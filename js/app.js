@@ -197,7 +197,7 @@ function setupAuth() {
   });
 
   // Login
-  document.getElementById('btn-login').addEventListener('click', async () => {
+  const doLogin = async () => {
     const email = document.getElementById('login-email').value.trim();
     const pass  = document.getElementById('login-pass').value;
     if (!email || !pass) return toast('Inserisci email e password', 'error');
@@ -209,10 +209,13 @@ function setupAuth() {
     } finally {
       document.getElementById('btn-login').disabled = false;
     }
-  });
+  };
+  document.getElementById('btn-login').addEventListener('click', doLogin);
+  document.getElementById('login-email').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('login-pass').addEventListener('keydown',  e => { if (e.key === 'Enter') doLogin(); });
 
   // Register
-  document.getElementById('btn-register').addEventListener('click', async () => {
+  const doRegister = async () => {
     const email = document.getElementById('reg-email').value.trim();
     const pass  = document.getElementById('reg-pass').value;
     if (!email || !pass) return toast('Inserisci email e password', 'error');
@@ -226,7 +229,10 @@ function setupAuth() {
     } finally {
       document.getElementById('btn-register').disabled = false;
     }
-  });
+  };
+  document.getElementById('btn-register').addEventListener('click', doRegister);
+  document.getElementById('reg-email').addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
+  document.getElementById('reg-pass').addEventListener('keydown',  e => { if (e.key === 'Enter') doRegister(); });
 
   // Guest
   document.getElementById('btn-guest').addEventListener('click', async () => {
@@ -583,7 +589,7 @@ function renderPiano() {
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               Dettagli
             </button>
-            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}">
+            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per poter sostituire"' : ''}>
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
               Sostituisci
             </button>
@@ -591,7 +597,7 @@ function renderPiano() {
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
               ${isConfirmed ? 'Confermato' : 'Conferma'}
             </button>
-            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}">
+            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per poter eliminare"' : ''}>
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Elimina
             </button>
@@ -823,18 +829,31 @@ function renderSpesa() {
   }
 
   const days = state.plan.days;
-  let dayBtns = days.map((d, i) => `
-    <button class="day-toggle${state.selectedShoppingDays.includes(i) ? ' selected' : ''}" data-day="${i}">
-      ${formatDateShort(d.date)}
-    </button>
-  `).join('');
+
+  // Quanti pasti confermati per ogni giorno (per mostrare badge)
+  const confirmedByDate = {};
+  for (const cm of state.confirmedMeals) {
+    confirmedByDate[cm.plan_date] = (confirmedByDate[cm.plan_date] || 0) + 1;
+  }
+
+  const dayBtns = days.map((d, i) => {
+    const count = confirmedByDate[d.date] || 0;
+    const badge = count > 0 ? `<span style="font-size:0.7rem;background:var(--green);color:#fff;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px">${count}</span>` : '';
+    return `<button class="day-toggle${state.selectedShoppingDays.includes(i) ? ' selected' : ''}" data-day="${i}">
+      ${formatDateShort(d.date)}${badge}
+    </button>`;
+  }).join('');
 
   el.innerHTML = `
     <div id="main-content">
       <h2 style="margin-bottom:6px">Lista della Spesa</h2>
-      <p class="text-soft" style="margin-bottom:16px">Seleziona i giorni per cui fare la spesa</p>
+      <p class="text-soft" style="margin-bottom:4px">Seleziona i giorni per cui fare la spesa.</p>
+      <p class="text-soft" style="margin-bottom:16px;font-size:0.82rem">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg>
+        La lista include solo i pasti che hai confermato — il numero verde indica quanti pasti confermati ha ogni giorno.
+      </p>
       <div class="shopping-day-selector">${dayBtns}</div>
-      <button class="btn btn-primary w-full" id="btn-gen-shopping" style="margin-bottom:24px">Genera lista</button>
+      <button class="btn btn-primary w-full" id="btn-gen-shopping" style="margin-bottom:24px">Genera lista della spesa</button>
       <div id="shopping-list"></div>
     </div>`;
 
@@ -853,19 +872,100 @@ function renderSpesa() {
 
   el.querySelector('#btn-gen-shopping').addEventListener('click', () => {
     if (!state.selectedShoppingDays.length) { toast('Seleziona almeno un giorno', 'error'); return; }
-    const list = buildShoppingList(state.plan, state.selectedShoppingDays);
-    renderShoppingList(list);
+
+    // Calcola le date selezionate
+    const selectedDates = state.selectedShoppingDays.map(i => days[i]?.date).filter(Boolean);
+
+    // Filtra i pasti confermati per quelle date
+    const confirmedForDays = state.confirmedMeals.filter(cm => selectedDates.includes(cm.plan_date));
+
+    if (!confirmedForDays.length) {
+      toast('Nessun pasto confermato nei giorni selezionati', 'info');
+      document.getElementById('shopping-list').innerHTML = `
+        <div class="card" style="text-align:center;padding:32px">
+          <p style="font-size:1.5rem;margin-bottom:8px">🍽️</p>
+          <p class="text-soft">Nessun pasto confermato nei giorni selezionati.<br>
+          Vai nel Piano e conferma i pasti che vuoi cucinare.</p>
+        </div>`;
+      return;
+    }
+
+    // Risolve le ricette dagli ID confermati
+    const recipeMap = {};
+    for (const r of state.recipes) recipeMap[r.id] = r;
+
+    const confirmedRecipes = confirmedForDays
+      .map(cm => recipeMap[cm.recipe_id])
+      .filter(Boolean);
+
+    const list = buildShoppingListFromRecipes(confirmedRecipes);
+    const totalConfirmed = confirmedForDays.length;
+    renderShoppingList(list, totalConfirmed);
   });
 }
 
-function renderShoppingList(list) {
+/**
+ * Aggrega ingredienti da un array di ricette già risolte
+ */
+function buildShoppingListFromRecipes(recipes) {
+  const raw = {};
+
+  for (const recipe of recipes) {
+    if (!recipe?.ingredients) continue;
+    for (const ing of recipe.ingredients) {
+      const key = `${ing.name.toLowerCase()}||${ing.unit || ''}`;
+      if (raw[key]) {
+        raw[key].amount += ing.amount || 0;
+      } else {
+        raw[key] = { name: ing.name, unit: ing.unit || '', amount: ing.amount || 0 };
+      }
+    }
+  }
+
+  const CATS = {
+    'Carne e Pesce':    ['pollo','manzo','vitello','tacchino','macinato','coniglio','salmone','tonno','orata','branzino','merluzzo','sgombro','alici','acciughe','gamberetti','trancio'],
+    'Verdure e Ortaggi':['zucchine','carote','spinaci','broccoli','pomodori','peperoni','cipolla','aglio','sedano','melanzane','asparagi','lattuga','rucola','cetriolo','patate','zucca','cipollotto','fagiolini'],
+    'Frutta':           ['mela','banana','fragole','mirtilli','limone','lime','avocado','arancia','pera','kiwi','albicocche'],
+    'Latticini e Uova': ['yogurt','ricotta','parmigiano','feta','grana','latte','uova','uovo','albume','formaggio','kefir','mozzarella','burro'],
+    'Pasta e Cereali':  ['pasta','spaghetti','fusilli','penne','riso','farro','orzo','cous','quinoa','avena','gallette','pane','fette biscottate'],
+    'Legumi':           ['ceci','fagioli','lenticchie','piselli','soia','fave','edamame','tofu'],
+    'Dispensa':         ['olio','sale','pepe','curry','curcuma','cannella','zenzero','rosmarino','basilico','timo','origano','prezzemolo','paprika','cumino','miele','confettura','aceto','capperi','olive','tahini'],
+    'Frutta secca':     ['mandorle','noci','nocciole','pistacchi','anacardi','pinoli','semi'],
+  };
+
+  const categorized = {};
+  for (const item of Object.values(raw)) {
+    let cat = 'Altro';
+    const nameLow = item.name.toLowerCase();
+    for (const [c, keywords] of Object.entries(CATS)) {
+      if (keywords.some(k => nameLow.includes(k))) { cat = c; break; }
+    }
+    if (!categorized[cat]) categorized[cat] = [];
+    categorized[cat].push(item);
+  }
+
+  // Ordina gli ingredienti alfabeticamente dentro ogni categoria
+  for (const cat of Object.keys(categorized)) {
+    categorized[cat].sort((a, b) => a.name.localeCompare(b.name, 'it'));
+  }
+
+  return categorized;
+}
+
+function renderShoppingList(list, confirmedCount = 0) {
   const el = document.getElementById('shopping-list');
   const catOrder = ['Carne e Pesce','Verdure e Ortaggi','Frutta','Latticini e Uova','Pasta e Cereali','Legumi','Dispensa','Frutta secca','Altro'];
 
-  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <h3>Lista generata</h3>
-    <button class="btn btn-ghost btn-sm" id="btn-print">🖨 Stampa</button>
-  </div>`;
+  const totalItems = Object.values(list).reduce((s, arr) => s + arr.length, 0);
+
+  let html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div>
+        <h3 style="margin-bottom:2px">Lista generata</h3>
+        <p style="font-size:0.78rem;color:var(--text-soft)">${confirmedCount} pasto/i confermati · ${totalItems} ingredienti</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="btn-print">🖨 Stampa</button>
+    </div>`;
 
   for (const cat of catOrder) {
     if (!list[cat]?.length) continue;
