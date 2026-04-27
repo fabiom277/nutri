@@ -511,52 +511,82 @@ function renderPiano() {
   }
 
   const slots = activeSlots(state.profile?.meal_schedule || 'standard');
-  const calSlots = caloriesBySlot(state.profile?.target_calories || 2000, state.profile?.meal_schedule || 'standard');
 
   const confirmedMap = {};
   for (const cm of state.confirmedMeals) {
     confirmedMap[`${cm.plan_date}|${cm.meal_slot}`] = cm.recipe_id;
   }
 
-  let html = `<div id="main-content"><div class="week-header"><h2>Il tuo Piano</h2><button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera</button></div>`;
+  let html = `<div id="main-content">
+    <div class="week-header">
+      <h2>Il tuo Piano</h2>
+      <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera settimana</button>
+    </div>`;
 
   for (let d = 0; d < state.plan.days.length; d++) {
     const day = state.plan.days[d];
     const label = formatDate(day.date);
-    html += `<div class="day-card"><div class="day-label">${label}</div>`;
+
+    // Calcola totale kcal giornaliero
+    const totalKcal = slots.reduce((sum, slot) => {
+      return sum + (day.slots[slot]?.calories || 0);
+    }, 0);
+
+    html += `
+      <div class="day-card">
+        <div class="day-card-header">
+          <span class="day-label">${label}</span>
+          <span class="day-total-kcal">${totalKcal} kcal totali</span>
+        </div>
+        <div class="day-meals-list">`;
 
     for (const slot of slots) {
       const recipe = day.slots[slot];
       if (!recipe) continue;
-      const confirmedKey = `${day.date}|${slot}`;
-      const isConfirmed = !!confirmedMap[confirmedKey];
+      const isConfirmed = !!confirmedMap[`${day.date}|${slot}`];
+      const p = recipe.macros?.proteine    || 0;
+      const c = recipe.macros?.carboidrati || 0;
+      const f = recipe.macros?.grassi      || 0;
 
       html += `
         <div class="meal-row${isConfirmed ? ' confirmed' : ''}" data-day="${d}" data-slot="${slot}">
-          <span class="meal-slot-badge slot-${slot}">${slot}</span>
+          <div>
+            <span class="meal-slot-badge slot-${slot}">${slot}</span>
+          </div>
           <div class="meal-info">
             <div class="meal-name">${recipe.name}</div>
-            <div class="meal-meta">
-              ${recipe.calories} kcal · target ${calSlots[slot]} kcal
-              <span class="macro-bar">
-                <span class="macro-chip p">P ${recipe.macros?.proteine || 0}g</span>
-                <span class="macro-chip c">C ${recipe.macros?.carboidrati || 0}g</span>
-                <span class="macro-chip f">G ${recipe.macros?.grassi || 0}g</span>
-              </span>
+            <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
+            <div class="macro-bar">
+              <span class="macro-chip p">Proteine ${p}g</span>
+              <span class="macro-chip c">Carboidrati ${c}g</span>
+              <span class="macro-chip f">Grassi ${f}g</span>
             </div>
           </div>
           <div class="meal-actions">
-            <button class="btn btn-ghost btn-sm btn-details" title="Dettagli" data-day="${d}" data-slot="${slot}">👁</button>
-            <button class="btn btn-secondary btn-sm btn-replace" title="Sostituisci" data-day="${d}" data-slot="${slot}">⇄</button>
-            <button class="btn ${isConfirmed ? 'btn-primary' : 'btn-ghost'} btn-sm btn-confirm" title="${isConfirmed ? 'Confermato' : 'Conferma'}" data-day="${d}" data-slot="${slot}">${isConfirmed ? '✓' : '○'}</button>
-            <button class="btn btn-danger btn-sm btn-exclude" title="Elimina" data-day="${d}" data-slot="${slot}">✕</button>
+            <button class="meal-action-btn details btn-details" data-day="${d}" data-slot="${slot}" title="Vedi ricetta">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              Dettagli
+            </button>
+            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" title="Sostituisci con altra ricetta">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+              Sostituisci
+            </button>
+            <button class="meal-action-btn confirm${isConfirmed ? ' active' : ''} btn-confirm" data-day="${d}" data-slot="${slot}" title="${isConfirmed ? 'Pasto confermato – clicca per rimuovere' : 'Conferma questo pasto'}">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              ${isConfirmed ? 'Confermato' : 'Conferma'}
+            </button>
+            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" title="Rimuovi questa ricetta dai suggerimenti">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Elimina
+            </button>
           </div>
         </div>`;
     }
-    html += `</div>`;
-  }
-  html += `</div>`;
 
+    html += `</div></div>`;
+  }
+
+  html += `</div>`;
   el.innerHTML = html;
 
   // Events

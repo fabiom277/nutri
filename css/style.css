@@ -109,9 +109,21 @@ textarea { resize: vertical; min-height: 80px; }
   #app-nav {
     top: 0; bottom: auto; right: auto;
     flex-direction: column;
-    width: 72px; height: 100vh;
+    width: 200px; height: 100vh;
     border-top: none; border-right: 1px solid var(--border);
-    padding: 24px 0; justify-content: flex-start; gap: 4px;
+    padding: 28px 12px; justify-content: flex-start; gap: 4px;
+    overflow: hidden;
+  }
+  /* Logo in sidebar desktop */
+  #app-nav::before {
+    content: 'Nutrì';
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--green);
+    padding: 0 8px;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
   }
 }
 .nav-item {
@@ -120,9 +132,24 @@ textarea { resize: vertical; min-height: 80px; }
   cursor: pointer; color: var(--text-soft);
   font-size: 0.65rem; font-weight: 600; letter-spacing: 0.5px;
   border: none; background: transparent; transition: all 0.2s;
-  text-transform: uppercase;
+  text-transform: uppercase; width: 100%;
 }
-.nav-item svg { width: 22px; height: 22px; }
+/* Desktop: icona + testo in orizzontale */
+@media (min-width: 768px) {
+  .nav-item {
+    flex-direction: row; gap: 12px;
+    font-size: 0.88rem; font-weight: 600;
+    letter-spacing: 0; text-transform: none;
+    padding: 11px 14px;
+    border-radius: var(--radius-sm);
+    justify-content: flex-start;
+  }
+  .nav-item.active {
+    background: var(--green-pale);
+    color: var(--green-dark);
+  }
+}
+.nav-item svg { width: 22px; height: 22px; flex-shrink: 0; }
 .nav-item.active { color: var(--green); }
 .nav-item.active svg path, .nav-item.active svg circle, .nav-item.active svg rect {
   stroke: var(--green);
@@ -139,7 +166,7 @@ textarea { resize: vertical; min-height: 80px; }
   margin: 0 auto;
 }
 @media (min-width: 768px) {
-  #main-content { padding: 24px 32px 40px 104px; max-width: 860px; }
+  #main-content { padding: 32px 40px 40px 232px; max-width: 960px; }
 }
 
 /* ── Auth page */
@@ -194,40 +221,107 @@ textarea { resize: vertical; min-height: 80px; }
 .tag-input-wrap input:focus { box-shadow: none; }
 
 /* ── Dashboard / Piano */
-.week-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.day-card { margin-bottom: 16px; }
-.day-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 10px; }
+.week-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+
+/* Card giornaliera */
+.day-card {
+  margin-bottom: 20px;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.day-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(29,158,117,0.04);
+}
+.day-label {
+  font-size: 0.82rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--green-dark);
+}
+.day-total-kcal {
+  font-size: 0.8rem; font-weight: 600; color: var(--text-soft);
+  background: var(--green-pale); padding: 3px 10px;
+  border-radius: 50px; white-space: nowrap;
+}
+.day-meals-list { padding: 10px 12px 12px; }
+
+/* Riga singolo pasto */
 .meal-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px 16px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  margin-bottom: 8px; cursor: pointer;
-  transition: all 0.2s; position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+  border-left: 3px solid transparent;
 }
-.meal-row:hover { border-color: var(--green-light); box-shadow: 0 4px 16px rgba(29,158,117,0.1); }
-.meal-row.confirmed { border-left: 3px solid var(--green); }
+.meal-row:last-child { margin-bottom: 0; }
+.meal-row:hover { background: rgba(29,158,117,0.04); }
+.meal-row.confirmed { border-left-color: var(--green); background: rgba(29,158,117,0.03); }
+
 .meal-slot-badge {
-  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 50px; white-space: nowrap;
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 50px; white-space: nowrap;
+  letter-spacing: 0.4px; margin-top: 2px;
 }
-.meal-row .meal-info { flex: 1; min-width: 0; }
-.meal-row .meal-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.meal-row .meal-meta { font-size: 0.78rem; color: var(--text-soft); margin-top: 2px; }
-.meal-row .meal-actions { display: flex; gap: 6px; flex-shrink: 0; }
-.meal-actions button { padding: 6px 10px; font-size: 0.75rem; }
+.meal-row .meal-info { min-width: 0; }
+.meal-row .meal-name {
+  font-weight: 600; font-size: 0.95rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+.meal-row .meal-meta { font-size: 0.78rem; color: var(--text-soft); }
+.meal-kcal {
+  font-size: 0.88rem; font-weight: 700; color: var(--text);
+  margin-bottom: 4px;
+}
+.meal-kcal span { font-weight: 400; font-size: 0.75rem; color: var(--text-soft); }
+
+/* Macro bar - nomi per esteso */
+.macro-bar { display: flex; gap: 10px; flex-wrap: wrap; }
+.macro-chip {
+  font-size: 0.72rem; font-weight: 600;
+  background: rgba(0,0,0,0.04);
+  padding: 2px 8px; border-radius: 50px;
+}
+.macro-chip.p { color: #C2410C; background: #FFF0E8; }
+.macro-chip.c { color: #15803D; background: #F0FDF4; }
+.macro-chip.f { color: #1D4ED8; background: #EFF6FF; }
+
+/* Pulsanti azione - con etichetta testo */
+.meal-row .meal-actions {
+  display: flex; flex-direction: column; gap: 5px;
+  flex-shrink: 0; align-items: flex-end;
+}
+.meal-action-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 8px; border: 1px solid transparent;
+  font-family: var(--font); font-size: 0.75rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: all 0.15s;
+  line-height: 1.2;
+}
+.meal-action-btn.details  { background: #F8FAFC; border-color: #E2E8F0; color: #475569; }
+.meal-action-btn.replace  { background: #FFFBEB; border-color: #FDE68A; color: #92400E; }
+.meal-action-btn.confirm  { background: #F0FDF4; border-color: #BBF7D0; color: #15803D; }
+.meal-action-btn.confirm.active { background: #15803D; color: #fff; border-color: #15803D; }
+.meal-action-btn.exclude  { background: #FFF1F2; border-color: #FECDD3; color: #BE123C; }
+.meal-action-btn:hover { filter: brightness(0.95); transform: translateY(-1px); }
 
 /* Colori badge slot */
-.slot-colazione { background: #FFF3E0; color: #E65100; }
-.slot-pranzo    { background: #E8F5E9; color: #2E7D32; }
-.slot-cena      { background: #E3F2FD; color: #1565C0; }
-.slot-spuntino  { background: #F3E5F5; color: #6A1B9A; }
-
-/* Macro bar */
-.macro-bar { display: flex; gap: 12px; margin-top: 6px; }
-.macro-chip { font-size: 0.73rem; font-weight: 600; }
-.macro-chip.p { color: #E65100; }
-.macro-chip.c { color: #2E7D32; }
-.macro-chip.f { color: #1565C0; }
+.slot-colazione { background: #FFF7ED; color: #C2410C; }
+.slot-pranzo    { background: #F0FDF4; color: #15803D; }
+.slot-cena      { background: #EFF6FF; color: #1D4ED8; }
+.slot-spuntino  { background: #FAF5FF; color: #7E22CE; }
 
 /* Skeleton */
 .skeleton { background: linear-gradient(90deg, #e8f8f2 25%, #d0f0e4 50%, #e8f8f2 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
