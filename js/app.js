@@ -566,32 +566,32 @@ function renderPiano() {
 
       html += `
         <div class="meal-row${isConfirmed ? ' confirmed' : ''}" data-day="${d}" data-slot="${slot}">
-          <div>
+          <div class="meal-row-top">
             <span class="meal-slot-badge slot-${slot}">${slot}</span>
-          </div>
-          <div class="meal-info">
-            <div class="meal-name">${recipe.name}</div>
-            <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
-            <div class="macro-bar">
-              <span class="macro-chip p">Proteine ${p}g</span>
-              <span class="macro-chip c">Carboidrati ${c}g</span>
-              <span class="macro-chip f">Grassi ${f}g</span>
+            <div class="meal-info">
+              <div class="meal-name">${recipe.name}</div>
+              <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
+              <div class="macro-bar">
+                <span class="macro-chip p">Proteine ${p}g</span>
+                <span class="macro-chip c">Carboidrati ${c}g</span>
+                <span class="macro-chip f">Grassi ${f}g</span>
+              </div>
             </div>
           </div>
           <div class="meal-actions">
-            <button class="meal-action-btn details btn-details" data-day="${d}" data-slot="${slot}" title="Vedi ricetta">
+            <button class="meal-action-btn details btn-details" data-day="${d}" data-slot="${slot}">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               Dettagli
             </button>
-            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" title="Sostituisci con altra ricetta">
+            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
               Sostituisci
             </button>
-            <button class="meal-action-btn confirm${isConfirmed ? ' active' : ''} btn-confirm" data-day="${d}" data-slot="${slot}" title="${isConfirmed ? 'Pasto confermato – clicca per rimuovere' : 'Conferma questo pasto'}">
+            <button class="meal-action-btn confirm${isConfirmed ? ' active' : ''} btn-confirm" data-day="${d}" data-slot="${slot}">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
               ${isConfirmed ? 'Confermato' : 'Conferma'}
             </button>
-            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" title="Rimuovi questa ricetta dai suggerimenti">
+            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Elimina
             </button>

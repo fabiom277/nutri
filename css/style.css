@@ -252,11 +252,9 @@ textarea { resize: vertical; min-height: 80px; }
 
 /* Riga singolo pasto */
 .meal-row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: start;
-  gap: 12px;
-  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 12px 10px;
   border-radius: var(--radius-sm);
   margin-bottom: 6px;
   cursor: pointer;
@@ -268,18 +266,20 @@ textarea { resize: vertical; min-height: 80px; }
 .meal-row:hover { background: rgba(29,158,117,0.04); }
 .meal-row.confirmed { border-left-color: var(--green); background: rgba(29,158,117,0.03); }
 
+.meal-row-top {
+  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px;
+}
 .meal-slot-badge {
   font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
   padding: 3px 9px; border-radius: 50px; white-space: nowrap;
-  letter-spacing: 0.4px; margin-top: 2px;
+  letter-spacing: 0.4px; margin-top: 2px; flex-shrink: 0;
 }
-.meal-row .meal-info { min-width: 0; }
+.meal-row .meal-info { min-width: 0; flex: 1; }
 .meal-row .meal-name {
   font-weight: 600; font-size: 0.95rem;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   margin-bottom: 5px;
 }
-.meal-row .meal-meta { font-size: 0.78rem; color: var(--text-soft); }
 .meal-kcal {
   font-size: 0.88rem; font-weight: 700; color: var(--text);
   margin-bottom: 4px;
@@ -287,25 +287,29 @@ textarea { resize: vertical; min-height: 80px; }
 .meal-kcal span { font-weight: 400; font-size: 0.75rem; color: var(--text-soft); }
 
 /* Macro bar - nomi per esteso */
-.macro-bar { display: flex; gap: 10px; flex-wrap: wrap; }
+.macro-bar { display: flex; gap: 8px; flex-wrap: wrap; }
 .macro-chip {
   font-size: 0.72rem; font-weight: 600;
-  background: rgba(0,0,0,0.04);
   padding: 2px 8px; border-radius: 50px;
 }
 .macro-chip.p { color: #C2410C; background: #FFF0E8; }
 .macro-chip.c { color: #15803D; background: #F0FDF4; }
 .macro-chip.f { color: #1D4ED8; background: #EFF6FF; }
 
-/* Pulsanti azione - con etichetta testo */
+/* Pulsanti azione — riga orizzontale centrata sotto il pasto */
 .meal-row .meal-actions {
-  display: flex; flex-direction: column; gap: 5px;
-  flex-shrink: 0; align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
 }
 .meal-action-btn {
   display: inline-flex; align-items: center; gap: 5px;
-  padding: 5px 10px; border-radius: 8px; border: 1px solid transparent;
-  font-family: var(--font); font-size: 0.75rem; font-weight: 600;
+  padding: 6px 12px; border-radius: 8px; border: 1px solid transparent;
+  font-family: var(--font); font-size: 0.78rem; font-weight: 600;
   cursor: pointer; white-space: nowrap; transition: all 0.15s;
   line-height: 1.2;
 }
@@ -314,7 +318,7 @@ textarea { resize: vertical; min-height: 80px; }
 .meal-action-btn.confirm  { background: #F0FDF4; border-color: #BBF7D0; color: #15803D; }
 .meal-action-btn.confirm.active { background: #15803D; color: #fff; border-color: #15803D; }
 .meal-action-btn.exclude  { background: #FFF1F2; border-color: #FECDD3; color: #BE123C; }
-.meal-action-btn:hover { filter: brightness(0.95); transform: translateY(-1px); }
+.meal-action-btn:hover { filter: brightness(0.94); transform: translateY(-1px); }
 
 /* Colori badge slot */
 .slot-colazione { background: #FFF7ED; color: #C2410C; }
