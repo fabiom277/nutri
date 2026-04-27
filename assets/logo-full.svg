@@ -1,0 +1,12 @@
+<svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- icona -->
+  <rect x="0" y="4" width="66" height="72" rx="14" fill="#1D9E75"/>
+  <rect x="22" y="10" width="5" height="26" rx="2.5" fill="white"/>
+  <rect x="30.5" y="10" width="5" height="26" rx="2.5" fill="white"/>
+  <rect x="39" y="10" width="5" height="26" rx="2.5" fill="white"/>
+  <rect x="22" y="34" width="22" height="4.5" rx="1.5" fill="white"/>
+  <rect x="30.5" y="36.5" width="5" height="31" rx="2.5" fill="white"/>
+  <ellipse cx="46" cy="16" rx="10.5" ry="4.5" transform="rotate(-32 46 16)" fill="white" opacity="0.55"/>
+  <!-- wordmark -->
+  <text x="82" y="53" font-family="Inter,-apple-system,sans-serif" font-size="42" font-weight="700" fill="#1D9E75" letter-spacing="-1">Nutrì</text>
+</svg>

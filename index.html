@@ -7,9 +7,20 @@
   <meta name="description" content="Nutrì – Il tuo piano alimentare intelligente. Calcolo calorico personalizzato, ricette italiane, lista della spesa.">
   <title>Nutrì – Il tuo piano alimentare</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+
+  <!-- Social / OG -->
+  <meta property="og:title" content="Nutrì – Il tuo piano alimentare">
+  <meta property="og:description" content="Calcolo calorico personalizzato, ricette italiane, lista della spesa automatica.">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:type" content="website">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -261,6 +272,11 @@
 
   <!-- Navigation -->
   <nav id="app-nav">
+    <!-- Logo desktop (nascosto su mobile via CSS) -->
+    <a id="nav-logo" href="#" onclick="return false" style="display:none">
+      <img src="assets/logo-icon.svg" alt="Nutrì" width="28" height="30">
+      <span>Nutrì</span>
+    </a>
     <button class="nav-item active" data-page="piano">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
       Piano

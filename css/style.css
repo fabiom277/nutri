@@ -111,19 +111,18 @@ textarea { resize: vertical; min-height: 80px; }
     flex-direction: column;
     width: 200px; height: 100vh;
     border-top: none; border-right: 1px solid var(--border);
-    padding: 28px 12px; justify-content: flex-start; gap: 4px;
+    padding: 24px 12px 28px; justify-content: flex-start; gap: 4px;
     overflow: hidden;
   }
-  /* Logo in sidebar desktop */
-  #app-nav::before {
-    content: 'Nutrì';
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--green);
-    padding: 0 8px;
-    margin-bottom: 28px;
-    letter-spacing: -0.5px;
+  #nav-logo {
+    display: flex !important;
+    align-items: center; gap: 10px;
+    padding: 6px 10px; margin-bottom: 20px;
+    text-decoration: none; border-radius: var(--radius-sm);
+  }
+  #nav-logo span {
+    font-size: 1.45rem; font-weight: 700;
+    color: var(--green); letter-spacing: -0.5px;
   }
 }
 .nav-item {

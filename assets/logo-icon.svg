@@ -1,0 +1,13 @@
+<svg viewBox="0 0 110 120" width="110" height="120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="110" height="120" rx="22" fill="#1D9E75"/>
+  <!-- tre rebbi forchetta -->
+  <rect x="37" y="15" width="8" height="43" rx="4" fill="white"/>
+  <rect x="51" y="15" width="8" height="43" rx="4" fill="white"/>
+  <rect x="65" y="15" width="8" height="43" rx="4" fill="white"/>
+  <!-- barra orizzontale -->
+  <rect x="37" y="55" width="36" height="7" rx="2" fill="white"/>
+  <!-- manico forchetta -->
+  <rect x="51" y="59" width="8" height="50" rx="4" fill="white"/>
+  <!-- foglia -->
+  <ellipse cx="74" cy="27" rx="17" ry="7" transform="rotate(-32 74 27)" fill="white" opacity="0.55"/>
+</svg>
