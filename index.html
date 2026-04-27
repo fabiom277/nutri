@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1D9E75">
+  <meta name="description" content="Nutrì – Il tuo piano alimentare intelligente. Calcolo calorico personalizzato, ricette italiane, lista della spesa.">
+  <title>Nutrì – Il tuo piano alimentare</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── AUTH PAGE ──────────────────────────────────── -->
+<div id="auth-page">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <!-- Logo SVG inline -->
+      <svg viewBox="0 0 110 120" width="44" height="48" xmlns="http://www.w3.org/2000/svg">
+        <rect width="110" height="120" rx="22" fill="#1D9E75"/>
+        <circle cx="55" cy="80" r="30" fill="none" stroke="white" stroke-width="1.5" opacity="0.18"/>
+        <rect x="37" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="51" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="65" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="37" y="55" width="36" height="7" rx="2" fill="white"/>
+        <rect x="51" y="59" width="8" height="50" rx="4" fill="white"/>
+        <ellipse cx="74" cy="27" rx="17" ry="7" transform="rotate(-32 74 27)" fill="white" opacity="0.48"/>
+      </svg>
+      <span class="wordmark">Nutrì</span>
+    </div>
+
+    <div class="card">
+      <div class="auth-tabs">
+        <div class="auth-tab active" data-tab="login">Accedi</div>
+        <div class="auth-tab" data-tab="register">Registrati</div>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="auth-login" class="auth-form">
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="tua@email.it" autocomplete="email">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary w-full" id="btn-login">Accedi</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="auth-register" class="auth-form hidden">
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" id="reg-email" placeholder="tua@email.it" autocomplete="email">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="reg-pass" placeholder="Minimo 6 caratteri" autocomplete="new-password">
+        </div>
+        <button class="btn btn-primary w-full" id="btn-register">Crea account</button>
+      </div>
+
+      <div class="auth-divider" style="margin-top:16px">oppure</div>
+      <button class="btn btn-ghost w-full" id="btn-guest" style="margin-top:8px">Continua come ospite</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ONBOARDING ─────────────────────────────────── -->
+<div id="onboarding-wrapper" class="hidden">
+  <div class="onboarding-wrap">
+
+    <div class="step-indicator">
+      <div class="step-dot active"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+    </div>
+
+    <!-- Step 0: Dati fisici -->
+    <div class="onboarding-step active">
+      <div class="step-title">Parliamo di te</div>
+      <div class="step-subtitle">Ci servono per calcolare il tuo fabbisogno calorico</div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+          <div class="input-group">
+            <label>Età</label>
+            <input type="number" id="ob-age" min="10" max="100" placeholder="30">
+          </div>
+          <div class="input-group">
+            <label>Peso (kg)</label>
+            <input type="number" id="ob-weight" min="30" max="300" step="0.1" placeholder="70">
+          </div>
+          <div class="input-group" style="grid-column:1/-1">
+            <label>Altezza (cm)</label>
+            <input type="number" id="ob-height" min="100" max="250" placeholder="170">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Sesso biologico</label>
+          <div class="choice-grid">
+            <div class="choice-card" data-group="sex" data-value="M">
+              <div class="icon">♂</div>
+              <div class="label">Uomo</div>
+            </div>
+            <div class="choice-card" data-group="sex" data-value="F">
+              <div class="icon">♀</div>
+              <div class="label">Donna</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 1: Allergie e intolleranze -->
+    <div class="onboarding-step">
+      <div class="step-title">Allergie e preferenze</div>
+      <div class="step-subtitle">Nessuna ricetta includerà questi alimenti</div>
+      <div class="card">
+        <div class="input-group" style="margin-bottom:16px">
+          <label>Allergie o intolleranze</label>
+          <div class="tag-input-wrap">
+            <div class="tags-list" id="allergies-tags"></div>
+            <input type="text" id="allergies-input" placeholder="es. glutine, lattosio... premi Enter">
+          </div>
+          <small class="text-soft">Premi Enter o virgola dopo ogni voce</small>
+        </div>
+        <div class="input-group">
+          <label>Cibi o categorie che non ti piacciono</label>
+          <div class="tag-input-wrap">
+            <div class="tags-list" id="dislikes-tags"></div>
+            <input type="text" id="dislikes-input" placeholder="es. pesce, funghi, crostacei... premi Enter">
+          </div>
+          <small class="text-soft">Intera categoria = tutte le varianti escluse</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Attività fisica -->
+    <div class="onboarding-step">
+      <div class="step-title">Stile di vita</div>
+      <div class="step-subtitle">Quanto ti muovi in una settimana tipica?</div>
+      <div class="card">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="choice-card" data-group="activity" data-value="sedentario" style="text-align:left;display:flex;align-items:center;gap:12px">
+            <div class="icon" style="font-size:1.4rem">🪑</div>
+            <div><div class="label">Sedentario</div><div class="sub">Lavoro d'ufficio, poca attività</div></div>
+          </div>
+          <div class="choice-card" data-group="activity" data-value="leggero" style="text-align:left;display:flex;align-items:center;gap:12px">
+            <div class="icon" style="font-size:1.4rem">🚶</div>
+            <div><div class="label">Leggero</div><div class="sub">1-2 allenamenti/settimana</div></div>
+          </div>
+          <div class="choice-card" data-group="activity" data-value="moderato" style="text-align:left;display:flex;align-items:center;gap:12px">
+            <div class="icon" style="font-size:1.4rem">🚴</div>
+            <div><div class="label">Moderato</div><div class="sub">3-4 allenamenti/settimana</div></div>
+          </div>
+          <div class="choice-card" data-group="activity" data-value="attivo" style="text-align:left;display:flex;align-items:center;gap:12px">
+            <div class="icon" style="font-size:1.4rem">🏃</div>
+            <div><div class="label">Attivo</div><div class="sub">5+ allenamenti/settimana</div></div>
+          </div>
+          <div class="choice-card" data-group="activity" data-value="atleta" style="text-align:left;display:flex;align-items:center;gap:12px">
+            <div class="icon" style="font-size:1.4rem">🏋️</div>
+            <div><div class="label">Atleta</div><div class="sub">Allenamento intenso ogni giorno</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Obiettivo -->
+    <div class="onboarding-step">
+      <div class="step-title">Il tuo obiettivo</div>
+      <div class="step-subtitle">Adatteremo le calorie di conseguenza</div>
+      <div class="card">
+        <div class="choice-grid">
+          <div class="choice-card" data-group="goal" data-value="dimagrire">
+            <div class="icon">⚖️</div>
+            <div class="label">Perdere peso</div>
+            <div class="sub">-500 kcal/giorno</div>
+          </div>
+          <div class="choice-card" data-group="goal" data-value="mantenere">
+            <div class="icon">⚡</div>
+            <div class="label">Mantenere</div>
+            <div class="sub">Calorie di mantenimento</div>
+          </div>
+          <div class="choice-card" data-group="goal" data-value="aumentare" style="grid-column:1/-1">
+            <div class="icon">💪</div>
+            <div class="label">Aumentare massa</div>
+            <div class="sub">+300 kcal/giorno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Dieta e schedule -->
+    <div class="onboarding-step">
+      <div class="step-title">Come mangi?</div>
+      <div class="step-subtitle">Regime alimentare e distribuzione dei pasti</div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="input-group">
+          <label style="margin-bottom:10px">Regime alimentare</label>
+          <div class="choice-grid">
+            <div class="choice-card" data-group="diet" data-value="standard">
+              <div class="icon">🍖</div>
+              <div class="label">Onnivoro</div>
+            </div>
+            <div class="choice-card" data-group="diet" data-value="vegetariana">
+              <div class="icon">🥗</div>
+              <div class="label">Vegetariano</div>
+            </div>
+            <div class="choice-card" data-group="diet" data-value="vegana" style="grid-column:1/-1">
+              <div class="icon">🌱</div>
+              <div class="label">Vegano</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="input-group">
+          <label style="margin-bottom:10px">Distribuzione pasti</label>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="choice-card" data-group="schedule" data-value="standard" style="text-align:left">
+              <div class="label">3 pasti + spuntino</div>
+              <div class="sub">Colazione · Spuntino · Pranzo · Cena</div>
+            </div>
+            <div class="choice-card" data-group="schedule" data-value="intermittente_colazione" style="text-align:left">
+              <div class="label">Digiuno 16:8 (mattina)</div>
+              <div class="sub">Colazione · Spuntino · Pranzo</div>
+            </div>
+            <div class="choice-card" data-group="schedule" data-value="intermittente_pranzo" style="text-align:left">
+              <div class="label">Digiuno 16:8 (pomeriggio)</div>
+              <div class="sub">Pranzo · Cena</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Riepilogo calcolato -->
+      <div id="ob-summary"></div>
+    </div>
+
+    <!-- Nav buttons -->
+    <div class="flex gap-12 mt-24">
+      <button class="btn btn-ghost" id="btn-prev" style="visibility:hidden">← Indietro</button>
+      <button class="btn btn-primary" id="btn-next" style="flex:1">Avanti →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── APP WRAPPER ────────────────────────────────── -->
+<div id="app-wrapper" class="hidden">
+
+  <!-- Navigation -->
+  <nav id="app-nav">
+    <button class="nav-item active" data-page="piano">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Piano
+    </button>
+    <button class="nav-item" data-page="calendario">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Calendario
+    </button>
+    <button class="nav-item" data-page="spesa">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Spesa
+    </button>
+    <button class="nav-item" data-page="profilo">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Profilo
+    </button>
+  </nav>
+
+  <!-- Pages -->
+  <div id="page-piano"      class="page active"></div>
+  <div id="page-calendario" class="page"></div>
+  <div id="page-spesa"      class="page"></div>
+  <div id="page-profilo"    class="page"></div>
+
+  <!-- Modal ricetta -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-sheet">
+      <button id="modal-close" style="position:absolute;right:20px;top:20px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,5059 @@
+[
+  {
+    "name": "Yogurt greco con frutti di bosco e avena",
+    "description": "Colazione proteica e antiossidante, pronta in 2 minuti.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 310,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 38,
+      "grassi": 8
+    },
+    "prep_time": 3,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "yogurt greco 0%",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "frutti di bosco misti",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "fiocchi d'avena",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "miele",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Versare lo yogurt in una ciotola.",
+      "Aggiungere i fiocchi d'avena e mescolare.",
+      "Distribuire i frutti di bosco sopra.",
+      "Completare con un filo di miele e servire."
+    ],
+    "tags": [
+      "colazione",
+      "proteico",
+      "senza cottura",
+      "rapido",
+      "antiossidante"
+    ],
+    "allergens": [
+      "latte",
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-con-frutta.html"
+  },
+  {
+    "name": "Uova strapazzate con pane integrale",
+    "description": "Colazione classica ad alto contenuto proteico con pane a lenta lievitazione.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 22,
+      "carboidrati": 30,
+      "grassi": 14
+    },
+    "prep_time": 10,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "uova",
+        "amount": 2,
+        "unit": "pz"
+      },
+      {
+        "name": "pane integrale",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "erba cipollina",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Sbattere le uova in una ciotola con un pizzico di sale.",
+      "Scaldare l'olio in una padella antiaderente a fuoco basso.",
+      "Versare le uova e mescolare delicatamente con una spatola fino a cottura morbida.",
+      "Tostare il pane integrale.",
+      "Servire le uova strapazzate sul pane con erba cipollina tritata."
+    ],
+    "tags": [
+      "colazione",
+      "proteico",
+      "rapido"
+    ],
+    "allergens": [
+      "uova",
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1551782450-17144efb9c50?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Uova-strapazzate.html"
+  },
+  {
+    "name": "Porridge d'avena con banana e mandorle",
+    "description": "Colazione energetica vegana con carboidrati complessi e grassi buoni.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 10,
+      "carboidrati": 58,
+      "grassi": 12
+    },
+    "prep_time": 10,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fiocchi d'avena",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "latte vegetale (avena o soia)",
+        "amount": 200,
+        "unit": "ml"
+      },
+      {
+        "name": "banana",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "mandorle",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "cannella",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Versare i fiocchi d'avena nel latte vegetale in un pentolino.",
+      "Cuocere a fuoco medio per 5 minuti mescolando spesso.",
+      "Versare in una ciotola, guarnire con banana a fette e mandorle.",
+      "Cospargere di cannella e servire."
+    ],
+    "tags": [
+      "colazione",
+      "vegano",
+      "vegetariano",
+      "fibre",
+      "energetico"
+    ],
+    "allergens": [
+      "glutine",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1517673408076-a2f8c1e5c9e7?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Porridge-di-avena.html"
+  },
+  {
+    "name": "Frittata al forno con verdure",
+    "description": "Frittata leggera cotta in forno, ricca di proteine e povera di grassi.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 290,
+    "macros": {
+      "proteine": 20,
+      "carboidrati": 8,
+      "grassi": 18
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "uova",
+        "amount": 3,
+        "unit": "pz"
+      },
+      {
+        "name": "zucchine",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "peperone rosso",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno a 180°C.",
+      "Tagliare zucchine e peperone a cubetti piccoli.",
+      "Saltare le verdure in padella con un filo d'olio per 5 minuti.",
+      "Sbattere le uova con sale e prezzemolo, aggiungere le verdure.",
+      "Versare in uno stampo da forno foderato con carta e cuocere 15 minuti."
+    ],
+    "tags": [
+      "colazione",
+      "proteico",
+      "senza glutine",
+      "light"
+    ],
+    "allergens": [
+      "uova"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
+    "source_url": "https://blog.giallozafferano.it/ricettepanedolci/ricette-light-dietetiche/"
+  },
+  {
+    "name": "Ricotta con miele e noci su fette di pane di segale",
+    "description": "Colazione veloce con proteine del latte e grassi omega-3 dalle noci.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 34,
+      "grassi": 14
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "ricotta di mucca",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "pane di segale",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "miele",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "noci",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Tostare leggermente le fette di pane di segale.",
+      "Spalmare abbondante ricotta su ogni fetta.",
+      "Sbriciolare le noci sopra.",
+      "Finire con un filo di miele e servire subito."
+    ],
+    "tags": [
+      "colazione",
+      "proteico",
+      "rapido",
+      "vegetariano"
+    ],
+    "allergens": [
+      "latte",
+      "glutine",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Crostini-con-ricotta-e-miele.html"
+  },
+  {
+    "name": "Smoothie proteico banana e cacao",
+    "description": "Frullato energizzante da bere come colazione, vegano e senza glutine.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 48,
+      "grassi": 7
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "banana",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "latte di soia",
+        "amount": 200,
+        "unit": "ml"
+      },
+      {
+        "name": "cacao amaro in polvere",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "proteine in polvere (pisello)",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "ghiaccio",
+        "amount": 50,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Inserire tutti gli ingredienti nel frullatore.",
+      "Frullare ad alta velocità per 1 minuto fino ad ottenere un composto liscio.",
+      "Versare in un bicchiere alto e servire subito."
+    ],
+    "tags": [
+      "colazione",
+      "vegano",
+      "senza glutine",
+      "rapido",
+      "proteico"
+    ],
+    "allergens": [
+      "soia"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Frullato-proteico.html"
+  },
+  {
+    "name": "Pancakes d'avena con frutti rossi",
+    "description": "Pancakes leggeri senza farina raffinata, dolci naturalmente con i frutti rossi.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 360,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 52,
+      "grassi": 9
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fiocchi d'avena",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "uova",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "latte parzialmente scremato",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "lievito per dolci",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "fragole",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "miele",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Frullare i fiocchi d'avena in farina grossolana.",
+      "Mescolare con uovo, latte e lievito fino ad avere una pastella omogenea.",
+      "Cuocere piccoli pancakes in padella antiaderente senza olio, 2 min per lato.",
+      "Servire con le fragole tagliate e un filo di miele."
+    ],
+    "tags": [
+      "colazione",
+      "vegetariano",
+      "dolce",
+      "senza zuccheri raffinati"
+    ],
+    "allergens": [
+      "glutine",
+      "uova",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pancakes-avena.html"
+  },
+  {
+    "name": "Toast integrale con avocado e uovo in camicia",
+    "description": "Colazione completa con grassi buoni dell'avocado e proteine dell'uovo.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 370,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 28,
+      "grassi": 20
+    },
+    "prep_time": 12,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pane integrale",
+        "amount": 70,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "uovo",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "limone (succo)",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "peperoncino in scaglie",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tostare il pane integrale.",
+      "Schiacciare l'avocado con il succo di limone e il sale, spalmare sul toast.",
+      "Portare a bollore acqua in un pentolino, creare un vortice e scivolare l'uovo dentro.",
+      "Cuocere l'uovo in camicia per 3 minuti, scolare e adagiare sull'avocado.",
+      "Cospargere di peperoncino e servire."
+    ],
+    "tags": [
+      "colazione",
+      "proteico",
+      "grassi buoni",
+      "tendenza"
+    ],
+    "allergens": [
+      "glutine",
+      "uova"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Toast-avocado-uovo.html"
+  },
+  {
+    "name": "Muesli con yogurt e mela",
+    "description": "Colazione senza cottura con cereali integrali, frutta fresca e proteine del latticino.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 330,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 50,
+      "grassi": 8
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "muesli senza zucchero aggiunto",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "yogurt bianco magro",
+        "amount": 125,
+        "unit": "g"
+      },
+      {
+        "name": "mela",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cannella",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Versare il muesli in una ciotola.",
+      "Aggiungere lo yogurt e mescolare.",
+      "Tagliare la mela a dadini con la buccia e distribuirla sopra.",
+      "Cospargere di cannella e servire."
+    ],
+    "tags": [
+      "colazione",
+      "rapido",
+      "fibre",
+      "vegetariano"
+    ],
+    "allergens": [
+      "glutine",
+      "latte",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Muesli-con-yogurt.html"
+  },
+  {
+    "name": "Fette biscottate integrali con confettura e ricotta",
+    "description": "Colazione semplice e bilanciata con proteine e carboidrati a lento rilascio.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 280,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 38,
+      "grassi": 7
+    },
+    "prep_time": 3,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fette biscottate integrali",
+        "amount": 4,
+        "unit": "pz"
+      },
+      {
+        "name": "ricotta di mucca",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "confettura di frutta senza zuccheri aggiunti",
+        "amount": 20,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Spalmare la ricotta su ogni fetta biscottata.",
+      "Aggiungere un cucchiaino di confettura sopra.",
+      "Servire accompagnando con una bevanda calda."
+    ],
+    "tags": [
+      "colazione",
+      "rapido",
+      "vegetariano",
+      "light"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Fette-biscottate-ricotta.html"
+  },
+  {
+    "name": "Overnight oats con cacao e nocciole",
+    "description": "Colazione preparata la sera prima: avena ammollo in latte con cacao.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 390,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 52,
+      "grassi": 13
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fiocchi d'avena",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "latte parzialmente scremato",
+        "amount": 150,
+        "unit": "ml"
+      },
+      {
+        "name": "yogurt greco",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "cacao amaro in polvere",
+        "amount": 8,
+        "unit": "g"
+      },
+      {
+        "name": "nocciole",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "miele",
+        "amount": 8,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "La sera, mescolare avena, latte, yogurt, cacao e miele in un barattolo.",
+      "Chiudere il barattolo e riporre in frigorifero per tutta la notte.",
+      "Al mattino, mescolare e guarnire con le nocciole tritate."
+    ],
+    "tags": [
+      "colazione",
+      "preparazione serale",
+      "vegetariano",
+      "fibre"
+    ],
+    "allergens": [
+      "glutine",
+      "latte",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546548970-71785318a17b?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Overnight-oats.html"
+  },
+  {
+    "name": "Pane integrale con burro d'arachidi e banana",
+    "description": "Colazione energetica pre-allenamento con proteine, carboidrati e grassi buoni.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 400,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 50,
+      "grassi": 14
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pane integrale",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "burro d'arachidi naturale (solo arachidi)",
+        "amount": 25,
+        "unit": "g"
+      },
+      {
+        "name": "banana",
+        "amount": 80,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Tostare le fette di pane integrale.",
+      "Spalmare abbondante burro d'arachidi.",
+      "Tagliare la banana a rondelle e disporre sopra.",
+      "Servire subito."
+    ],
+    "tags": [
+      "colazione",
+      "vegano",
+      "vegetariano",
+      "pre-allenamento",
+      "rapido"
+    ],
+    "allergens": [
+      "glutine",
+      "arachidi"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Toast-burro-arachidi.html"
+  },
+  {
+    "name": "Crepe d'avena con ricotta e mirtilli",
+    "description": "Crepe leggera a base di avena, farcita con ricotta fresca e mirtilli.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 345,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 40,
+      "grassi": 10
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farina d'avena",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "uovo",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "latte parzialmente scremato",
+        "amount": 100,
+        "unit": "ml"
+      },
+      {
+        "name": "ricotta di mucca",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "mirtilli",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Mescolare farina d'avena, uovo e latte fino ad ottenere una pastella liscia.",
+      "Cuocere una crepe sottile in padella antiaderente senza grassi, 2 min per lato.",
+      "Farcire con ricotta e mirtilli, arrotolare e servire."
+    ],
+    "tags": [
+      "colazione",
+      "vegetariano",
+      "proteico",
+      "senza zuccheri raffinati"
+    ],
+    "allergens": [
+      "glutine",
+      "uova",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Crepe-avena-ricotta.html"
+  },
+  {
+    "name": "Frutta fresca con granola artigianale",
+    "description": "Bowl di frutta stagionale con granola croccante, semplice e veloce.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 300,
+    "macros": {
+      "proteine": 7,
+      "carboidrati": 52,
+      "grassi": 9
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "frutta mista di stagione (mela, pera, kiwi)",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "granola senza zuccheri aggiunti",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "latte di mandorla",
+        "amount": 100,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Tagliare la frutta a cubetti in una ciotola.",
+      "Aggiungere la granola sopra.",
+      "Versare il latte di mandorla e servire."
+    ],
+    "tags": [
+      "colazione",
+      "vegano",
+      "vegetariano",
+      "rapido",
+      "senza cottura"
+    ],
+    "allergens": [
+      "glutine",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1511690078903-71dc5a49f5e3?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Bowl-frutta-granola.html"
+  },
+  {
+    "name": "Kefir con semi di chia e frutta secca",
+    "description": "Colazione probiotica con omega-3 dei semi di chia e energia dalla frutta secca.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 290,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 28,
+      "grassi": 14
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "kefir",
+        "amount": 200,
+        "unit": "ml"
+      },
+      {
+        "name": "semi di chia",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "albicocche secche",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "mandorle",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Versare il kefir in una ciotola.",
+      "Aggiungere i semi di chia e mescolare.",
+      "Guarnire con le albicocche secche tritate e le mandorle."
+    ],
+    "tags": [
+      "colazione",
+      "probiotico",
+      "vegetariano",
+      "omega-3",
+      "rapido"
+    ],
+    "allergens": [
+      "latte",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1497888329096-51c27beff665?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Kefir-semi-chia.html"
+  },
+  {
+    "name": "Insalata di pollo grigliato con verdure e salsa allo yogurt",
+    "description": "Piatto unico leggero e proteico, fresco e saziante. Perfetto per il pranzo.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 38,
+      "carboidrati": 18,
+      "grassi": 14
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di pollo",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "lattuga",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cetriolo",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "yogurt greco 0%",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "limone (succo)",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Marinare il petto di pollo con olio, succo di limone, sale e pepe per 10 minuti.",
+      "Grigliare il pollo per 5 minuti per lato su griglia ben calda.",
+      "Preparare la salsa mescolando yogurt greco con un po' di limone e sale.",
+      "Tagliare tutte le verdure. Comporre l'insalata in una ciotola.",
+      "Affettare il pollo a listarelle e disporre sopra l'insalata.",
+      "Condire con la salsa allo yogurt."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "proteico",
+      "light",
+      "senza glutine",
+      "mediterraneo"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-di-pollo-light.html"
+  },
+  {
+    "name": "Pasta integrale al pomodoro fresco e basilico",
+    "description": "Primo piatto classico della cucina mediterranea, leggero e nutriente.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 13,
+      "carboidrati": 74,
+      "grassi": 9
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pasta integrale (pennette o fusilli)",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori maturi",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "basilico fresco",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Cuocere la pasta in abbondante acqua salata.",
+      "In padella, scaldare l'olio con l'aglio e farlo dorare leggermente.",
+      "Aggiungere i pomodori tagliati a cubetti e cuocere 10 minuti a fuoco medio.",
+      "Scolare la pasta al dente e mantecare nel sugo.",
+      "Spegnere il fuoco, aggiungere basilico fresco spezzato e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "mediterraneo",
+      "primo piatto"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pasta-al-pomodoro-fresco.html"
+  },
+  {
+    "name": "Zuppa di lenticchie rosse con carote e cumino",
+    "description": "Zuppa vegana densa e nutriente, ricca di proteine vegetali e ferro.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 52,
+      "grassi": 6
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "lenticchie rosse decorticate",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cumino in polvere",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla e carote in olio per 5 minuti.",
+      "Aggiungere il cumino, tostare 1 minuto.",
+      "Aggiungere le lenticchie, i pelati e il brodo.",
+      "Cuocere coperto a fuoco basso per 25 minuti fino a quando le lenticchie sono morbide.",
+      "Frullare parzialmente con un frullatore ad immersione per una consistenza cremosa."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "legumi",
+      "proteico",
+      "invernale"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Filetto di salmone in padella con limone e prezzemolo",
+    "description": "Secondo piatto di pesce veloce, saporito e ricco di omega-3.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 2,
+      "grassi": 22
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "filetto di salmone fresco",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "prezzemolo fresco",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "pepe rosa in grani",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Marinare il salmone con olio, succo di mezzo limone, aglio e pepe rosa per 30 minuti.",
+      "Scaldare una padella antiaderente a fuoco vivo senza aggiungere grassi.",
+      "Cuocere il salmone 4 minuti per lato senza muoverlo.",
+      "Sfumare con poco vino bianco (opzionale) e cuocere altri 2 minuti.",
+      "Servire con prezzemolo tritato e fette di limone."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "salmone",
+      "omega-3",
+      "senza glutine",
+      "rapido"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Filetto-di-salmone-in-padella.html"
+  },
+  {
+    "name": "Orata al forno con patate e rosmarino",
+    "description": "Classico secondo della cucina mediterranea, completo di contorno.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 430,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 30,
+      "grassi": 16
+    },
+    "prep_time": 55,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "orata (già eviscerata)",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "patate",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "rosmarino",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "timo",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 2,
+        "unit": "spicchi"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno statico a 180°C.",
+      "Pulire l'orata, riempire la cavità con rosmarino, timo, aglio e fette di limone.",
+      "Tagliare le patate a spicchi, condire con olio, origano e sale fiocchi.",
+      "Sistemarle nella teglia intorno al pesce.",
+      "Cuocere 40 minuti, girando le patate a metà cottura."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "orata",
+      "mediterraneo",
+      "senza glutine",
+      "forno"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Orata-al-forno.html"
+  },
+  {
+    "name": "Pollo e zucchine in padella",
+    "description": "Secondo rapido con pochissimi ingredienti, leggero e gustoso.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 310,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 8,
+      "grassi": 13
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di pollo",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "curry in polvere",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tagliare il pollo a bocconcini e le zucchine a rondelle.",
+      "Scaldare l'olio in padella con l'aglio.",
+      "Aggiungere il pollo e rosolarlo a fuoco vivo per 5 minuti.",
+      "Unire le zucchine, il curry, sale e pepe.",
+      "Cuocere altri 10 minuti mescolando a fuoco medio."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "senza glutine",
+      "rapido",
+      "light"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Risotto integrale con verdure di stagione",
+    "description": "Primo piatto vegetariano cremoso con riso integrale ricco di fibre.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 390,
+    "macros": {
+      "proteine": 10,
+      "carboidrati": 68,
+      "grassi": 9
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "riso integrale",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "peperoni misti",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "basilico",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Soffriggere la cipolla con l'olio per 3 minuti.",
+      "Aggiungere le verdure tagliate a cubetti e rosolare 5 minuti.",
+      "Tostare il riso integrale nel soffritto per 2 minuti.",
+      "Aggiungere il brodo caldo un mestolo alla volta, cuocere 35-40 minuti.",
+      "Mantecare con basilico fresco e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "primo piatto",
+      "fibre"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Risotto-verdure-stagione.html"
+  },
+  {
+    "name": "Minestra di ceci e spinaci",
+    "description": "Zuppa invernale vegana con proteine dei ceci e ferro degli spinaci.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 44,
+      "grassi": 8
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "ceci lessati",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "rosmarino",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 300,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "In una pentola, soffriggere l'aglio e il rosmarino con l'olio.",
+      "Aggiungere i ceci e i pelati, mescolare e cuocere 5 minuti.",
+      "Versare il brodo e portare a bollore.",
+      "Aggiungere gli spinaci freschi, cuocere altri 10 minuti.",
+      "Aggiustare di sale e servire con un filo d'olio a crudo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "legumi",
+      "invernale",
+      "ferro"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Salmone al cartoccio con pomodorini e olive",
+    "description": "Secondo piatto al forno aromatico e salutare, cottura al cartoccio preserva tutti i nutrienti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 360,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 6,
+      "grassi": 22
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "filetti di salmone",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "olive nere denocciolate",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla rossa",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno a 180°C.",
+      "Stendere un foglio di carta forno, adagiare il salmone al centro.",
+      "Disporre attorno pomodorini, olive e cipolla tagliata ad anelli.",
+      "Condire con olio, sale e pepe.",
+      "Chiudere il cartoccio e cuocere 30-35 minuti.",
+      "Aprire, cospargere di prezzemolo e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "salmone",
+      "forno",
+      "senza glutine",
+      "mediterraneo"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Filetti-di-salmone-al-cartoccio.html"
+  },
+  {
+    "name": "Penne integrali con pesto di spinaci e noci",
+    "description": "Primo piatto vegetariano con pesto verde alternativo al classico genovese.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 440,
+    "macros": {
+      "proteine": 15,
+      "carboidrati": 64,
+      "grassi": 15
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "penne integrali",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "noci",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Cuocere la pasta in acqua salata.",
+      "Frullare spinaci, noci, parmigiano, aglio e olio con un frullatore ad immersione.",
+      "Aggiungere poca acqua di cottura per ammorbidire il pesto.",
+      "Scolare la pasta e mantecare con il pesto.",
+      "Servire con scaglie di parmigiano opzionale."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "primo piatto",
+      "pesto",
+      "verdura"
+    ],
+    "allergens": [
+      "glutine",
+      "frutta a guscio",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Penne-pesto-spinaci-noci.html"
+  },
+  {
+    "name": "Burger di legumi con insalata mista",
+    "description": "Burger vegano proteico a base di ceci e fagioli, con contorno di verdure fresche.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 370,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 46,
+      "grassi": 10
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "ceci lessati",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "fagioli borlotti lessati",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "farina integrale",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "curcuma e paprika",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "insalata mista",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Frullare ceci e fagioli in modo grossolano, aggiungere cipolla tritata e spezie.",
+      "Aggiungere la farina e impastare fino ad ottenere un composto compatto.",
+      "Formare un burger e cuocere in padella antiaderente con poco olio, 4 minuti per lato.",
+      "Servire su letto di insalata mista condita con olio e aceto di mele."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "legumi",
+      "proteico",
+      "burger"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Burger-legumi.html"
+  },
+  {
+    "name": "Branzino al vapore con verdure",
+    "description": "Piatto delicatissimo e ultraleggero. La cottura al vapore preserva tutti i nutrienti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 290,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 10,
+      "grassi": 12
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "branzino (tranci)",
+        "amount": 220,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cipollotto",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "basilico",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Riempire la pentola d'acqua aromatizzata con limone, pepe e alloro.",
+      "Cuocere le verdure nel cestello vapore per 10 minuti.",
+      "Pulire il branzino, formare i medaglioni e cuocere nel cestello per 10 minuti.",
+      "Preparare la salsa frullando cipollotto, basilico e olio.",
+      "Impiattare il pesce con le verdure e la salsa verde."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "branzino",
+      "vapore",
+      "senza glutine",
+      "light",
+      "raffinato"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Branzino-al-vapore-con-verdure.html"
+  },
+  {
+    "name": "Pasta al tonno con capperi e pomodorini",
+    "description": "Primo piatto veloce della tradizione italiana, proteico e gustoso.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 430,
+    "macros": {
+      "proteine": 26,
+      "carboidrati": 60,
+      "grassi": 10
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pasta integrale",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "tonno al naturale",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "capperi",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Cuocere la pasta in abbondante acqua salata.",
+      "In padella, soffriggere l'aglio nell'olio, aggiungere i pomodorini tagliati a metà.",
+      "Cuocere 5 minuti, aggiungere tonno sgocciolato e capperi.",
+      "Scolare la pasta al dente e mantecare nel condimento.",
+      "Servire con prezzemolo fresco."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "tonno",
+      "primo piatto",
+      "rapido",
+      "mediterraneo"
+    ],
+    "allergens": [
+      "glutine",
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1598103442097-8b74394b95c3?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pasta-tonno-capperi-pomodorini.html"
+  },
+  {
+    "name": "Farro con verdure grigliate e formaggio di capra",
+    "description": "Piatto unico vegetariano con cereale antico e verdure estive.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 400,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 56,
+      "grassi": 14
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farro perlato",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "melanzane",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "peperoni",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "formaggio di capra fresco",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "erbe aromatiche (timo, origano)",
+        "amount": 3,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Cuocere il farro in acqua salata per 25-30 minuti, scolare.",
+      "Grigliare le verdure tagliate a fette su griglia ben calda, 3-4 minuti per lato.",
+      "Condire le verdure con olio ed erbe aromatiche.",
+      "Comporre il piatto: farro alla base, verdure sopra, formaggio di capra sbriciolato."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "cereali",
+      "verdure grigliate",
+      "estivo"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Farro-verdure-grigliate.html"
+  },
+  {
+    "name": "Involtini di vitello alle mandorle in padella",
+    "description": "Secondo tenero e senza glutine, rapido da preparare e delicato al palato.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 6,
+      "grassi": 20
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fettine di vitello (fesa)",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "mandorle tritate",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "uvetta",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Battere le fettine di vitello e distribuire prezzemolo tritato e uvetta su ognuna.",
+      "Arrotolare e fermare con uno stuzzicadenti.",
+      "Impanare nell'esterno con le mandorle tritate.",
+      "Cuocere in padella antiaderente con olio a fuoco medio, 8-10 minuti girandoli.",
+      "Eliminare gli stuzzicadenti e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne",
+      "vitello",
+      "senza glutine",
+      "secondo"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+  },
+  {
+    "name": "Cous cous di pollo con verdure",
+    "description": "Piatto unico bilanciato con cereali e pollo, ispirato alla dieta mediterranea.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 32,
+      "carboidrati": 46,
+      "grassi": 12
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "cous cous integrale",
+        "amount": 70,
+        "unit": "g"
+      },
+      {
+        "name": "petto di pollo",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "brodo vegetale caldo",
+        "amount": 100,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "curcuma e cumino",
+        "amount": 2,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Versare il cous cous nel brodo caldo, coprire e lasciare gonfiare 5 minuti.",
+      "Sgranare con una forchetta e condire con olio.",
+      "Tagliare il pollo a cubetti e rosolare con le spezie.",
+      "Aggiungere le verdure a cubetti, cuocere 10 minuti.",
+      "Servire il cous cous con il pollo e le verdure sopra."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "cereali",
+      "speziato",
+      "mediterraneo"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Vellutata di zucca e patate dolci",
+    "description": "Zuppa vellutata vegana dal sapore dolce, ricca di beta-carotene.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 280,
+    "macros": {
+      "proteine": 6,
+      "carboidrati": 48,
+      "grassi": 8
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "zucca",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "patate dolci",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "zenzero fresco",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "semi di zucca tostati",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla e zenzero con l'olio per 3 minuti.",
+      "Aggiungere zucca e patata dolce a cubetti.",
+      "Versare il brodo e cuocere 25 minuti a fuoco medio.",
+      "Frullare con frullatore ad immersione fino a consistenza cremosa.",
+      "Servire con semi di zucca tostati e un filo d'olio."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "vellutata",
+      "beta-carotene",
+      "invernale"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+  },
+  {
+    "name": "Tacchino con pomodori secchi e olive",
+    "description": "Secondo di carne bianca con sapori mediterranei intensi.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 38,
+      "carboidrati": 8,
+      "grassi": 14
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di tacchino",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori secchi (non sott'olio)",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "olive verdi denocciolate",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "vino bianco secco",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "origano",
+        "amount": 2,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Tagliare il tacchino a bocconcini.",
+      "Rosolare cipolla con olio, aggiungere il tacchino e dorarlo.",
+      "Sfumare con vino bianco e lasciare evaporare.",
+      "Aggiungere pomodori secchi reidratati, olive e origano.",
+      "Cuocere a fuoco medio per 15 minuti. Servire caldo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne bianca",
+      "tacchino",
+      "senza glutine",
+      "mediterraneo"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tacchino-pomodori-secchi-olive.html"
+  },
+  {
+    "name": "Minestra di orzo e fagioli",
+    "description": "Piatto unico della tradizione italiana, ricco di fibre e proteine vegetali.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 360,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 56,
+      "grassi": 8
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "orzo perlato",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "fagioli borlotti lessati",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "sedano",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "rosmarino",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 500,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Soffriggere sedano, carota e cipolla con olio e rosmarino.",
+      "Aggiungere metà dei fagioli e schiacciarli con una forchetta.",
+      "Versare il brodo e portare a bollore.",
+      "Aggiungere l'orzo e i fagioli interi rimanenti.",
+      "Cuocere 30-35 minuti, aggiustare di sale."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "cereali",
+      "legumi",
+      "invernale",
+      "tradizionale"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Minestra-orzo-fagioli.html"
+  },
+  {
+    "name": "Tonno alla pizzaiola con olive e capperi",
+    "description": "Secondo di pesce veloce con salsa di pomodoro aromatica.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 310,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 10,
+      "grassi": 12
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "trancio di tonno fresco",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "olive nere",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "capperi",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "origano",
+        "amount": 2,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Preparare il sugo: soffriggere l'aglio, aggiungere pelati, olive e capperi.",
+      "Cuocere il sugo 10 minuti a fuoco medio.",
+      "Adagiare il trancio di tonno nel sugo e cuocere 5-6 minuti per lato.",
+      "Servire con origano fresco."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "tonno",
+      "senza glutine",
+      "mediterraneo",
+      "rapido"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tonno-alla-pizzaiola.html"
+  },
+  {
+    "name": "Spaghetti integrali al limone",
+    "description": "Primo piatto leggero e cremoso senza panna, pronto in 15 minuti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 390,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 66,
+      "grassi": 9
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "spaghetti integrali",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "limoni (scorza e succo)",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "basilico",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Cuocere gli spaghetti in acqua salata.",
+      "In una ciotola grande, mescolare olio, succo e scorza di limone, parmigiano.",
+      "Scolare la pasta conservando mezzo bicchiere di acqua di cottura.",
+      "Mantecare velocemente nella ciotola con l'acqua di cottura.",
+      "Aggiungere basilico e pepe nero macinato."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "primo piatto",
+      "rapido",
+      "estivo"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600",
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+  },
+  {
+    "name": "Polpette di tacchino e ricotta al sugo",
+    "description": "Polpette light al forno poi in sugo di pomodoro, leggere e gustose.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 32,
+      "carboidrati": 18,
+      "grassi": 16
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "macinato di tacchino",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "ricotta di mucca",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "uovo (solo albume)",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Mescolare macinato, ricotta, albume e prezzemolo.",
+      "Formare polpette delle dimensioni di una noce.",
+      "Cuocere in forno a 180°C per 15 minuti.",
+      "Preparare il sugo con aglio, pelati e olio, cuocere 10 minuti.",
+      "Aggiungere le polpette al sugo e cuocere altri 10 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne bianca",
+      "tacchino",
+      "polpette",
+      "light"
+    ],
+    "allergens": [
+      "latte",
+      "uova"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600",
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+  },
+  {
+    "name": "Quinoa con avocado, fagioli neri e lime",
+    "description": "Bowl vegana proteica completa con tutti gli aminoacidi essenziali.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 410,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 50,
+      "grassi": 16
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "quinoa",
+        "amount": 70,
+        "unit": "g"
+      },
+      {
+        "name": "fagioli neri lessati",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "mais (sgocciolato)",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "lime (succo)",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "coriandolo fresco",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Sciacquare e cuocere la quinoa nel doppio del volume d'acqua per 15 minuti.",
+      "Condire la quinoa con olio e succo di lime.",
+      "Comporre la bowl: quinoa alla base, poi fagioli, mais, pomodorini e avocado a fette.",
+      "Guarnire con coriandolo fresco."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "proteico",
+      "bowl"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Bowl-quinoa-avocado.html"
+  },
+  {
+    "name": "Straccetti di pollo alla mediterranea",
+    "description": "Pollo a strisce cotto in friggitrice ad aria o padella, rapido e saporito.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 300,
+    "macros": {
+      "proteine": 38,
+      "carboidrati": 6,
+      "grassi": 12
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di pollo",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "olive nere",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "origano",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tagliare il pollo a strisce sottili.",
+      "Marinare 10 minuti con olio, origano, sale e pepe.",
+      "Cuocere a fuoco vivo in padella antiaderente per 8-10 minuti.",
+      "Aggiungere pomodorini e olive negli ultimi 3 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "senza glutine",
+      "rapido",
+      "mediterraneo"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+  },
+  {
+    "name": "Frittata di albumi con verdure",
+    "description": "Frittata ipoproteica a base di soli albumi, leggerissima e saziante.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 220,
+    "macros": {
+      "proteine": 28,
+      "carboidrati": 8,
+      "grassi": 7
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "albumi d'uovo",
+        "amount": 4,
+        "unit": "pz"
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cipollotto",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Saltare cipollotto e spinaci con pochissimo olio per 3 minuti.",
+      "Sbattere gli albumi con sale e pepe.",
+      "Aggiungere le verdure agli albumi, mescolare.",
+      "Cuocere in padella antiaderente con coperchio a fuoco basso per 10 minuti.",
+      "Aggiungere i pomodorini a metà cottura."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "senza glutine",
+      "proteico",
+      "light",
+      "ipocalorico"
+    ],
+    "allergens": [
+      "uova"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+  },
+  {
+    "name": "Pasta e fagioli",
+    "description": "Piatto unico della cucina povera italiana, completo e nutriente.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 430,
+    "macros": {
+      "proteine": 20,
+      "carboidrati": 68,
+      "grassi": 8
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pasta corta integrale (tubetti)",
+        "amount": 70,
+        "unit": "g"
+      },
+      {
+        "name": "fagioli cannellini lessati",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "pomodoro fresco",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "sedano, carota, cipolla (soffritto)",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "rosmarino",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 300,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Soffriggere sedano, carota, cipolla con olio e rosmarino.",
+      "Aggiungere metà dei fagioli, schiacciarli per addensare.",
+      "Versare brodo e pomodoro, portare a bollore.",
+      "Aggiungere la pasta e cuocere nel brodo.",
+      "Aggiungere i fagioli interi rimanenti e servire con filo d'olio a crudo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "legumi",
+      "primo piatto",
+      "tradizionale",
+      "invernale"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pasta-e-fagioli.html"
+  },
+  {
+    "name": "Petto di pollo al limone",
+    "description": "Secondo classico leggero con salsina agrumata, pronto in 20 minuti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 280,
+    "macros": {
+      "proteine": 38,
+      "carboidrati": 4,
+      "grassi": 11
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di pollo",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "limoni (succo)",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "farina integrale (per infarinare)",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "brodo di pollo leggero",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tagliare il pollo a fettine sottili e infarinarle leggermente.",
+      "Rosolare in padella con olio caldo, 3 minuti per lato.",
+      "Sfumare con succo di limone e aggiungere il brodo.",
+      "Cuocere 5 minuti fino a che la salsa si addensa.",
+      "Servire con prezzemolo tritato."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "rapido",
+      "light"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pollo-al-limone.html"
+  },
+  {
+    "name": "Riso venere con gamberetti e zucchine",
+    "description": "Primo piatto elegante con riso nero integrale e proteine del pesce.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 400,
+    "macros": {
+      "proteine": 26,
+      "carboidrati": 54,
+      "grassi": 10
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "riso venere",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "gamberetti surgelati",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "prezzemolo",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "pepe nero",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Cuocere il riso venere 40-45 minuti in acqua salata.",
+      "Saltare i gamberetti scongelati con olio e aglio per 4 minuti.",
+      "Aggiungere le zucchine a rondelle e cuocere altri 5 minuti.",
+      "Scolare il riso e unire al condimento.",
+      "Servire con prezzemolo fresco e pepe nero."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "crostacei",
+      "riso",
+      "senza glutine"
+    ],
+    "allergens": [
+      "crostacei"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Zucchine ripiene di ricotta e timo",
+    "description": "Secondo vegetariano leggero, profumato e colorato.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 260,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 12,
+      "grassi": 16
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "zucchine grandi",
+        "amount": 2,
+        "unit": "pz"
+      },
+      {
+        "name": "ricotta di mucca",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "timo fresco",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "uovo (solo albume)",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tagliare le zucchine a metà per la lunghezza, svuotarle con un cucchiaino.",
+      "Tritare la polpa di zucchina e mescolarla con ricotta, parmigiano, albume e timo.",
+      "Riempire le barchette di zucchina con il composto.",
+      "Cuocere in forno a 180°C per 25 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "senza glutine",
+      "light",
+      "forno"
+    ],
+    "allergens": [
+      "latte",
+      "uova"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+  },
+  {
+    "name": "Insalata di farro con cetrioli, pomodori e feta",
+    "description": "Piatto unico estivo vegetariano, fresco e saziante.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 52,
+      "grassi": 14
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farro perlato",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori datterini",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cetriolo",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "feta",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "olive kalamata",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "menta fresca",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      }
+    ],
+    "instructions": [
+      "Cuocere il farro in acqua salata per 25-30 minuti, scolare e raffreddare.",
+      "Tagliare pomodorini, cetriolo e mescolare con il farro.",
+      "Condire con olio, succo di limone e foglie di menta.",
+      "Sbriciolate la feta sopra e aggiungere le olive."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "estivo",
+      "cereali",
+      "insalata"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-farro-feta.html"
+  },
+  {
+    "name": "Tofu marinato con verdure saltate e sesamo",
+    "description": "Secondo vegano proteico con tofu croccante e verdure colorate.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 22,
+      "carboidrati": 18,
+      "grassi": 18
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "tofu sodo",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "broccoli",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "salsa di soia (tamari)",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "olio di sesamo",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "zenzero fresco grattugiato",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "semi di sesamo",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Tagliare il tofu a cubetti, marinare con tamari e zenzero per 20 minuti.",
+      "Cuocere il tofu in padella a fuoco vivo fino a renderlo dorato.",
+      "In un'altra padella, saltare broccoli e carote con olio di sesamo per 7 minuti.",
+      "Unire tofu e verdure, cuocere insieme 2 minuti.",
+      "Cospargere di sesamo e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "tofu",
+      "proteico"
+    ],
+    "allergens": [
+      "soia",
+      "sesamo"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tofu-marinato-verdure.html"
+  },
+  {
+    "name": "Zuppa di piselli e menta",
+    "description": "Vellutata estiva fredda o calda, verde e fresca, ricca di proteine vegetali.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 270,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 38,
+      "grassi": 7
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "piselli surgelati",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 300,
+        "unit": "ml"
+      },
+      {
+        "name": "menta fresca",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla con olio per 3 minuti.",
+      "Aggiungere piselli e brodo, portare a bollore.",
+      "Cuocere 15 minuti, aggiungere la menta.",
+      "Frullare tutto con frullatore ad immersione fino a crema liscia.",
+      "Servire calda con filo d'olio o fredda in estate."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "vellutata",
+      "estivo",
+      "legumi"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Vellutata-piselli-menta.html"
+  },
+  {
+    "name": "Coniglio alla ligure con olive e pinoli",
+    "description": "Secondo tradizionale del nord Italia, carne magra saporita con profumi mediterranei.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 5,
+      "grassi": 18
+    },
+    "prep_time": 60,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "coniglio a pezzi",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "olive taggiasche",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "pinoli",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "rosmarino e timo",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "vino bianco secco",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "aglio",
+        "amount": 2,
+        "unit": "spicchi"
+      }
+    ],
+    "instructions": [
+      "Rosolare i pezzi di coniglio in olio con aglio e erbe aromatiche.",
+      "Sfumare con vino bianco e lasciare evaporare.",
+      "Aggiungere olive e pinoli, coprire e cuocere a fuoco basso per 40 minuti.",
+      "Regolare di sale e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne",
+      "coniglio",
+      "senza glutine",
+      "tradizionale",
+      "ligure"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Coniglio-alla-ligure.html"
+  },
+  {
+    "name": "Insalata nizzarda con tonno e uova sode",
+    "description": "Insalata completa ricca di proteine e grassi buoni, piatto unico estivo.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 30,
+      "carboidrati": 18,
+      "grassi": 20
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "tonno al naturale",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "uova sode",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "fagiolini lessati",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "lattuga",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "olive nere",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "acciughe sott'olio",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Cuocere i fagiolini al vapore finché croccanti, raffreddarli.",
+      "Comporre l'insalata: lattuga, pomodori, fagiolini.",
+      "Aggiungere il tonno sgocciolato, l'uovo a spicchi, le olive e le acciughe.",
+      "Condire con olio, aceto di vino bianco, sale e pepe."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "tonno",
+      "insalata",
+      "senza glutine",
+      "estivo",
+      "piatto unico"
+    ],
+    "allergens": [
+      "uova",
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-nizzarda.html"
+  },
+  {
+    "name": "Pollo alla cacciatora",
+    "description": "Classico piatto toscano in umido con verdure, pomodoro e olive.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 370,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 14,
+      "grassi": 18
+    },
+    "prep_time": 55,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pollo in pezzi (coscia e petto)",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "olive verdi",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "peperoni",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "vino rosso",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "rosmarino e alloro",
+        "amount": 4,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Rosolare il pollo in olio caldo fino a doratura, circa 8 minuti.",
+      "Aggiungere cipolla e peperoni, cuocere 5 minuti.",
+      "Sfumare con vino rosso e lasciare evaporare.",
+      "Aggiungere pelati, olive e aromi.",
+      "Cuocere coperto a fuoco basso per 35 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "senza glutine",
+      "umido",
+      "tradizionale",
+      "toscano"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pollo-alla-cacciatora.html"
+  },
+  {
+    "name": "Fusilli integrali con ricotta e spinaci",
+    "description": "Primo piatto vegetariano cremoso e veloce, equilibrato nei macro.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 62,
+      "grassi": 12
+    },
+    "prep_time": 20,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fusilli integrali",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "ricotta di mucca",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "parmigiano",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "noce moscata",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Cuocere la pasta in acqua salata.",
+      "Saltare gli spinaci con olio e aglio per 3 minuti.",
+      "In una ciotola, ammorbidire la ricotta con 2 cucchiai di acqua di cottura.",
+      "Scolare la pasta e mantecare con ricotta e spinaci.",
+      "Aggiungere parmigiano, noce moscata e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "primo piatto",
+      "rapido"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Fusilli-ricotta-spinaci.html"
+  },
+  {
+    "name": "Bistecca di manzo con rucola e grana",
+    "description": "Secondo di carne rossa di qualità con contorno leggero di rucola.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 390,
+    "macros": {
+      "proteine": 42,
+      "carboidrati": 4,
+      "grassi": 22
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fesa di manzo",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "rucola",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "grana padano a scaglie",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Scaldare la griglia a fuoco vivo.",
+      "Cuocere la bistecca 3 minuti per lato per una cottura al sangue.",
+      "Lasciarla riposare 2 minuti, poi tagliarla a fettine.",
+      "Servire su letto di rucola condita con olio e limone.",
+      "Guarnire con scaglie di grana padano."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne rossa",
+      "senza glutine",
+      "rapido",
+      "proteico"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tagliata-rucola-grana.html"
+  },
+  {
+    "name": "Curry di ceci e spinaci",
+    "description": "Piatto vegano speziato e cremoso con proteine dei legumi.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 46,
+      "grassi": 12
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "ceci lessati",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "latte di cocco (leggero)",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "curry in polvere",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "zenzero e aglio",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla, zenzero e aglio con olio.",
+      "Aggiungere il curry e tostare 1 minuto.",
+      "Aggiungere i pelati e cuocere 5 minuti.",
+      "Unire ceci e latte di cocco, cuocere 10 minuti.",
+      "Aggiungere spinaci e cuocere 3 minuti finché appassiscono."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "legumi",
+      "speziato",
+      "curry",
+      "senza glutine"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Curry-ceci-spinaci.html"
+  },
+  {
+    "name": "Merluzzo al vapore con pomodorini e olive",
+    "description": "Secondo di pesce bianco delicato, leggero e ricco di proteine.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 270,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 8,
+      "grassi": 10
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "filetti di merluzzo",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "olive verdi",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "capperi",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "origano",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Cuocere il merluzzo al vapore per 10-12 minuti.",
+      "In padella, scaldate i pomodorini tagliati a metà con olive e capperi per 5 minuti.",
+      "Adagiare il merluzzo cotto sul condimento e cuocere insieme 2 minuti.",
+      "Condire con olio e origano."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "merluzzo",
+      "vapore",
+      "senza glutine",
+      "light"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Merluzzo-vapore-pomodorini.html"
+  },
+  {
+    "name": "Insalata di orzo con verdure estive e pesto",
+    "description": "Piatto freddo per l'estate con cereale integrale e condimento aromatico.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 400,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 58,
+      "grassi": 14
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "orzo perlato",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "pesto genovese (senza aglio)",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cetriolo",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "peperoni grigliati",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "olive nere",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Cuocere l'orzo in acqua salata per 30 minuti, scolare e raffreddare.",
+      "Mescolare l'orzo con il pesto.",
+      "Aggiungere le verdure tagliate a cubetti e le olive.",
+      "Servire freddo o a temperatura ambiente."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "estivo",
+      "cereali",
+      "freddo"
+    ],
+    "allergens": [
+      "glutine",
+      "frutta a guscio",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-orzo-pesto.html"
+  },
+  {
+    "name": "Uova al tegamino con asparagi",
+    "description": "Secondo vegetariano semplice e primaverile, pronto in 15 minuti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 280,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 8,
+      "grassi": 18
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "uova",
+        "amount": 2,
+        "unit": "pz"
+      },
+      {
+        "name": "asparagi",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Lessare gli asparagi in acqua salata per 8 minuti, scolare.",
+      "Scaldare olio in una padella, disporre gli asparagi.",
+      "Rompere le uova sopra gli asparagi, coprire e cuocere 5 minuti.",
+      "Cospargere di parmigiano, sale e pepe."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "senza glutine",
+      "primaverile",
+      "rapido"
+    ],
+    "allergens": [
+      "uova",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Uova-al-tegamino-asparagi.html"
+  },
+  {
+    "name": "Salmone al vapore con broccoli",
+    "description": "Piatto ultralight perfetto per chi è a dieta, completo di proteine e verdure.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 300,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 10,
+      "grassi": 14
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "trancio di salmone",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "broccoli",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "zenzero fresco",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Portare a bollore l'acqua aromatizzata con fette di limone e zenzero.",
+      "Cuocere il salmone nel cestello vapore per 8-9 minuti.",
+      "Cuocere i broccoli a vapore per 10 minuti finché croccanti.",
+      "Condire tutto con olio, succo di limone e sale."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "salmone",
+      "vapore",
+      "senza glutine",
+      "light",
+      "dieta"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Salmone-al-vapore.html"
+  },
+  {
+    "name": "Minestrone di verdure",
+    "description": "Il classico della nonna: piatto unico caldo, leggero e ricco di vitamine.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 260,
+    "macros": {
+      "proteine": 10,
+      "carboidrati": 40,
+      "grassi": 6
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "patate",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "fagiolini",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "pomodori",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "sedano",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "fagioli cannellini lessati",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "parmigiano (facoltativo)",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 600,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Tagliare tutte le verdure a cubetti.",
+      "In pentola, soffriggere sedano con olio.",
+      "Aggiungere tutte le verdure e il brodo, portare a bollore.",
+      "Cuocere 35-40 minuti a fuoco medio.",
+      "Aggiungere i fagioli negli ultimi 10 minuti.",
+      "Servire con filo d'olio e parmigiano (facoltativo)."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "tradizionale",
+      "invernale",
+      "fibre"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+  },
+  {
+    "name": "Pomodori ripieni di riso e verdure",
+    "description": "Piatto vegetariano estivo completo, fresco e colorato.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 9,
+      "carboidrati": 58,
+      "grassi": 8
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pomodori grandi",
+        "amount": 2,
+        "unit": "pz"
+      },
+      {
+        "name": "riso integrale",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "zucchine",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "basilico",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno a 180°C.",
+      "Tagliare la calotta ai pomodori, svuotarli conservando la polpa.",
+      "Cuocere il riso per 15 minuti in acqua salata, scolare.",
+      "Mescolare riso, polpa di pomodoro, zucchina a dadini e basilico.",
+      "Riempire i pomodori, coprire con le calotte, infornare 25 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "estivo",
+      "forno"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pomodori-ripieni-riso.html"
+  },
+  {
+    "name": "Sgombro in padella con erbe aromatiche",
+    "description": "Pesce azzurro economico e ricchissimo di omega-3, cotto in pochi minuti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 330,
+    "macros": {
+      "proteine": 32,
+      "carboidrati": 2,
+      "grassi": 22
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "filetti di sgombro",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "rosmarino",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "timo",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio"
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Asciugare i filetti di sgombro con carta da cucina.",
+      "Scaldare olio in padella con aglio e erbe.",
+      "Cuocere lo sgombro 3-4 minuti per lato a fuoco vivo.",
+      "Servire con spicchi di limone e erbe aromatiche fresche."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "pesce azzurro",
+      "sgombro",
+      "omega-3",
+      "senza glutine",
+      "rapido"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Sgombro-padella-erbe.html"
+  },
+  {
+    "name": "Riso basmati con pollo e curcuma",
+    "description": "Piatto unico leggero con riso aromatico e pollo alle spezie indiane.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 32,
+      "carboidrati": 52,
+      "grassi": 10
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "riso basmati",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "petto di pollo",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "curcuma",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "paprika dolce",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "brodo di pollo",
+        "amount": 160,
+        "unit": "ml"
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Tostare il riso con cipolla e olio per 2 minuti.",
+      "Aggiungere il brodo e cuocere 12 minuti coperto.",
+      "A parte, cuocere il pollo a cubetti con curcuma e paprika in padella.",
+      "Mescolare riso e pollo e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "riso",
+      "senza glutine",
+      "speziato"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Riso-pollo-curcuma.html"
+  },
+  {
+    "name": "Mele al forno con cannella e noci",
+    "description": "Spuntino dolce naturale e caldo, senza zuccheri aggiunti.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 160,
+    "macros": {
+      "proteine": 2,
+      "carboidrati": 28,
+      "grassi": 6
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "mele (tipo golden)",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "noci",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "cannella",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "miele",
+        "amount": 5,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno a 180°C.",
+      "Tagliare le mele a metà e svuotare il centro.",
+      "Riempire con noci tritate, cannella e miele.",
+      "Cuocere in forno 20 minuti."
+    ],
+    "tags": [
+      "spuntino",
+      "vegetariano",
+      "senza glutine",
+      "dolce naturale",
+      "frutta"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Mele-al-forno-cannella.html"
+  },
+  {
+    "name": "Yogurt greco con semi di lino e frutta secca",
+    "description": "Spuntino proteico saziante, ricco di omega-3 e probiotici.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 190,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 14,
+      "grassi": 8
+    },
+    "prep_time": 3,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "yogurt greco 0%",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "semi di lino macinati",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "mandorle",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "uvetta",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Versare lo yogurt in una ciotolina.",
+      "Aggiungere semi di lino, mandorle e uvetta.",
+      "Mescolare e consumare subito."
+    ],
+    "tags": [
+      "spuntino",
+      "vegetariano",
+      "senza glutine",
+      "proteico",
+      "rapido"
+    ],
+    "allergens": [
+      "latte",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1511690078903-71dc5a49f5e3?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-semi.html"
+  },
+  {
+    "name": "Gallette di riso con hummus",
+    "description": "Spuntino leggero vegano con proteine dei ceci e cereali integrali.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 175,
+    "macros": {
+      "proteine": 7,
+      "carboidrati": 24,
+      "grassi": 6
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "gallette di riso integrale",
+        "amount": 3,
+        "unit": "pz"
+      },
+      {
+        "name": "hummus di ceci",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "prezzemolo fresco",
+        "amount": 3,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Spalmare l'hummus sulle gallette.",
+      "Cospargere di paprika e prezzemolo fresco.",
+      "Servire subito."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "rapido",
+      "legumi"
+    ],
+    "allergens": [
+      "sesamo"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Gallette-hummus.html"
+  },
+  {
+    "name": "Frutta secca mista",
+    "description": "Spuntino energetico completo con grassi buoni, minerali e antiossidanti.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 185,
+    "macros": {
+      "proteine": 5,
+      "carboidrati": 8,
+      "grassi": 16
+    },
+    "prep_time": 1,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "mandorle",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "noci",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "anacardi",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "nocciole",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Mescolare la frutta secca in una ciotolina.",
+      "Consumare come spuntino a metà mattina o pomeriggio."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "rapido",
+      "omega-3"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Frutta-secca-spuntino.html"
+  },
+  {
+    "name": "Banana e burro di mandorle",
+    "description": "Spuntino pre o post allenamento rapido, energetico e naturale.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 200,
+    "macros": {
+      "proteine": 5,
+      "carboidrati": 28,
+      "grassi": 9
+    },
+    "prep_time": 2,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "banana",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "burro di mandorle naturale",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Sbucciare la banana e tagliarla a fette.",
+      "Intingere ogni fetta nel burro di mandorle e consumare."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "rapido",
+      "pre-allenamento"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Banana-burro-mandorle.html"
+  },
+  {
+    "name": "Edamame salati",
+    "description": "Spuntino proteico e saziante di fagioli di soia giovani, tipicamente giapponese.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 160,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 12,
+      "grassi": 6
+    },
+    "prep_time": 10,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "edamame surgelati (nel baccello)",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "sale marino grosso",
+        "amount": 2,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Lessare gli edamame in acqua salata per 5 minuti.",
+      "Scolare e cospargere con sale marino grosso.",
+      "Consumare ancora caldi o a temperatura ambiente."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "proteico",
+      "rapido"
+    ],
+    "allergens": [
+      "soia"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Edamame-salati.html"
+  },
+  {
+    "name": "Cetrioli e carote con tzatziki",
+    "description": "Spuntino freschissimo e ipocalorico con verdure crude e salsa greca.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 130,
+    "macros": {
+      "proteine": 8,
+      "carboidrati": 14,
+      "grassi": 4
+    },
+    "prep_time": 10,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "cetriolo",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "carote",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "yogurt greco 0%",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "aglio (piccola quantità)",
+        "amount": 1,
+        "unit": "pizzico"
+      },
+      {
+        "name": "aneto o menta",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "sale",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Preparare il tzatziki: grattugiare mezzo cetriolo, strizzarlo, mescolare con yogurt, aglio e aneto.",
+      "Tagliare il cetriolo rimanente e le carote a bastoncini.",
+      "Servire le verdure con la salsa tzatziki a parte."
+    ],
+    "tags": [
+      "spuntino",
+      "vegetariano",
+      "senza glutine",
+      "ipocalorico",
+      "fresco",
+      "estivo"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Verdure-tzatziki.html"
+  },
+  {
+    "name": "Ricotta con miele e pistacchi",
+    "description": "Spuntino dolce naturale proteico, cremoso e soddisfacente.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 200,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 18,
+      "grassi": 8
+    },
+    "prep_time": 3,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "ricotta di mucca",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "miele",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "pistacchi sgusciati",
+        "amount": 10,
+        "unit": "g"
+      }
+    ],
+    "instructions": [
+      "Versare la ricotta in una ciotolina.",
+      "Aggiungere il miele e mescolare leggermente.",
+      "Guarnire con i pistacchi tritati grossolanamente."
+    ],
+    "tags": [
+      "spuntino",
+      "vegetariano",
+      "senza glutine",
+      "proteico",
+      "dolce naturale",
+      "rapido"
+    ],
+    "allergens": [
+      "latte",
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1497888329096-51c27beff665?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Ricotta-miele-pistacchi.html"
+  },
+  {
+    "name": "Frullato verde con spinaci, mela e zenzero",
+    "description": "Spuntino detox vegano, ricco di clorofilla e vitamine.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 140,
+    "macros": {
+      "proteine": 3,
+      "carboidrati": 30,
+      "grassi": 1
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "spinaci freschi",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "mela verde",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "zenzero fresco",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "limone (succo)",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "acqua fredda",
+        "amount": 150,
+        "unit": "ml"
+      }
+    ],
+    "instructions": [
+      "Inserire tutti gli ingredienti nel frullatore.",
+      "Frullare ad alta velocità per 1 minuto.",
+      "Servire subito con ghiaccio."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "detox",
+      "rapido",
+      "verde"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Frullato-verde-spinaci.html"
+  },
+  {
+    "name": "Pane di segale con avocado e pomodorino",
+    "description": "Spuntino saziante con grassi buoni e fibre, croccante e gustoso.",
+    "meal_type": [
+      "spuntino"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 180,
+    "macros": {
+      "proteine": 4,
+      "carboidrati": 20,
+      "grassi": 9
+    },
+    "prep_time": 5,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pane di segale",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "pomodorini",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "sale e pepe",
+        "amount": 1,
+        "unit": "pizzico"
+      }
+    ],
+    "instructions": [
+      "Tostare il pane di segale.",
+      "Schiacciare l'avocado con sale e pepe.",
+      "Spalmare sul pane e guarnire con pomodorini dimezzati."
+    ],
+    "tags": [
+      "spuntino",
+      "vegano",
+      "vegetariano",
+      "rapido",
+      "grassi buoni"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pane-segale-avocado.html"
+  }
+]

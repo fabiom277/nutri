@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nutrì Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f0faf6; }
+    .admin-header { background: #1D9E75; color: #fff; padding: 16px 24px; display:flex; align-items:center; justify-content:space-between; }
+    .admin-header h1 { font-size:1.3rem; color:#fff; }
+    .badge { background:rgba(255,255,255,0.25); padding:3px 10px; border-radius:50px; font-size:0.8rem; font-weight:700; }
+    .admin-stat { background:#fff; border-radius:12px; padding:16px; text-align:center; border:1px solid #e8f8f2; }
+    .admin-stat .num { font-size:2rem; font-weight:700; color:#1D9E75; }
+    .admin-stat .lbl { font-size:0.8rem; color:#777; }
+    .tag { display:inline-block; padding:2px 8px; border-radius:50px; font-size:0.73rem; font-weight:600; margin:2px; }
+    .tag-meal { background:#E8F5E9; color:#2E7D32; }
+    .tag-diet { background:#E3F2FD; color:#1565C0; }
+    .tag-veg  { background:#F3E5F5; color:#6A1B9A; }
+    .modal-admin { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:500; display:flex; align-items:center; justify-content:center; padding:16px; }
+    .modal-admin-box { background:#fff; border-radius:16px; padding:24px; width:100%; max-width:700px; max-height:90vh; overflow-y:auto; }
+    .modal-admin-box h2 { margin-bottom:20px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:600px){ .form-grid { grid-template-columns:1fr; } }
+    textarea.code { font-family:monospace; font-size:0.8rem; }
+    #login-section { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+    .hidden { display:none!important; }
+  </style>
+</head>
+<body>
+
+<!-- Admin Login -->
+<div id="login-section">
+  <div class="card" style="width:100%;max-width:380px">
+    <div style="text-align:center;margin-bottom:24px">
+      <svg viewBox="0 0 110 120" width="40" height="44" xmlns="http://www.w3.org/2000/svg">
+        <rect width="110" height="120" rx="22" fill="#1D9E75"/>
+        <rect x="37" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="51" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="65" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="37" y="55" width="36" height="7" rx="2" fill="white"/>
+        <rect x="51" y="59" width="8" height="50" rx="4" fill="white"/>
+      </svg>
+      <h2 style="margin-top:12px">Nutrì Admin</h2>
+    </div>
+    <div class="auth-form">
+      <div class="input-group"><label>Email</label><input type="email" id="adm-email" placeholder="admin@email.it"></div>
+      <div class="input-group"><label>Password</label><input type="password" id="adm-pass" placeholder="••••••••"></div>
+      <button class="btn btn-primary w-full" id="btn-adm-login">Accedi come Admin</button>
+      <p id="login-error" style="color:#c00;font-size:0.85rem;text-align:center;display:none"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div id="admin-panel" class="hidden">
+  <div class="admin-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <svg viewBox="0 0 110 120" width="28" height="31" xmlns="http://www.w3.org/2000/svg">
+        <rect width="110" height="120" rx="22" fill="rgba(255,255,255,0.3)"/>
+        <rect x="37" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="51" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="65" y="15" width="8" height="43" rx="4" fill="white"/>
+        <rect x="37" y="55" width="36" height="7" fill="white"/>
+        <rect x="51" y="59" width="8" height="50" rx="4" fill="white"/>
+      </svg>
+      <h1>Admin Panel</h1>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="badge" id="recipe-count">0 ricette</span>
+      <button class="btn btn-secondary btn-sm" id="btn-adm-logout">Esci</button>
+    </div>
+  </div>
+
+  <div class="admin-wrap">
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-bottom:24px">
+      <div class="admin-stat"><div class="num" id="cnt-total">–</div><div class="lbl">Totale</div></div>
+      <div class="admin-stat"><div class="num" id="cnt-colazione">–</div><div class="lbl">Colazioni</div></div>
+      <div class="admin-stat"><div class="num" id="cnt-pranzo">–</div><div class="lbl">Pranzi/Cene</div></div>
+      <div class="admin-stat"><div class="num" id="cnt-spuntino">–</div><div class="lbl">Spuntini</div></div>
+      <div class="admin-stat"><div class="num" id="cnt-vegan">–</div><div class="lbl">Vegane</div></div>
+    </div>
+
+    <!-- Filters + Add -->
+    <div class="filter-bar">
+      <input type="text" id="search-recipes" placeholder="Cerca per nome o ingrediente…" style="max-width:280px">
+      <select id="filter-meal" style="max-width:160px">
+        <option value="">Tutti i tipi</option>
+        <option value="colazione">Colazione</option>
+        <option value="pranzo">Pranzo</option>
+        <option value="cena">Cena</option>
+        <option value="spuntino">Spuntino</option>
+      </select>
+      <select id="filter-diet" style="max-width:160px">
+        <option value="">Tutte le diete</option>
+        <option value="vegana">Vegana</option>
+        <option value="vegetariana">Vegetariana</option>
+        <option value="standard">Standard</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="btn-add-recipe" style="margin-left:auto">+ Aggiungi ricetta</button>
+      <button class="btn btn-secondary btn-sm" id="btn-seed-db">⬆ Carica ricette iniziali</button>
+    </div>
+
+    <!-- Table -->
+    <div class="card" style="padding:0;overflow-x:auto">
+      <table class="recipe-table" id="recipe-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Nome</th>
+            <th>Tipo pasto</th>
+            <th>Dieta</th>
+            <th>kcal</th>
+            <th>Azioni</th>
+          </tr>
+        </thead>
+        <tbody id="recipe-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Editor Modal -->
+<div id="editor-modal" class="modal-admin hidden">
+  <div class="modal-admin-box">
+    <h2 id="editor-title">Aggiungi ricetta</h2>
+    <div class="form-grid">
+      <div class="input-group" style="grid-column:1/-1">
+        <label>Nome ricetta *</label>
+        <input type="text" id="ed-name" placeholder="Insalata di pollo con yogurt">
+      </div>
+      <div class="input-group" style="grid-column:1/-1">
+        <label>Descrizione</label>
+        <textarea id="ed-desc" placeholder="Breve descrizione del piatto" rows="2"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Tipo pasto (JSON array) *</label>
+        <input type="text" id="ed-meal-type" placeholder='["pranzo","cena"]'>
+      </div>
+      <div class="input-group">
+        <label>Tipo dieta (JSON array) *</label>
+        <input type="text" id="ed-diet-type" placeholder='["standard","vegetariana"]'>
+      </div>
+      <div class="input-group">
+        <label>Calorie (kcal) *</label>
+        <input type="number" id="ed-calories" placeholder="380">
+      </div>
+      <div class="input-group">
+        <label>Tempo preparazione (min)</label>
+        <input type="number" id="ed-prep" placeholder="20">
+      </div>
+      <div class="input-group">
+        <label>Macronutrienti (JSON) *</label>
+        <textarea id="ed-macros" class="code" rows="3" placeholder='{"proteine":30,"carboidrati":20,"grassi":12}'></textarea>
+      </div>
+      <div class="input-group">
+        <label>Allergeni (JSON array)</label>
+        <input type="text" id="ed-allergens" placeholder='["glutine","latte"]'>
+      </div>
+      <div class="input-group" style="grid-column:1/-1">
+        <label>Ingredienti (JSON array) *</label>
+        <textarea id="ed-ingredients" class="code" rows="5" placeholder='[{"name":"Petto di pollo","amount":180,"unit":"g"}]'></textarea>
+      </div>
+      <div class="input-group" style="grid-column:1/-1">
+        <label>Istruzioni (JSON array di stringhe) *</label>
+        <textarea id="ed-instructions" class="code" rows="5" placeholder='["Tagliare il pollo a striscioline.","Grigliare per 5 minuti."]'></textarea>
+      </div>
+      <div class="input-group">
+        <label>URL immagine</label>
+        <input type="url" id="ed-image" placeholder="https://images.unsplash.com/...">
+      </div>
+      <div class="input-group">
+        <label>URL fonte ricetta</label>
+        <input type="url" id="ed-source" placeholder="https://ricette.giallozafferano.it/...">
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:24px">
+      <button class="btn btn-secondary" id="btn-editor-cancel" style="flex:1">Annulla</button>
+      <button class="btn btn-primary" id="btn-editor-save" style="flex:2">Salva ricetta</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://ynaaksvbfrlraqdwnvea.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWFrc3ZiZnJscmFxZHdudmVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjgxMTQsImV4cCI6MjA5MjgwNDExNH0.PLACEHOLDER_ANON_KEY';
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let allRecipes = [];
+let editingId  = null;
+
+function toast(msg, type='success') {
+  const d = document.createElement('div');
+  d.className = `toast ${type}`;
+  d.textContent = msg;
+  d.style.cssText = 'position:fixed;top:16px;right:16px;z-index:9999;background:' + (type==='error'?'#c00':type==='info'?'#1565C0':'#1D9E75') + ';color:#fff;padding:10px 20px;border-radius:50px;font-weight:600;font-family:Inter,sans-serif';
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),3000);
+}
+
+// Auth
+document.getElementById('btn-adm-login').addEventListener('click', async () => {
+  const email = document.getElementById('adm-email').value.trim();
+  const pass  = document.getElementById('adm-pass').value;
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) { document.getElementById('login-error').textContent = error.message; document.getElementById('login-error').style.display='block'; return; }
+
+  // Check admin flag
+  const { data: profile } = await sb.from('profiles').select('is_admin').eq('id', data.user.id).single();
+  if (!profile?.is_admin) {
+    document.getElementById('login-error').textContent = 'Accesso non autorizzato';
+    document.getElementById('login-error').style.display = 'block';
+    await sb.auth.signOut(); return;
+  }
+
+  document.getElementById('login-section').classList.add('hidden');
+  document.getElementById('admin-panel').classList.remove('hidden');
+  await loadRecipes();
+});
+
+document.getElementById('btn-adm-logout').addEventListener('click', async () => {
+  await sb.auth.signOut();
+  location.reload();
+});
+
+// Load
+async function loadRecipes() {
+  const { data, error } = await sb.from('recipes').select('*').order('name');
+  if (error) { toast('Errore caricamento', 'error'); return; }
+  allRecipes = data || [];
+  updateStats();
+  renderTable(allRecipes);
+}
+
+function updateStats() {
+  document.getElementById('recipe-count').textContent = `${allRecipes.length} ricette`;
+  document.getElementById('cnt-total').textContent = allRecipes.length;
+  document.getElementById('cnt-colazione').textContent = allRecipes.filter(r=>r.meal_type?.includes('colazione')).length;
+  document.getElementById('cnt-pranzo').textContent    = allRecipes.filter(r=>r.meal_type?.includes('pranzo')).length;
+  document.getElementById('cnt-spuntino').textContent  = allRecipes.filter(r=>r.meal_type?.includes('spuntino')).length;
+  document.getElementById('cnt-vegan').textContent     = allRecipes.filter(r=>r.diet_type?.includes('vegana')).length;
+}
+
+function renderTable(recipes) {
+  const tbody = document.getElementById('recipe-tbody');
+  if (!recipes.length) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#999;padding:32px">Nessuna ricetta trovata</td></tr>'; return; }
+  tbody.innerHTML = recipes.map(r => `
+    <tr>
+      <td><strong>${r.name}</strong><br><small style="color:#999">${r.description || ''}</small></td>
+      <td>${(r.meal_type||[]).map(t=>`<span class="tag tag-meal">${t}</span>`).join('')}</td>
+      <td>${(r.diet_type||[]).map(t=>`<span class="tag tag-diet">${t}</span>`).join('')}</td>
+      <td><strong>${r.calories}</strong></td>
+      <td>
+        <button class="btn btn-secondary btn-sm" onclick="editRecipe('${r.id}')">✏ Modifica</button>
+        <button class="btn btn-danger btn-sm" style="margin-top:4px" onclick="deleteRecipe('${r.id}','${r.name.replace(/'/g,"\\'")}')">✕</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// Search & filter
+document.getElementById('search-recipes').addEventListener('input', filterTable);
+document.getElementById('filter-meal').addEventListener('change', filterTable);
+document.getElementById('filter-diet').addEventListener('change', filterTable);
+
+function filterTable() {
+  const q    = document.getElementById('search-recipes').value.toLowerCase();
+  const meal = document.getElementById('filter-meal').value;
+  const diet = document.getElementById('filter-diet').value;
+  const filtered = allRecipes.filter(r => {
+    const matchQ = !q || r.name.toLowerCase().includes(q) ||
+      JSON.stringify(r.ingredients).toLowerCase().includes(q);
+    const matchMeal = !meal || r.meal_type?.includes(meal);
+    const matchDiet = !diet || r.diet_type?.includes(diet);
+    return matchQ && matchMeal && matchDiet;
+  });
+  renderTable(filtered);
+}
+
+// Add / Edit
+window.editRecipe = (id) => {
+  const r = allRecipes.find(x => x.id === id);
+  if (!r) return;
+  editingId = id;
+  document.getElementById('editor-title').textContent = 'Modifica ricetta';
+  document.getElementById('ed-name').value       = r.name || '';
+  document.getElementById('ed-desc').value       = r.description || '';
+  document.getElementById('ed-meal-type').value  = JSON.stringify(r.meal_type || []);
+  document.getElementById('ed-diet-type').value  = JSON.stringify(r.diet_type || []);
+  document.getElementById('ed-calories').value   = r.calories || '';
+  document.getElementById('ed-prep').value       = r.prep_time || '';
+  document.getElementById('ed-macros').value     = JSON.stringify(r.macros || {}, null, 2);
+  document.getElementById('ed-allergens').value  = JSON.stringify(r.allergens || []);
+  document.getElementById('ed-ingredients').value  = JSON.stringify(r.ingredients || [], null, 2);
+  document.getElementById('ed-instructions').value = JSON.stringify(r.instructions || [], null, 2);
+  document.getElementById('ed-image').value      = r.image_url || '';
+  document.getElementById('ed-source').value     = r.source_url || '';
+  document.getElementById('editor-modal').classList.remove('hidden');
+};
+
+document.getElementById('btn-add-recipe').addEventListener('click', () => {
+  editingId = null;
+  document.getElementById('editor-title').textContent = 'Aggiungi ricetta';
+  ['ed-name','ed-desc','ed-meal-type','ed-diet-type','ed-calories','ed-prep','ed-macros','ed-allergens','ed-ingredients','ed-instructions','ed-image','ed-source'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = id === 'ed-macros' ? '{"proteine":0,"carboidrati":0,"grassi":0}' :
+                        id === 'ed-meal-type' ? '["pranzo","cena"]' :
+                        id === 'ed-diet-type' ? '["standard"]' :
+                        id === 'ed-allergens' ? '[]' :
+                        id === 'ed-ingredients' ? '[]' :
+                        id === 'ed-instructions' ? '[]' : '';
+  });
+  document.getElementById('editor-modal').classList.remove('hidden');
+});
+
+document.getElementById('btn-editor-cancel').addEventListener('click', () => {
+  document.getElementById('editor-modal').classList.add('hidden');
+});
+
+document.getElementById('btn-editor-save').addEventListener('click', async () => {
+  try {
+    const recipe = {
+      name:        document.getElementById('ed-name').value.trim(),
+      description: document.getElementById('ed-desc').value.trim(),
+      meal_type:   JSON.parse(document.getElementById('ed-meal-type').value),
+      diet_type:   JSON.parse(document.getElementById('ed-diet-type').value),
+      calories:    +document.getElementById('ed-calories').value,
+      prep_time:   +document.getElementById('ed-prep').value || null,
+      macros:      JSON.parse(document.getElementById('ed-macros').value),
+      allergens:   JSON.parse(document.getElementById('ed-allergens').value),
+      ingredients: JSON.parse(document.getElementById('ed-ingredients').value),
+      instructions:JSON.parse(document.getElementById('ed-instructions').value),
+      image_url:   document.getElementById('ed-image').value.trim() || null,
+      source_url:  document.getElementById('ed-source').value.trim() || null,
+      is_active:   true,
+    };
+    if (!recipe.name || !recipe.calories) { toast('Nome e calorie sono obbligatori', 'error'); return; }
+    if (editingId) recipe.id = editingId;
+
+    const { error } = await sb.from('recipes').upsert(recipe);
+    if (error) throw error;
+    toast(editingId ? 'Ricetta aggiornata!' : 'Ricetta aggiunta!');
+    document.getElementById('editor-modal').classList.add('hidden');
+    await loadRecipes();
+  } catch (e) {
+    toast('Errore: ' + (e.message || JSON.stringify(e)), 'error');
+  }
+});
+
+window.deleteRecipe = async (id, name) => {
+  if (!confirm(`Eliminare "${name}"?`)) return;
+  const { error } = await sb.from('recipes').update({ is_active: false }).eq('id', id);
+  if (error) { toast('Errore eliminazione', 'error'); return; }
+  toast('Ricetta eliminata');
+  await loadRecipes();
+};
+
+// Seed DB con le ricette iniziali
+document.getElementById('btn-seed-db').addEventListener('click', async () => {
+  if (!confirm('Caricare le ricette iniziali nel database? Le ricette già esistenti non verranno duplicate.')) return;
+  try {
+    const response = await fetch('seeds/recipes.json');
+    const recipes = await response.json();
+    const { data: existing } = await sb.from('recipes').select('name');
+    const existingNames = new Set((existing || []).map(r => r.name));
+    const toInsert = recipes.filter(r => !existingNames.has(r.name));
+    if (!toInsert.length) { toast('Tutte le ricette sono già presenti', 'info'); return; }
+    const { error } = await sb.from('recipes').insert(toInsert);
+    if (error) throw error;
+    toast(`${toInsert.length} ricette caricate!`);
+    await loadRecipes();
+  } catch (e) {
+    toast('Errore seed: ' + e.message, 'error');
+  }
+});
+</script>
+</body>
+</html>
