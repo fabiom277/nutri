@@ -99,15 +99,45 @@ async function loadUserData() {
       showOnboarding();
     } else {
       showApp();
-      state.plan = profile.current_plan || null;
+
+      // Ricostruisce il piano dagli ID (formato compatto) oppure genera nuovo
+      const savedPlan = profile.current_plan;
+      if (savedPlan && savedPlan.days) {
+        state.plan = hydratePlan(savedPlan, recipes);
+      }
       if (!state.plan) await generateAndSavePlan();
-      // Carica pasti confermati per la settimana corrente
+
       await loadConfirmedMeals();
     }
   } catch (e) {
-    console.error(e);
-    toast('Errore caricamento dati', 'error');
+    console.error('[loadUserData]', e);
+    toast('Errore caricamento dati: ' + (e.message || ''), 'error');
   }
+}
+
+/**
+ * Ricostruisce il piano completo dagli ID salvati nel DB
+ */
+function hydratePlan(compactPlan, recipes) {
+  const recipeMap = {};
+  for (const r of recipes) recipeMap[r.id] = r;
+
+  // Supporta sia il formato vecchio (oggetti completi) che quello nuovo (solo ID)
+  const days = compactPlan.days.map(d => ({
+    date: d.date,
+    slots: Object.fromEntries(
+      Object.entries(d.slots).map(([slot, val]) => {
+        if (!val) return [slot, null];
+        // Formato nuovo: val è una stringa UUID
+        if (typeof val === 'string') return [slot, recipeMap[val] || null];
+        // Formato vecchio: val è già un oggetto ricetta (retrocompatibilità)
+        if (typeof val === 'object' && val.id) return [slot, recipeMap[val.id] || val];
+        return [slot, null];
+      })
+    )
+  }));
+
+  return { days, generatedAt: compactPlan.generatedAt };
 }
 
 async function loadConfirmedMeals() {
@@ -287,8 +317,15 @@ async function nextStep() {
   if (currentStep === STEPS - 1) {
     btn.textContent = 'Salvataggio...';
     btn.disabled = true;
-    await saveOnboarding();
-    btn.disabled = false;
+    try {
+      await saveOnboarding();
+    } catch (e) {
+      console.error('[nextStep] uncaught error:', e);
+      toast('Errore: ' + (e.message || JSON.stringify(e)), 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Inizia →';
+    }
     return;
   }
   if (!validateStep(currentStep)) return;
@@ -366,29 +403,40 @@ function showOnboardingSummary() {
 
 async function saveOnboarding() {
   const uid = state.session?.user?.id;
-  if (!uid) return;
+  if (!uid) {
+    toast('Sessione scaduta. Rieffettua il login.', 'error');
+    showAuth();
+    return;
+  }
 
-  const age    = +document.getElementById('ob-age').value;
-  const weight = +document.getElementById('ob-weight').value;
-  const height = +document.getElementById('ob-height').value;
+  const age    = +document.getElementById('ob-age')?.value || 0;
+  const weight = +document.getElementById('ob-weight')?.value || 0;
+  const height = +document.getElementById('ob-height')?.value || 0;
   const sex    = document.querySelector('.choice-card[data-group="sex"].selected')?.dataset.value;
   const act    = document.querySelector('.choice-card[data-group="activity"].selected')?.dataset.value;
   const goal   = document.querySelector('.choice-card[data-group="goal"].selected')?.dataset.value;
   const diet   = document.querySelector('.choice-card[data-group="diet"].selected')?.dataset.value;
   const sched  = document.querySelector('.choice-card[data-group="schedule"].selected')?.dataset.value;
 
+  if (!sex || !act || !goal || !diet || !sched) {
+    toast('Compila tutte le sezioni prima di salvare', 'error');
+    return;
+  }
+
   const alginput = document.getElementById('allergies-input');
   const disinput = document.getElementById('dislikes-input');
-  const allergies = alginput?._getTags() || [];
-  const dislikes  = disinput?._getTags() || [];
+  const allergies = alginput?._getTags?.() || [];
+  const dislikes  = disinput?._getTags?.() || [];
 
   const bmr  = calcBMR(weight, height, age, sex);
   const tdee = calcTDEE(bmr, act);
   const kcal = calcTargetCalories(tdee, goal);
   const bmi  = calcBMI(weight, height);
 
+  // 1. Salva profilo
+  let profile;
   try {
-    const profile = await upsertProfile(uid, {
+    profile = await upsertProfile(uid, {
       age, weight, height, sex,
       activity_level: act, goal, diet_type: diet, meal_schedule: sched,
       allergies, dislikes,
@@ -396,26 +444,62 @@ async function saveOnboarding() {
       target_calories: Math.round(kcal), bmi: +bmi.toFixed(2),
       onboarding_complete: true
     });
-    state.profile = profile;
-
-    // Registra il peso iniziale
-    await addWeightLog(uid, weight, 'Peso iniziale');
-
-    await generateAndSavePlan();
-    toast('Profilo salvato!');
-    showApp();
   } catch (e) {
-    console.error(e);
-    toast('Errore salvataggio', 'error');
+    console.error('[saveOnboarding] upsertProfile error:', e);
+    toast('Errore salvataggio profilo: ' + (e.message || e.code || 'sconosciuto'), 'error');
+    return;
   }
+
+  // Usa il profilo restituito, o costruiscilo localmente se Supabase non lo ritorna
+  state.profile = profile || {
+    id: uid, age, weight, height, sex,
+    activity_level: act, goal, diet_type: diet, meal_schedule: sched,
+    allergies, dislikes,
+    bmr: Math.round(bmr), tdee: Math.round(tdee),
+    target_calories: Math.round(kcal), bmi: +bmi.toFixed(2),
+    onboarding_complete: true
+  };
+
+  // 2. Registra peso iniziale (non bloccante)
+  addWeightLog(uid, weight, 'Peso iniziale').catch(e =>
+    console.warn('[saveOnboarding] addWeightLog failed (non-critical):', e)
+  );
+
+  // 3. Genera piano settimanale
+  try {
+    await generateAndSavePlan();
+  } catch (e) {
+    console.warn('[saveOnboarding] generateAndSavePlan failed, proceeding without plan:', e);
+    // Non bloccare: l'utente arriva comunque all'app e il piano viene rigenereato al caricamento
+  }
+
+  toast('Profilo salvato! Benvenuto su Nutrì 🎉');
+  showApp();
 }
 
 // ── Piano generazione ─────────────────────────────────
 async function generateAndSavePlan() {
-  if (!state.recipes.length) state.recipes = await getAllRecipes();
+  if (!state.recipes.length) {
+    try { state.recipes = await getAllRecipes(); } catch {}
+  }
   const plan = generateWeeklyPlan(state.recipes, state.profile, state.excluded);
   state.plan = plan;
-  await upsertProfile(state.session.user.id, { current_plan: plan, plan_generated_at: new Date().toISOString() });
+
+  // Salva su Supabase solo gli ID (payload minimo), non gli oggetti completi
+  const planCompact = {
+    generatedAt: plan.generatedAt,
+    days: plan.days.map(d => ({
+      date: d.date,
+      slots: Object.fromEntries(
+        Object.entries(d.slots).map(([slot, recipe]) => [slot, recipe?.id || null])
+      )
+    }))
+  };
+
+  await upsertProfile(state.session.user.id, {
+    current_plan: planCompact,
+    plan_generated_at: new Date().toISOString()
+  });
 }
 
 // ── Render Piano ──────────────────────────────────────
