@@ -90,25 +90,34 @@ async function loadUserData() {
       getWeightLogs(uid),
     ]);
 
-    state.profile  = profile;
-    state.recipes  = recipes;
-    state.excluded = excluded;
+    state.profile    = profile;
+    state.recipes    = recipes;
+    state.excluded   = excluded;
     state.weightLogs = weightLogs;
 
     if (!profile || !profile.onboarding_complete) {
       showOnboarding();
-    } else {
-      showApp();
-
-      // Ricostruisce il piano dagli ID (formato compatto) oppure genera nuovo
-      const savedPlan = profile.current_plan;
-      if (savedPlan && savedPlan.days) {
-        state.plan = hydratePlan(savedPlan, recipes);
-      }
-      if (!state.plan) await generateAndSavePlan();
-
-      await loadConfirmedMeals();
+      return;
     }
+
+    // Ricostruisce o genera il piano PRIMA di mostrare l'app
+    const savedPlan = profile.current_plan;
+    if (savedPlan && savedPlan.days) {
+      state.plan = hydratePlan(savedPlan, recipes);
+    }
+    if (!state.plan || !state.plan.days?.length) {
+      try {
+        await generateAndSavePlan();
+      } catch (e) {
+        console.warn('[loadUserData] generateAndSavePlan failed:', e);
+      }
+    }
+
+    await loadConfirmedMeals();
+
+    // Solo ora mostra l'app (state.plan è già pronto)
+    showApp();
+
   } catch (e) {
     console.error('[loadUserData]', e);
     toast('Errore caricamento dati: ' + (e.message || ''), 'error');
@@ -119,14 +128,15 @@ async function loadUserData() {
  * Ricostruisce il piano completo dagli ID salvati nel DB
  */
 function hydratePlan(compactPlan, recipes) {
+  if (!compactPlan?.days?.length) return null;
+
   const recipeMap = {};
   for (const r of recipes) recipeMap[r.id] = r;
 
-  // Supporta sia il formato vecchio (oggetti completi) che quello nuovo (solo ID)
   const days = compactPlan.days.map(d => ({
     date: d.date,
     slots: Object.fromEntries(
-      Object.entries(d.slots).map(([slot, val]) => {
+      Object.entries(d.slots || {}).map(([slot, val]) => {
         if (!val) return [slot, null];
         // Formato nuovo: val è una stringa UUID
         if (typeof val === 'string') return [slot, recipeMap[val] || null];
@@ -136,6 +146,12 @@ function hydratePlan(compactPlan, recipes) {
       })
     )
   }));
+
+  // Verifica che almeno un giorno abbia almeno una ricetta valida
+  const hasAnyRecipe = days.some(d =>
+    Object.values(d.slots).some(r => r !== null)
+  );
+  if (!hasAnyRecipe) return null;
 
   return { days, generatedAt: compactPlan.generatedAt };
 }
