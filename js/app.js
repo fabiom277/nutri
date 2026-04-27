@@ -906,65 +906,288 @@ function renderProfilo() {
   const el = document.getElementById('page-profilo');
   const status = bmiStatus(p.bmi || 22);
 
-  const logsHtml = state.weightLogs.slice(-5).reverse().map(l => `
-    <div class="weight-log-entry">
-      <span>${new Date(l.logged_at).toLocaleDateString('it-IT')}</span>
-      <span class="bold text-green">${l.weight} kg</span>
-    </div>
-  `).join('');
+  const ACTIVITY_LABELS = { sedentario:'Sedentario', leggero:'Leggero', moderato:'Moderato', attivo:'Attivo', atleta:'Atleta' };
+  const GOAL_LABELS     = { dimagrire:'Perdere peso', mantenere:'Mantenere', aumentare:'Aumentare massa' };
+  const DIET_LABELS     = { standard:'Onnivoro', vegetariana:'Vegetariano', vegana:'Vegano' };
+  const SCHED_LABELS    = { standard:'3 pasti + spuntino', intermittente_colazione:'Digiuno 16:8 (mattina)', intermittente_pranzo:'Digiuno 16:8 (pomeriggio)' };
+
+  const logsHtml = state.weightLogs.length
+    ? state.weightLogs.slice(-5).reverse().map(l => `
+        <div class="weight-log-entry">
+          <span>${new Date(l.logged_at).toLocaleDateString('it-IT')}</span>
+          <strong class="text-green">${l.weight} kg</strong>
+        </div>`).join('')
+    : '<p class="text-soft" style="font-size:0.85rem">Nessun peso registrato</p>';
 
   el.innerHTML = `
     <div id="main-content">
       <h2 style="margin-bottom:20px">Profilo</h2>
 
+      <!-- Card calorie -->
       <div class="bmr-card">
         <h3>Calorie giornaliere</h3>
         <div class="kcal">${Math.round(p.target_calories || 0)}</div>
-        <p>BMR: ${Math.round(p.bmr || 0)} kcal · TDEE: ${Math.round(p.tdee || 0)} kcal</p>
-        <p>Obiettivo: <strong>${p.goal || '–'}</strong> · Attività: <strong>${p.activity_level || '–'}</strong></p>
+        <p>Metabolismo basale: ${Math.round(p.bmr || 0)} kcal · TDEE: ${Math.round(p.tdee || 0)} kcal</p>
+        <p style="margin-top:4px">Obiettivo: <strong>${GOAL_LABELS[p.goal] || p.goal || '–'}</strong> · Attività: <strong>${ACTIVITY_LABELS[p.activity_level] || p.activity_level || '–'}</strong></p>
       </div>
 
+      <!-- Stats -->
       <div class="profile-stat-grid">
-        <div class="stat-box"><div class="stat-value">${p.weight || '–'} kg</div><div class="stat-label">Peso attuale</div></div>
+        <div class="stat-box"><div class="stat-value">${p.weight || '–'} kg</div><div class="stat-label">Peso</div></div>
         <div class="stat-box"><div class="stat-value">${p.height || '–'} cm</div><div class="stat-label">Altezza</div></div>
         <div class="stat-box"><div class="stat-value">${(p.bmi || 0).toFixed(1)}</div><div class="stat-label">BMI <span class="bmi-pill ${status.cls}">${status.label}</span></div></div>
         <div class="stat-box"><div class="stat-value">${p.age || '–'}</div><div class="stat-label">Età</div></div>
       </div>
 
+      <!-- Peso nel tempo -->
       <div class="card mt-16">
         <div class="flex items-center justify-between" style="margin-bottom:14px">
           <h3>Andamento peso</h3>
-          <button class="btn btn-secondary btn-sm" id="btn-add-weight">+ Peso</button>
+          <button class="btn btn-secondary btn-sm" id="btn-add-weight">+ Registra peso</button>
         </div>
         <canvas id="weight-chart" class="weight-chart"></canvas>
         <div id="weight-logs-list" style="margin-top:12px">${logsHtml}</div>
       </div>
 
+      <!-- Impostazioni dieta (sola lettura) -->
       <div class="card mt-16">
-        <h3 style="margin-bottom:12px">Impostazioni dieta</h3>
+        <div class="flex items-center justify-between" style="margin-bottom:14px">
+          <h3>Impostazioni dieta</h3>
+          <button class="btn btn-primary btn-sm" id="btn-edit-profile">✏ Modifica</button>
+        </div>
         <div class="profile-stat-grid">
-          <div class="stat-box"><div class="stat-value" style="font-size:1rem">${p.diet_type || '–'}</div><div class="stat-label">Regime</div></div>
-          <div class="stat-box"><div class="stat-value" style="font-size:0.85rem">${p.meal_schedule?.replace('_',' ') || '–'}</div><div class="stat-label">Distribuzione pasti</div></div>
+          <div class="stat-box"><div class="stat-value" style="font-size:0.9rem">${DIET_LABELS[p.diet_type] || p.diet_type || '–'}</div><div class="stat-label">Regime</div></div>
+          <div class="stat-box"><div class="stat-value" style="font-size:0.8rem">${SCHED_LABELS[p.meal_schedule] || p.meal_schedule || '–'}</div><div class="stat-label">Pasti</div></div>
         </div>
-        <div style="margin-top:12px">
-          ${p.allergies?.length ? `<p><strong>Allergie:</strong> ${p.allergies.join(', ')}</p>` : ''}
-          ${p.dislikes?.length  ? `<p><strong>Non graditi:</strong> ${p.dislikes.join(', ')}</p>` : ''}
-        </div>
-        <button class="btn btn-secondary w-full mt-16" id="btn-edit-profile">✏ Modifica profilo</button>
+        ${(p.allergies?.length || p.dislikes?.length) ? `
+          <div style="margin-top:12px;font-size:0.875rem;display:flex;flex-direction:column;gap:4px">
+            ${p.allergies?.length ? `<div><strong>Allergie:</strong> ${p.allergies.join(', ')}</div>` : ''}
+            ${p.dislikes?.length  ? `<div><strong>Non graditi:</strong> ${p.dislikes.join(', ')}</div>` : ''}
+          </div>` : ''}
       </div>
 
-      <button class="btn btn-ghost w-full mt-16" id="btn-logout" style="color:#c00">Esci dall'account</button>
+      <button class="btn btn-ghost w-full mt-16" id="btn-logout" style="color:#BE123C">Esci dall'account</button>
+    </div>
+
+    <!-- ── Modal modifica profilo ── -->
+    <div id="edit-profile-overlay" class="modal-overlay">
+      <div class="modal-sheet" style="max-width:560px">
+        <button id="edit-profile-close" style="position:absolute;right:20px;top:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#aaa;line-height:1">×</button>
+        <div class="modal-handle"></div>
+        <h2 style="margin-bottom:20px">Modifica profilo</h2>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+
+          <!-- Dati fisici -->
+          <div class="card card-sm" style="background:#f8fffe">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--green-dark);margin-bottom:12px">Dati fisici</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+              <div class="input-group">
+                <label>Età</label>
+                <input type="number" id="ep-age" value="${p.age || ''}" min="10" max="100">
+              </div>
+              <div class="input-group">
+                <label>Peso (kg)</label>
+                <input type="number" id="ep-weight" value="${p.weight || ''}" step="0.1" min="30" max="300">
+              </div>
+              <div class="input-group">
+                <label>Altezza (cm)</label>
+                <input type="number" id="ep-height" value="${p.height || ''}" min="100" max="250">
+              </div>
+            </div>
+            <div class="input-group" style="margin-top:12px">
+              <label>Sesso biologico</label>
+              <div style="display:flex;gap:8px">
+                <label class="ep-radio-btn${p.sex === 'M' ? ' selected' : ''}" data-group="ep-sex" data-value="M">♂ Uomo</label>
+                <label class="ep-radio-btn${p.sex === 'F' ? ' selected' : ''}" data-group="ep-sex" data-value="F">♀ Donna</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stile di vita -->
+          <div class="card card-sm" style="background:#f8fffe">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--green-dark);margin-bottom:12px">Stile di vita</div>
+            <div class="input-group">
+              <label>Livello di attività</label>
+              <div style="display:flex;flex-direction:column;gap:6px" id="ep-activity-group">
+                ${[['sedentario','🪑 Sedentario','Lavoro d\'ufficio, poca attività'],['leggero','🚶 Leggero','1-2 allenamenti/settimana'],['moderato','🚴 Moderato','3-4 allenamenti/settimana'],['attivo','🏃 Attivo','5+ allenamenti/settimana'],['atleta','🏋️ Atleta','Allenamento intenso quotidiano']].map(([val, label, sub]) => `
+                  <label class="ep-radio-btn ep-radio-row${p.activity_level === val ? ' selected' : ''}" data-group="ep-activity" data-value="${val}">
+                    <span style="font-weight:600">${label}</span><span style="font-size:0.75rem;color:#888;margin-left:auto">${sub}</span>
+                  </label>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Obiettivo -->
+          <div class="card card-sm" style="background:#f8fffe">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--green-dark);margin-bottom:12px">Obiettivo</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              ${[['dimagrire','⚖️ Perdere peso'],['mantenere','⚡ Mantenere'],['aumentare','💪 Aumentare massa']].map(([val, label]) => `
+                <label class="ep-radio-btn${p.goal === val ? ' selected' : ''}" data-group="ep-goal" data-value="${val}">${label}</label>`).join('')}
+            </div>
+          </div>
+
+          <!-- Regime e pasti -->
+          <div class="card card-sm" style="background:#f8fffe">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--green-dark);margin-bottom:12px">Dieta e pasti</div>
+            <div class="input-group" style="margin-bottom:12px">
+              <label>Regime alimentare</label>
+              <div style="display:flex;gap:8px">
+                ${[['standard','🍖 Onnivoro'],['vegetariana','🥗 Vegetariano'],['vegana','🌱 Vegano']].map(([val, label]) => `
+                  <label class="ep-radio-btn${p.diet_type === val ? ' selected' : ''}" data-group="ep-diet" data-value="${val}">${label}</label>`).join('')}
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Distribuzione pasti</label>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                ${[['standard','3 pasti + spuntino','Colazione · Spuntino · Pranzo · Cena'],['intermittente_colazione','Digiuno 16:8 mattina','Colazione · Spuntino · Pranzo'],['intermittente_pranzo','Digiuno 16:8 pomeriggio','Pranzo · Cena']].map(([val, label, sub]) => `
+                  <label class="ep-radio-btn ep-radio-row${p.meal_schedule === val ? ' selected' : ''}" data-group="ep-schedule" data-value="${val}">
+                    <span style="font-weight:600">${label}</span><span style="font-size:0.75rem;color:#888;margin-left:auto">${sub}</span>
+                  </label>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Allergie e dislikes -->
+          <div class="card card-sm" style="background:#f8fffe">
+            <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--green-dark);margin-bottom:12px">Allergie e preferenze</div>
+            <div class="input-group" style="margin-bottom:12px">
+              <label>Allergie / intolleranze</label>
+              <div class="tag-input-wrap">
+                <div class="tags-list" id="ep-allergies-tags"></div>
+                <input type="text" id="ep-allergies-input" placeholder="premi Enter dopo ogni voce">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Cibi non graditi</label>
+              <div class="tag-input-wrap">
+                <div class="tags-list" id="ep-dislikes-tags"></div>
+                <input type="text" id="ep-dislikes-input" placeholder="premi Enter dopo ogni voce">
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary w-full" id="btn-save-profile" style="padding:14px">Salva modifiche</button>
+        </div>
+      </div>
     </div>`;
 
   renderWeightChart();
 
-  document.getElementById('btn-add-weight')?.addEventListener('click', () => promptWeightEntry());
-  document.getElementById('btn-logout')?.addEventListener('click', async () => { await signOut(); });
-  document.getElementById('btn-edit-profile')?.addEventListener('click', () => {
-    document.getElementById('onboarding-wrapper').classList.remove('hidden');
-    document.getElementById('app-wrapper').classList.add('hidden');
-    startOnboarding();
+  // Inizializza tag inputs con valori esistenti
+  setupEditTagInput('ep-allergies-input', 'ep-allergies-tags', p.allergies || []);
+  setupEditTagInput('ep-dislikes-input',  'ep-dislikes-tags',  p.dislikes  || []);
+
+  // Radio buttons stile
+  document.querySelectorAll('.ep-radio-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.dataset.group;
+      document.querySelectorAll(`.ep-radio-btn[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
   });
+
+  // Apri/chiudi modal
+  document.getElementById('btn-edit-profile').addEventListener('click', () => {
+    document.getElementById('edit-profile-overlay').classList.add('open');
+  });
+  document.getElementById('edit-profile-close').addEventListener('click', () => {
+    document.getElementById('edit-profile-overlay').classList.remove('open');
+  });
+  document.getElementById('edit-profile-overlay').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+  });
+
+  // Salva
+  document.getElementById('btn-save-profile').addEventListener('click', saveProfileEdit);
+
+  document.getElementById('btn-add-weight')?.addEventListener('click', promptWeightEntry);
+  document.getElementById('btn-logout')?.addEventListener('click', async () => { await signOut(); });
+}
+
+function setupEditTagInput(inputId, tagsId, initialTags = []) {
+  const input = document.getElementById(inputId);
+  const tagsEl = document.getElementById(tagsId);
+  if (!input || !tagsEl) return;
+  const tags = [...initialTags];
+
+  function renderTags() {
+    tagsEl.innerHTML = tags.map((t, i) =>
+      `<span class="tag-pill">${t}<button data-i="${i}">×</button></span>`
+    ).join('');
+    tagsEl.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => { tags.splice(+btn.dataset.i, 1); renderTags(); });
+    });
+  }
+
+  input.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ',') && input.value.trim()) {
+      e.preventDefault();
+      const val = input.value.trim().replace(/,$/, '');
+      if (val && !tags.includes(val)) tags.push(val);
+      input.value = '';
+      renderTags();
+    }
+  });
+
+  input._getTags = () => tags;
+  renderTags();
+}
+
+async function saveProfileEdit() {
+  const btn = document.getElementById('btn-save-profile');
+  btn.disabled = true;
+  btn.textContent = 'Salvataggio...';
+
+  try {
+    const uid = state.session?.user?.id;
+    if (!uid) throw new Error('Sessione scaduta, rieffettua il login');
+
+    const age    = +document.getElementById('ep-age')?.value || 0;
+    const weight = +document.getElementById('ep-weight')?.value || 0;
+    const height = +document.getElementById('ep-height')?.value || 0;
+    const sex      = document.querySelector('.ep-radio-btn[data-group="ep-sex"].selected')?.dataset.value;
+    const act      = document.querySelector('.ep-radio-btn[data-group="ep-activity"].selected')?.dataset.value;
+    const goal     = document.querySelector('.ep-radio-btn[data-group="ep-goal"].selected')?.dataset.value;
+    const diet     = document.querySelector('.ep-radio-btn[data-group="ep-diet"].selected')?.dataset.value;
+    const sched    = document.querySelector('.ep-radio-btn[data-group="ep-schedule"].selected')?.dataset.value;
+    const allergies = document.getElementById('ep-allergies-input')?._getTags?.() || [];
+    const dislikes  = document.getElementById('ep-dislikes-input')?._getTags?.()  || [];
+
+    if (!age || !weight || !height || !sex || !act || !goal || !diet || !sched) {
+      throw new Error('Compila tutti i campi obbligatori');
+    }
+
+    const bmr  = calcBMR(weight, height, age, sex);
+    const tdee = calcTDEE(bmr, act);
+    const kcal = calcTargetCalories(tdee, goal);
+    const bmi  = calcBMI(weight, height);
+
+    const updated = await upsertProfile(uid, {
+      age, weight, height, sex,
+      activity_level: act, goal, diet_type: diet, meal_schedule: sched,
+      allergies, dislikes,
+      bmr: Math.round(bmr), tdee: Math.round(tdee),
+      target_calories: Math.round(kcal), bmi: +bmi.toFixed(2),
+    });
+
+    state.profile = updated || { ...state.profile, age, weight, height, sex, activity_level: act, goal, diet_type: diet, meal_schedule: sched, allergies, dislikes, bmr: Math.round(bmr), tdee: Math.round(tdee), target_calories: Math.round(kcal), bmi: +bmi.toFixed(2) };
+
+    // Rigenera il piano con le nuove preferenze
+    state.rejectedPerSlot = {};
+    await generateAndSavePlan();
+
+    document.getElementById('edit-profile-overlay').classList.remove('open');
+    toast('Profilo aggiornato! Piano ricalcolato ✓');
+    renderProfilo();
+
+  } catch (e) {
+    console.error('[saveProfileEdit]', e);
+    toast(e.message || 'Errore durante il salvataggio', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Salva modifiche';
+  }
 }
 
 function promptWeightEntry() {
