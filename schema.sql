@@ -173,3 +173,7 @@ ALTER TABLE recipes
   DROP CONSTRAINT IF EXISTS recipes_name_key;
 ALTER TABLE recipes
   ADD CONSTRAINT recipes_name_key UNIQUE (name);
+
+-- MIGRATION v3: kcal scalate nelle conferme
+ALTER TABLE confirmed_meals
+  ADD COLUMN IF NOT EXISTS scaled_calories INTEGER;

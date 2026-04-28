@@ -685,19 +685,27 @@ async function handleReplace(dayIdx, slot) {
 }
 
 async function handleConfirm(dayIdx, slot) {
-  const day = state.plan.days[dayIdx];
+  const day    = state.plan.days[dayIdx];
   const recipe = day.slots[slot];
   if (!recipe) return;
-  const uid = state.session.user.id;
-  const confirmedKey = `${day.date}|${slot}`;
-  const alreadyConfirmed = state.confirmedMeals.find(cm => cm.plan_date === day.date && cm.meal_slot === slot);
+  const uid            = state.session.user.id;
+  const alreadyConfirmed = state.confirmedMeals.find(
+    cm => cm.plan_date === day.date && cm.meal_slot === slot
+  );
 
   if (alreadyConfirmed) {
     await unconfirmMeal(uid, day.date, slot);
-    state.confirmedMeals = state.confirmedMeals.filter(cm => !(cm.plan_date === day.date && cm.meal_slot === slot));
+    state.confirmedMeals = state.confirmedMeals.filter(
+      cm => !(cm.plan_date === day.date && cm.meal_slot === slot)
+    );
     toast('Conferma rimossa');
   } else {
-    const cm = await confirmMeal(uid, day.date, slot, recipe.id);
+    // Salva anche le kcal scalate così il calendario le mostra correttamente
+    const scaledKcal = recipe.calories || null;
+    const cm = await confirmMeal(uid, day.date, slot, recipe.id, scaledKcal);
+    // Arricchisci con i dati della ricetta scalata per uso locale (calendario)
+    cm.recipes         = recipe;
+    cm.scaled_calories = scaledKcal;
     state.confirmedMeals.push(cm);
     toast('Pasto confermato ✓');
   }
@@ -856,20 +864,30 @@ function showDayDetail(date, confirmed) {
   const dayMeals = confirmed.filter(c => c.plan_date === date);
   const el = document.getElementById('cal-day-detail');
   if (!dayMeals.length) {
-    el.innerHTML = `<p class="text-soft center">Nessun pasto confermato per ${formatDateShort(date)}</p>`;
+    el.innerHTML = `<p class="text-soft center" style="padding:16px">Nessun pasto confermato per ${formatDateShort(date)}</p>`;
     return;
   }
   const label = formatDate(date);
-  let html = `<h3 style="margin-bottom:12px">${label}</h3>`;
+  const totalKcal = dayMeals.reduce((s, m) => s + (m.scaled_calories || m.recipes?.calories || 0), 0);
+
+  let html = `
+    <div class="flex items-center justify-between" style="margin-bottom:12px">
+      <h3>${label}</h3>
+      <span class="day-total-kcal">${totalKcal} kcal totali</span>
+    </div>`;
+
   for (const m of dayMeals) {
-    const r = m.recipes;
+    const r    = m.recipes;
+    const kcal = m.scaled_calories || r?.calories || '–';
     if (!r) continue;
     html += `
       <div class="meal-row" style="cursor:default">
-        <span class="meal-slot-badge slot-${m.meal_slot}">${m.meal_slot}</span>
-        <div class="meal-info">
-          <div class="meal-name">${r.name}</div>
-          <div class="meal-meta">${r.calories} kcal</div>
+        <div class="meal-row-top">
+          <span class="meal-slot-badge slot-${m.meal_slot}">${m.meal_slot}</span>
+          <div class="meal-info">
+            <div class="meal-name">${r.name}</div>
+            <div class="meal-kcal">${kcal} <span>kcal</span></div>
+          </div>
         </div>
       </div>`;
   }

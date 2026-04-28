@@ -117,10 +117,16 @@ export async function getConfirmedMeals(userId, fromDate, toDate) {
   return data || [];
 }
 
-export async function confirmMeal(userId, planDate, mealSlot, recipeId) {
+export async function confirmMeal(userId, planDate, mealSlot, recipeId, scaledCalories = null) {
   const { data, error } = await supabase
     .from('confirmed_meals')
-    .upsert({ user_id: userId, plan_date: planDate, meal_slot: mealSlot, recipe_id: recipeId })
+    .upsert({
+      user_id: userId,
+      plan_date: planDate,
+      meal_slot: mealSlot,
+      recipe_id: recipeId,
+      ...(scaledCalories !== null ? { scaled_calories: scaledCalories } : {})
+    })
     .select()
     .single();
   if (error) throw error;
