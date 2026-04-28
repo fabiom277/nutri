@@ -54,7 +54,12 @@ function showPage(name) {
   document.querySelector(`.nav-item[data-page="${name}"]`)?.classList.add('active');
 
   if (name === 'piano')      renderPiano();
-  if (name === 'calendario') renderCalendar();
+  if (name === 'calendario') {
+    // Reset al mese corrente quando si entra nel calendario dal menu
+    calendarYear  = null;
+    calendarMonth = null;
+    renderCalendar();
+  }
   if (name === 'spesa')      renderSpesa();
   if (name === 'profilo')    renderProfilo();
 }
@@ -158,8 +163,9 @@ function hydratePlan(compactPlan, recipes) {
 
 async function loadConfirmedMeals() {
   const uid = state.session.user.id;
-  const from = new Date().toISOString().split('T')[0];
-  const to = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+  // Carica 60 giorni: 30 passati + 30 futuri (copre storico calendario + piano corrente)
+  const from = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
+  const to   = new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0];
   state.confirmedMeals = await getConfirmedMeals(uid, from, to);
 }
 
@@ -507,7 +513,7 @@ async function generateAndSavePlan() {
   const plan = generateWeeklyPlan(state.recipes, state.profile, state.excluded);
   state.plan = plan;
 
-  // Salva su Supabase solo gli ID (payload minimo), non gli oggetti completi
+  // Salva su Supabase solo gli ID (payload minimo)
   const planCompact = {
     generatedAt: plan.generatedAt,
     days: plan.days.map(d => ({
@@ -522,6 +528,27 @@ async function generateAndSavePlan() {
     current_plan: planCompact,
     plan_generated_at: new Date().toISOString()
   });
+
+  // Svuota le conferme della settimana corrente: il piano è cambiato
+  // e i vecchi pasti confermati non corrispondono più alle nuove ricette
+  try {
+    const uid = state.session.user.id;
+    const from = plan.days[0]?.date;
+    const to   = plan.days[plan.days.length - 1]?.date;
+    if (from && to) {
+      const { error } = await supabase
+        .from('confirmed_meals')
+        .delete()
+        .eq('user_id', uid)
+        .gte('plan_date', from)
+        .lte('plan_date', to);
+      if (!error) state.confirmedMeals = state.confirmedMeals.filter(
+        cm => cm.plan_date < from || cm.plan_date > to
+      );
+    }
+  } catch (e) {
+    console.warn('[generateAndSavePlan] clear confirmed failed (non-critical):', e);
+  }
 }
 
 // ── Render Piano ──────────────────────────────────────
@@ -750,13 +777,27 @@ function closeModal() {
 }
 
 // ── Render Calendario ─────────────────────────────────
-async function renderCalendar() {
-  const el = document.getElementById('page-calendario');
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
+// Tiene traccia del mese visualizzato tra le chiamate
+let calendarYear  = null;
+let calendarMonth = null;
 
-  // Carica pasti confermati del mese
+async function renderCalendar(yearOverride, monthOverride) {
+  const el  = document.getElementById('page-calendario');
+  const now = new Date();
+
+  // Prima chiamata: usa mese corrente; successive: usa quello passato
+  if (yearOverride !== undefined) {
+    calendarYear  = yearOverride;
+    calendarMonth = monthOverride;
+  } else if (calendarYear === null) {
+    calendarYear  = now.getFullYear();
+    calendarMonth = now.getMonth();
+  }
+
+  const year  = calendarYear;
+  const month = calendarMonth;
+
+  // Carica pasti confermati del mese visualizzato
   const firstDay = new Date(year, month, 1).toISOString().split('T')[0];
   const lastDay  = new Date(year, month + 1, 0).toISOString().split('T')[0];
   let confirmed = [];
@@ -765,32 +806,47 @@ async function renderCalendar() {
   } catch {}
 
   const confirmedDates = new Set(confirmed.map(c => c.plan_date));
+  const monthName = new Date(year, month, 1).toLocaleDateString('it-IT', { month: 'long', year: 'numeric' });
 
-  const monthName = now.toLocaleDateString('it-IT', { month: 'long', year: 'numeric' });
-  const firstDow = new Date(year, month, 1).getDay();
+  const firstDow   = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const startOffset = (firstDow + 6) % 7; // Lunedì = 0
+  const todayStr   = now.toISOString().split('T')[0];
+
+  // Calcola mese precedente e successivo
+  const prevYear  = month === 0  ? year - 1 : year;
+  const prevMonth = month === 0  ? 11        : month - 1;
+  const nextYear  = month === 11 ? year + 1 : year;
+  const nextMonth = month === 11 ? 0         : month + 1;
 
   const days = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
   let grid = days.map(d => `<div class="cal-header">${d}</div>`).join('');
-
   for (let i = 0; i < startOffset; i++) grid += `<div class="cal-day empty"></div>`;
   for (let d = 1; d <= daysInMonth; d++) {
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const isToday = dateStr === now.toISOString().split('T')[0];
+    const isToday = dateStr === todayStr;
     const hasData = confirmedDates.has(dateStr);
     grid += `<div class="cal-day${isToday ? ' today' : ''}${hasData ? ' has-data' : ''}" data-date="${dateStr}">${d}</div>`;
   }
 
   el.innerHTML = `
     <div id="main-content">
-      <h2 style="margin-bottom:20px;text-transform:capitalize">${monthName}</h2>
+      <div class="flex items-center justify-between" style="margin-bottom:20px">
+        <button class="btn btn-ghost btn-sm" id="cal-prev" style="font-size:1.1rem">‹</button>
+        <h2 style="text-transform:capitalize;flex:1;text-align:center">${monthName}</h2>
+        <button class="btn btn-ghost btn-sm" id="cal-next" style="font-size:1.1rem">›</button>
+      </div>
       <div class="card">
         <div class="calendar-grid">${grid}</div>
       </div>
       <div id="cal-day-detail" class="mt-16"></div>
     </div>`;
 
+  // Navigazione mesi
+  el.querySelector('#cal-prev').addEventListener('click', () => renderCalendar(prevYear, prevMonth));
+  el.querySelector('#cal-next').addEventListener('click', () => renderCalendar(nextYear, nextMonth));
+
+  // Click su giorno
   el.querySelectorAll('.cal-day:not(.empty)').forEach(cell => {
     cell.addEventListener('click', () => showDayDetail(cell.dataset.date, confirmed));
   });
