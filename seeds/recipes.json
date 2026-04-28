@@ -22,22 +22,46 @@
       {
         "name": "yogurt greco 0%",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 59
       },
       {
         "name": "frutti di bosco misti",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 50
       },
       {
         "name": "fiocchi d'avena",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 380
       },
       {
         "name": "miele",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       }
     ],
     "instructions": [
@@ -58,7 +82,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-con-frutta.html"
+    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-con-frutta.html",
+    "kcal_min_scaled": 286,
+    "kcal_max_scaled": 491
   },
   {
     "name": "Uova strapazzate con pane integrale",
@@ -82,27 +108,57 @@
       {
         "name": "uova",
         "amount": 2,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 3,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 155
       },
       {
         "name": "pane integrale",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 5,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "erba cipollina",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -122,7 +178,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1551782450-17144efb9c50?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Uova-strapazzate.html"
+    "source_url": "https://ricette.giallozafferano.it/Uova-strapazzate.html",
+    "kcal_min_scaled": 308,
+    "kcal_max_scaled": 599
   },
   {
     "name": "Porridge d'avena con banana e mandorle",
@@ -147,27 +205,57 @@
       {
         "name": "fiocchi d'avena",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 380
       },
       {
         "name": "latte vegetale (avena o soia)",
         "amount": 200,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 150,
+        "max": 360,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 40
       },
       {
         "name": "banana",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 89
       },
       {
         "name": "mandorle",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 580
       },
       {
         "name": "cannella",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -188,7 +276,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1517673408076-a2f8c1e5c9e7?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Porridge-di-avena.html"
+    "source_url": "https://ricette.giallozafferano.it/Porridge-di-avena.html",
+    "kcal_min_scaled": 341,
+    "kcal_max_scaled": 843
   },
   {
     "name": "Frittata al forno con verdure",
@@ -212,32 +302,68 @@
       {
         "name": "uova",
         "amount": 3,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 155
       },
       {
         "name": "zucchine",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "peperone rosso",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 60,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 5,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -257,7 +383,9 @@
       "uova"
     ],
     "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
-    "source_url": "https://blog.giallozafferano.it/ricettepanedolci/ricette-light-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/ricettepanedolci/ricette-light-dietetiche/",
+    "kcal_min_scaled": 226,
+    "kcal_max_scaled": 448
   },
   {
     "name": "Ricotta con miele e noci su fette di pane di segale",
@@ -281,22 +409,46 @@
       {
         "name": "ricotta di mucca",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "pane di segale",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 220
       },
       {
         "name": "miele",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 15,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       },
       {
         "name": "noci",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 654
       }
     ],
     "instructions": [
@@ -317,7 +469,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Crostini-con-ricotta-e-miele.html"
+    "source_url": "https://ricette.giallozafferano.it/Crostini-con-ricotta-e-miele.html",
+    "kcal_min_scaled": 261,
+    "kcal_max_scaled": 627
   },
   {
     "name": "Smoothie proteico banana e cacao",
@@ -342,27 +496,57 @@
       {
         "name": "banana",
         "amount": 120,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 89
       },
       {
         "name": "latte di soia",
         "amount": 200,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 200,
+        "max": 200,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 40
       },
       {
         "name": "cacao amaro in polvere",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 228
       },
       {
         "name": "proteine in polvere (pisello)",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 380
       },
       {
         "name": "ghiaccio",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 50,
+        "max": 50,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -381,7 +565,9 @@
       "soia"
     ],
     "image_url": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Frullato-proteico.html"
+    "source_url": "https://ricette.giallozafferano.it/Frullato-proteico.html",
+    "kcal_min_scaled": 147,
+    "kcal_max_scaled": 201
   },
   {
     "name": "Pancakes d'avena con frutti rossi",
@@ -405,32 +591,68 @@
       {
         "name": "fiocchi d'avena",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 380
       },
       {
         "name": "uova",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 155
       },
       {
         "name": "latte parzialmente scremato",
         "amount": 80,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 80,
+        "max": 80,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 46
       },
       {
         "name": "lievito per dolci",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "fragole",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 32
       },
       {
         "name": "miele",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       }
     ],
     "instructions": [
@@ -451,7 +673,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pancakes-avena.html"
+    "source_url": "https://ricette.giallozafferano.it/Pancakes-avena.html",
+    "kcal_min_scaled": 256,
+    "kcal_max_scaled": 620
   },
   {
     "name": "Toast integrale con avocado e uovo in camicia",
@@ -475,32 +699,68 @@
       {
         "name": "pane integrale",
         "amount": 70,
-        "unit": "g"
+        "unit": "g",
+        "min": 50,
+        "max": 130,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
       },
       {
         "name": "avocado",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 55,
+        "max": 160,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 160
       },
       {
         "name": "uovo",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "limone (succo)",
         "amount": 5,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 0,
+        "max": 0,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "peperoncino in scaglie",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -521,7 +781,9 @@
       "uova"
     ],
     "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Toast-avocado-uovo.html"
+    "source_url": "https://ricette.giallozafferano.it/Toast-avocado-uovo.html",
+    "kcal_min_scaled": 230,
+    "kcal_max_scaled": 582
   },
   {
     "name": "Muesli con yogurt e mela",
@@ -545,22 +807,46 @@
       {
         "name": "muesli senza zucchero aggiunto",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 90,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 380
       },
       {
         "name": "yogurt bianco magro",
         "amount": 125,
-        "unit": "g"
+        "unit": "g",
+        "min": 125,
+        "max": 125,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 60
       },
       {
         "name": "mela",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 52
       },
       {
         "name": "cannella",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -581,7 +867,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Muesli-con-yogurt.html"
+    "source_url": "https://ricette.giallozafferano.it/Muesli-con-yogurt.html",
+    "kcal_min_scaled": 194,
+    "kcal_max_scaled": 404
   },
   {
     "name": "Fette biscottate integrali con confettura e ricotta",
@@ -605,17 +893,35 @@
       {
         "name": "fette biscottate integrali",
         "amount": 4,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 3,
+        "max": 6,
+        "step": 1,
+        "priority": 3,
+        "category": "carboidrati",
+        "kcal_per_100": 400
       },
       {
         "name": "ricotta di mucca",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "confettura di frutta senza zuccheri aggiunti",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 180
       }
     ],
     "instructions": [
@@ -634,7 +940,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Fette-biscottate-ricotta.html"
+    "source_url": "https://ricette.giallozafferano.it/Fette-biscottate-ricotta.html",
+    "kcal_min_scaled": 768,
+    "kcal_max_scaled": 1428
   },
   {
     "name": "Overnight oats con cacao e nocciole",
@@ -658,32 +966,68 @@
       {
         "name": "fiocchi d'avena",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 380
       },
       {
         "name": "latte parzialmente scremato",
         "amount": 150,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 150,
+        "max": 150,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 46
       },
       {
         "name": "yogurt greco",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 59
       },
       {
         "name": "cacao amaro in polvere",
         "amount": 8,
-        "unit": "g"
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 228
       },
       {
         "name": "nocciole",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 628
       },
       {
         "name": "miele",
         "amount": 8,
-        "unit": "g"
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       }
     ],
     "instructions": [
@@ -703,7 +1047,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1546548970-71785318a17b?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Overnight-oats.html"
+    "source_url": "https://ricette.giallozafferano.it/Overnight-oats.html",
+    "kcal_min_scaled": 262,
+    "kcal_max_scaled": 591
   },
   {
     "name": "Pane integrale con burro d'arachidi e banana",
@@ -728,17 +1074,35 @@
       {
         "name": "pane integrale",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
       },
       {
         "name": "burro d'arachidi naturale (solo arachidi)",
         "amount": 25,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 50,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 589
       },
       {
         "name": "banana",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 89
       }
     ],
     "instructions": [
@@ -759,7 +1123,9 @@
       "arachidi"
     ],
     "image_url": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Toast-burro-arachidi.html"
+    "source_url": "https://ricette.giallozafferano.it/Toast-burro-arachidi.html",
+    "kcal_min_scaled": 309,
+    "kcal_max_scaled": 706
   },
   {
     "name": "Crepe d'avena con ricotta e mirtilli",
@@ -783,27 +1149,57 @@
       {
         "name": "farina d'avena",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 90,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 379
       },
       {
         "name": "uovo",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "latte parzialmente scremato",
         "amount": 100,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 100,
+        "max": 100,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 46
       },
       {
         "name": "ricotta di mucca",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "mirtilli",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 57
       }
     ],
     "instructions": [
@@ -823,7 +1219,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Crepe-avena-ricotta.html"
+    "source_url": "https://ricette.giallozafferano.it/Crepe-avena-ricotta.html",
+    "kcal_min_scaled": 310,
+    "kcal_max_scaled": 576
   },
   {
     "name": "Frutta fresca con granola artigianale",
@@ -848,17 +1246,35 @@
       {
         "name": "frutta mista di stagione (mela, pera, kiwi)",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 55
       },
       {
         "name": "granola senza zuccheri aggiunti",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 450
       },
       {
         "name": "latte di mandorla",
         "amount": 100,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 100,
+        "max": 100,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 30
       }
     ],
     "instructions": [
@@ -878,7 +1294,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1511690078903-71dc5a49f5e3?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Bowl-frutta-granola.html"
+    "source_url": "https://ricette.giallozafferano.it/Bowl-frutta-granola.html",
+    "kcal_min_scaled": 257,
+    "kcal_max_scaled": 447
   },
   {
     "name": "Kefir con semi di chia e frutta secca",
@@ -902,22 +1320,46 @@
       {
         "name": "kefir",
         "amount": 200,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 61
       },
       {
         "name": "semi di chia",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 486
       },
       {
         "name": "albicocche secche",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 241
       },
       {
         "name": "mandorle",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 580
       }
     ],
     "instructions": [
@@ -937,7 +1379,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1497888329096-51c27beff665?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Kefir-semi-chia.html"
+    "source_url": "https://ricette.giallozafferano.it/Kefir-semi-chia.html",
+    "kcal_min_scaled": 301,
+    "kcal_max_scaled": 529
   },
   {
     "name": "Insalata di pollo grigliato con verdure e salsa allo yogurt",
@@ -961,47 +1405,101 @@
       {
         "name": "petto di pollo",
         "amount": 180,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "lattuga",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "pomodorini",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "cetriolo",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "carote",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "yogurt greco 0%",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 59
       },
       {
         "name": "limone (succo)",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1024,7 +1522,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Insalata-di-pollo-light.html"
+    "source_url": "https://ricette.giallozafferano.it/Insalata-di-pollo-light.html",
+    "kcal_min_scaled": 375,
+    "kcal_max_scaled": 701
   },
   {
     "name": "Pasta integrale al pomodoro fresco e basilico",
@@ -1050,32 +1550,68 @@
       {
         "name": "pasta integrale (pennette o fusilli)",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "pomodori maturi",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "basilico fresco",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1097,7 +1633,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pasta-al-pomodoro-fresco.html"
+    "source_url": "https://ricette.giallozafferano.it/Pasta-al-pomodoro-fresco.html",
+    "kcal_min_scaled": 325,
+    "kcal_max_scaled": 713
   },
   {
     "name": "Zuppa di lenticchie rosse con carote e cumino",
@@ -1123,42 +1661,90 @@
       {
         "name": "lenticchie rosse decorticate",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 116
       },
       {
         "name": "carote",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "cipolla",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "pomodori pelati",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "cumino in polvere",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "brodo vegetale",
         "amount": 400,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 400,
+        "max": 400,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1179,7 +1765,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 201,
+    "kcal_max_scaled": 377
   },
   {
     "name": "Filetto di salmone in padella con limone e prezzemolo",
@@ -1203,32 +1791,68 @@
       {
         "name": "filetto di salmone fresco",
         "amount": 180,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 200
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "prezzemolo fresco",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "pepe rosa in grani",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1251,7 +1875,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Filetto-di-salmone-in-padella.html"
+    "source_url": "https://ricette.giallozafferano.it/Filetto-di-salmone-in-padella.html",
+    "kcal_min_scaled": 341,
+    "kcal_max_scaled": 687
   },
   {
     "name": "Orata al forno con patate e rosmarino",
@@ -1275,42 +1901,90 @@
       {
         "name": "orata (già eviscerata)",
         "amount": 300,
-        "unit": "g"
+        "unit": "g",
+        "min": 240,
+        "max": 420,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 85
       },
       {
         "name": "patate",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 180,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 77
       },
       {
         "name": "rosmarino",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "timo",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "aglio",
         "amount": 2,
-        "unit": "spicchi"
+        "unit": "spicchi",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1333,7 +2007,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Orata-al-forno.html"
+    "source_url": "https://ricette.giallozafferano.it/Orata-al-forno.html",
+    "kcal_min_scaled": 387,
+    "kcal_max_scaled": 708
   },
   {
     "name": "Pollo e zucchine in padella",
@@ -1357,32 +2033,68 @@
       {
         "name": "petto di pollo",
         "amount": 180,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "zucchine",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "curry in polvere",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1402,7 +2114,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 300,
+    "kcal_max_scaled": 605
   },
   {
     "name": "Risotto integrale con verdure di stagione",
@@ -1428,37 +2142,79 @@
       {
         "name": "riso integrale",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "zucchine",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "peperoni misti",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 31
       },
       {
         "name": "cipolla",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "brodo vegetale",
         "amount": 400,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 400,
+        "max": 400,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "basilico",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1478,7 +2234,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Risotto-verdure-stagione.html"
+    "source_url": "https://ricette.giallozafferano.it/Risotto-verdure-stagione.html",
+    "kcal_min_scaled": 303,
+    "kcal_max_scaled": 692
   },
   {
     "name": "Minestra di ceci e spinaci",
@@ -1504,37 +2262,79 @@
       {
         "name": "ceci lessati",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 164
       },
       {
         "name": "spinaci freschi",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "pomodori pelati",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "rosmarino",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "brodo vegetale",
         "amount": 300,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 300,
+        "max": 300,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       }
     ],
     "instructions": [
@@ -1555,7 +2355,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 271,
+    "kcal_max_scaled": 509
   },
   {
     "name": "Salmone al cartoccio con pomodorini e olive",
@@ -1579,37 +2381,79 @@
       {
         "name": "filetti di salmone",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 200
       },
       {
         "name": "pomodorini",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "olive nere denocciolate",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       },
       {
         "name": "cipolla rossa",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1633,7 +2477,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Filetti-di-salmone-al-cartoccio.html"
+    "source_url": "https://ricette.giallozafferano.it/Filetti-di-salmone-al-cartoccio.html",
+    "kcal_min_scaled": 395,
+    "kcal_max_scaled": 733
   },
   {
     "name": "Penne integrali con pesto di spinaci e noci",
@@ -1658,37 +2504,79 @@
       {
         "name": "penne integrali",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "spinaci freschi",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "noci",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 40,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 654
       },
       {
         "name": "parmigiano grattugiato",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1712,7 +2600,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Penne-pesto-spinaci-noci.html"
+    "source_url": "https://ricette.giallozafferano.it/Penne-pesto-spinaci-noci.html",
+    "kcal_min_scaled": 455,
+    "kcal_max_scaled": 1084
   },
   {
     "name": "Burger di legumi con insalata mista",
@@ -1738,37 +2628,79 @@
       {
         "name": "ceci lessati",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 164
       },
       {
         "name": "fagioli borlotti lessati",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
       },
       {
         "name": "cipolla",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "farina integrale",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 50
       },
       {
         "name": "curcuma e paprika",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "insalata mista",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -1790,7 +2722,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Burger-legumi.html"
+    "source_url": "https://ricette.giallozafferano.it/Burger-legumi.html",
+    "kcal_min_scaled": 326,
+    "kcal_max_scaled": 571
   },
   {
     "name": "Branzino al vapore con verdure",
@@ -1814,42 +2748,90 @@
       {
         "name": "branzino (tranci)",
         "amount": 220,
-        "unit": "g"
+        "unit": "g",
+        "min": 180,
+        "max": 300,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 82
       },
       {
         "name": "carote",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "zucchine",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "cipollotto",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 40,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 32
       },
       {
         "name": "basilico",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1873,7 +2855,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Branzino-al-vapore-con-verdure.html"
+    "source_url": "https://ricette.giallozafferano.it/Branzino-al-vapore-con-verdure.html",
+    "kcal_min_scaled": 253,
+    "kcal_max_scaled": 484
   },
   {
     "name": "Pasta al tonno con capperi e pomodorini",
@@ -1897,37 +2881,79 @@
       {
         "name": "pasta integrale",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "tonno al naturale",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 116
       },
       {
         "name": "pomodorini",
         "amount": 120,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "capperi",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 15,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 23
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -1951,7 +2977,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1598103442097-8b74394b95c3?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pasta-tonno-capperi-pomodorini.html"
+    "source_url": "https://ricette.giallozafferano.it/Pasta-tonno-capperi-pomodorini.html",
+    "kcal_min_scaled": 362,
+    "kcal_max_scaled": 813
   },
   {
     "name": "Farro con verdure grigliate e formaggio di capra",
@@ -1976,37 +3004,79 @@
       {
         "name": "farro perlato",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
       },
       {
         "name": "zucchine",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "melanzane",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 25
       },
       {
         "name": "peperoni",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 31
       },
       {
         "name": "formaggio di capra fresco",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 80,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 200
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "erbe aromatiche (timo, origano)",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2028,7 +3098,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Farro-verdure-grigliate.html"
+    "source_url": "https://ricette.giallozafferano.it/Farro-verdure-grigliate.html",
+    "kcal_min_scaled": 356,
+    "kcal_max_scaled": 847
   },
   {
     "name": "Involtini di vitello alle mandorle in padella",
@@ -2052,32 +3124,68 @@
       {
         "name": "fettine di vitello (fesa)",
         "amount": 180,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 130
       },
       {
         "name": "mandorle tritate",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 40,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 580
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "uvetta",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 299
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2099,7 +3207,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
-    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/",
+    "kcal_min_scaled": 344,
+    "kcal_max_scaled": 765
   },
   {
     "name": "Cous cous di pollo con verdure",
@@ -2123,42 +3233,90 @@
       {
         "name": "cous cous integrale",
         "amount": 70,
-        "unit": "g"
+        "unit": "g",
+        "min": 50,
+        "max": 130,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 376
       },
       {
         "name": "petto di pollo",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "zucchine",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "carote",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "cipolla",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "brodo vegetale caldo",
         "amount": 100,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 100,
+        "max": 100,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "curcuma e cumino",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2180,7 +3338,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 474,
+    "kcal_max_scaled": 1020
   },
   {
     "name": "Vellutata di zucca e patate dolci",
@@ -2206,37 +3366,79 @@
       {
         "name": "zucca",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 26
       },
       {
         "name": "patate dolci",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 86
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "brodo vegetale",
         "amount": 400,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 400,
+        "max": 400,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       },
       {
         "name": "zenzero fresco",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 15
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "semi di zucca tostati",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 559
       }
     ],
     "instructions": [
@@ -2257,7 +3459,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
-    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/",
+    "kcal_min_scaled": 222,
+    "kcal_max_scaled": 436
   },
   {
     "name": "Tacchino con pomodori secchi e olive",
@@ -2281,37 +3485,79 @@
       {
         "name": "petto di tacchino",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "pomodori secchi (non sott'olio)",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 25,
+        "max": 60,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 258
       },
       {
         "name": "olive verdi denocciolate",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 145
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "vino bianco secco",
         "amount": 50,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 50,
+        "max": 50,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 66
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "origano",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2331,7 +3577,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Tacchino-pomodori-secchi-olive.html"
+    "source_url": "https://ricette.giallozafferano.it/Tacchino-pomodori-secchi-olive.html",
+    "kcal_min_scaled": 342,
+    "kcal_max_scaled": 692
   },
   {
     "name": "Minestra di orzo e fagioli",
@@ -2357,42 +3605,90 @@
       {
         "name": "orzo perlato",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
       },
       {
         "name": "fagioli borlotti lessati",
         "amount": 120,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
       },
       {
         "name": "carote",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "sedano",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 16
       },
       {
         "name": "cipolla",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "rosmarino",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "brodo vegetale",
         "amount": 500,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 500,
+        "max": 500,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       }
     ],
     "instructions": [
@@ -2416,7 +3712,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Minestra-orzo-fagioli.html"
+    "source_url": "https://ricette.giallozafferano.it/Minestra-orzo-fagioli.html",
+    "kcal_min_scaled": 347,
+    "kcal_max_scaled": 767
   },
   {
     "name": "Tonno alla pizzaiola con olive e capperi",
@@ -2440,37 +3738,79 @@
       {
         "name": "trancio di tonno fresco",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 144
       },
       {
         "name": "pomodori pelati",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 180,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "olive nere",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       },
       {
         "name": "capperi",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 23
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "origano",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2492,7 +3832,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Tonno-alla-pizzaiola.html"
+    "source_url": "https://ricette.giallozafferano.it/Tonno-alla-pizzaiola.html",
+    "kcal_min_scaled": 293,
+    "kcal_max_scaled": 571
   },
   {
     "name": "Spaghetti integrali al limone",
@@ -2517,32 +3859,68 @@
       {
         "name": "spaghetti integrali",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "limoni (scorza e succo)",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "parmigiano grattugiato",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "basilico",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2565,7 +3943,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600",
-    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/",
+    "kcal_min_scaled": 370,
+    "kcal_max_scaled": 826
   },
   {
     "name": "Polpette di tacchino e ricotta al sugo",
@@ -2589,37 +3969,79 @@
       {
         "name": "macinato di tacchino",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "ricotta di mucca",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "uovo (solo albume)",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 52
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "pomodori pelati",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -2642,7 +4064,9 @@
       "uova"
     ],
     "image_url": "https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600",
-    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/",
+    "kcal_min_scaled": 369,
+    "kcal_max_scaled": 613
   },
   {
     "name": "Quinoa con avocado, fagioli neri e lime",
@@ -2668,42 +4092,90 @@
       {
         "name": "quinoa",
         "amount": 70,
-        "unit": "g"
+        "unit": "g",
+        "min": 50,
+        "max": 130,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 368
       },
       {
         "name": "fagioli neri lessati",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
       },
       {
         "name": "avocado",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 55,
+        "max": 160,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 160
       },
       {
         "name": "pomodorini",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "mais (sgocciolato)",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 90,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 50
       },
       {
         "name": "lime (succo)",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 30
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "coriandolo fresco",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2723,7 +4195,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Bowl-quinoa-avocado.html"
+    "source_url": "https://ricette.giallozafferano.it/Bowl-quinoa-avocado.html",
+    "kcal_min_scaled": 466,
+    "kcal_max_scaled": 1143
   },
   {
     "name": "Straccetti di pollo alla mediterranea",
@@ -2747,32 +4221,68 @@
       {
         "name": "petto di pollo",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "pomodorini",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "olive nere",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       },
       {
         "name": "origano",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2791,7 +4301,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
-    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/"
+    "source_url": "https://blog.giallozafferano.it/studentiaifornelli/ricette-leggere-per-settimana/",
+    "kcal_min_scaled": 320,
+    "kcal_max_scaled": 615
   },
   {
     "name": "Frittata di albumi con verdure",
@@ -2816,32 +4328,68 @@
       {
         "name": "albumi d'uovo",
         "amount": 4,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 4,
+        "max": 4,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "spinaci freschi",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "pomodorini",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "cipollotto",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 40,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 32
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 5,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -2864,7 +4412,9 @@
       "uova"
     ],
     "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
-    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/",
+    "kcal_min_scaled": 189,
+    "kcal_max_scaled": 254
   },
   {
     "name": "Pasta e fagioli",
@@ -2890,37 +4440,79 @@
       {
         "name": "pasta corta integrale (tubetti)",
         "amount": 70,
-        "unit": "g"
+        "unit": "g",
+        "min": 50,
+        "max": 130,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "fagioli cannellini lessati",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
       },
       {
         "name": "pomodoro fresco",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 50
       },
       {
         "name": "sedano, carota, cipolla (soffritto)",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "rosmarino",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "brodo vegetale",
         "amount": 300,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 300,
+        "max": 300,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       }
     ],
     "instructions": [
@@ -2944,7 +4536,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pasta-e-fagioli.html"
+    "source_url": "https://ricette.giallozafferano.it/Pasta-e-fagioli.html",
+    "kcal_min_scaled": 436,
+    "kcal_max_scaled": 944
   },
   {
     "name": "Petto di pollo al limone",
@@ -2968,37 +4562,79 @@
       {
         "name": "petto di pollo",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "limoni (succo)",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "farina integrale (per infarinare)",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 50
       },
       {
         "name": "brodo di pollo leggero",
         "amount": 50,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 8
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3019,7 +4655,9 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pollo-al-limone.html"
+    "source_url": "https://ricette.giallozafferano.it/Pollo-al-limone.html",
+    "kcal_min_scaled": 348,
+    "kcal_max_scaled": 641
   },
   {
     "name": "Riso venere con gamberetti e zucchine",
@@ -3043,37 +4681,79 @@
       {
         "name": "riso venere",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
       },
       {
         "name": "gamberetti surgelati",
         "amount": 120,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 99
       },
       {
         "name": "zucchine",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "prezzemolo",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "pepe nero",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3095,7 +4775,9 @@
       "crostacei"
     ],
     "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 362,
+    "kcal_max_scaled": 790
   },
   {
     "name": "Zucchine ripiene di ricotta e timo",
@@ -3120,32 +4802,68 @@
       {
         "name": "zucchine grandi",
         "amount": 2,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 3,
+        "step": 1,
+        "priority": 3,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "ricotta di mucca",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "parmigiano grattugiato",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "timo fresco",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "uovo (solo albume)",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 52
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3167,7 +4885,9 @@
       "uova"
     ],
     "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
-    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/"
+    "source_url": "https://blog.giallozafferano.it/vickyart/ricette-light/",
+    "kcal_min_scaled": 198,
+    "kcal_max_scaled": 403
   },
   {
     "name": "Insalata di farro con cetrioli, pomodori e feta",
@@ -3192,42 +4912,90 @@
       {
         "name": "farro perlato",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
       },
       {
         "name": "pomodori datterini",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "cetriolo",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "feta",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 80,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 264
       },
       {
         "name": "olive kalamata",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "menta fresca",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       }
     ],
     "instructions": [
@@ -3249,7 +5017,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Insalata-farro-feta.html"
+    "source_url": "https://ricette.giallozafferano.it/Insalata-farro-feta.html",
+    "kcal_min_scaled": 368,
+    "kcal_max_scaled": 891
   },
   {
     "name": "Tofu marinato con verdure saltate e sesamo",
@@ -3275,37 +5045,79 @@
       {
         "name": "tofu sodo",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 76
       },
       {
         "name": "broccoli",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 34
       },
       {
         "name": "carote",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "salsa di soia (tamari)",
         "amount": 15,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 15,
+        "max": 15,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 60
       },
       {
         "name": "olio di sesamo",
         "amount": 5,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "zenzero fresco grattugiato",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 15
       },
       {
         "name": "semi di sesamo",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 573
       }
     ],
     "instructions": [
@@ -3329,7 +5141,9 @@
       "sesamo"
     ],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Tofu-marinato-verdure.html"
+    "source_url": "https://ricette.giallozafferano.it/Tofu-marinato-verdure.html",
+    "kcal_min_scaled": 237,
+    "kcal_max_scaled": 430
   },
   {
     "name": "Zuppa di piselli e menta",
@@ -3355,32 +5169,68 @@
       {
         "name": "piselli surgelati",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 81
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "brodo vegetale",
         "amount": 300,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 300,
+        "max": 300,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       },
       {
         "name": "menta fresca",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3402,7 +5252,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Vellutata-piselli-menta.html"
+    "source_url": "https://ricette.giallozafferano.it/Vellutata-piselli-menta.html",
+    "kcal_min_scaled": 191,
+    "kcal_max_scaled": 386
   },
   {
     "name": "Coniglio alla ligure con olive e pinoli",
@@ -3426,37 +5278,79 @@
       {
         "name": "coniglio a pezzi",
         "amount": 250,
-        "unit": "g"
+        "unit": "g",
+        "min": 200,
+        "max": 360,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 136
       },
       {
         "name": "olive taggiasche",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       },
       {
         "name": "pinoli",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 673
       },
       {
         "name": "rosmarino e timo",
         "amount": 4,
-        "unit": "g"
+        "unit": "g",
+        "min": 4,
+        "max": 4,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "vino bianco secco",
         "amount": 60,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 60,
+        "max": 60,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 66
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "aglio",
         "amount": 2,
-        "unit": "spicchi"
+        "unit": "spicchi",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       }
     ],
     "instructions": [
@@ -3478,7 +5372,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Coniglio-alla-ligure.html"
+    "source_url": "https://ricette.giallozafferano.it/Coniglio-alla-ligure.html",
+    "kcal_min_scaled": 429,
+    "kcal_max_scaled": 872
   },
   {
     "name": "Insalata nizzarda con tonno e uova sode",
@@ -3502,42 +5398,90 @@
       {
         "name": "tonno al naturale",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 116
       },
       {
         "name": "uova sode",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 155
       },
       {
         "name": "fagiolini lessati",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 31
       },
       {
         "name": "pomodori",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "lattuga",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "olive nere",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       },
       {
         "name": "acciughe sott'olio",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 131
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -3561,7 +5505,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Insalata-nizzarda.html"
+    "source_url": "https://ricette.giallozafferano.it/Insalata-nizzarda.html",
+    "kcal_min_scaled": 294,
+    "kcal_max_scaled": 565
   },
   {
     "name": "Pollo alla cacciatora",
@@ -3585,42 +5531,90 @@
       {
         "name": "pollo in pezzi (coscia e petto)",
         "amount": 250,
-        "unit": "g"
+        "unit": "g",
+        "min": 200,
+        "max": 360,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "pomodori pelati",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 180,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "olive verdi",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 145
       },
       {
         "name": "peperoni",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 31
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "vino rosso",
         "amount": 50,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 50,
+        "max": 50,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 68
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "rosmarino e alloro",
         "amount": 4,
-        "unit": "g"
+        "unit": "g",
+        "min": 4,
+        "max": 4,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3641,7 +5635,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pollo-alla-cacciatora.html"
+    "source_url": "https://ricette.giallozafferano.it/Pollo-alla-cacciatora.html",
+    "kcal_min_scaled": 473,
+    "kcal_max_scaled": 861
   },
   {
     "name": "Fusilli integrali con ricotta e spinaci",
@@ -3666,37 +5662,79 @@
       {
         "name": "fusilli integrali",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "ricotta di mucca",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "spinaci freschi",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "parmigiano",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "noce moscata",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -3718,7 +5756,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Fusilli-ricotta-spinaci.html"
+    "source_url": "https://ricette.giallozafferano.it/Fusilli-ricotta-spinaci.html",
+    "kcal_min_scaled": 424,
+    "kcal_max_scaled": 901
   },
   {
     "name": "Bistecca di manzo con rucola e grana",
@@ -3742,32 +5782,68 @@
       {
         "name": "fesa di manzo",
         "amount": 180,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 150
       },
       {
         "name": "rucola",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 25
       },
       {
         "name": "grana padano a scaglie",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 387
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3789,7 +5865,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Tagliata-rucola-grana.html"
+    "source_url": "https://ricette.giallozafferano.it/Tagliata-rucola-grana.html",
+    "kcal_min_scaled": 320,
+    "kcal_max_scaled": 693
   },
   {
     "name": "Curry di ceci e spinaci",
@@ -3815,42 +5893,90 @@
       {
         "name": "ceci lessati",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 164
       },
       {
         "name": "spinaci freschi",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "latte di cocco (leggero)",
         "amount": 80,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 80,
+        "max": 80,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 230
       },
       {
         "name": "pomodori pelati",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "curry in polvere",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "zenzero e aglio",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -3872,7 +5998,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Curry-ceci-spinaci.html"
+    "source_url": "https://ricette.giallozafferano.it/Curry-ceci-spinaci.html",
+    "kcal_min_scaled": 291,
+    "kcal_max_scaled": 536
   },
   {
     "name": "Merluzzo al vapore con pomodorini e olive",
@@ -3896,37 +6024,79 @@
       {
         "name": "filetti di merluzzo",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 82
       },
       {
         "name": "pomodorini",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "olive verdi",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 20,
+        "max": 20,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 145
       },
       {
         "name": "capperi",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 23
       },
       {
         "name": "origano",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -3948,7 +6118,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Merluzzo-vapore-pomodorini.html"
+    "source_url": "https://ricette.giallozafferano.it/Merluzzo-vapore-pomodorini.html",
+    "kcal_min_scaled": 191,
+    "kcal_max_scaled": 386
   },
   {
     "name": "Insalata di orzo con verdure estive e pesto",
@@ -3973,32 +6145,68 @@
       {
         "name": "orzo perlato",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
       },
       {
         "name": "pesto genovese (senza aglio)",
         "amount": 20,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 40,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 450
       },
       {
         "name": "pomodorini",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "cetriolo",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "peperoni grigliati",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 31
       },
       {
         "name": "olive nere",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 15,
+        "max": 15,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 115
       }
     ],
     "instructions": [
@@ -4021,7 +6229,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Insalata-orzo-pesto.html"
+    "source_url": "https://ricette.giallozafferano.it/Insalata-orzo-pesto.html",
+    "kcal_min_scaled": 301,
+    "kcal_max_scaled": 711
   },
   {
     "name": "Uova al tegamino con asparagi",
@@ -4046,27 +6256,57 @@
       {
         "name": "uova",
         "amount": 2,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 3,
+        "step": 1,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 155
       },
       {
         "name": "asparagi",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 100,
+        "max": 180,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 20
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "parmigiano grattugiato",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4088,7 +6328,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Uova-al-tegamino-asparagi.html"
+    "source_url": "https://ricette.giallozafferano.it/Uova-al-tegamino-asparagi.html",
+    "kcal_min_scaled": 278,
+    "kcal_max_scaled": 513
   },
   {
     "name": "Salmone al vapore con broccoli",
@@ -4112,32 +6354,68 @@
       {
         "name": "trancio di salmone",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 200
       },
       {
         "name": "broccoli",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 140,
+        "max": 240,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 34
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "zenzero fresco",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 15
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4160,7 +6438,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Salmone-al-vapore.html"
+    "source_url": "https://ricette.giallozafferano.it/Salmone-al-vapore.html",
+    "kcal_min_scaled": 429,
+    "kcal_max_scaled": 808
   },
   {
     "name": "Minestrone di verdure",
@@ -4186,52 +6466,112 @@
       {
         "name": "patate",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 77
       },
       {
         "name": "carote",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "zucchine",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "fagiolini",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 31
       },
       {
         "name": "pomodori",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "sedano",
         "amount": 30,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 16
       },
       {
         "name": "fagioli cannellini lessati",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "parmigiano (facoltativo)",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
       },
       {
         "name": "brodo vegetale",
         "amount": 600,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 600,
+        "max": 600,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
       }
     ],
     "instructions": [
@@ -4255,7 +6595,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600",
-    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/"
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 297,
+    "kcal_max_scaled": 542
   },
   {
     "name": "Pomodori ripieni di riso e verdure",
@@ -4281,32 +6623,68 @@
       {
         "name": "pomodori grandi",
         "amount": 2,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 3,
+        "step": 1,
+        "priority": 3,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "riso integrale",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "zucchine",
         "amount": 60,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
       },
       {
         "name": "basilico",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4326,7 +6704,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pomodori-ripieni-riso.html"
+    "source_url": "https://ricette.giallozafferano.it/Pomodori-ripieni-riso.html",
+    "kcal_min_scaled": 212,
+    "kcal_max_scaled": 563
   },
   {
     "name": "Sgombro in padella con erbe aromatiche",
@@ -4350,32 +6730,68 @@
       {
         "name": "filetti di sgombro",
         "amount": 200,
-        "unit": "g"
+        "unit": "g",
+        "min": 160,
+        "max": 280,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 205
       },
       {
         "name": "rosmarino",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "timo",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "aglio",
         "amount": 1,
-        "unit": "spicchio"
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "limone",
         "amount": 1,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "priority": 3,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -4398,7 +6814,9 @@
       "pesce"
     ],
     "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Sgombro-padella-erbe.html"
+    "source_url": "https://ricette.giallozafferano.it/Sgombro-padella-erbe.html",
+    "kcal_min_scaled": 389,
+    "kcal_max_scaled": 741
   },
   {
     "name": "Riso basmati con pollo e curcuma",
@@ -4422,37 +6840,79 @@
       {
         "name": "riso basmati",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 140,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 349
       },
       {
         "name": "petto di pollo",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
       },
       {
         "name": "curcuma",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "paprika dolce",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "cipolla",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
       },
       {
         "name": "brodo di pollo",
         "amount": 160,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 120,
+        "max": 220,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 8
       },
       {
         "name": "olio extravergine d'oliva",
         "amount": 8,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
       }
     ],
     "instructions": [
@@ -4471,7 +6931,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Riso-pollo-curcuma.html"
+    "source_url": "https://ricette.giallozafferano.it/Riso-pollo-curcuma.html",
+    "kcal_min_scaled": 478,
+    "kcal_max_scaled": 995
   },
   {
     "name": "Mele al forno con cannella e noci",
@@ -4495,22 +6957,46 @@
       {
         "name": "mele (tipo golden)",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 150,
+        "max": 150,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 50
       },
       {
         "name": "noci",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 654
       },
       {
         "name": "cannella",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "miele",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       }
     ],
     "instructions": [
@@ -4530,7 +7016,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Mele-al-forno-cannella.html"
+    "source_url": "https://ricette.giallozafferano.it/Mele-al-forno-cannella.html",
+    "kcal_min_scaled": 65,
+    "kcal_max_scaled": 131
   },
   {
     "name": "Yogurt greco con semi di lino e frutta secca",
@@ -4554,22 +7042,46 @@
       {
         "name": "yogurt greco 0%",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 59
       },
       {
         "name": "semi di lino macinati",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 534
       },
       {
         "name": "mandorle",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 580
       },
       {
         "name": "uvetta",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 299
       }
     ],
     "instructions": [
@@ -4589,7 +7101,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1511690078903-71dc5a49f5e3?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-semi.html"
+    "source_url": "https://ricette.giallozafferano.it/Yogurt-greco-semi.html",
+    "kcal_min_scaled": 212,
+    "kcal_max_scaled": 401
   },
   {
     "name": "Gallette di riso con hummus",
@@ -4614,22 +7128,46 @@
       {
         "name": "gallette di riso integrale",
         "amount": 3,
-        "unit": "pz"
+        "unit": "pz",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "priority": 3,
+        "category": "carboidrati",
+        "kcal_per_100": 350
       },
       {
         "name": "hummus di ceci",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 80,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 166
       },
       {
         "name": "paprika",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "prezzemolo fresco",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4649,7 +7187,9 @@
       "sesamo"
     ],
     "image_url": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Gallette-hummus.html"
+    "source_url": "https://ricette.giallozafferano.it/Gallette-hummus.html",
+    "kcal_min_scaled": 518,
+    "kcal_max_scaled": 903
   },
   {
     "name": "Frutta secca mista",
@@ -4674,22 +7214,46 @@
       {
         "name": "mandorle",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 580
       },
       {
         "name": "noci",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 654
       },
       {
         "name": "anacardi",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 553
       },
       {
         "name": "nocciole",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 628
       }
     ],
     "instructions": [
@@ -4708,7 +7272,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Frutta-secca-spuntino.html"
+    "source_url": "https://ricette.giallozafferano.it/Frutta-secca-spuntino.html",
+    "kcal_min_scaled": 242,
+    "kcal_max_scaled": 483
   },
   {
     "name": "Banana e burro di mandorle",
@@ -4733,12 +7299,24 @@
       {
         "name": "banana",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 89
       },
       {
         "name": "burro di mandorle naturale",
         "amount": 15,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 614
       }
     ],
     "instructions": [
@@ -4757,7 +7335,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Banana-burro-mandorle.html"
+    "source_url": "https://ricette.giallozafferano.it/Banana-burro-mandorle.html",
+    "kcal_min_scaled": 133,
+    "kcal_max_scaled": 291
   },
   {
     "name": "Edamame salati",
@@ -4782,12 +7362,24 @@
       {
         "name": "edamame surgelati (nel baccello)",
         "amount": 150,
-        "unit": "g"
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 121
       },
       {
         "name": "sale marino grosso",
         "amount": 2,
-        "unit": "g"
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4807,7 +7399,9 @@
       "soia"
     ],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Edamame-salati.html"
+    "source_url": "https://ricette.giallozafferano.it/Edamame-salati.html",
+    "kcal_min_scaled": 145,
+    "kcal_max_scaled": 242
   },
   {
     "name": "Cetrioli e carote con tzatziki",
@@ -4831,32 +7425,68 @@
       {
         "name": "cetriolo",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
       },
       {
         "name": "carote",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
       },
       {
         "name": "yogurt greco 0%",
         "amount": 80,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 59
       },
       {
         "name": "aglio (piccola quantità)",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 149
       },
       {
         "name": "aneto o menta",
         "amount": 3,
-        "unit": "g"
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       },
       {
         "name": "sale",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4876,7 +7506,9 @@
       "latte"
     ],
     "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Verdure-tzatziki.html"
+    "source_url": "https://ricette.giallozafferano.it/Verdure-tzatziki.html",
+    "kcal_min_scaled": 84,
+    "kcal_max_scaled": 130
   },
   {
     "name": "Ricotta con miele e pistacchi",
@@ -4900,17 +7532,35 @@
       {
         "name": "ricotta di mucca",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 135
       },
       {
         "name": "miele",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 304
       },
       {
         "name": "pistacchi sgusciati",
         "amount": 10,
-        "unit": "g"
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 562
       }
     ],
     "instructions": [
@@ -4931,7 +7581,9 @@
       "frutta a guscio"
     ],
     "image_url": "https://images.unsplash.com/photo-1497888329096-51c27beff665?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Ricotta-miele-pistacchi.html"
+    "source_url": "https://ricette.giallozafferano.it/Ricotta-miele-pistacchi.html",
+    "kcal_min_scaled": 164,
+    "kcal_max_scaled": 301
   },
   {
     "name": "Frullato verde con spinaci, mela e zenzero",
@@ -4956,27 +7608,57 @@
       {
         "name": "spinaci freschi",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
       },
       {
         "name": "mela verde",
         "amount": 100,
-        "unit": "g"
+        "unit": "g",
+        "min": 80,
+        "max": 120,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 52
       },
       {
         "name": "zenzero fresco",
         "amount": 5,
-        "unit": "g"
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 15
       },
       {
         "name": "limone (succo)",
         "amount": 10,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 29
       },
       {
         "name": "acqua fredda",
         "amount": 150,
-        "unit": "ml"
+        "unit": "ml",
+        "min": 150,
+        "max": 150,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -4995,7 +7677,9 @@
     ],
     "allergens": [],
     "image_url": "https://images.unsplash.com/photo-1553530666-ba11a90a0868?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Frullato-verde-spinaci.html"
+    "source_url": "https://ricette.giallozafferano.it/Frullato-verde-spinaci.html",
+    "kcal_min_scaled": 54,
+    "kcal_max_scaled": 82
   },
   {
     "name": "Pane di segale con avocado e pomodorino",
@@ -5020,22 +7704,46 @@
       {
         "name": "pane di segale",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 220
       },
       {
         "name": "avocado",
         "amount": 50,
-        "unit": "g"
+        "unit": "g",
+        "min": 35,
+        "max": 100,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 160
       },
       {
         "name": "pomodorini",
         "amount": 40,
-        "unit": "g"
+        "unit": "g",
+        "min": 40,
+        "max": 40,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
       },
       {
         "name": "sale e pepe",
         "amount": 1,
-        "unit": "pizzico"
+        "unit": "pizzico",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
       }
     ],
     "instructions": [
@@ -5054,6 +7762,8 @@
       "glutine"
     ],
     "image_url": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600",
-    "source_url": "https://ricette.giallozafferano.it/Pane-segale-avocado.html"
+    "source_url": "https://ricette.giallozafferano.it/Pane-segale-avocado.html",
+    "kcal_min_scaled": 151,
+    "kcal_max_scaled": 321
   }
 ]
