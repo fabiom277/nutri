@@ -10,6 +10,7 @@ import {
 import {
   calcBMR, calcTDEE, calcTargetCalories, calcBMI, bmiStatus,
   caloriesBySlot, activeSlots, generateWeeklyPlan, replaceRecipe,
+  filterRecipes, scaleRecipeToTarget,
   buildShoppingList, formatDate, formatDateShort
 } from './nutrition.js';
 
@@ -105,28 +106,118 @@ async function loadUserData() {
       return;
     }
 
-    // Ricostruisce o genera il piano PRIMA di mostrare l'app
+    // Ricostruisce il piano dagli ID salvati
     const savedPlan = profile.current_plan;
     if (savedPlan && savedPlan.days) {
       state.plan = hydratePlan(savedPlan, recipes);
     }
+
     if (!state.plan || !state.plan.days?.length) {
-      try {
-        await generateAndSavePlan();
-      } catch (e) {
-        console.warn('[loadUserData] generateAndSavePlan failed:', e);
-      }
+      // Nessun piano: genera da zero
+      await generateAndSavePlan();
+    } else {
+      // Piano esistente: avanza la finestra se oggi è cambiato
+      await rollPlanForward();
     }
 
     await loadConfirmedMeals();
-
-    // Solo ora mostra l'app (state.plan è già pronto)
     showApp();
 
   } catch (e) {
     console.error('[loadUserData]', e);
     toast('Errore caricamento dati: ' + (e.message || ''), 'error');
   }
+}
+
+/**
+ * Avanza la finestra del piano al giorno corrente.
+ * - Rimuove i giorni passati (< oggi)
+ * - Aggiunge giorni nuovi in fondo per mantenere 7 giorni totali
+ * - NON cancella le conferme dei giorni rimossi (rimangono nel calendario)
+ * - NON azzera le conferme dei giorni futuri già confermati
+ */
+async function rollPlanForward() {
+  if (!state.plan?.days?.length) return;
+
+  const today = new Date().toISOString().split('T')[0];
+  const planStart = state.plan.days[0].date;
+
+  // Piano già aggiornato
+  if (planStart >= today) return;
+
+  // Tieni solo i giorni da oggi in poi
+  const keptDays = state.plan.days.filter(d => d.date >= today);
+  const daysNeeded = 7 - keptDays.length;
+
+  if (daysNeeded === 0) {
+    state.plan.days = keptDays;
+    await savePlanCompact();
+    return;
+  }
+
+  // Calcola da quale data aggiungere i nuovi giorni
+  const lastKeptDate = keptDays.length > 0
+    ? keptDays[keptDays.length - 1].date
+    : new Date(Date.parse(today + 'T00:00:00') - 86400000).toISOString().split('T')[0];
+
+  // Pool di ID già usati nella finestra mantenuta (evita ripetizioni immediate)
+  const usedIds = new Set(
+    keptDays.flatMap(d => Object.values(d.slots).filter(Boolean).map(r => r.id || r))
+  );
+
+  const slots    = activeSlots(state.profile.meal_schedule);
+  const calSlots = caloriesBySlot(state.profile.target_calories, state.profile.meal_schedule);
+  const newDays  = [];
+
+  for (let i = 0; i < daysNeeded; i++) {
+    const date = new Date(Date.parse(lastKeptDate + 'T00:00:00') + (i + 1) * 86400000)
+      .toISOString().split('T')[0];
+
+    const daySlots = {};
+    for (const slot of slots) {
+      const target     = calSlots[slot];
+      const candidates = filterRecipes(state.recipes, state.profile, slot, state.excluded);
+      const fresh      = candidates.filter(r => !usedIds.has(r.id));
+      const pool       = fresh.length ? fresh : candidates;
+
+      if (!pool.length) { daySlots[slot] = null; continue; }
+
+      // Scegli tra le top-4 più vicine al target calorico
+      const sorted = [...pool].sort((a, b) =>
+        Math.abs(a.calories - target) - Math.abs(b.calories - target)
+      );
+      const chosen = sorted.slice(0, Math.min(4, sorted.length))[
+        Math.floor(Math.random() * Math.min(4, sorted.length))
+      ];
+
+      daySlots[slot] = scaleRecipeToTarget(chosen, target, state.profile.meal_schedule);
+      usedIds.add(chosen.id);
+    }
+
+    newDays.push({ date, slots: daySlots });
+  }
+
+  state.plan.days = [...keptDays, ...newDays];
+  await savePlanCompact();
+}
+
+/**
+ * Salva il piano corrente su Supabase in formato compatto (solo ID ricette)
+ */
+async function savePlanCompact() {
+  const planCompact = {
+    generatedAt: state.plan.generatedAt || new Date().toISOString(),
+    days: state.plan.days.map(d => ({
+      date: d.date,
+      slots: Object.fromEntries(
+        Object.entries(d.slots).map(([slot, recipe]) => [slot, recipe?.id || null])
+      )
+    }))
+  };
+  await upsertProfile(state.session.user.id, {
+    current_plan: planCompact,
+    plan_generated_at: new Date().toISOString()
+  });
 }
 
 /**
@@ -513,41 +604,27 @@ async function generateAndSavePlan() {
   const plan = generateWeeklyPlan(state.recipes, state.profile, state.excluded);
   state.plan = plan;
 
-  // Salva su Supabase solo gli ID (payload minimo)
-  const planCompact = {
-    generatedAt: plan.generatedAt,
-    days: plan.days.map(d => ({
-      date: d.date,
-      slots: Object.fromEntries(
-        Object.entries(d.slots).map(([slot, recipe]) => [slot, recipe?.id || null])
-      )
-    }))
-  };
+  await savePlanCompact();
 
-  await upsertProfile(state.session.user.id, {
-    current_plan: planCompact,
-    plan_generated_at: new Date().toISOString()
-  });
-
-  // Svuota le conferme della settimana corrente: il piano è cambiato
-  // e i vecchi pasti confermati non corrispondono più alle nuove ricette
+  // Rigenerazione manuale: svuota le conferme della nuova finestra
+  // (i pasti sono cambiati, vanno riconfermati)
   try {
-    const uid = state.session.user.id;
+    const uid  = state.session.user.id;
     const from = plan.days[0]?.date;
     const to   = plan.days[plan.days.length - 1]?.date;
     if (from && to) {
-      const { error } = await supabase
+      await supabase
         .from('confirmed_meals')
         .delete()
         .eq('user_id', uid)
         .gte('plan_date', from)
         .lte('plan_date', to);
-      if (!error) state.confirmedMeals = state.confirmedMeals.filter(
+      state.confirmedMeals = state.confirmedMeals.filter(
         cm => cm.plan_date < from || cm.plan_date > to
       );
     }
   } catch (e) {
-    console.warn('[generateAndSavePlan] clear confirmed failed (non-critical):', e);
+    console.warn('[generateAndSavePlan] clear confirmed failed:', e);
   }
 }
 
