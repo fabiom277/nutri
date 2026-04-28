@@ -663,20 +663,34 @@ function renderPiano() {
 }
 
 async function handleReplace(dayIdx, slot) {
-  const day = state.plan.days[dayIdx];
+  const day     = state.plan.days[dayIdx];
   const current = day.slots[slot];
   if (!current) return;
 
-  if (!state.rejectedPerSlot[slot]) state.rejectedPerSlot[slot] = [];
-  state.rejectedPerSlot[slot].push(current.id);
+  // Chiave per giorno+slot (non globale per slot, altrimenti si esaurisce tra i 7 giorni)
+  const key = `${dayIdx}_${slot}`;
+  if (!state.rejectedPerSlot[key]) state.rejectedPerSlot[key] = [];
+  state.rejectedPerSlot[key].push(current.id);
 
-  const next = replaceRecipe(
+  let next = replaceRecipe(
     state.recipes, state.profile, slot,
     state.plan, dayIdx,
-    state.rejectedPerSlot[slot],
+    state.rejectedPerSlot[key],
     state.excluded
   );
-  if (!next) { toast('Nessuna altra ricetta disponibile', 'info'); return; }
+
+  // Pool esaurito: azzera i rifiutati e ricomincia il giro
+  if (!next) {
+    state.rejectedPerSlot[key] = [current.id]; // mantieni solo l'attuale per non riproporre subito
+    next = replaceRecipe(
+      state.recipes, state.profile, slot,
+      state.plan, dayIdx,
+      state.rejectedPerSlot[key],
+      state.excluded
+    );
+  }
+
+  if (!next) { toast('Nessuna ricetta disponibile per questo slot', 'info'); return; }
 
   state.plan.days[dayIdx].slots[slot] = next;
   await upsertProfile(state.session.user.id, { current_plan: state.plan });
