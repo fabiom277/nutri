@@ -157,3 +157,19 @@ CREATE TRIGGER profiles_updated_at BEFORE UPDATE ON profiles
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 CREATE TRIGGER recipes_updated_at BEFORE UPDATE ON recipes
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+-- ─────────────────────────────────────────
+-- MIGRATION v2: scaling dinamico
+-- Esegui nel SQL Editor di Supabase
+-- ─────────────────────────────────────────
+
+-- Colonne per potenziale calorico pre-calcolato
+ALTER TABLE recipes
+  ADD COLUMN IF NOT EXISTS kcal_min_scaled INTEGER,
+  ADD COLUMN IF NOT EXISTS kcal_max_scaled INTEGER;
+
+-- Unique constraint su name per permettere upsert dal seed
+ALTER TABLE recipes
+  DROP CONSTRAINT IF EXISTS recipes_name_key;
+ALTER TABLE recipes
+  ADD CONSTRAINT recipes_name_key UNIQUE (name);

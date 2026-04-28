@@ -368,11 +368,10 @@ document.getElementById('btn-seed-db').addEventListener('click', async () => {
     const recipes = await response.json();
     const { data: existing } = await sb.from('recipes').select('name');
     const existingNames = new Set((existing || []).map(r => r.name));
-    const toInsert = recipes.filter(r => !existingNames.has(r.name));
-    if (!toInsert.length) { toast('Tutte le ricette sono già presenti', 'info'); return; }
-    const { error } = await sb.from('recipes').insert(toInsert);
+    // Upsert: aggiorna le esistenti E inserisce le nuove
+    const { error } = await sb.from('recipes').upsert(recipes, { onConflict: 'name' });
     if (error) throw error;
-    toast(`${toInsert.length} ricette caricate!`);
+    toast(`${recipes.length} ricette aggiornate/inserite!`);
     await loadRecipes();
   } catch (e) {
     toast('Errore seed: ' + e.message, 'error');
