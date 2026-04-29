@@ -11,7 +11,7 @@ import {
 import {
   calcBMR, calcTDEE, calcTargetCalories, calcBMI, bmiStatus,
   caloriesBySlot, activeSlots, generateWeeklyPlan, replaceRecipe,
-  filterRecipes, scaleRecipeToTarget,
+  filterRecipes, scaleRecipeToTarget, recipeScore,
   buildShoppingList, formatDate, formatDateShort
 } from './nutrition.js';
 
@@ -535,7 +535,12 @@ function showStep(n) {
   });
   const prevBtn = document.getElementById('btn-prev');
   if (prevBtn) prevBtn.style.visibility = n === 0 ? 'hidden' : 'visible';
+  // Progress bar animata
+  const fill = document.getElementById('ob-progress-fill');
+  if (fill) fill.style.width = `${Math.round((n + 1) / STEPS * 100)}%`;
   updateStepIndicator();
+  // Aggiorna anteprima kcal live se siamo all'ultimo step
+  if (n === STEPS - 1) showOnboardingSummary();
 }
 
 function updateStepIndicator() {
@@ -566,8 +571,9 @@ async function nextStep() {
   showStep(currentStep);
   if (currentStep === STEPS - 1) {
     document.getElementById('btn-next').textContent = 'Inizia →';
-    showOnboardingSummary();
   }
+  // Summary live: aggiorna ogni volta che si avanza verso l'ultimo step
+  showOnboardingSummary();
 }
 
 function prevStep() {
@@ -618,18 +624,25 @@ function showOnboardingSummary() {
   const el = document.getElementById('ob-summary');
   if (el) el.innerHTML = `
     <div class="card mt-16">
-      <div class="flex items-center justify-between mb-16">
+      <div class="flex items-center justify-between" style="margin-bottom:12px">
         <div>
-          <div class="bold" style="font-size:2rem">${Math.round(kcal)} <span style="font-size:1rem;font-weight:400">kcal/giorno</span></div>
-          <div class="text-soft" style="font-size:0.85rem">Metabolismo basale: ${Math.round(bmr)} kcal · BMI: ${bmi.toFixed(1)}</div>
+          <div style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-soft);margin-bottom:4px">Il tuo fabbisogno</div>
+          <div class="bold" style="font-size:2.2rem;color:var(--green-dark);line-height:1">${Math.round(kcal)} <span style="font-size:1rem;font-weight:400;color:var(--text-soft)">kcal/giorno</span></div>
+          <div class="text-soft" style="font-size:0.82rem;margin-top:4px">BMR: ${Math.round(bmr)} kcal · TDEE: ${Math.round(tdee)} kcal</div>
         </div>
-        <span class="bmi-pill ${status.cls}">${status.label}</span>
+        <span class="bmi-pill ${status.cls}">${status.label} ${bmi.toFixed(1)}</span>
       </div>
-      <div class="macro-bar">
-        <span class="macro-chip p">Proteine ~25%</span>
-        <span class="macro-chip c">Carboidrati ~50%</span>
-        <span class="macro-chip f">Grassi ~25%</span>
+      <div style="background:var(--green-pale);border-radius:8px;padding:10px 12px;margin-bottom:12px">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--green-dark);margin-bottom:6px">Distribuzione giornaliera</div>
+        <div class="macro-bar">
+          <span class="macro-chip p">Proteine ~25%</span>
+          <span class="macro-chip c">Carboidrati ~50%</span>
+          <span class="macro-chip f">Grassi ~25%</span>
+        </div>
       </div>
+      <p style="font-size:0.8rem;color:var(--text-soft)">
+        🎯 Con questo fabbisogno genereremo un piano settimanale con ricette calibrate per te.
+      </p>
     </div>
   `;
 }
@@ -1085,7 +1098,7 @@ async function generateAndSavePlan() {
   if (!state.recipes.length) {
     try { state.recipes = await getAllRecipes(); } catch {}
   }
-  const plan = generateWeeklyPlan(state.recipes, state.profile, state.excluded);
+  const plan = generateWeeklyPlan(state.recipes, state.profile, state.excluded, state.ratings);
   state.plan = plan;
 
   await savePlanCompact();
@@ -1116,7 +1129,13 @@ async function generateAndSavePlan() {
 function renderPiano() {
   const el = document.getElementById('page-piano');
   if (!state.plan || !state.plan.days) {
-    el.innerHTML = `<div id="main-content"><div class="loading-wrap"><div class="spinner"></div><p>Generazione piano...</p></div></div>`;
+    el.innerHTML = `<div id="main-content">
+      <div class="empty-state">
+        <img src="assets/empty-plan.svg" alt="">
+        <h3>Piano non ancora generato</h3>
+        <p>Completa il tuo profilo per generare il piano alimentare personalizzato.</p>
+      </div>
+    </div>`;
     return;
   }
 
@@ -1395,7 +1414,7 @@ async function handleReplace(dayIdx, slot) {
     state.recipes, state.profile, slot,
     state.plan, dayIdx,
     state.rejectedPerSlot[key],
-    state.excluded
+    state.excluded, state.ratings
   );
 
   // Pool esaurito: azzera i rifiutati e ricomincia il giro
@@ -1405,7 +1424,7 @@ async function handleReplace(dayIdx, slot) {
       state.recipes, state.profile, slot,
       state.plan, dayIdx,
       state.rejectedPerSlot[key],
-      state.excluded
+      state.excluded, state.ratings
     );
   }
 
@@ -1600,7 +1619,11 @@ function showDayDetail(date, confirmed) {
   const dayMeals = confirmed.filter(c => c.plan_date === date);
   const el = document.getElementById('cal-day-detail');
   if (!dayMeals.length) {
-    el.innerHTML = `<p class="text-soft center" style="padding:16px">Nessun pasto confermato per ${formatDateShort(date)}</p>`;
+    el.innerHTML = `
+      <div class="empty-state" style="padding:24px 16px">
+        <img src="assets/empty-calendar.svg" alt="" style="width:90px">
+        <p class="text-soft">Nessun pasto confermato per <strong>${formatDateShort(date)}</strong></p>
+      </div>`;
     return;
   }
   const label = formatDate(date);
@@ -1692,10 +1715,10 @@ function renderSpesa() {
     if (!confirmedForDays.length) {
       toast('Nessun pasto confermato nei giorni selezionati', 'info');
       document.getElementById('shopping-list').innerHTML = `
-        <div class="card" style="text-align:center;padding:32px">
-          <p style="font-size:1.5rem;margin-bottom:8px">🍽️</p>
-          <p class="text-soft">Nessun pasto confermato nei giorni selezionati.<br>
-          Vai nel Piano e conferma i pasti che vuoi cucinare.</p>
+        <div class="empty-state">
+          <img src="assets/empty-shopping.svg" alt="">
+          <h3>Nessun pasto confermato</h3>
+          <p>Vai nel Piano, conferma i pasti che vuoi cucinare, poi torna qui a generare la lista.</p>
         </div>`;
       return;
     }

@@ -1011,3 +1011,47 @@ textarea { resize: vertical; min-height: 80px; }
 @keyframes slideInLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
 .slide-in-right { animation: slideInRight 0.28s cubic-bezier(.4,0,.2,1); }
 .slide-in-left  { animation: slideInLeft  0.28s cubic-bezier(.4,0,.2,1); }
+
+/* ── Empty states ── */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  padding: 40px 24px; gap: 12px;
+}
+.empty-state img { width: 140px; height: auto; opacity: 0.92; }
+.empty-state h3  { font-size: 1.05rem; font-weight: 700; margin: 0; }
+.empty-state p   { font-size: 0.875rem; color: var(--text-soft); max-width: 280px; margin: 0; }
+
+/* ── Riepilogo settimanale ── */
+.weekly-summary-card {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  color: #fff; border-radius: var(--radius); padding: 20px 24px;
+  margin-bottom: 16px; position: relative; overflow: hidden;
+}
+.weekly-summary-card::after {
+  content: '📊'; font-size: 4rem; position: absolute;
+  right: 16px; top: 50%; transform: translateY(-50%); opacity: 0.2;
+}
+.weekly-summary-card h3 { color: #fff; margin-bottom: 6px; }
+.weekly-summary-card p  { color: rgba(255,255,255,0.85); font-size: 0.875rem; margin-bottom: 14px; }
+.weekly-summary-stats   { display: flex; gap: 16px; flex-wrap: wrap; }
+.ws-stat { text-align: center; }
+.ws-stat .val { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1; }
+.ws-stat .lbl { font-size: 0.7rem; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+/* ── Onboarding migliorato ── */
+.step-progress-bar {
+  height: 4px; background: var(--border);
+  border-radius: 2px; margin-bottom: 28px; overflow: hidden;
+}
+.step-progress-fill {
+  height: 100%; background: var(--green);
+  border-radius: 2px; transition: width 0.4s ease;
+}
+.kcal-preview-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green); color: #fff;
+  padding: 8px 16px; border-radius: 50px;
+  font-size: 1rem; font-weight: 700; margin-top: 12px;
+  animation: fadeIn 0.4s ease;
+}

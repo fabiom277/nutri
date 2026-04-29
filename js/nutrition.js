@@ -250,24 +250,43 @@ function filterRecipes(recipes, profile, slot, excluded = []) {
 }
 
 // ── Generazione piano settimanale ─────────────────────
-function generateWeeklyPlan(recipes, profile, excludedIds = []) {
+/**
+ * Calcola uno score per la selezione ricetta.
+ * Priorità: liked > neutro >> disliked
+ * @param {Object} recipe
+ * @param {number} target kcal target slot
+ * @param {Object} ratings { recipeId: 1 | -1 }
+ */
+function recipeScore(recipe, target, ratings = {}) {
+  const rating    = ratings[recipe.id] || 0;
+  const kcalDist  = Math.abs(recipe.calories - target);
+  // Base score: inverso della distanza calorica (più vicino = meglio)
+  let score = 1000 - kcalDist;
+  // Bonus/malus rating
+  if (rating ===  1) score += 400;   // 👍 preferita fortemente
+  if (rating === -1) score -= 600;   // 👎 evitata fortemente
+  return score;
+}
+
+function generateWeeklyPlan(recipes, profile, excludedIds = [], ratings = {}) {
   const slots    = activeSlots(profile.meal_schedule);
   const calSlots = caloriesBySlot(profile.target_calories, profile.meal_schedule);
   const todayLocal = new Date();
   const pad = n => String(n).padStart(2, '0');
 
-  // Pool per slot (filtrato per dieta/allergie)
+  // Pool per slot — esclude le ricette con 👎 forte se ci sono alternative
   const pools = {};
   for (const slot of slots) {
-    pools[slot] = shuffleArray(filterRecipes(recipes, profile, slot, excludedIds));
+    const all      = filterRecipes(recipes, profile, slot, excludedIds);
+    const liked    = all.filter(r => (ratings[r.id] || 0) >=  0);
+    pools[slot]    = shuffleArray(liked.length >= 3 ? liked : all);
   }
 
-  const usedIds = new Set(); // evita ripetizioni settimanali
+  const usedIds = new Set();
   const days = [];
 
   for (let d = 0; d < 7; d++) {
-    // Data locale: usa new Date(y, m, day+d) per evitare bug UTC+2
-    const date = new Date(todayLocal.getFullYear(), todayLocal.getMonth(), todayLocal.getDate() + d);
+    const date    = new Date(todayLocal.getFullYear(), todayLocal.getMonth(), todayLocal.getDate() + d);
     const dateStr = `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
     const daySlots = {};
     let dayKcal = 0;
@@ -277,27 +296,31 @@ function generateWeeklyPlan(recipes, profile, excludedIds = []) {
       const pool   = pools[slot];
       if (!pool.length) { daySlots[slot] = null; continue; }
 
-      // Preferisci ricette non ancora usate questa settimana
-      const fresh  = pool.filter(r => !usedIds.has(r.id));
-      const search = fresh.length ? fresh : pool;
-
-      // Filtra per fattibilità calorica
+      const fresh   = pool.filter(r => !usedIds.has(r.id));
+      const search  = fresh.length ? fresh : pool;
       const feasible = feasibleCandidates(search, target);
 
-      // Top 4 per vicinanza calorica base → estrai 1 a caso
+      // Ordina per score (kcal + rating) invece di solo distanza calorica
       const sorted = [...feasible].sort((a, b) =>
-        Math.abs(a.calories - target) - Math.abs(b.calories - target)
+        recipeScore(b, target, ratings) - recipeScore(a, target, ratings)
       );
-      const chosen = sorted.slice(0, Math.min(4, sorted.length))[
-        Math.floor(Math.random() * Math.min(4, sorted.length))
-      ];
+      // Top 5 per varietà (non sempre la migliore)
+      const topN   = sorted.slice(0, Math.min(5, sorted.length));
+      // Peso casuale ma sbilanciato verso le prime: scegli con probabilità 40/30/15/10/5
+      const weights = [40, 30, 15, 10, 5].slice(0, topN.length);
+      const total   = weights.reduce((s, w) => s + w, 0);
+      let rand      = Math.random() * total;
+      let chosen    = topN[0];
+      for (let i = 0; i < topN.length; i++) {
+        rand -= weights[i];
+        if (rand <= 0) { chosen = topN[i]; break; }
+      }
 
       const scaled = scaleRecipeToTarget(chosen, target, profile.meal_schedule);
       daySlots[slot] = scaled;
       dayKcal += scaled.calories;
       usedIds.add(chosen.id);
 
-      // Rimuovi dal pool per non ripetere nello stesso giorno
       const idx = pool.findIndex(r => r.id === chosen.id);
       if (idx > -1) pool.splice(idx, 1);
     }
@@ -308,19 +331,25 @@ function generateWeeklyPlan(recipes, profile, excludedIds = []) {
   return { days, generatedAt: new Date().toISOString() };
 }
 
-function replaceRecipe(recipes, profile, slot, currentPlan, dayIndex, rejectedForSlot = [], excludedIds = []) {
+function replaceRecipe(recipes, profile, slot, currentPlan, dayIndex, rejectedForSlot = [], excludedIds = [], ratings = {}) {
   const target  = caloriesBySlot(profile.target_calories, profile.meal_schedule)[slot];
   const usedIds = new Set(currentPlan.days.flatMap(d => d.slots[slot]?.id ? [d.slots[slot].id] : []));
 
-  const candidates = filterRecipes(recipes, profile, slot, excludedIds)
+  let candidates = filterRecipes(recipes, profile, slot, excludedIds)
     .filter(r => !rejectedForSlot.includes(r.id));
+
+  // Evita ricette con 👎 se ci sono alternative sufficienti
+  const positives = candidates.filter(r => (ratings[r.id] || 0) >= 0);
+  if (positives.length >= 3) candidates = positives;
 
   const fresh = candidates.filter(r => !usedIds.has(r.id));
   const pool  = feasibleCandidates(fresh.length ? fresh : candidates, target);
   if (!pool.length) return null;
 
-  const sorted = [...pool].sort((a, b) => Math.abs(a.calories - target) - Math.abs(b.calories - target));
-  const chosen = sorted.slice(0, Math.min(4, sorted.length))[Math.floor(Math.random() * Math.min(4, sorted.length))];
+  // Usa score per privilegiare le 👍
+  const sorted = [...pool].sort((a, b) => recipeScore(b, target, ratings) - recipeScore(a, target, ratings));
+  const topN   = sorted.slice(0, Math.min(5, sorted.length));
+  const chosen = topN[Math.floor(Math.random() * topN.length)];
   return scaleRecipeToTarget(chosen, target, profile.meal_schedule);
 }
 
@@ -386,7 +415,7 @@ function formatDateShort(dateStr) {
 export {
   calcBMR, calcTDEE, calcTargetCalories, calcBMI, bmiStatus,
   caloriesBySlot, activeSlots,
-  filterRecipes, scaleRecipeToTarget, feasibleCandidates,
+  filterRecipes, scaleRecipeToTarget, feasibleCandidates, recipeScore,
   generateWeeklyPlan, replaceRecipe, buildShoppingList,
   shuffleArray, formatDate, formatDateShort
 };

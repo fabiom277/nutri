@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="75" r="52" fill="#E8F8F2"/>
+  <!-- borsa spesa -->
+  <path d="M75 65 L70 115 L130 115 L125 65 Z" fill="#1D9E75" opacity="0.25"/>
+  <path d="M75 65 L70 115 L130 115 L125 65 Z" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M88 65 Q88 48 100 48 Q112 48 112 65" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- checkmarks -->
+  <line x1="82" y1="82" x2="118" y2="82" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="82" y1="93" x2="118" y2="93" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="82" y1="104" x2="105" y2="104" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+</svg>

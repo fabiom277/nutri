@@ -1,0 +1,15 @@
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="30" width="100" height="90" rx="12" fill="#E8F8F2"/>
+  <rect x="50" y="30" width="100" height="28" rx="12" fill="#1D9E75" opacity="0.3"/>
+  <rect x="50" y="46" width="100" height="12" fill="#1D9E75" opacity="0.3"/>
+  <!-- griglia calendario -->
+  <g fill="#1D9E75" opacity="0.5">
+    <circle cx="72" cy="75" r="4"/><circle cx="90" cy="75" r="4"/>
+    <circle cx="108" cy="75" r="4"/><circle cx="126" cy="75" r="4"/>
+    <circle cx="72" cy="90" r="4"/><circle cx="90" cy="90" r="4"/>
+    <circle cx="108" cy="90" r="4"/>
+  </g>
+  <!-- oggi evidenziato -->
+  <circle cx="126" cy="90" r="7" fill="#1D9E75"/>
+  <circle cx="126" cy="90" r="4" fill="white"/>
+</svg>

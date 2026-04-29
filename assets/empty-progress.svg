@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="75" r="52" fill="#E8F8F2"/>
+  <!-- barre grafico -->
+  <rect x="62" y="95" width="14" height="20" rx="4" fill="#5DCAA5" opacity="0.5"/>
+  <rect x="82" y="80" width="14" height="35" rx="4" fill="#1D9E75" opacity="0.6"/>
+  <rect x="102" y="70" width="14" height="45" rx="4" fill="#1D9E75" opacity="0.8"/>
+  <rect x="122" y="60" width="14" height="55" rx="4" fill="#1D9E75"/>
+  <!-- linea target -->
+  <line x1="58" y1="68" x2="142" y2="68" stroke="#FF7043" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- stella -->
+  <circle cx="136" cy="45" r="5" fill="#FFD700" opacity="0.8"/>
+</svg>
