@@ -1165,3 +1165,32 @@ textarea { resize: vertical; min-height: 80px; }
   padding: 10px 14px; font-size: 0.85rem; color: var(--green-dark);
   margin-bottom: 12px;
 }
+
+/* ── Import da URL ── */
+.import-preview-card {
+  background: var(--green-pale); border-radius: var(--radius-sm);
+  overflow: hidden; border: 1px solid var(--border);
+}
+.import-preview-img {
+  width: 100%; height: 160px; object-fit: cover; display: block;
+}
+.import-preview-body { padding: 14px; }
+.import-stat { text-align: center; }
+.import-stat-val { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); line-height: 1; }
+.import-stat-lbl { font-size: 0.68rem; color: var(--text-soft); margin-top: 2px; }
+
+/* ── Ricerca nel piano migliorata ── */
+.plan-search-result {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  margin-bottom: 6px; border: 1px solid transparent;
+  transition: all 0.15s; cursor: default;
+}
+.plan-search-result:hover {
+  background: var(--green-pale); border-color: var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+  .import-preview-card { background: rgba(46,204,143,0.08); }
+  .import-stat-val { color: var(--green-light); }
+}

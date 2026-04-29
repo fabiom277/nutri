@@ -736,51 +736,111 @@ async function saveOnboarding() {
 function renderSearchResults(dayIdx) {
   const q    = document.getElementById('recipe-search-input')?.value.toLowerCase().trim() || '';
   const slot = document.getElementById('recipe-slot-select')?.value || 'pranzo';
+  const source = document.getElementById('recipe-source-select')?.value || 'all';
   const el   = document.getElementById('recipe-search-results');
   if (!el) return;
-
-  const candidates = filterRecipes(state.recipes, state.profile, slot, state.excluded);
-  const filtered   = q
-    ? candidates.filter(r =>
-        r.name.toLowerCase().includes(q) ||
-        r.ingredients?.some(i => i.name.toLowerCase().includes(q)) ||
-        r.tags?.some(t => t.toLowerCase().includes(q))
-      )
-    : candidates;
-
-  if (!filtered.length) {
-    el.innerHTML = `<p class="text-soft" style="text-align:center;padding:24px">Nessuna ricetta trovata</p>`;
-    return;
-  }
 
   const calSlots = caloriesBySlot(state.profile?.target_calories || 2000, state.profile?.meal_schedule || 'standard');
   const target   = calSlots[slot] || 500;
 
-  el.innerHTML = filtered.slice(0, 20).map(r => `
-    <div class="search-result-item" data-rid="${r.id}" data-slot="${slot}" data-day="${dayIdx}">
-      ${r.image_url ? `<div class="search-thumb" style="background-image:url(${r.image_url})"></div>` : '<div class="search-thumb search-thumb-empty">🍽️</div>'}
+  // Ricette di sistema (filtrate per dieta/allergie/slot)
+  let systemRecipes = filterRecipes(state.recipes, state.profile, slot, state.excluded);
+  if (q) systemRecipes = systemRecipes.filter(r =>
+    r.name.toLowerCase().includes(q) ||
+    r.ingredients?.some(i => i.name.toLowerCase().includes(q)) ||
+    r.tags?.some(t => t.toLowerCase().includes(q))
+  );
+
+  // Ricette utente (filtrate per slot)
+  let userRecipes = (state.userRecipes || []).filter(r =>
+    r.meal_type?.includes(slot) &&
+    (!q || r.name.toLowerCase().includes(q) ||
+     r.ingredients?.some(i => i.name.toLowerCase().includes(q)))
+  );
+
+  // Combina in base al filtro sorgente
+  let combined = [];
+  if (source !== 'user')   combined = [...combined, ...systemRecipes.map(r => ({...r, _source:'system'}))];
+  if (source !== 'system') combined = [...combined, ...userRecipes.map(r => ({...r, _source:'user'}))];
+
+  // Ordina: prima le 👍, poi per vicinanza al target
+  combined.sort((a, b) => {
+    const ra = state.ratings[a.id] || 0;
+    const rb = state.ratings[b.id] || 0;
+    if (ra !== rb) return rb - ra;
+    return Math.abs(a.calories - target) - Math.abs(b.calories - target);
+  });
+
+  if (!combined.length) {
+    el.innerHTML = `
+      <div style="text-align:center;padding:24px">
+        <p class="text-soft">Nessuna ricetta trovata per "${q || slot}"</p>
+        ${q ? '<p class="text-soft" style="font-size:0.8rem;margin-top:8px">Prova a importare una ricetta da URL nella sezione Ricette</p>' : ''}
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = combined.slice(0, 25).map(r => {
+    const rating = state.ratings[r.id] || 0;
+    const isUser = r._source === 'user';
+    const kcalDisplay = r.calories || '?';
+    const diffKcal = r.calories ? r.calories - target : 0;
+    const diffColor = Math.abs(diffKcal) < 80 ? 'var(--green)' : Math.abs(diffKcal) < 200 ? '#e09000' : '#c00';
+    return `
+    <div class="plan-search-result" data-rid="${r.id}" data-source="${r._source}" data-slot="${slot}" data-day="${dayIdx}">
+      ${r.image_url
+        ? `<div class="search-thumb" style="background-image:url(${r.image_url})"></div>`
+        : `<div class="search-thumb search-thumb-empty">${isUser ? '👤' : '🍽️'}</div>`}
       <div style="flex:1;min-width:0">
-        <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</div>
-        <div style="font-size:0.78rem;color:var(--text-soft);margin-top:2px">${r.calories} kcal base · target ${target} kcal</div>
-        <div class="macro-bar" style="margin-top:4px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          ${isUser ? '<span style="font-size:0.65rem;background:var(--green-pale);color:var(--green-dark);padding:1px 6px;border-radius:50px;font-weight:700">MIA</span>' : ''}
+          ${rating === 1 ? '<span title="Piace">👍</span>' : rating === -1 ? '<span title="Non piace">👎</span>' : ''}
+          <span style="font-weight:600;font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</span>
+        </div>
+        <div style="font-size:0.76rem;color:var(--text-soft)">
+          ${kcalDisplay} kcal
+          ${r.calories ? `<span style="color:${diffColor};font-weight:600">(${diffKcal > 0 ? '+' : ''}${diffKcal} vs target)</span>` : ''}
+        </div>
+        <div class="macro-bar" style="margin-top:3px">
           <span class="macro-chip p">P ${r.macros?.proteine || 0}g</span>
           <span class="macro-chip c">C ${r.macros?.carboidrati || 0}g</span>
           <span class="macro-chip f">G ${r.macros?.grassi || 0}g</span>
         </div>
       </div>
-      <button class="btn btn-primary btn-sm" style="flex-shrink:0" onclick="applyRecipeToSlot('${r.id}','${slot}',${dayIdx})">Usa</button>
-    </div>
-  `).join('');
+      <button class="btn btn-primary btn-sm"
+              onclick="applyRecipeToSlot('${r.id}','${slot}',${dayIdx},'${r._source}')">
+        Usa
+      </button>
+    </div>`;
+  }).join('');
 }
 
-window.applyRecipeToSlot = async function(recipeId, slot, dayIdx) {
-  const recipe = state.recipes.find(r => r.id === recipeId);
+window.applyRecipeToSlot = async function(recipeId, slot, dayIdx, source = 'system') {
+  const recipe = source === 'user'
+    ? state.userRecipes.find(r => r.id === recipeId)
+    : state.recipes.find(r => r.id === recipeId);
   if (!recipe) return;
 
   const calSlots = caloriesBySlot(state.profile?.target_calories || 2000, state.profile?.meal_schedule || 'standard');
-  const scaled   = scaleRecipeToTarget(recipe, calSlots[slot], state.profile?.meal_schedule || 'standard');
+  let planRecipe;
 
-  state.plan.days[dayIdx].slots[slot] = scaled;
+  if (source === 'user') {
+    // Ricetta utente: usa le calorie calcolate da INRAN
+    planRecipe = {
+      id: recipe.id, name: recipe.name,
+      calories: recipe.calories, macros: recipe.macros,
+      ingredients: recipe.ingredients || [],
+      instructions: recipe.instructions || [],
+      image_url: recipe.image_url || null,
+      tags: recipe.meal_type || [],
+      _user_recipe: true,
+    };
+  } else {
+    // Ricetta di sistema: scala al target
+    planRecipe = scaleRecipeToTarget(recipe, calSlots[slot], state.profile?.meal_schedule || 'standard');
+  }
+
+  state.plan.days[dayIdx].slots[slot] = planRecipe;
   await savePlanCompact();
 
   document.getElementById('search-recipe-overlay')?.classList.remove('open');
@@ -845,7 +905,10 @@ async function renderRicette() {
     <div id="main-content">
       <div class="flex items-center justify-between" style="margin-bottom:20px">
         <h2>Le mie ricette</h2>
-        <button class="btn btn-primary btn-sm" id="btn-new-recipe">+ Nuova ricetta</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" id="btn-import-url">🔗 Importa URL</button>
+          <button class="btn btn-primary btn-sm" id="btn-new-recipe">+ Nuova ricetta</button>
+        </div>
       </div>
 
       <div id="user-recipes-list">${listHtml}</div>
@@ -918,6 +981,30 @@ async function renderRicette() {
       </div>
     </div>
 
+    <!-- Import URL modal -->
+    <div id="import-url-overlay" class="modal-overlay">
+      <div class="modal-sheet" style="max-width:520px">
+        <button id="import-url-close" class="modal-close-btn">×</button>
+        <div class="modal-handle"></div>
+        <h3 style="margin-bottom:6px">Importa ricetta da URL</h3>
+        <p class="text-soft" style="font-size:0.85rem;margin-bottom:16px">
+          Incolla il link di qualsiasi ricetta da GialloZafferano, Cucchiaio d'Argento, Ricette.it e altri siti che usano i dati strutturati. I valori nutrizionali vengono calcolati automaticamente con il database INRAN.
+        </p>
+        <div class="input-group" style="margin-bottom:12px">
+          <label>URL ricetta</label>
+          <input type="url" id="import-url-input"
+                 placeholder="https://ricette.giallozafferano.it/..."
+                 autocomplete="off" autocorrect="off">
+        </div>
+        <div id="import-preview" style="margin-bottom:12px"></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary" id="btn-import-preview" style="flex:1">🔍 Anteprima</button>
+          <button class="btn btn-primary" id="btn-import-save" style="flex:2" disabled>💾 Salva in Le mie ricette</button>
+        </div>
+        <p id="import-error" style="color:#BE123C;font-size:0.82rem;margin-top:8px;display:none"></p>
+      </div>
+    </div>
+
     <!-- Add to plan modal -->
     <div id="add-to-plan-overlay" class="modal-overlay">
       <div class="modal-sheet" style="max-width:420px">
@@ -967,6 +1054,20 @@ async function renderRicette() {
       document.getElementById('add-to-plan-overlay')?.classList.add('open');
     });
   });
+
+  // Import URL
+  el.querySelector('#btn-import-url')?.addEventListener('click', () => {
+    document.getElementById('import-url-input').value = '';
+    document.getElementById('import-preview').innerHTML = '';
+    document.getElementById('import-error').style.display = 'none';
+    document.getElementById('btn-import-save').disabled = true;
+    document.getElementById('import-url-overlay')?.classList.add('open');
+  });
+  el.querySelector('#import-url-close')?.addEventListener('click', () => document.getElementById('import-url-overlay')?.classList.remove('open'));
+  el.querySelector('#import-url-overlay')?.addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+  el.querySelector('#btn-import-preview')?.addEventListener('click', () => doImportPreview());
+  el.querySelector('#import-url-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') doImportPreview(); });
+  el.querySelector('#btn-import-save')?.addEventListener('click', () => doImportSave());
 
   // Builder events
   el.querySelector('#builder-close')?.addEventListener('click', () => document.getElementById('builder-overlay')?.classList.remove('open'));
@@ -1020,7 +1121,151 @@ async function renderRicette() {
   el.querySelector('#btn-save-recipe')?.addEventListener('click', saveBuilderRecipe);
 }
 
-function openBuilder(recipe) {
+// ── Import da URL ─────────────────────────────────────
+let _importedRecipe = null; // risultato temporaneo dell'anteprima
+
+async function doImportPreview() {
+  const url   = document.getElementById('import-url-input')?.value.trim();
+  const prevEl = document.getElementById('import-preview');
+  const errEl  = document.getElementById('import-error');
+  const saveBtn = document.getElementById('btn-import-save');
+  const prevBtn = document.getElementById('btn-import-preview');
+
+  errEl.style.display = 'none';
+  _importedRecipe = null;
+  saveBtn.disabled = true;
+
+  if (!url || !url.startsWith('http')) {
+    errEl.textContent = 'Inserisci un URL valido (deve iniziare con http o https)';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  prevBtn.disabled = true;
+  prevBtn.textContent = '⏳ Analisi in corso...';
+  prevEl.innerHTML = '<div class="loading-wrap" style="padding:20px"><div class="spinner"></div><p>Analizzo la pagina...</p></div>';
+
+  try {
+    const SUPA_URL = 'https://ynaaksvbfrlraqdwnvea.supabase.co';
+    const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWFrc3ZiZnJscmFxZHdudmVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjgxMTQsImV4cCI6MjA5MjgwNDExNH0.-QGrwtUS0O9Wu8vtUuSMiKiZQH2p-aH8gVFoDgoTFQg';
+    const { data: { session } } = await (await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')).createClient(SUPA_URL, ANON_KEY).auth.getSession();
+
+    const res = await fetch(
+      `${SUPA_URL}/functions/v1/recipe-import`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token || ANON_KEY}`,
+          'apikey': ANON_KEY,
+        },
+        body: JSON.stringify({ url }),
+      }
+    );
+
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Errore sconosciuto');
+
+    _importedRecipe = data;
+
+    const matchPct = Math.round((data.matched / Math.max(1, data.total)) * 100);
+    const matchColor = matchPct >= 70 ? 'var(--green-dark)' : matchPct >= 40 ? '#e09000' : '#c00';
+
+    prevEl.innerHTML = `
+      <div class="import-preview-card">
+        ${data.image_url ? `<img src="${data.image_url}" alt="" class="import-preview-img">` : ''}
+        <div class="import-preview-body">
+          <h3 style="margin-bottom:6px">${data.name}</h3>
+          ${data.description ? `<p class="text-soft" style="font-size:0.82rem;margin-bottom:10px">${data.description.slice(0,150)}${data.description.length > 150 ? '...' : ''}</p>` : ''}
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+            <div class="import-stat"><div class="import-stat-val">${data.calories}</div><div class="import-stat-lbl">kcal totali</div></div>
+            <div class="import-stat"><div class="import-stat-val" style="color:#C2410C">${data.macros.proteine}g</div><div class="import-stat-lbl">Proteine</div></div>
+            <div class="import-stat"><div class="import-stat-val" style="color:#15803D">${data.macros.carboidrati}g</div><div class="import-stat-lbl">Carboidrati</div></div>
+            <div class="import-stat"><div class="import-stat-val" style="color:#1D4ED8">${data.macros.grassi}g</div><div class="import-stat-lbl">Grassi</div></div>
+            ${data.prep_time ? `<div class="import-stat"><div class="import-stat-val">${data.prep_time}'</div><div class="import-stat-lbl">Preparazione</div></div>` : ''}
+          </div>
+
+          <div style="font-size:0.78rem;background:var(--green-pale);border-radius:8px;padding:8px 10px">
+            <strong style="color:${matchColor}">${data.matched}/${data.total} ingredienti</strong>
+            <span class="text-soft"> abbinati al database INRAN (${matchPct}% di precisione nutrizionale)</span>
+          </div>
+
+          <details style="margin-top:10px">
+            <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--green-dark)">Vedi ingredienti (${data.ingredients.length})</summary>
+            <div style="margin-top:8px;font-size:0.8rem">
+              ${data.ingredients.map(i => `
+                <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border)">
+                  <span>${i.name} <span class="text-soft">(${i.amount_g}g)</span></span>
+                  <span style="color:${i.matched ? 'var(--green-dark)' : 'var(--text-soft)'}">${i.matched ? '✓ ' + i.inran_name : '~ stimato'}</span>
+                </div>`).join('')}
+            </div>
+          </details>
+        </div>
+      </div>`;
+
+    saveBtn.disabled = false;
+
+  } catch (e) {
+    prevEl.innerHTML = '';
+    errEl.textContent = e.message.includes('Failed to fetch') || e.message.includes('NetworkError')
+      ? 'Edge Function non raggiungibile. Assicurati di aver fatto il deploy della funzione su Supabase.'
+      : `Errore: ${e.message}`;
+    errEl.style.display = 'block';
+  } finally {
+    prevBtn.disabled = false;
+    prevBtn.textContent = '🔍 Anteprima';
+  }
+}
+
+async function doImportSave() {
+  if (!_importedRecipe) return;
+  const saveBtn = document.getElementById('btn-import-save');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Salvataggio...';
+
+  try {
+    // Converti nel formato user_recipes
+    const recipe = {
+      name:         _importedRecipe.name,
+      description:  _importedRecipe.description || '',
+      meal_type:    _importedRecipe.meal_type || ['pranzo', 'cena'],
+      prep_time:    _importedRecipe.prep_time || null,
+      servings:     _importedRecipe.servings || 1,
+      ingredients:  _importedRecipe.ingredients.map(i => ({
+        food_item_id: i.food_item_id || null,
+        name:         i.name,
+        amount_g:     i.amount_g,
+        unit:         i.unit,
+        kcal:         i.kcal,
+        proteine:     i.proteine,
+        carboidrati:  i.carboidrati,
+        grassi:       i.grassi,
+      })),
+      instructions: _importedRecipe.instructions || [],
+      calories:     _importedRecipe.calories,
+      macros:       _importedRecipe.macros,
+      image_url:    _importedRecipe.image_url || null,
+      source_url:   document.getElementById('import-url-input')?.value.trim(),
+      diet_type:    ['standard'],
+    };
+
+    const saved = await saveUserRecipe(state.session.user.id, recipe);
+    state.userRecipes.unshift(saved);
+
+    document.getElementById('import-url-overlay')?.classList.remove('open');
+    _importedRecipe = null;
+    renderRicette();
+    toast(`"${saved.name}" importata e salvata ✓`);
+  } catch (e) {
+    toast('Errore salvataggio: ' + e.message, 'error');
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = '💾 Salva in Le mie ricette';
+  }
+}
+
+
   builderIngredients = recipe?.ingredients ? JSON.parse(JSON.stringify(recipe.ingredients)) : [];
   builderEditId      = recipe?.id || null;
 
@@ -1684,13 +1929,22 @@ function renderPiano() {
         <button id="search-recipe-close" style="position:absolute;right:16px;top:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#aaa">×</button>
         <div class="modal-handle"></div>
         <h3 style="margin-bottom:14px">Cerca una ricetta</h3>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <input type="text" id="recipe-search-input"
+                 placeholder="Cerca per nome, ingrediente, tag..."
+                 style="flex:1" autocomplete="off">
+        </div>
         <div style="display:flex;gap:8px;margin-bottom:12px">
-          <input type="text" id="recipe-search-input" placeholder="Es: pollo, pasta, zucchine..." style="flex:1">
-          <select id="recipe-slot-select" style="width:130px">
+          <select id="recipe-slot-select" style="flex:1">
             ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
           </select>
+          <select id="recipe-source-select" style="flex:1">
+            <option value="all">Tutte le ricette</option>
+            <option value="system">Solo database</option>
+            <option value="user">Solo mie ricette</option>
+          </select>
         </div>
-        <div id="recipe-search-results" style="max-height:340px;overflow-y:auto"></div>
+        <div id="recipe-search-results" style="max-height:360px;overflow-y:auto"></div>
       </div>
     </div>`;
 
@@ -1755,6 +2009,9 @@ function renderPiano() {
   const searchInput = document.getElementById('recipe-search-input');
   searchInput?.addEventListener('input', () => renderSearchResults(dayIdx));
   document.getElementById('recipe-slot-select')?.addEventListener('change', () => renderSearchResults(dayIdx));
+  document.getElementById('recipe-source-select')?.addEventListener('change', () => renderSearchResults(dayIdx));
+  // Mostra subito risultati (senza query, ordina per rating e vicinanza target)
+  renderSearchResults(dayIdx);
 
   // Click card → apre modal (ma non se clicchi sul menu o dentro il dropdown)
   el.querySelectorAll('.meal-card-inner').forEach(inner => {
