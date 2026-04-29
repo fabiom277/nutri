@@ -1055,3 +1055,113 @@ textarea { resize: vertical; min-height: 80px; }
   font-size: 1rem; font-weight: 700; margin-top: 12px;
   animation: fadeIn 0.4s ease;
 }
+
+/* ══════════════════════════════════════════════════
+   RECIPE BUILDER
+   ══════════════════════════════════════════════════ */
+
+.builder-sheet { max-width: 640px; }
+.builder-section {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.builder-section:last-of-type { border-bottom: none; }
+
+.modal-close-btn {
+  position: absolute; right: 16px; top: 14px;
+  background: none; border: none; font-size: 1.5rem;
+  cursor: pointer; color: var(--text-soft); line-height: 1;
+  padding: 4px; border-radius: 50%;
+}
+.modal-close-btn:hover { background: rgba(0,0,0,0.06); }
+
+/* Food search */
+.food-search-wrap { position: relative; }
+.food-results {
+  position: absolute; z-index: 20;
+  top: calc(100% + 4px); left: 0; right: 0;
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  max-height: 280px; overflow-y: auto;
+}
+@media (prefers-color-scheme: dark) {
+  .food-results { background: #1a2a1e; }
+}
+.food-results.hidden { display: none; }
+.food-result-item {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+.food-result-item:last-child { border-bottom: none; }
+.food-result-item:hover { background: var(--green-pale); }
+.food-result-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.food-result-meta { font-size: 0.75rem; color: var(--text-soft); margin-top: 2px; }
+.food-amount-input {
+  border-radius: 8px; border: 1.5px solid var(--border);
+  background: var(--surface); padding: 4px 8px;
+  font-family: var(--font);
+}
+.food-amount-input:focus { border-color: var(--green); outline: none; }
+
+/* Builder ingredient list */
+.builder-ing-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px; border-radius: 8px; gap: 8px;
+  background: var(--green-pale); margin-bottom: 6px;
+}
+.builder-ing-name {
+  font-size: 0.875rem; font-weight: 600; color: var(--text);
+  flex: 1; min-width: 0; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Builder totals */
+.builder-totals { margin-top: 12px; }
+.builder-totals-inner {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 12px;
+}
+.bt-item { text-align: center; }
+.bt-item .bt-val { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); line-height: 1; }
+.bt-item .bt-lbl { font-size: 0.68rem; color: var(--text-soft); margin-top: 3px; }
+.bt-item.p .bt-val { color: #C2410C; }
+.bt-item.c .bt-val { color: #15803D; }
+.bt-item.f .bt-val { color: #1D4ED8; }
+
+/* User recipe card */
+.user-recipe-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px; margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.user-recipe-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 8px;
+}
+.user-recipe-name {
+  font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
+}
+.user-recipe-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.user-recipe-kcal {
+  font-size: 1.4rem; font-weight: 700; color: var(--green-dark);
+  white-space: nowrap; flex-shrink: 0;
+}
+.user-recipe-kcal span { font-size: 0.8rem; font-weight: 400; color: var(--text-soft); }
+
+@media (prefers-color-scheme: dark) {
+  .user-recipe-card { background: rgba(18,30,22,0.9); }
+  .builder-ing-row { background: rgba(46,204,143,0.1); }
+  .bt-item .bt-val { color: var(--green-light); }
+}
+
+/* Admin seed button per food_items */
+.admin-wrap .food-seed-note {
+  background: var(--green-pale); border-radius: 8px;
+  padding: 10px 14px; font-size: 0.85rem; color: var(--green-dark);
+  margin-bottom: 12px;
+}

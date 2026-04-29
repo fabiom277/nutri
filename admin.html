@@ -102,6 +102,7 @@
       </select>
       <button class="btn btn-primary btn-sm" id="btn-add-recipe" style="margin-left:auto">+ Aggiungi ricetta</button>
       <button class="btn btn-secondary btn-sm" id="btn-seed-db">⬆ Carica ricette iniziali</button>
+      <button class="btn btn-secondary btn-sm" id="btn-seed-food">🥑 Carica alimenti INRAN</button>
     </div>
 
     <!-- Table -->
@@ -375,6 +376,27 @@ document.getElementById('btn-seed-db').addEventListener('click', async () => {
     await loadRecipes();
   } catch (e) {
     toast('Errore seed: ' + e.message, 'error');
+  }
+});
+
+// Seed alimenti INRAN
+document.getElementById('btn-seed-food').addEventListener('click', async () => {
+  if (!confirm('Caricare il database alimenti INRAN? Gli alimenti già presenti non vengono duplicati.')) return;
+  try {
+    const response = await fetch('seeds/food_items.json');
+    const items    = await response.json();
+    const { data: existing } = await sb.from('food_items').select('name');
+    const existingNames = new Set((existing || []).map(f => f.name));
+    const toInsert = items.filter(f => !existingNames.has(f.name));
+    if (!toInsert.length) { toast('Tutti gli alimenti sono già presenti', 'info'); return; }
+    // Inserisce in batch da 50
+    for (let i = 0; i < toInsert.length; i += 50) {
+      const { error } = await sb.from('food_items').insert(toInsert.slice(i, i + 50));
+      if (error) throw error;
+    }
+    toast(`${toInsert.length} alimenti INRAN caricati!`);
+  } catch (e) {
+    toast('Errore seed INRAN: ' + e.message, 'error');
   }
 });
 </script>

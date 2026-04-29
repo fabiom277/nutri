@@ -5,7 +5,8 @@ import {
   getExcludedIds, excludeRecipe,
   getConfirmedMeals, confirmMeal, unconfirmMeal,
   getWeightLogs, addWeightLog, deleteWeightLog,
-  getRatings, setRating, savePushSubscription
+  getRatings, setRating, savePushSubscription,
+  searchFoodItems, getUserRecipes, saveUserRecipe, deleteUserRecipe
 } from './supabase.js';
 
 import {
@@ -29,6 +30,7 @@ const state = {
   shoppingChecked: {},
   selectedShoppingDays: [],
   currentDayIndex: 0,      // giorno visualizzato nel piano (0 = oggi)
+  userRecipes: [],           // ricette create dall'utente
   currentModal: null,
 };
 
@@ -58,6 +60,7 @@ function showPage(name) {
   document.querySelector(`.nav-item[data-page="${name}"]`)?.classList.add('active');
 
   if (name === 'piano')      renderPiano();
+  if (name === 'ricette')    renderRicette();
   if (name === 'spesa')      renderSpesa();
   if (name === 'profilo')    renderProfilo();
 
@@ -130,6 +133,12 @@ async function loadUserData() {
     state.recipes    = recipes;
     state.excluded   = excluded;
     state.weightLogs = weightLogs;
+
+    // User recipes
+    try { state.userRecipes = await getUserRecipes(uid); } catch (e) {
+      console.warn('[loadUserData] getUserRecipes failed:', e);
+      state.userRecipes = [];
+    }
 
     // Ratings: non-bloccante (tabella potrebbe non esistere ancora)
     try { state.ratings = await getRatings(uid); } catch (e) {
@@ -778,6 +787,417 @@ window.applyRecipeToSlot = async function(recipeId, slot, dayIdx) {
   renderPiano();
   toast(`"${recipe.name}" aggiunto al ${slot} ✓`);
 };
+
+// ── Ricette utente ────────────────────────────────────
+
+// Stato builder
+let builderIngredients = []; // { food_item_id, name, amount_g, kcal, proteine, carboidrati, grassi }
+let builderEditId      = null;
+
+function calcBuilderTotals() {
+  return builderIngredients.reduce((t, i) => ({
+    kcal:        t.kcal        + Math.round(i.kcal        * i.amount_g / 100),
+    proteine:    t.proteine    + Math.round(i.proteine    * i.amount_g / 100 * 10) / 10,
+    carboidrati: t.carboidrati + Math.round(i.carboidrati * i.amount_g / 100 * 10) / 10,
+    grassi:      t.grassi      + Math.round(i.grassi      * i.amount_g / 100 * 10) / 10,
+  }), { kcal: 0, proteine: 0, carboidrati: 0, grassi: 0 });
+}
+
+async function renderRicette() {
+  const el = document.getElementById('page-ricette');
+  if (!el) return;
+
+  const recipes = state.userRecipes;
+
+  // Converti ricette utente in formato compatibile con il piano
+  const MEAL_LABELS = { colazione: 'Colazione', pranzo: 'Pranzo', cena: 'Cena', spuntino: 'Spuntino' };
+
+  const listHtml = recipes.length === 0 ? `
+    <div class="empty-state">
+      <img src="assets/empty-plan.svg" alt="" style="width:120px">
+      <h3>Nessuna ricetta creata</h3>
+      <p>Crea la tua prima ricetta personalizzata con gli ingredienti che preferisci. Le calorie vengono calcolate automaticamente con i dati INRAN.</p>
+    </div>` : recipes.map(r => `
+    <div class="user-recipe-card" data-id="${r.id}">
+      <div class="user-recipe-header">
+        <div>
+          <div class="user-recipe-name">${r.name}</div>
+          <div class="user-recipe-meta">
+            ${(r.meal_type || []).map(t => `<span class="meal-slot-badge slot-${t}">${t}</span>`).join(' ')}
+            <span style="font-size:0.78rem;color:var(--text-soft)">${r.prep_time ? r.prep_time + ' min' : ''}</span>
+          </div>
+        </div>
+        <div class="user-recipe-kcal">${r.calories}<span> kcal</span></div>
+      </div>
+      <div class="macro-bar" style="padding:0 0 8px">
+        <span class="macro-chip p">Proteine ${r.macros?.proteine || 0}g</span>
+        <span class="macro-chip c">Carboidrati ${r.macros?.carboidrati || 0}g</span>
+        <span class="macro-chip f">Grassi ${r.macros?.grassi || 0}g</span>
+      </div>
+      <div style="display:flex;gap:8px;border-top:1px solid var(--border);padding-top:10px">
+        <button class="btn btn-secondary btn-sm btn-edit-recipe" data-id="${r.id}" style="flex:1">✏ Modifica</button>
+        <button class="btn btn-primary btn-sm btn-add-to-plan" data-id="${r.id}" style="flex:1">+ Al piano</button>
+        <button class="btn btn-danger btn-sm btn-del-recipe" data-id="${r.id}">✕</button>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div id="main-content">
+      <div class="flex items-center justify-between" style="margin-bottom:20px">
+        <h2>Le mie ricette</h2>
+        <button class="btn btn-primary btn-sm" id="btn-new-recipe">+ Nuova ricetta</button>
+      </div>
+
+      <div id="user-recipes-list">${listHtml}</div>
+    </div>
+
+    <!-- Builder Modal -->
+    <div id="builder-overlay" class="modal-overlay">
+      <div class="modal-sheet builder-sheet">
+        <button id="builder-close" class="modal-close-btn">×</button>
+        <div class="modal-handle"></div>
+        <h2 id="builder-title" style="margin-bottom:20px">Nuova ricetta</h2>
+
+        <!-- Info base -->
+        <div class="builder-section">
+          <div style="display:grid;grid-template-columns:1fr;gap:12px">
+            <div class="input-group">
+              <label>Nome ricetta *</label>
+              <input type="text" id="b-name" placeholder="Es: Pasta al pomodoro della nonna">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="input-group">
+                <label>Tipo pasto</label>
+                <div style="display:flex;flex-wrap:wrap;gap:6px" id="b-meal-type">
+                  ${['colazione','pranzo','cena','spuntino'].map(s => `
+                    <label class="ep-radio-btn" data-group="b-meal" data-value="${s}">${s}</label>`).join('')}
+                </div>
+              </div>
+              <div class="input-group">
+                <label>Tempo prep. (min)</label>
+                <input type="number" id="b-prep" placeholder="20" min="1" max="180">
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Descrizione</label>
+              <textarea id="b-desc" rows="2" placeholder="Descrizione opzionale..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ingredienti -->
+        <div class="builder-section">
+          <h3 style="margin-bottom:12px">Ingredienti</h3>
+
+          <!-- Ricerca alimento -->
+          <div class="food-search-wrap">
+            <div style="display:flex;gap:8px">
+              <input type="text" id="food-search" placeholder="Cerca alimento (es: petto di pollo)..." style="flex:1">
+              <button class="btn btn-secondary btn-sm" id="btn-food-search">Cerca</button>
+            </div>
+            <div id="food-results" class="food-results hidden"></div>
+          </div>
+
+          <!-- Lista ingredienti aggiunti -->
+          <div id="builder-ing-list" style="margin-top:12px"></div>
+
+          <!-- Totali live -->
+          <div id="builder-totals" class="builder-totals"></div>
+        </div>
+
+        <!-- Istruzioni -->
+        <div class="builder-section">
+          <h3 style="margin-bottom:8px">Istruzioni (opzionale)</h3>
+          <textarea id="b-instructions" rows="4" placeholder="Scrivi i passaggi di preparazione, uno per riga..."></textarea>
+          <small class="text-soft">Ogni riga diventa un passaggio numerato</small>
+        </div>
+
+        <button class="btn btn-primary w-full" id="btn-save-recipe" style="padding:14px;margin-top:8px">
+          💾 Salva ricetta
+        </button>
+      </div>
+    </div>
+
+    <!-- Add to plan modal -->
+    <div id="add-to-plan-overlay" class="modal-overlay">
+      <div class="modal-sheet" style="max-width:420px">
+        <button id="add-to-plan-close" class="modal-close-btn">×</button>
+        <div class="modal-handle"></div>
+        <h3 style="margin-bottom:16px">Aggiungi al piano</h3>
+        <div class="input-group" style="margin-bottom:12px">
+          <label>Giorno</label>
+          <select id="atp-day">${(state.plan?.days || []).map((d,i) => {
+            const date = new Date(d.date + 'T12:00:00');
+            return `<option value="${i}">${date.toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})}</option>`;
+          }).join('')}</select>
+        </div>
+        <div class="input-group" style="margin-bottom:20px">
+          <label>Slot</label>
+          <select id="atp-slot">
+            ${activeSlots(state.profile?.meal_schedule || 'standard').map(s =>
+              `<option value="${s}">${s}</option>`).join('')}
+          </select>
+        </div>
+        <button class="btn btn-primary w-full" id="btn-confirm-add-to-plan">Aggiungi</button>
+      </div>
+    </div>`;
+
+  // Events lista
+  el.querySelector('#btn-new-recipe')?.addEventListener('click', () => openBuilder(null));
+  el.querySelectorAll('.btn-edit-recipe').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const r = state.userRecipes.find(x => x.id === btn.dataset.id);
+      if (r) openBuilder(r);
+    });
+  });
+  el.querySelectorAll('.btn-del-recipe').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Eliminare questa ricetta?')) return;
+      await deleteUserRecipe(btn.dataset.id);
+      state.userRecipes = state.userRecipes.filter(r => r.id !== btn.dataset.id);
+      renderRicette();
+      toast('Ricetta eliminata');
+    });
+  });
+
+  let addToPlanRecipeId = null;
+  el.querySelectorAll('.btn-add-to-plan').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToPlanRecipeId = btn.dataset.id;
+      document.getElementById('add-to-plan-overlay')?.classList.add('open');
+    });
+  });
+
+  // Builder events
+  el.querySelector('#builder-close')?.addEventListener('click', () => document.getElementById('builder-overlay')?.classList.remove('open'));
+  el.querySelector('#builder-overlay')?.addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+  el.querySelector('#add-to-plan-close')?.addEventListener('click', () => document.getElementById('add-to-plan-overlay')?.classList.remove('open'));
+  el.querySelector('#add-to-plan-overlay')?.addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
+
+  // Add to plan confirm
+  el.querySelector('#btn-confirm-add-to-plan')?.addEventListener('click', async () => {
+    const recipe = state.userRecipes.find(r => r.id === addToPlanRecipeId);
+    if (!recipe || !state.plan) return;
+    const dayIdx = +document.getElementById('atp-day').value;
+    const slot   = document.getElementById('atp-slot').value;
+    // Converti user recipe in formato piano
+    const planRecipe = {
+      id: recipe.id, name: recipe.name,
+      calories: recipe.calories, macros: recipe.macros,
+      ingredients: recipe.ingredients || [],
+      instructions: recipe.instructions || [],
+      image_url: recipe.image_url || null,
+      tags: recipe.meal_type || [],
+      _user_recipe: true,
+    };
+    state.plan.days[dayIdx].slots[slot] = planRecipe;
+    await savePlanCompact();
+    document.getElementById('add-to-plan-overlay')?.classList.remove('open');
+    toast(`"${recipe.name}" aggiunto al piano ✓`);
+  });
+
+  // Food search
+  let searchTimeout;
+  el.querySelector('#food-search')?.addEventListener('input', e => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => doFoodSearch(e.target.value), 350);
+  });
+  el.querySelector('#btn-food-search')?.addEventListener('click', () => {
+    doFoodSearch(document.getElementById('food-search')?.value || '');
+  });
+  el.querySelector('#food-search')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') doFoodSearch(e.target.value);
+  });
+
+  // Meal type selector nel builder
+  el.querySelectorAll('.ep-radio-btn[data-group="b-meal"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('selected');
+    });
+  });
+
+  // Save recipe
+  el.querySelector('#btn-save-recipe')?.addEventListener('click', saveBuilderRecipe);
+}
+
+function openBuilder(recipe) {
+  builderIngredients = recipe?.ingredients ? JSON.parse(JSON.stringify(recipe.ingredients)) : [];
+  builderEditId      = recipe?.id || null;
+
+  const overlay = document.getElementById('builder-overlay');
+  if (!overlay) return;
+
+  document.getElementById('builder-title').textContent = recipe ? 'Modifica ricetta' : 'Nuova ricetta';
+  document.getElementById('b-name').value         = recipe?.name || '';
+  document.getElementById('b-desc').value         = recipe?.description || '';
+  document.getElementById('b-prep').value         = recipe?.prep_time || '';
+  document.getElementById('b-instructions').value = (recipe?.instructions || []).join('\n');
+  document.getElementById('food-search').value    = '';
+  document.getElementById('food-results').classList.add('hidden');
+
+  // Reset meal type
+  document.querySelectorAll('.ep-radio-btn[data-group="b-meal"]').forEach(btn => {
+    btn.classList.toggle('selected', (recipe?.meal_type || []).includes(btn.dataset.value));
+  });
+
+  renderBuilderIngredients();
+  overlay.classList.add('open');
+}
+
+async function doFoodSearch(query) {
+  const el = document.getElementById('food-results');
+  if (!el) return;
+  if (!query.trim()) { el.classList.add('hidden'); return; }
+  el.innerHTML = '<div style="padding:10px;text-align:center;color:var(--text-soft)">Ricerca...</div>';
+  el.classList.remove('hidden');
+  try {
+    const results = await searchFoodItems(query, 12);
+    if (!results.length) {
+      el.innerHTML = '<div style="padding:10px;text-align:center;color:var(--text-soft)">Nessun risultato</div>';
+      return;
+    }
+    el.innerHTML = results.map(f => `
+      <div class="food-result-item" data-id="${f.id}"
+           data-name="${f.name.replace(/"/g,'&quot;')}"
+           data-kcal="${f.kcal}" data-p="${f.proteine||0}"
+           data-c="${f.carboidrati||0}" data-g="${f.grassi||0}">
+        <div class="food-result-name">${f.name}</div>
+        <div class="food-result-meta">${f.kcal} kcal/100g · P ${f.proteine||0}g · C ${f.carboidrati||0}g · G ${f.grassi||0}g</div>
+        <div style="display:flex;gap:6px;margin-top:6px;align-items:center">
+          <input type="number" class="food-amount-input" placeholder="100" value="100" min="1" max="2000" style="width:80px;padding:4px 8px;font-size:0.85rem">
+          <span style="font-size:0.8rem;color:var(--text-soft)">g</span>
+          <button class="btn btn-primary btn-sm btn-add-food" style="margin-left:auto">+ Aggiungi</button>
+        </div>
+      </div>`).join('');
+
+    el.querySelectorAll('.btn-add-food').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row    = btn.closest('.food-result-item');
+        const amount = +row.querySelector('.food-amount-input').value || 100;
+        builderIngredients.push({
+          food_item_id: row.dataset.id,
+          name:         row.dataset.name,
+          amount_g:     amount,
+          kcal:         +row.dataset.kcal,
+          proteine:     +row.dataset.p,
+          carboidrati:  +row.dataset.c,
+          grassi:       +row.dataset.g,
+          unit:         'g',
+        });
+        renderBuilderIngredients();
+        document.getElementById('food-search').value = '';
+        el.classList.add('hidden');
+        toast(`${row.dataset.name} aggiunto ✓`);
+      });
+    });
+  } catch (e) {
+    el.innerHTML = `<div style="padding:10px;color:#c00">Errore ricerca: ${e.message}</div>`;
+  }
+}
+
+function renderBuilderIngredients() {
+  const el = document.getElementById('builder-ing-list');
+  const totEl = document.getElementById('builder-totals');
+  if (!el) return;
+
+  if (!builderIngredients.length) {
+    el.innerHTML = '<p class="text-soft" style="font-size:0.85rem;padding:8px 0">Cerca e aggiungi gli ingredienti sopra.</p>';
+    if (totEl) totEl.innerHTML = '';
+    return;
+  }
+
+  el.innerHTML = builderIngredients.map((ing, i) => {
+    const kcalTot = Math.round(ing.kcal * ing.amount_g / 100);
+    return `
+      <div class="builder-ing-row" data-i="${i}">
+        <div class="builder-ing-name">${ing.name}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="number" class="builder-ing-amount" data-i="${i}"
+                 value="${ing.amount_g}" min="1" max="2000"
+                 style="width:72px;padding:4px 8px;font-size:0.85rem">
+          <span style="font-size:0.78rem;color:var(--text-soft)">g · ${kcalTot} kcal</span>
+          <button class="btn-remove-ing" data-i="${i}" style="background:none;border:none;cursor:pointer;color:#BE123C;font-size:1rem;line-height:1;padding:2px 4px">×</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Totali
+  const t = calcBuilderTotals();
+  if (totEl) totEl.innerHTML = `
+    <div class="builder-totals-inner">
+      <div class="bt-item"><div class="bt-val">${t.kcal}</div><div class="bt-lbl">kcal totali</div></div>
+      <div class="bt-item p"><div class="bt-val">${t.proteine}g</div><div class="bt-lbl">Proteine</div></div>
+      <div class="bt-item c"><div class="bt-val">${t.carboidrati}g</div><div class="bt-lbl">Carboidrati</div></div>
+      <div class="bt-item f"><div class="bt-val">${t.grassi}g</div><div class="bt-lbl">Grassi</div></div>
+    </div>`;
+
+  // Events
+  el.querySelectorAll('.builder-ing-amount').forEach(input => {
+    input.addEventListener('input', () => {
+      const i = +input.dataset.i;
+      builderIngredients[i].amount_g = +input.value || 0;
+      renderBuilderIngredients();
+    });
+  });
+  el.querySelectorAll('.btn-remove-ing').forEach(btn => {
+    btn.addEventListener('click', () => {
+      builderIngredients.splice(+btn.dataset.i, 1);
+      renderBuilderIngredients();
+    });
+  });
+}
+
+async function saveBuilderRecipe() {
+  const name = document.getElementById('b-name')?.value.trim();
+  if (!name) { toast('Inserisci il nome della ricetta', 'error'); return; }
+  if (!builderIngredients.length) { toast('Aggiungi almeno un ingrediente', 'error'); return; }
+
+  const mealType = [...document.querySelectorAll('.ep-radio-btn[data-group="b-meal"].selected')]
+    .map(b => b.dataset.value);
+  if (!mealType.length) { toast('Seleziona almeno un tipo di pasto', 'error'); return; }
+
+  const totals  = calcBuilderTotals();
+  const rawInst = document.getElementById('b-instructions')?.value || '';
+  const instructions = rawInst.split('\n').map(l => l.trim()).filter(Boolean);
+
+  const recipe = {
+    ...(builderEditId ? { id: builderEditId } : {}),
+    name,
+    description:  document.getElementById('b-desc')?.value.trim() || '',
+    meal_type:    mealType,
+    prep_time:    +document.getElementById('b-prep')?.value || null,
+    ingredients:  builderIngredients,
+    instructions,
+    calories:     totals.kcal,
+    macros: {
+      proteine:    totals.proteine,
+      carboidrati: totals.carboidrati,
+      grassi:      totals.grassi,
+    },
+    diet_type: ['standard'], // default; l'utente può modificarlo in futuro
+  };
+
+  const btn = document.getElementById('btn-save-recipe');
+  btn.disabled = true; btn.textContent = 'Salvataggio...';
+  try {
+    const saved = await saveUserRecipe(state.session.user.id, recipe);
+    if (builderEditId) {
+      const idx = state.userRecipes.findIndex(r => r.id === builderEditId);
+      if (idx > -1) state.userRecipes[idx] = saved;
+    } else {
+      state.userRecipes.unshift(saved);
+    }
+    document.getElementById('builder-overlay')?.classList.remove('open');
+    renderRicette();
+    toast(builderEditId ? 'Ricetta aggiornata ✓' : 'Ricetta salvata ✓');
+    builderEditId = null;
+    builderIngredients = [];
+  } catch (e) {
+    toast('Errore salvataggio: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '💾 Salva ricetta';
+  }
+}
 
 // ── Smart Rigenera ────────────────────────────────────
 // Rigenera solo i pasti NON confermati, lascia intatti i confermati

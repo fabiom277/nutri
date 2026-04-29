@@ -1,0 +1,1922 @@
+[
+  {
+    "name": "Pasta di semola (cruda)",
+    "category": "Cereali",
+    "kcal": 353,
+    "proteine": 11.0,
+    "carboidrati": 74.4,
+    "grassi": 1.4,
+    "fibre": 2.7,
+    "acqua": 10.3
+  },
+  {
+    "name": "Pasta integrale (cruda)",
+    "category": "Cereali",
+    "kcal": 335,
+    "proteine": 12.5,
+    "carboidrati": 68.5,
+    "grassi": 2.5,
+    "fibre": 6.3,
+    "acqua": 11.5
+  },
+  {
+    "name": "Riso brillato (crudo)",
+    "category": "Cereali",
+    "kcal": 332,
+    "proteine": 6.7,
+    "carboidrati": 80.4,
+    "grassi": 0.4,
+    "fibre": 1.0,
+    "acqua": 12.0
+  },
+  {
+    "name": "Riso integrale (crudo)",
+    "category": "Cereali",
+    "kcal": 335,
+    "proteine": 7.5,
+    "carboidrati": 72.6,
+    "grassi": 2.2,
+    "fibre": 3.5,
+    "acqua": 13.0
+  },
+  {
+    "name": "Riso basmati (crudo)",
+    "category": "Cereali",
+    "kcal": 349,
+    "proteine": 7.9,
+    "carboidrati": 77.4,
+    "grassi": 0.8,
+    "fibre": 1.8,
+    "acqua": 11.5
+  },
+  {
+    "name": "Farro perlato (crudo)",
+    "category": "Cereali",
+    "kcal": 335,
+    "proteine": 14.7,
+    "carboidrati": 65.4,
+    "grassi": 2.7,
+    "fibre": 7.5,
+    "acqua": 10.8
+  },
+  {
+    "name": "Orzo perlato (crudo)",
+    "category": "Cereali",
+    "kcal": 319,
+    "proteine": 9.9,
+    "carboidrati": 70.7,
+    "grassi": 1.2,
+    "fibre": 8.5,
+    "acqua": 11.5
+  },
+  {
+    "name": "Quinoa (cruda)",
+    "category": "Cereali",
+    "kcal": 368,
+    "proteine": 14.1,
+    "carboidrati": 64.2,
+    "grassi": 6.1,
+    "fibre": 7.0,
+    "acqua": 13.3
+  },
+  {
+    "name": "Cous cous (crudo)",
+    "category": "Cereali",
+    "kcal": 376,
+    "proteine": 13.1,
+    "carboidrati": 77.5,
+    "grassi": 1.8,
+    "fibre": 2.4,
+    "acqua": 8.0
+  },
+  {
+    "name": "Avena, fiocchi",
+    "category": "Cereali",
+    "kcal": 389,
+    "proteine": 11.2,
+    "carboidrati": 66.9,
+    "grassi": 7.0,
+    "fibre": 10.6,
+    "acqua": 9.2
+  },
+  {
+    "name": "Mais, farina",
+    "category": "Cereali",
+    "kcal": 362,
+    "proteine": 9.2,
+    "carboidrati": 76.8,
+    "grassi": 3.8,
+    "fibre": 2.4,
+    "acqua": 12.0
+  },
+  {
+    "name": "Farina di frumento 00",
+    "category": "Cereali",
+    "kcal": 364,
+    "proteine": 11.0,
+    "carboidrati": 78.0,
+    "grassi": 0.7,
+    "fibre": 2.9,
+    "acqua": 14.0
+  },
+  {
+    "name": "Farina integrale di frumento",
+    "category": "Cereali",
+    "kcal": 339,
+    "proteine": 13.0,
+    "carboidrati": 68.0,
+    "grassi": 2.9,
+    "fibre": 10.3,
+    "acqua": 12.5
+  },
+  {
+    "name": "Grano saraceno, farina",
+    "category": "Cereali",
+    "kcal": 335,
+    "proteine": 12.6,
+    "carboidrati": 71.5,
+    "grassi": 3.1,
+    "fibre": 10.0,
+    "acqua": 13.0
+  },
+  {
+    "name": "Pane di tipo 0",
+    "category": "Cereali",
+    "kcal": 275,
+    "proteine": 8.1,
+    "carboidrati": 57.4,
+    "grassi": 0.5,
+    "fibre": 3.8,
+    "acqua": 31.0
+  },
+  {
+    "name": "Pane integrale",
+    "category": "Cereali",
+    "kcal": 224,
+    "proteine": 8.5,
+    "carboidrati": 46.0,
+    "grassi": 1.3,
+    "fibre": 6.5,
+    "acqua": 38.0
+  },
+  {
+    "name": "Pane di segale",
+    "category": "Cereali",
+    "kcal": 219,
+    "proteine": 8.3,
+    "carboidrati": 45.3,
+    "grassi": 1.7,
+    "fibre": 7.9,
+    "acqua": 39.0
+  },
+  {
+    "name": "Pane tipo toast",
+    "category": "Cereali",
+    "kcal": 310,
+    "proteine": 9.6,
+    "carboidrati": 55.4,
+    "grassi": 7.6,
+    "fibre": 2.9,
+    "acqua": 28.0
+  },
+  {
+    "name": "Fette biscottate",
+    "category": "Cereali",
+    "kcal": 410,
+    "proteine": 8.9,
+    "carboidrati": 80.8,
+    "grassi": 6.1,
+    "fibre": 4.4,
+    "acqua": 5.0
+  },
+  {
+    "name": "Gallette di riso",
+    "category": "Cereali",
+    "kcal": 381,
+    "proteine": 8.0,
+    "carboidrati": 83.0,
+    "grassi": 2.8,
+    "fibre": 3.9,
+    "acqua": 6.0
+  },
+  {
+    "name": "Grissini",
+    "category": "Cereali",
+    "kcal": 432,
+    "proteine": 11.5,
+    "carboidrati": 80.7,
+    "grassi": 7.4,
+    "fibre": 4.4,
+    "acqua": 5.0
+  },
+  {
+    "name": "Crackers",
+    "category": "Cereali",
+    "kcal": 428,
+    "proteine": 10.0,
+    "carboidrati": 72.0,
+    "grassi": 11.5,
+    "fibre": 3.0,
+    "acqua": 6.0
+  },
+  {
+    "name": "Pollo, petto (senza pelle)",
+    "category": "Carne",
+    "kcal": 105,
+    "proteine": 23.3,
+    "carboidrati": 0.0,
+    "grassi": 1.2,
+    "fibre": 0.0,
+    "acqua": 75.0
+  },
+  {
+    "name": "Pollo, coscia (senza pelle)",
+    "category": "Carne",
+    "kcal": 130,
+    "proteine": 19.7,
+    "carboidrati": 0.0,
+    "grassi": 5.7,
+    "fibre": 0.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Pollo intero (senza pelle)",
+    "category": "Carne",
+    "kcal": 159,
+    "proteine": 18.8,
+    "carboidrati": 0.0,
+    "grassi": 9.3,
+    "fibre": 0.0,
+    "acqua": 71.0
+  },
+  {
+    "name": "Tacchino, petto (senza pelle)",
+    "category": "Carne",
+    "kcal": 107,
+    "proteine": 24.1,
+    "carboidrati": 0.0,
+    "grassi": 0.7,
+    "fibre": 0.0,
+    "acqua": 74.0
+  },
+  {
+    "name": "Manzo, fesa",
+    "category": "Carne",
+    "kcal": 150,
+    "proteine": 21.5,
+    "carboidrati": 0.0,
+    "grassi": 6.5,
+    "fibre": 0.0,
+    "acqua": 71.0
+  },
+  {
+    "name": "Manzo, macinato (10% grasso)",
+    "category": "Carne",
+    "kcal": 152,
+    "proteine": 20.9,
+    "carboidrati": 0.0,
+    "grassi": 7.2,
+    "fibre": 0.0,
+    "acqua": 71.0
+  },
+  {
+    "name": "Vitello, fesa",
+    "category": "Carne",
+    "kcal": 105,
+    "proteine": 21.3,
+    "carboidrati": 0.0,
+    "grassi": 1.8,
+    "fibre": 0.0,
+    "acqua": 76.0
+  },
+  {
+    "name": "Maiale, lonza",
+    "category": "Carne",
+    "kcal": 131,
+    "proteine": 22.1,
+    "carboidrati": 0.0,
+    "grassi": 4.4,
+    "fibre": 0.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Agnello, coscia",
+    "category": "Carne",
+    "kcal": 191,
+    "proteine": 18.6,
+    "carboidrati": 0.0,
+    "grassi": 12.3,
+    "fibre": 0.0,
+    "acqua": 68.0
+  },
+  {
+    "name": "Coniglio (senza pelle)",
+    "category": "Carne",
+    "kcal": 124,
+    "proteine": 22.6,
+    "carboidrati": 0.0,
+    "grassi": 3.2,
+    "fibre": 0.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Prosciutto crudo (sgrassato)",
+    "category": "Carne",
+    "kcal": 159,
+    "proteine": 27.3,
+    "carboidrati": 0.1,
+    "grassi": 5.4,
+    "fibre": 0.0,
+    "acqua": 65.0
+  },
+  {
+    "name": "Prosciutto cotto",
+    "category": "Carne",
+    "kcal": 215,
+    "proteine": 19.1,
+    "carboidrati": 0.0,
+    "grassi": 15.0,
+    "fibre": 0.0,
+    "acqua": 64.0
+  },
+  {
+    "name": "Bresaola",
+    "category": "Carne",
+    "kcal": 151,
+    "proteine": 32.4,
+    "carboidrati": 0.5,
+    "grassi": 1.8,
+    "fibre": 0.0,
+    "acqua": 63.0
+  },
+  {
+    "name": "Speck",
+    "category": "Carne",
+    "kcal": 290,
+    "proteine": 28.2,
+    "carboidrati": 0.0,
+    "grassi": 19.7,
+    "fibre": 0.0,
+    "acqua": 50.0
+  },
+  {
+    "name": "Salmone (fresco)",
+    "category": "Pesce",
+    "kcal": 185,
+    "proteine": 18.4,
+    "carboidrati": 0.0,
+    "grassi": 12.0,
+    "fibre": 0.0,
+    "acqua": 69.0
+  },
+  {
+    "name": "Tonno (fresco)",
+    "category": "Pesce",
+    "kcal": 157,
+    "proteine": 21.5,
+    "carboidrati": 0.0,
+    "grassi": 7.9,
+    "fibre": 0.0,
+    "acqua": 68.0
+  },
+  {
+    "name": "Tonno al naturale (sgocciolato)",
+    "category": "Pesce",
+    "kcal": 103,
+    "proteine": 23.0,
+    "carboidrati": 0.0,
+    "grassi": 0.7,
+    "fibre": 0.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Orata",
+    "category": "Pesce",
+    "kcal": 96,
+    "proteine": 18.0,
+    "carboidrati": 0.0,
+    "grassi": 2.5,
+    "fibre": 0.0,
+    "acqua": 77.0
+  },
+  {
+    "name": "Branzino (spigola)",
+    "category": "Pesce",
+    "kcal": 82,
+    "proteine": 16.5,
+    "carboidrati": 0.5,
+    "grassi": 1.5,
+    "fibre": 0.0,
+    "acqua": 80.0
+  },
+  {
+    "name": "Merluzzo (fresco)",
+    "category": "Pesce",
+    "kcal": 71,
+    "proteine": 17.0,
+    "carboidrati": 0.0,
+    "grassi": 0.3,
+    "fibre": 0.0,
+    "acqua": 82.0
+  },
+  {
+    "name": "Baccalà (ammollato)",
+    "category": "Pesce",
+    "kcal": 82,
+    "proteine": 19.8,
+    "carboidrati": 0.0,
+    "grassi": 0.4,
+    "fibre": 0.0,
+    "acqua": 80.0
+  },
+  {
+    "name": "Sgombro (fresco)",
+    "category": "Pesce",
+    "kcal": 170,
+    "proteine": 18.7,
+    "carboidrati": 0.0,
+    "grassi": 10.5,
+    "fibre": 0.0,
+    "acqua": 70.0
+  },
+  {
+    "name": "Trota (fresca)",
+    "category": "Pesce",
+    "kcal": 119,
+    "proteine": 18.2,
+    "carboidrati": 0.0,
+    "grassi": 4.7,
+    "fibre": 0.0,
+    "acqua": 76.0
+  },
+  {
+    "name": "Acciughe (fresche)",
+    "category": "Pesce",
+    "kcal": 131,
+    "proteine": 20.0,
+    "carboidrati": 0.0,
+    "grassi": 5.3,
+    "fibre": 0.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Gamberetti (sgusciati, cotti)",
+    "category": "Pesce",
+    "kcal": 99,
+    "proteine": 20.1,
+    "carboidrati": 0.9,
+    "grassi": 1.1,
+    "fibre": 0.0,
+    "acqua": 76.0
+  },
+  {
+    "name": "Calamari (freschi)",
+    "category": "Pesce",
+    "kcal": 68,
+    "proteine": 12.6,
+    "carboidrati": 0.4,
+    "grassi": 1.5,
+    "fibre": 0.0,
+    "acqua": 84.0
+  },
+  {
+    "name": "Polpo (fresco)",
+    "category": "Pesce",
+    "kcal": 57,
+    "proteine": 10.6,
+    "carboidrati": 1.4,
+    "grassi": 1.0,
+    "fibre": 0.0,
+    "acqua": 84.0
+  },
+  {
+    "name": "Cozze (senza guscio)",
+    "category": "Pesce",
+    "kcal": 84,
+    "proteine": 11.7,
+    "carboidrati": 3.4,
+    "grassi": 2.7,
+    "fibre": 0.0,
+    "acqua": 81.0
+  },
+  {
+    "name": "Vongole (senza guscio)",
+    "category": "Pesce",
+    "kcal": 72,
+    "proteine": 10.2,
+    "carboidrati": 2.5,
+    "grassi": 2.0,
+    "fibre": 0.0,
+    "acqua": 82.0
+  },
+  {
+    "name": "Uovo intero (55g medio)",
+    "category": "Uova",
+    "kcal": 128,
+    "proteine": 12.4,
+    "carboidrati": 0.5,
+    "grassi": 8.7,
+    "fibre": 0.0,
+    "acqua": 77.0
+  },
+  {
+    "name": "Albume d'uovo",
+    "category": "Uova",
+    "kcal": 43,
+    "proteine": 10.8,
+    "carboidrati": 0.5,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 88.0
+  },
+  {
+    "name": "Tuorlo d'uovo",
+    "category": "Uova",
+    "kcal": 352,
+    "proteine": 15.9,
+    "carboidrati": 0.3,
+    "grassi": 31.9,
+    "fibre": 0.0,
+    "acqua": 49.0
+  },
+  {
+    "name": "Latte intero",
+    "category": "Latticini",
+    "kcal": 64,
+    "proteine": 3.3,
+    "carboidrati": 4.7,
+    "grassi": 3.6,
+    "fibre": 0.0,
+    "acqua": 88.0
+  },
+  {
+    "name": "Latte parzialmente scremato",
+    "category": "Latticini",
+    "kcal": 46,
+    "proteine": 3.5,
+    "carboidrati": 5.0,
+    "grassi": 1.5,
+    "fibre": 0.0,
+    "acqua": 90.0
+  },
+  {
+    "name": "Yogurt intero bianco",
+    "category": "Latticini",
+    "kcal": 66,
+    "proteine": 3.8,
+    "carboidrati": 4.9,
+    "grassi": 3.2,
+    "fibre": 0.0,
+    "acqua": 87.0
+  },
+  {
+    "name": "Yogurt greco 0% grassi",
+    "category": "Latticini",
+    "kcal": 57,
+    "proteine": 10.0,
+    "carboidrati": 3.6,
+    "grassi": 0.2,
+    "fibre": 0.0,
+    "acqua": 85.0
+  },
+  {
+    "name": "Yogurt greco intero",
+    "category": "Latticini",
+    "kcal": 97,
+    "proteine": 9.0,
+    "carboidrati": 3.6,
+    "grassi": 5.0,
+    "fibre": 0.0,
+    "acqua": 81.0
+  },
+  {
+    "name": "Kefir",
+    "category": "Latticini",
+    "kcal": 61,
+    "proteine": 3.3,
+    "carboidrati": 4.8,
+    "grassi": 3.2,
+    "fibre": 0.0,
+    "acqua": 88.0
+  },
+  {
+    "name": "Ricotta di mucca",
+    "category": "Latticini",
+    "kcal": 146,
+    "proteine": 8.8,
+    "carboidrati": 3.5,
+    "grassi": 10.9,
+    "fibre": 0.0,
+    "acqua": 74.0
+  },
+  {
+    "name": "Ricotta di pecora",
+    "category": "Latticini",
+    "kcal": 195,
+    "proteine": 8.8,
+    "carboidrati": 3.6,
+    "grassi": 16.1,
+    "fibre": 0.0,
+    "acqua": 70.0
+  },
+  {
+    "name": "Parmigiano reggiano",
+    "category": "Latticini",
+    "kcal": 392,
+    "proteine": 33.5,
+    "carboidrati": 0.0,
+    "grassi": 28.4,
+    "fibre": 0.0,
+    "acqua": 30.0
+  },
+  {
+    "name": "Grana padano",
+    "category": "Latticini",
+    "kcal": 387,
+    "proteine": 32.0,
+    "carboidrati": 0.0,
+    "grassi": 28.0,
+    "fibre": 0.0,
+    "acqua": 32.0
+  },
+  {
+    "name": "Pecorino romano",
+    "category": "Latticini",
+    "kcal": 387,
+    "proteine": 26.9,
+    "carboidrati": 2.0,
+    "grassi": 30.5,
+    "fibre": 0.0,
+    "acqua": 31.0
+  },
+  {
+    "name": "Mozzarella di bufala",
+    "category": "Latticini",
+    "kcal": 288,
+    "proteine": 17.7,
+    "carboidrati": 1.0,
+    "grassi": 24.4,
+    "fibre": 0.0,
+    "acqua": 55.0
+  },
+  {
+    "name": "Mozzarella vaccina (fior di latte)",
+    "category": "Latticini",
+    "kcal": 233,
+    "proteine": 17.5,
+    "carboidrati": 2.3,
+    "grassi": 17.1,
+    "fibre": 0.0,
+    "acqua": 60.0
+  },
+  {
+    "name": "Feta",
+    "category": "Latticini",
+    "kcal": 264,
+    "proteine": 14.2,
+    "carboidrati": 4.1,
+    "grassi": 21.3,
+    "fibre": 0.0,
+    "acqua": 55.0
+  },
+  {
+    "name": "Gorgonzola",
+    "category": "Latticini",
+    "kcal": 326,
+    "proteine": 19.1,
+    "carboidrati": 0.0,
+    "grassi": 27.9,
+    "fibre": 0.0,
+    "acqua": 44.0
+  },
+  {
+    "name": "Formaggio Asiago",
+    "category": "Latticini",
+    "kcal": 366,
+    "proteine": 28.6,
+    "carboidrati": 1.5,
+    "grassi": 27.0,
+    "fibre": 0.0,
+    "acqua": 39.0
+  },
+  {
+    "name": "Burro",
+    "category": "Latticini",
+    "kcal": 758,
+    "proteine": 0.7,
+    "carboidrati": 0.7,
+    "grassi": 83.6,
+    "fibre": 0.0,
+    "acqua": 14.0
+  },
+  {
+    "name": "Ceci secchi",
+    "category": "Legumi",
+    "kcal": 316,
+    "proteine": 20.9,
+    "carboidrati": 54.3,
+    "grassi": 4.9,
+    "fibre": 14.3,
+    "acqua": 11.0
+  },
+  {
+    "name": "Ceci lessati",
+    "category": "Legumi",
+    "kcal": 120,
+    "proteine": 8.0,
+    "carboidrati": 18.2,
+    "grassi": 2.6,
+    "fibre": 6.5,
+    "acqua": 68.0
+  },
+  {
+    "name": "Fagioli borlotti secchi",
+    "category": "Legumi",
+    "kcal": 291,
+    "proteine": 20.2,
+    "carboidrati": 50.2,
+    "grassi": 1.5,
+    "fibre": 17.5,
+    "acqua": 11.5
+  },
+  {
+    "name": "Fagioli borlotti lessati",
+    "category": "Legumi",
+    "kcal": 114,
+    "proteine": 8.7,
+    "carboidrati": 19.4,
+    "grassi": 0.6,
+    "fibre": 8.0,
+    "acqua": 67.0
+  },
+  {
+    "name": "Fagioli cannellini lessati",
+    "category": "Legumi",
+    "kcal": 109,
+    "proteine": 8.0,
+    "carboidrati": 19.0,
+    "grassi": 0.6,
+    "fibre": 6.3,
+    "acqua": 68.0
+  },
+  {
+    "name": "Lenticchie secche",
+    "category": "Legumi",
+    "kcal": 291,
+    "proteine": 25.1,
+    "carboidrati": 50.5,
+    "grassi": 1.3,
+    "fibre": 13.8,
+    "acqua": 12.0
+  },
+  {
+    "name": "Lenticchie lessate",
+    "category": "Legumi",
+    "kcal": 116,
+    "proteine": 8.6,
+    "carboidrati": 20.1,
+    "grassi": 0.4,
+    "fibre": 6.0,
+    "acqua": 68.0
+  },
+  {
+    "name": "Piselli freschi",
+    "category": "Legumi",
+    "kcal": 80,
+    "proteine": 6.7,
+    "carboidrati": 12.4,
+    "grassi": 0.4,
+    "fibre": 5.0,
+    "acqua": 79.0
+  },
+  {
+    "name": "Piselli surgelati",
+    "category": "Legumi",
+    "kcal": 73,
+    "proteine": 5.2,
+    "carboidrati": 11.3,
+    "grassi": 0.4,
+    "fibre": 6.5,
+    "acqua": 80.0
+  },
+  {
+    "name": "Fave fresche (sgusciate)",
+    "category": "Legumi",
+    "kcal": 72,
+    "proteine": 7.0,
+    "carboidrati": 9.7,
+    "grassi": 0.6,
+    "fibre": 5.0,
+    "acqua": 80.0
+  },
+  {
+    "name": "Edamame (fagioli di soia, sgusciati)",
+    "category": "Legumi",
+    "kcal": 121,
+    "proteine": 11.0,
+    "carboidrati": 8.0,
+    "grassi": 5.0,
+    "fibre": 5.0,
+    "acqua": 73.0
+  },
+  {
+    "name": "Tofu sodo",
+    "category": "Legumi",
+    "kcal": 76,
+    "proteine": 8.1,
+    "carboidrati": 0.5,
+    "grassi": 4.8,
+    "fibre": 0.3,
+    "acqua": 84.0
+  },
+  {
+    "name": "Tofu morbido (silken)",
+    "category": "Legumi",
+    "kcal": 55,
+    "proteine": 5.3,
+    "carboidrati": 1.4,
+    "grassi": 2.7,
+    "fibre": 0.2,
+    "acqua": 89.0
+  },
+  {
+    "name": "Hummus (purea di ceci)",
+    "category": "Legumi",
+    "kcal": 166,
+    "proteine": 7.9,
+    "carboidrati": 14.3,
+    "grassi": 9.6,
+    "fibre": 6.0,
+    "acqua": 66.0
+  },
+  {
+    "name": "Pomodori da insalata",
+    "category": "Verdure",
+    "kcal": 17,
+    "proteine": 1.2,
+    "carboidrati": 3.5,
+    "grassi": 0.2,
+    "fibre": 1.0,
+    "acqua": 94.0
+  },
+  {
+    "name": "Pomodorini ciliegino",
+    "category": "Verdure",
+    "kcal": 19,
+    "proteine": 0.9,
+    "carboidrati": 3.9,
+    "grassi": 0.2,
+    "fibre": 1.1,
+    "acqua": 93.0
+  },
+  {
+    "name": "Pomodori pelati (in scatola)",
+    "category": "Verdure",
+    "kcal": 20,
+    "proteine": 1.0,
+    "carboidrati": 3.7,
+    "grassi": 0.1,
+    "fibre": 1.2,
+    "acqua": 93.0
+  },
+  {
+    "name": "Passata di pomodoro",
+    "category": "Verdure",
+    "kcal": 32,
+    "proteine": 1.6,
+    "carboidrati": 5.8,
+    "grassi": 0.2,
+    "fibre": 1.8,
+    "acqua": 90.0
+  },
+  {
+    "name": "Zucchine",
+    "category": "Verdure",
+    "kcal": 16,
+    "proteine": 1.3,
+    "carboidrati": 2.5,
+    "grassi": 0.1,
+    "fibre": 1.4,
+    "acqua": 94.0
+  },
+  {
+    "name": "Melanzane",
+    "category": "Verdure",
+    "kcal": 18,
+    "proteine": 1.1,
+    "carboidrati": 2.6,
+    "grassi": 0.2,
+    "fibre": 2.6,
+    "acqua": 92.0
+  },
+  {
+    "name": "Peperoni (rossi)",
+    "category": "Verdure",
+    "kcal": 31,
+    "proteine": 1.0,
+    "carboidrati": 6.4,
+    "grassi": 0.3,
+    "fibre": 2.1,
+    "acqua": 91.0
+  },
+  {
+    "name": "Peperoni (gialli)",
+    "category": "Verdure",
+    "kcal": 27,
+    "proteine": 1.0,
+    "carboidrati": 5.3,
+    "grassi": 0.2,
+    "fibre": 1.7,
+    "acqua": 91.0
+  },
+  {
+    "name": "Carote",
+    "category": "Verdure",
+    "kcal": 35,
+    "proteine": 1.1,
+    "carboidrati": 7.0,
+    "grassi": 0.2,
+    "fibre": 3.1,
+    "acqua": 90.0
+  },
+  {
+    "name": "Sedano",
+    "category": "Verdure",
+    "kcal": 20,
+    "proteine": 0.9,
+    "carboidrati": 3.8,
+    "grassi": 0.2,
+    "fibre": 1.5,
+    "acqua": 94.0
+  },
+  {
+    "name": "Cipolla",
+    "category": "Verdure",
+    "kcal": 26,
+    "proteine": 1.0,
+    "carboidrati": 5.7,
+    "grassi": 0.1,
+    "fibre": 1.3,
+    "acqua": 92.0
+  },
+  {
+    "name": "Cipolla rossa",
+    "category": "Verdure",
+    "kcal": 32,
+    "proteine": 1.2,
+    "carboidrati": 7.0,
+    "grassi": 0.1,
+    "fibre": 1.6,
+    "acqua": 89.0
+  },
+  {
+    "name": "Cipollotto",
+    "category": "Verdure",
+    "kcal": 27,
+    "proteine": 1.8,
+    "carboidrati": 4.7,
+    "grassi": 0.2,
+    "fibre": 2.6,
+    "acqua": 90.0
+  },
+  {
+    "name": "Aglio",
+    "category": "Verdure",
+    "kcal": 41,
+    "proteine": 2.0,
+    "carboidrati": 8.4,
+    "grassi": 0.1,
+    "fibre": 1.5,
+    "acqua": 65.0
+  },
+  {
+    "name": "Spinaci freschi",
+    "category": "Verdure",
+    "kcal": 31,
+    "proteine": 3.4,
+    "carboidrati": 3.6,
+    "grassi": 0.7,
+    "fibre": 1.9,
+    "acqua": 91.0
+  },
+  {
+    "name": "Bietola",
+    "category": "Verdure",
+    "kcal": 19,
+    "proteine": 1.8,
+    "carboidrati": 2.9,
+    "grassi": 0.1,
+    "fibre": 2.4,
+    "acqua": 93.0
+  },
+  {
+    "name": "Broccoli",
+    "category": "Verdure",
+    "kcal": 34,
+    "proteine": 2.9,
+    "carboidrati": 4.1,
+    "grassi": 0.4,
+    "fibre": 2.9,
+    "acqua": 90.0
+  },
+  {
+    "name": "Cavolfiore",
+    "category": "Verdure",
+    "kcal": 25,
+    "proteine": 2.5,
+    "carboidrati": 3.0,
+    "grassi": 0.2,
+    "fibre": 2.5,
+    "acqua": 92.0
+  },
+  {
+    "name": "Cavolo nero",
+    "category": "Verdure",
+    "kcal": 37,
+    "proteine": 3.3,
+    "carboidrati": 5.2,
+    "grassi": 0.5,
+    "fibre": 3.5,
+    "acqua": 89.0
+  },
+  {
+    "name": "Cavolo cappuccio",
+    "category": "Verdure",
+    "kcal": 25,
+    "proteine": 1.4,
+    "carboidrati": 5.2,
+    "grassi": 0.1,
+    "fibre": 2.3,
+    "acqua": 92.0
+  },
+  {
+    "name": "Lattuga",
+    "category": "Verdure",
+    "kcal": 14,
+    "proteine": 1.3,
+    "carboidrati": 1.7,
+    "grassi": 0.2,
+    "fibre": 1.5,
+    "acqua": 95.0
+  },
+  {
+    "name": "Rucola",
+    "category": "Verdure",
+    "kcal": 25,
+    "proteine": 2.6,
+    "carboidrati": 2.0,
+    "grassi": 0.7,
+    "fibre": 1.6,
+    "acqua": 92.0
+  },
+  {
+    "name": "Radicchio",
+    "category": "Verdure",
+    "kcal": 23,
+    "proteine": 1.4,
+    "carboidrati": 3.6,
+    "grassi": 0.2,
+    "fibre": 3.0,
+    "acqua": 93.0
+  },
+  {
+    "name": "Cetriolo",
+    "category": "Verdure",
+    "kcal": 13,
+    "proteine": 0.7,
+    "carboidrati": 2.3,
+    "grassi": 0.1,
+    "fibre": 0.7,
+    "acqua": 96.0
+  },
+  {
+    "name": "Asparagi",
+    "category": "Verdure",
+    "kcal": 20,
+    "proteine": 2.2,
+    "carboidrati": 2.0,
+    "grassi": 0.2,
+    "fibre": 2.1,
+    "acqua": 93.0
+  },
+  {
+    "name": "Patate (a pasta gialla)",
+    "category": "Verdure",
+    "kcal": 85,
+    "proteine": 2.1,
+    "carboidrati": 18.0,
+    "grassi": 0.1,
+    "fibre": 1.7,
+    "acqua": 79.0
+  },
+  {
+    "name": "Patate dolci",
+    "category": "Verdure",
+    "kcal": 86,
+    "proteine": 1.6,
+    "carboidrati": 20.1,
+    "grassi": 0.1,
+    "fibre": 2.5,
+    "acqua": 77.0
+  },
+  {
+    "name": "Zucca (polpa)",
+    "category": "Verdure",
+    "kcal": 26,
+    "proteine": 1.1,
+    "carboidrati": 5.8,
+    "grassi": 0.1,
+    "fibre": 0.5,
+    "acqua": 92.0
+  },
+  {
+    "name": "Fagiolini",
+    "category": "Verdure",
+    "kcal": 29,
+    "proteine": 1.7,
+    "carboidrati": 4.5,
+    "grassi": 0.2,
+    "fibre": 2.9,
+    "acqua": 91.0
+  },
+  {
+    "name": "Funghi champignon",
+    "category": "Verdure",
+    "kcal": 22,
+    "proteine": 2.7,
+    "carboidrati": 0.3,
+    "grassi": 0.3,
+    "fibre": 2.5,
+    "acqua": 91.0
+  },
+  {
+    "name": "Funghi porcini (freschi)",
+    "category": "Verdure",
+    "kcal": 27,
+    "proteine": 3.7,
+    "carboidrati": 4.2,
+    "grassi": 0.7,
+    "fibre": 2.7,
+    "acqua": 88.0
+  },
+  {
+    "name": "Carciofi",
+    "category": "Verdure",
+    "kcal": 22,
+    "proteine": 2.7,
+    "carboidrati": 2.5,
+    "grassi": 0.2,
+    "fibre": 5.5,
+    "acqua": 86.0
+  },
+  {
+    "name": "Finocchi",
+    "category": "Verdure",
+    "kcal": 9,
+    "proteine": 1.2,
+    "carboidrati": 0.8,
+    "grassi": 0.1,
+    "fibre": 2.3,
+    "acqua": 94.0
+  },
+  {
+    "name": "Indivia (cicoria)",
+    "category": "Verdure",
+    "kcal": 17,
+    "proteine": 1.7,
+    "carboidrati": 2.7,
+    "grassi": 0.1,
+    "fibre": 3.1,
+    "acqua": 93.0
+  },
+  {
+    "name": "Mela golden",
+    "category": "Frutta",
+    "kcal": 52,
+    "proteine": 0.3,
+    "carboidrati": 13.7,
+    "grassi": 0.1,
+    "fibre": 2.0,
+    "acqua": 84.0
+  },
+  {
+    "name": "Mela renetta",
+    "category": "Frutta",
+    "kcal": 45,
+    "proteine": 0.3,
+    "carboidrati": 11.6,
+    "grassi": 0.1,
+    "fibre": 2.3,
+    "acqua": 86.0
+  },
+  {
+    "name": "Pera",
+    "category": "Frutta",
+    "kcal": 41,
+    "proteine": 0.3,
+    "carboidrati": 10.5,
+    "grassi": 0.1,
+    "fibre": 3.1,
+    "acqua": 88.0
+  },
+  {
+    "name": "Arancia",
+    "category": "Frutta",
+    "kcal": 34,
+    "proteine": 0.7,
+    "carboidrati": 7.8,
+    "grassi": 0.2,
+    "fibre": 1.6,
+    "acqua": 88.0
+  },
+  {
+    "name": "Mandarino",
+    "category": "Frutta",
+    "kcal": 72,
+    "proteine": 0.9,
+    "carboidrati": 17.6,
+    "grassi": 0.3,
+    "fibre": 1.8,
+    "acqua": 79.0
+  },
+  {
+    "name": "Limone (succo)",
+    "category": "Frutta",
+    "kcal": 7,
+    "proteine": 0.3,
+    "carboidrati": 1.5,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 91.0
+  },
+  {
+    "name": "Lime (succo)",
+    "category": "Frutta",
+    "kcal": 25,
+    "proteine": 0.5,
+    "carboidrati": 5.8,
+    "grassi": 0.1,
+    "fibre": 0.4,
+    "acqua": 90.0
+  },
+  {
+    "name": "Banana",
+    "category": "Frutta",
+    "kcal": 89,
+    "proteine": 1.1,
+    "carboidrati": 22.8,
+    "grassi": 0.3,
+    "fibre": 2.6,
+    "acqua": 75.0
+  },
+  {
+    "name": "Fragole",
+    "category": "Frutta",
+    "kcal": 30,
+    "proteine": 0.9,
+    "carboidrati": 5.3,
+    "grassi": 0.4,
+    "fibre": 1.6,
+    "acqua": 91.0
+  },
+  {
+    "name": "Mirtilli",
+    "category": "Frutta",
+    "kcal": 57,
+    "proteine": 0.7,
+    "carboidrati": 14.5,
+    "grassi": 0.3,
+    "fibre": 2.4,
+    "acqua": 84.0
+  },
+  {
+    "name": "Lamponi",
+    "category": "Frutta",
+    "kcal": 34,
+    "proteine": 1.2,
+    "carboidrati": 5.6,
+    "grassi": 0.7,
+    "fibre": 6.5,
+    "acqua": 87.0
+  },
+  {
+    "name": "More",
+    "category": "Frutta",
+    "kcal": 36,
+    "proteine": 1.4,
+    "carboidrati": 5.1,
+    "grassi": 0.5,
+    "fibre": 5.3,
+    "acqua": 88.0
+  },
+  {
+    "name": "Uva bianca",
+    "category": "Frutta",
+    "kcal": 61,
+    "proteine": 0.5,
+    "carboidrati": 15.6,
+    "grassi": 0.1,
+    "fibre": 0.5,
+    "acqua": 81.0
+  },
+  {
+    "name": "Kiwi",
+    "category": "Frutta",
+    "kcal": 44,
+    "proteine": 1.1,
+    "carboidrati": 9.0,
+    "grassi": 0.4,
+    "fibre": 2.2,
+    "acqua": 84.0
+  },
+  {
+    "name": "Avocado",
+    "category": "Frutta",
+    "kcal": 160,
+    "proteine": 2.0,
+    "carboidrati": 8.5,
+    "grassi": 14.7,
+    "fibre": 6.7,
+    "acqua": 73.0
+  },
+  {
+    "name": "Melograno (chicchi)",
+    "category": "Frutta",
+    "kcal": 83,
+    "proteine": 1.7,
+    "carboidrati": 18.7,
+    "grassi": 1.2,
+    "fibre": 4.0,
+    "acqua": 78.0
+  },
+  {
+    "name": "Albicocche fresche",
+    "category": "Frutta",
+    "kcal": 28,
+    "proteine": 0.9,
+    "carboidrati": 5.9,
+    "grassi": 0.1,
+    "fibre": 2.1,
+    "acqua": 87.0
+  },
+  {
+    "name": "Albicocche secche",
+    "category": "Frutta",
+    "kcal": 188,
+    "proteine": 3.4,
+    "carboidrati": 42.0,
+    "grassi": 0.4,
+    "fibre": 7.3,
+    "acqua": 31.0
+  },
+  {
+    "name": "Prugne secche",
+    "category": "Frutta",
+    "kcal": 161,
+    "proteine": 2.2,
+    "carboidrati": 38.6,
+    "grassi": 0.4,
+    "fibre": 7.1,
+    "acqua": 32.0
+  },
+  {
+    "name": "Uvetta",
+    "category": "Frutta",
+    "kcal": 283,
+    "proteine": 2.5,
+    "carboidrati": 70.6,
+    "grassi": 0.5,
+    "fibre": 3.3,
+    "acqua": 16.0
+  },
+  {
+    "name": "Datteri secchi",
+    "category": "Frutta",
+    "kcal": 282,
+    "proteine": 2.0,
+    "carboidrati": 69.2,
+    "grassi": 0.4,
+    "fibre": 8.7,
+    "acqua": 21.0
+  },
+  {
+    "name": "Olio extravergine d'oliva",
+    "category": "Grassi",
+    "kcal": 899,
+    "proteine": 0.0,
+    "carboidrati": 0.0,
+    "grassi": 99.9,
+    "fibre": 0.0,
+    "acqua": 0.2
+  },
+  {
+    "name": "Olio di semi di girasole",
+    "category": "Grassi",
+    "kcal": 900,
+    "proteine": 0.0,
+    "carboidrati": 0.0,
+    "grassi": 100.0,
+    "fibre": 0.0,
+    "acqua": 0.0
+  },
+  {
+    "name": "Olio di semi di lino",
+    "category": "Grassi",
+    "kcal": 900,
+    "proteine": 0.0,
+    "carboidrati": 0.0,
+    "grassi": 100.0,
+    "fibre": 0.0,
+    "acqua": 0.0
+  },
+  {
+    "name": "Olio di sesamo",
+    "category": "Grassi",
+    "kcal": 900,
+    "proteine": 0.0,
+    "carboidrati": 0.0,
+    "grassi": 100.0,
+    "fibre": 0.0,
+    "acqua": 0.0
+  },
+  {
+    "name": "Mandorle",
+    "category": "Frutta secca",
+    "kcal": 597,
+    "proteine": 21.2,
+    "carboidrati": 19.7,
+    "grassi": 52.0,
+    "fibre": 11.8,
+    "acqua": 5.6
+  },
+  {
+    "name": "Noci (sgusciate)",
+    "category": "Frutta secca",
+    "kcal": 689,
+    "proteine": 14.3,
+    "carboidrati": 10.6,
+    "grassi": 65.2,
+    "fibre": 6.7,
+    "acqua": 4.0
+  },
+  {
+    "name": "Nocciole",
+    "category": "Frutta secca",
+    "kcal": 655,
+    "proteine": 13.1,
+    "carboidrati": 17.0,
+    "grassi": 63.5,
+    "fibre": 9.7,
+    "acqua": 5.6
+  },
+  {
+    "name": "Pistacchi (sgusciati)",
+    "category": "Frutta secca",
+    "kcal": 562,
+    "proteine": 17.9,
+    "carboidrati": 27.7,
+    "grassi": 45.4,
+    "fibre": 10.0,
+    "acqua": 3.9
+  },
+  {
+    "name": "Anacardi",
+    "category": "Frutta secca",
+    "kcal": 553,
+    "proteine": 18.2,
+    "carboidrati": 30.2,
+    "grassi": 43.9,
+    "fibre": 3.3,
+    "acqua": 5.2
+  },
+  {
+    "name": "Pinoli",
+    "category": "Frutta secca",
+    "kcal": 673,
+    "proteine": 13.7,
+    "carboidrati": 13.1,
+    "grassi": 68.6,
+    "fibre": 3.7,
+    "acqua": 2.3
+  },
+  {
+    "name": "Arachidi (tostate)",
+    "category": "Frutta secca",
+    "kcal": 589,
+    "proteine": 25.8,
+    "carboidrati": 15.8,
+    "grassi": 49.7,
+    "fibre": 8.1,
+    "acqua": 2.7
+  },
+  {
+    "name": "Burro di arachidi",
+    "category": "Frutta secca",
+    "kcal": 589,
+    "proteine": 25.1,
+    "carboidrati": 19.6,
+    "grassi": 49.9,
+    "fibre": 6.0,
+    "acqua": 1.8
+  },
+  {
+    "name": "Semi di chia",
+    "category": "Frutta secca",
+    "kcal": 486,
+    "proteine": 16.5,
+    "carboidrati": 42.1,
+    "grassi": 30.7,
+    "fibre": 34.4,
+    "acqua": 6.0
+  },
+  {
+    "name": "Semi di lino",
+    "category": "Frutta secca",
+    "kcal": 534,
+    "proteine": 18.3,
+    "carboidrati": 28.9,
+    "grassi": 42.2,
+    "fibre": 27.3,
+    "acqua": 7.7
+  },
+  {
+    "name": "Semi di sesamo",
+    "category": "Frutta secca",
+    "kcal": 573,
+    "proteine": 17.7,
+    "carboidrati": 23.5,
+    "grassi": 49.7,
+    "fibre": 11.8,
+    "acqua": 5.4
+  },
+  {
+    "name": "Semi di zucca (tostati)",
+    "category": "Frutta secca",
+    "kcal": 559,
+    "proteine": 30.2,
+    "carboidrati": 10.7,
+    "grassi": 49.1,
+    "fibre": 6.0,
+    "acqua": 5.3
+  },
+  {
+    "name": "Semi di girasole",
+    "category": "Frutta secca",
+    "kcal": 584,
+    "proteine": 20.8,
+    "carboidrati": 20.0,
+    "grassi": 51.5,
+    "fibre": 8.6,
+    "acqua": 4.8
+  },
+  {
+    "name": "Miele (millefiori)",
+    "category": "Dolcificanti",
+    "kcal": 304,
+    "proteine": 0.6,
+    "carboidrati": 80.3,
+    "grassi": 0.0,
+    "fibre": 0.2,
+    "acqua": 17.0
+  },
+  {
+    "name": "Zucchero semolato",
+    "category": "Dolcificanti",
+    "kcal": 392,
+    "proteine": 0.0,
+    "carboidrati": 104.5,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 0.5
+  },
+  {
+    "name": "Sciroppo d'acero",
+    "category": "Dolcificanti",
+    "kcal": 260,
+    "proteine": 0.0,
+    "carboidrati": 67.0,
+    "grassi": 0.2,
+    "fibre": 0.0,
+    "acqua": 32.0
+  },
+  {
+    "name": "Zucchero di cocco",
+    "category": "Dolcificanti",
+    "kcal": 383,
+    "proteine": 1.0,
+    "carboidrati": 95.0,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 2.0
+  },
+  {
+    "name": "Latte di soia",
+    "category": "Latticini vegetali",
+    "kcal": 33,
+    "proteine": 2.9,
+    "carboidrati": 1.8,
+    "grassi": 1.8,
+    "fibre": 0.5,
+    "acqua": 93.0
+  },
+  {
+    "name": "Latte di avena",
+    "category": "Latticini vegetali",
+    "kcal": 47,
+    "proteine": 1.0,
+    "carboidrati": 8.0,
+    "grassi": 1.5,
+    "fibre": 0.8,
+    "acqua": 89.0
+  },
+  {
+    "name": "Latte di mandorla (non zuccherato)",
+    "category": "Latticini vegetali",
+    "kcal": 24,
+    "proteine": 0.4,
+    "carboidrati": 3.1,
+    "grassi": 1.1,
+    "fibre": 0.4,
+    "acqua": 95.0
+  },
+  {
+    "name": "Latte di riso",
+    "category": "Latticini vegetali",
+    "kcal": 47,
+    "proteine": 0.3,
+    "carboidrati": 9.9,
+    "grassi": 1.0,
+    "fibre": 0.2,
+    "acqua": 89.0
+  },
+  {
+    "name": "Latte di cocco (da cucina, 10% grassi)",
+    "category": "Latticini vegetali",
+    "kcal": 97,
+    "proteine": 0.9,
+    "carboidrati": 2.7,
+    "grassi": 10.0,
+    "fibre": 0.0,
+    "acqua": 83.0
+  },
+  {
+    "name": "Yogurt di soia",
+    "category": "Latticini vegetali",
+    "kcal": 65,
+    "proteine": 3.5,
+    "carboidrati": 7.5,
+    "grassi": 2.5,
+    "fibre": 0.0,
+    "acqua": 84.0
+  },
+  {
+    "name": "Aceto di vino rosso",
+    "category": "Condimenti",
+    "kcal": 19,
+    "proteine": 0.1,
+    "carboidrati": 0.6,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 94.0
+  },
+  {
+    "name": "Aceto balsamico di Modena",
+    "category": "Condimenti",
+    "kcal": 88,
+    "proteine": 0.5,
+    "carboidrati": 17.0,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 77.0
+  },
+  {
+    "name": "Salsa di soia (shoyu)",
+    "category": "Condimenti",
+    "kcal": 53,
+    "proteine": 6.0,
+    "carboidrati": 6.0,
+    "grassi": 0.0,
+    "fibre": 0.8,
+    "acqua": 70.0
+  },
+  {
+    "name": "Tamari (salsa di soia senza glutine)",
+    "category": "Condimenti",
+    "kcal": 60,
+    "proteine": 10.5,
+    "carboidrati": 4.0,
+    "grassi": 0.0,
+    "fibre": 0.0,
+    "acqua": 72.0
+  },
+  {
+    "name": "Pesto genovese",
+    "category": "Condimenti",
+    "kcal": 422,
+    "proteine": 5.7,
+    "carboidrati": 5.4,
+    "grassi": 42.6,
+    "fibre": 1.5,
+    "acqua": 42.0
+  },
+  {
+    "name": "Tahini (pasta di sesamo)",
+    "category": "Condimenti",
+    "kcal": 595,
+    "proteine": 17.0,
+    "carboidrati": 21.2,
+    "grassi": 53.8,
+    "fibre": 9.3,
+    "acqua": 3.0
+  },
+  {
+    "name": "Capperi (sott'aceto, sgocciolati)",
+    "category": "Condimenti",
+    "kcal": 18,
+    "proteine": 2.4,
+    "carboidrati": 1.4,
+    "grassi": 0.5,
+    "fibre": 3.2,
+    "acqua": 88.0
+  },
+  {
+    "name": "Olive nere (denocciolate, sgocciolate)",
+    "category": "Condimenti",
+    "kcal": 115,
+    "proteine": 0.8,
+    "carboidrati": 6.3,
+    "grassi": 10.7,
+    "fibre": 3.2,
+    "acqua": 79.0
+  },
+  {
+    "name": "Olive verdi (denocciolate, sgocciolate)",
+    "category": "Condimenti",
+    "kcal": 145,
+    "proteine": 1.0,
+    "carboidrati": 3.8,
+    "grassi": 15.3,
+    "fibre": 2.9,
+    "acqua": 77.0
+  },
+  {
+    "name": "Cacao amaro in polvere",
+    "category": "Cacao",
+    "kcal": 229,
+    "proteine": 19.6,
+    "carboidrati": 11.5,
+    "grassi": 13.7,
+    "fibre": 26.3,
+    "acqua": 5.0
+  },
+  {
+    "name": "Cioccolato fondente 70%",
+    "category": "Cacao",
+    "kcal": 574,
+    "proteine": 8.0,
+    "carboidrati": 43.7,
+    "grassi": 42.6,
+    "fibre": 10.9,
+    "acqua": 1.3
+  },
+  {
+    "name": "Cioccolato fondente 85%",
+    "category": "Cacao",
+    "kcal": 598,
+    "proteine": 10.0,
+    "carboidrati": 32.4,
+    "grassi": 52.9,
+    "fibre": 13.1,
+    "acqua": 1.5
+  },
+  {
+    "name": "Basilico fresco",
+    "category": "Erbe",
+    "kcal": 22,
+    "proteine": 3.2,
+    "carboidrati": 2.7,
+    "grassi": 0.6,
+    "fibre": 1.6,
+    "acqua": 92.0
+  },
+  {
+    "name": "Prezzemolo fresco",
+    "category": "Erbe",
+    "kcal": 49,
+    "proteine": 3.7,
+    "carboidrati": 7.8,
+    "grassi": 0.6,
+    "fibre": 3.3,
+    "acqua": 84.0
+  },
+  {
+    "name": "Origano secco",
+    "category": "Erbe",
+    "kcal": 265,
+    "proteine": 9.0,
+    "carboidrati": 68.9,
+    "grassi": 4.3,
+    "fibre": 42.5,
+    "acqua": 9.0
+  },
+  {
+    "name": "Rosmarino fresco",
+    "category": "Erbe",
+    "kcal": 131,
+    "proteine": 3.3,
+    "carboidrati": 20.7,
+    "grassi": 5.9,
+    "fibre": 14.1,
+    "acqua": 68.0
+  },
+  {
+    "name": "Timo fresco",
+    "category": "Erbe",
+    "kcal": 101,
+    "proteine": 5.6,
+    "carboidrati": 24.5,
+    "grassi": 1.7,
+    "fibre": 14.0,
+    "acqua": 65.0
+  },
+  {
+    "name": "Menta fresca",
+    "category": "Erbe",
+    "kcal": 44,
+    "proteine": 3.3,
+    "carboidrati": 8.4,
+    "grassi": 0.7,
+    "fibre": 6.8,
+    "acqua": 86.0
+  },
+  {
+    "name": "Curcuma (polvere)",
+    "category": "Spezie",
+    "kcal": 354,
+    "proteine": 7.8,
+    "carboidrati": 67.1,
+    "grassi": 9.9,
+    "fibre": 21.1,
+    "acqua": 11.4
+  },
+  {
+    "name": "Curry in polvere",
+    "category": "Spezie",
+    "kcal": 325,
+    "proteine": 12.7,
+    "carboidrati": 55.8,
+    "grassi": 13.8,
+    "fibre": 33.2,
+    "acqua": 9.5
+  },
+  {
+    "name": "Paprika dolce",
+    "category": "Spezie",
+    "kcal": 289,
+    "proteine": 14.8,
+    "carboidrati": 56.0,
+    "grassi": 12.9,
+    "fibre": 34.9,
+    "acqua": 10.0
+  },
+  {
+    "name": "Cumino (semi)",
+    "category": "Spezie",
+    "kcal": 375,
+    "proteine": 17.8,
+    "carboidrati": 44.2,
+    "grassi": 22.3,
+    "fibre": 10.5,
+    "acqua": 8.1
+  },
+  {
+    "name": "Cannella (polvere)",
+    "category": "Spezie",
+    "kcal": 261,
+    "proteine": 3.9,
+    "carboidrati": 80.6,
+    "grassi": 3.2,
+    "fibre": 53.1,
+    "acqua": 10.6
+  },
+  {
+    "name": "Noce moscata (polvere)",
+    "category": "Spezie",
+    "kcal": 525,
+    "proteine": 5.8,
+    "carboidrati": 49.3,
+    "grassi": 36.3,
+    "fibre": 20.8,
+    "acqua": 6.2
+  },
+  {
+    "name": "Zenzero fresco",
+    "category": "Spezie",
+    "kcal": 80,
+    "proteine": 1.8,
+    "carboidrati": 18.0,
+    "grassi": 0.8,
+    "fibre": 2.0,
+    "acqua": 79.0
+  }
+]

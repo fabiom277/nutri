@@ -202,3 +202,56 @@ CREATE TABLE IF NOT EXISTS push_subscriptions (
 );
 ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "push_all" ON push_subscriptions FOR ALL USING (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────
+-- MIGRATION v5: INRAN food database + user recipes
+-- ─────────────────────────────────────────
+
+-- Tabella alimenti INRAN
+CREATE TABLE IF NOT EXISTS food_items (
+  id            UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name          TEXT NOT NULL,
+  name_search   TEXT GENERATED ALWAYS AS (lower(name)) STORED,
+  category      TEXT,
+  kcal          DECIMAL(7,2) NOT NULL,  -- per 100g
+  proteine      DECIMAL(6,2),
+  carboidrati   DECIMAL(6,2),
+  grassi        DECIMAL(6,2),
+  fibre         DECIMAL(6,2),
+  acqua         DECIMAL(6,2),
+  source        TEXT DEFAULT 'INRAN-CREA',
+  is_active     BOOLEAN DEFAULT TRUE
+);
+CREATE INDEX idx_food_search ON food_items (name_search);
+CREATE INDEX idx_food_category ON food_items (category);
+
+-- Tutti possono leggere, solo admin può scrivere
+ALTER TABLE food_items ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "food_select" ON food_items FOR SELECT USING (is_active = TRUE);
+CREATE POLICY "food_admin"  ON food_items FOR ALL USING (
+  EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND is_admin = TRUE)
+);
+
+-- Ricette utente (recipe builder)
+CREATE TABLE IF NOT EXISTS user_recipes (
+  id            UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id       UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
+  name          TEXT NOT NULL,
+  description   TEXT,
+  meal_type     TEXT[] NOT NULL,
+  servings      INTEGER DEFAULT 1,
+  prep_time     INTEGER,
+  ingredients   JSONB NOT NULL,   -- [{ food_item_id, name, amount_g, kcal, proteine, carboidrati, grassi }]
+  instructions  JSONB DEFAULT '[]',
+  -- calcolati automaticamente dalla somma degli ingredienti
+  calories      INTEGER,
+  macros        JSONB,            -- { proteine, carboidrati, grassi }
+  image_url     TEXT,
+  is_public     BOOLEAN DEFAULT FALSE,
+  created_at    TIMESTAMPTZ DEFAULT NOW(),
+  updated_at    TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE user_recipes ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "urecipes_own"    ON user_recipes FOR ALL   USING (auth.uid() = user_id);
+CREATE POLICY "urecipes_public" ON user_recipes FOR SELECT USING (is_public = TRUE);
+CREATE INDEX idx_user_recipes_user ON user_recipes (user_id);

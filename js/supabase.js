@@ -204,3 +204,59 @@ export async function savePushSubscription(userId, subscription) {
   });
   if (error) throw error;
 }
+
+// ── INRAN Food Items ──────────────────────────────────
+
+export async function searchFoodItems(query, limit = 20) {
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
+  const { data, error } = await supabase
+    .from('food_items')
+    .select('*')
+    .ilike('name', `%${q}%`)
+    .eq('is_active', true)
+    .limit(limit);
+  if (error) throw error;
+  return data || [];
+}
+
+export async function getFoodItemsByCategory(category) {
+  const { data, error } = await supabase
+    .from('food_items')
+    .select('*')
+    .eq('category', category)
+    .eq('is_active', true)
+    .order('name');
+  if (error) throw error;
+  return data || [];
+}
+
+// ── User Recipes ──────────────────────────────────────
+
+export async function getUserRecipes(userId) {
+  const { data, error } = await supabase
+    .from('user_recipes')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data || [];
+}
+
+export async function saveUserRecipe(userId, recipe) {
+  const { data, error } = await supabase
+    .from('user_recipes')
+    .upsert({ ...recipe, user_id: userId, updated_at: new Date().toISOString() })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteUserRecipe(id) {
+  const { error } = await supabase
+    .from('user_recipes')
+    .delete()
+    .eq('id', id);
+  if (error) throw error;
+}
