@@ -7765,5 +7765,2340 @@
     "source_url": "https://ricette.giallozafferano.it/Pane-segale-avocado.html",
     "kcal_min_scaled": 151,
     "kcal_max_scaled": 321
+  },
+  {
+    "name": "Sciatt valtellinesi light con insalata",
+    "description": "Versione alleggerita dei tipici sciatt valtellinesi, con formaggio filante e insalata fresca.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 16,
+      "carboidrati": 28,
+      "grassi": 18
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farina di grano saraceno",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
+      },
+      {
+        "name": "formaggio casera (o fontina)",
+        "amount": 40,
+        "unit": "g",
+        "min": 30,
+        "max": 60,
+        "step": 10,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 370
+      },
+      {
+        "name": "grappa o acqua gasata",
+        "amount": 30,
+        "unit": "ml",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "insalata mista",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 15
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Mescolare farina di grano saraceno con acqua gasata e formaggio a cubetti.",
+      "Friggere cucchiaiate in olio caldo fino a doratura.",
+      "Scolare e servire su letto di insalata."
+    ],
+    "tags": [
+      "colazione",
+      "vegetariano",
+      "grano saraceno",
+      "tradizionale"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600",
+    "source_url": "https://blog.giallozafferano.it/atavolacontea/ricette-dietetiche/",
+    "kcal_min_scaled": 280,
+    "kcal_max_scaled": 520
+  },
+  {
+    "name": "Bowl proteica con tofu scramble e verdure",
+    "description": "Colazione vegana ispirata alle uova strapazzate, con tofu morbido e curcuma.",
+    "meal_type": [
+      "colazione"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 22,
+      "carboidrati": 18,
+      "grassi": 18
+    },
+    "prep_time": 15,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "tofu sodo",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 76
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
+      },
+      {
+        "name": "pomodorini",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "curcuma e sale",
+        "amount": 2,
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "pane integrale",
+        "amount": 40,
+        "unit": "g",
+        "min": 30,
+        "max": 60,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
+      }
+    ],
+    "instructions": [
+      "Sbricolare il tofu grossolanamente.",
+      "Scaldare olio con curcuma, aggiungere tofu e cuocere 5 min.",
+      "Aggiungere spinaci e pomodorini, cuocere altri 3 min.",
+      "Servire con pane integrale tostato."
+    ],
+    "tags": [
+      "colazione",
+      "vegano",
+      "vegetariano",
+      "proteico",
+      "senza glutine"
+    ],
+    "allergens": [
+      "soia",
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1546548970-71785318a17b?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tofu-scramble.html",
+    "kcal_min_scaled": 240,
+    "kcal_max_scaled": 480
+  },
+  {
+    "name": "Zuppa di pomodoro e basilico con crostini integrali",
+    "description": "Classica vellutata di pomodoro aromatica, servita con crostini croccanti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 290,
+    "macros": {
+      "proteine": 8,
+      "carboidrati": 42,
+      "grassi": 10
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pomodori maturi",
+        "amount": 300,
+        "unit": "g",
+        "min": 250,
+        "max": 400,
+        "step": 50,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
+      },
+      {
+        "name": "basilico fresco",
+        "amount": 10,
+        "unit": "g",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 200,
+        "unit": "ml",
+        "min": 150,
+        "max": 300,
+        "step": 50,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
+      },
+      {
+        "name": "pane integrale (per crostini)",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla con olio, aggiungere pomodori a pezzi e brodo.",
+      "Cuocere 20 minuti, frullare con frullatore ad immersione.",
+      "Tagliare il pane a cubetti e tostare in forno.",
+      "Servire la vellutata calda con crostini e basilico."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "vellutata",
+      "senza glutine",
+      "semplice"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Vellutata-pomodoro.html",
+    "kcal_min_scaled": 220,
+    "kcal_max_scaled": 450
+  },
+  {
+    "name": "Petto d'anatra al forno con mele e timo",
+    "description": "Secondo raffinato con carne magra e il contrasto dolce-aromatico delle mele.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 14,
+      "grassi": 20
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto d'anatra (senza pelle)",
+        "amount": 200,
+        "unit": "g",
+        "min": 160,
+        "max": 240,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
+      },
+      {
+        "name": "mele golden",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 52
+      },
+      {
+        "name": "timo fresco",
+        "amount": 3,
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "aceto di mele",
+        "amount": 10,
+        "unit": "ml",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
+      }
+    ],
+    "instructions": [
+      "Incidere leggermente il petto d'anatra, marinare con timo, olio e aceto.",
+      "Rosolare in padella skin-side down 5 min, girare e cuocere altri 5 min.",
+      "Aggiungere le mele a spicchi, infornare a 180°C per 12 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "carne",
+      "anatra",
+      "forno",
+      "raffinato",
+      "senza glutine"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Petto-anatra-mele.html",
+    "kcal_min_scaled": 290,
+    "kcal_max_scaled": 520
+  },
+  {
+    "name": "Insalata di quinoa con zucchine grigliate e formaggio feta",
+    "description": "Bowl vegetariana estiva con proteine complete della quinoa e il sapore deciso della feta.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 48,
+      "grassi": 16
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "quinoa",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 368
+      },
+      {
+        "name": "zucchine",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
+      },
+      {
+        "name": "feta",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 10,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 264
+      },
+      {
+        "name": "menta fresca",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "limone (succo)",
+        "amount": 15,
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 29
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Cuocere la quinoa in doppio volume d'acqua per 15 minuti, raffreddare.",
+      "Grigliare le zucchine a fette su piastra calda.",
+      "Condire la quinoa con olio e limone.",
+      "Assemblare con zucchine, feta sbriciolata e foglie di menta."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "senza glutine",
+      "estivo",
+      "quinoa"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-quinoa-feta.html",
+    "kcal_min_scaled": 330,
+    "kcal_max_scaled": 600
+  },
+  {
+    "name": "Ribollita toscana",
+    "description": "Zuppa toscana di pane raffermo e verdure, ricca di fibre e proteine vegetali.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 380,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 58,
+      "grassi": 10
+    },
+    "prep_time": 55,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "fagioli cannellini lessati",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 127
+      },
+      {
+        "name": "cavolo nero",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 150,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 35
+      },
+      {
+        "name": "pane toscano raffermo",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 250
+      },
+      {
+        "name": "sedano, carota, cipolla",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 100,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 35
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 130,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 400,
+        "unit": "ml",
+        "min": 300,
+        "max": 500,
+        "step": 50,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
+      }
+    ],
+    "instructions": [
+      "Soffriggere sedano, carota e cipolla.",
+      "Aggiungere pelati, fagioli e brodo, cuocere 20 min.",
+      "Aggiungere cavolo nero e pane a pezzi, cuocere altri 20 min fino a consistenza densa.",
+      "Servire con filo d'olio a crudo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "tradizionale",
+      "toscano",
+      "invernale",
+      "legumi"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Ribollita.html",
+    "kcal_min_scaled": 290,
+    "kcal_max_scaled": 560
+  },
+  {
+    "name": "Salmone teriyaki con riso basmati",
+    "description": "Piatto fusion con salmone glassato in salsa teriyaki leggera e riso profumato.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 450,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 46,
+      "grassi": 14
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "filetto di salmone",
+        "amount": 180,
+        "unit": "g",
+        "min": 150,
+        "max": 220,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 200
+      },
+      {
+        "name": "riso basmati",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 349
+      },
+      {
+        "name": "salsa di soia (tamari)",
+        "amount": 20,
+        "unit": "ml",
+        "min": 15,
+        "max": 25,
+        "step": 5,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 60
+      },
+      {
+        "name": "miele",
+        "amount": 10,
+        "unit": "g",
+        "min": 8,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 304
+      },
+      {
+        "name": "zenzero fresco grattugiato",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 15
+      },
+      {
+        "name": "semi di sesamo",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 10,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 573
+      }
+    ],
+    "instructions": [
+      "Cuocere il riso basmati.",
+      "Mescolare tamari, miele e zenzero per la salsa teriyaki.",
+      "Marinare il salmone 10 minuti, poi cuocere in padella 4 min per lato.",
+      "Glassare con la salsa negli ultimi 2 minuti.",
+      "Servire con riso e sesamo tostato."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "salmone",
+      "riso",
+      "senza glutine",
+      "fusion"
+    ],
+    "allergens": [
+      "pesce",
+      "soia",
+      "sesamo"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Salmone-teriyaki.html",
+    "kcal_min_scaled": 360,
+    "kcal_max_scaled": 640
+  },
+  {
+    "name": "Parmigiana di zucchine light",
+    "description": "Versione leggera della classica parmigiana, con zucchine al forno invece di fritte.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 16,
+      "grassi": 20
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "zucchine",
+        "amount": 300,
+        "unit": "g",
+        "min": 250,
+        "max": 380,
+        "step": 50,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
+      },
+      {
+        "name": "mozzarella light",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 200
+      },
+      {
+        "name": "passata di pomodoro",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 30,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 35
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 20,
+        "unit": "g",
+        "min": 15,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
+      },
+      {
+        "name": "basilico fresco",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Tagliare le zucchine per il lungo, grigliare su piastra.",
+      "Disporre in teglia: zucchine, passata, mozzarella, parmigiano.",
+      "Ripetere gli strati e finire con parmigiano.",
+      "Cuocere in forno a 200°C per 25 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "senza glutine",
+      "forno",
+      "light"
+    ],
+    "allergens": [
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1540914124281-342587941389?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Parmigiana-zucchine.html",
+    "kcal_min_scaled": 240,
+    "kcal_max_scaled": 500
+  },
+  {
+    "name": "Pasta al forno con verdure e besciamella light",
+    "description": "Primo piatto di pasta al forno vegetariano, con besciamella leggera e verdure di stagione.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 450,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 62,
+      "grassi": 14
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pasta integrale (rigatoni)",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
+      },
+      {
+        "name": "zucchine",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 130,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
+      },
+      {
+        "name": "melanzane",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 25
+      },
+      {
+        "name": "latte parzialmente scremato",
+        "amount": 150,
+        "unit": "ml",
+        "min": 120,
+        "max": 180,
+        "step": 30,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 46
+      },
+      {
+        "name": "farina integrale (per besciamella)",
+        "amount": 15,
+        "unit": "g",
+        "min": 12,
+        "max": 20,
+        "step": 5,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 339
+      },
+      {
+        "name": "parmigiano grattugiato",
+        "amount": 20,
+        "unit": "g",
+        "min": 15,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 430
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Cuocere la pasta al dente, scolare.",
+      "Saltare le verdure con olio.",
+      "Preparare besciamella con latte, farina e un cucchiaio d'olio.",
+      "Mescolare pasta, verdure e besciamella in teglia, cospargere di parmigiano.",
+      "Infornare a 200°C per 20 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "pasta al forno",
+      "forno"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pasta-forno-verdure.html",
+    "kcal_min_scaled": 340,
+    "kcal_max_scaled": 660
+  },
+  {
+    "name": "Spiedini di pollo e verdure alla griglia",
+    "description": "Spiedini colorati e leggeri, perfetti per una cena estiva veloce.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 310,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 12,
+      "grassi": 12
+    },
+    "prep_time": 25,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "petto di pollo",
+        "amount": 180,
+        "unit": "g",
+        "min": 150,
+        "max": 230,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 165
+      },
+      {
+        "name": "peperoni misti",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 130,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 31
+      },
+      {
+        "name": "zucchine",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 17
+      },
+      {
+        "name": "cipolla rossa",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 70,
+        "step": 15,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "origano e paprika",
+        "amount": 2,
+        "unit": "g",
+        "min": 2,
+        "max": 2,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      }
+    ],
+    "instructions": [
+      "Tagliare pollo e verdure a cubetti simili.",
+      "Infilare su spiedini alternando pollo e verdure.",
+      "Spennellare con olio, origano e paprika.",
+      "Grigliare 10-12 minuti girando spesso."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pollo",
+      "senza glutine",
+      "estivo",
+      "griglia",
+      "rapido"
+    ],
+    "allergens": [],
+    "image_url": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Spiedini-pollo-verdure.html",
+    "kcal_min_scaled": 240,
+    "kcal_max_scaled": 470
+  },
+  {
+    "name": "Zuppa di farro e funghi porcini",
+    "description": "Zuppa autunnale ricca di sapore, con farro integrale e profumo di bosco.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 360,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 58,
+      "grassi": 8
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farro perlato",
+        "amount": 70,
+        "unit": "g",
+        "min": 50,
+        "max": 100,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
+      },
+      {
+        "name": "funghi porcini secchi",
+        "amount": 15,
+        "unit": "g",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 280
+      },
+      {
+        "name": "funghi champignon freschi",
+        "amount": 100,
+        "unit": "g",
+        "min": 80,
+        "max": 140,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 22
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 500,
+        "unit": "ml",
+        "min": 400,
+        "max": 600,
+        "step": 50,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "rosmarino e timo",
+        "amount": 3,
+        "unit": "g",
+        "min": 3,
+        "max": 3,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      }
+    ],
+    "instructions": [
+      "Ammollare i porcini secchi in acqua tiepida 20 minuti.",
+      "Soffriggere cipolla, aggiungere champignon e porcini scolati.",
+      "Aggiungere farro e brodo (+ acqua dei porcini filtrata).",
+      "Cuocere 30 minuti. Aggiustare di sale, servire con olio a crudo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "funghi",
+      "autunnale",
+      "cereali"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Zuppa-farro-funghi.html",
+    "kcal_min_scaled": 270,
+    "kcal_max_scaled": 530
+  },
+  {
+    "name": "Trota salmonata al cartoccio con limone e erbe",
+    "description": "Pesce delicato cotto al cartoccio, profumato di erbe mediterranee.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 300,
+    "macros": {
+      "proteine": 38,
+      "carboidrati": 2,
+      "grassi": 15
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "trota salmonata (filetti)",
+        "amount": 220,
+        "unit": "g",
+        "min": 180,
+        "max": 260,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 119
+      },
+      {
+        "name": "limone",
+        "amount": 1,
+        "unit": "pz",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 29
+      },
+      {
+        "name": "rosmarino e timo",
+        "amount": 4,
+        "unit": "g",
+        "min": 4,
+        "max": 4,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      }
+    ],
+    "instructions": [
+      "Preriscaldare il forno a 180°C.",
+      "Disporre i filetti su carta forno, condire con olio, limone, erbe e aglio.",
+      "Chiudere il cartoccio e cuocere 25 minuti.",
+      "Aprire e servire con spicchi di limone."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "trota",
+      "senza glutine",
+      "forno",
+      "light"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Trota-cartoccio.html",
+    "kcal_min_scaled": 220,
+    "kcal_max_scaled": 430
+  },
+  {
+    "name": "Gnocchi di patate al pomodoro fresco",
+    "description": "Gnocchi fatti in casa con sugo leggero di pomodoro fresco e basilico.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 430,
+    "macros": {
+      "proteine": 12,
+      "carboidrati": 76,
+      "grassi": 9
+    },
+    "prep_time": 50,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "patate",
+        "amount": 200,
+        "unit": "g",
+        "min": 160,
+        "max": 250,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 77
+      },
+      {
+        "name": "farina 00",
+        "amount": 60,
+        "unit": "g",
+        "min": 50,
+        "max": 80,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 364
+      },
+      {
+        "name": "pomodori freschi maturi",
+        "amount": 200,
+        "unit": "g",
+        "min": 160,
+        "max": 260,
+        "step": 40,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "basilico fresco",
+        "amount": 8,
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "aglio",
+        "amount": 1,
+        "unit": "spicchio",
+        "min": 1,
+        "max": 1,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Lessare le patate, schiacciarle e mescolare con farina fino ad impasto omogeneo.",
+      "Formare i gnocchi con una forchetta.",
+      "Preparare il sugo: soffriggere aglio, aggiungere pomodori e cuocere 10 min.",
+      "Cuocere gli gnocchi in acqua salata (pronti quando vengono a galla).",
+      "Condire con il sugo e basilico fresco."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "primo piatto",
+      "gnocchi",
+      "tradizionale"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Gnocchi-patate-pomodoro.html",
+    "kcal_min_scaled": 320,
+    "kcal_max_scaled": 630
+  },
+  {
+    "name": "Baccalà in umido con patate e olive",
+    "description": "Secondo di pesce della tradizione italiana, saporito e nutriente.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 350,
+    "macros": {
+      "proteine": 32,
+      "carboidrati": 26,
+      "grassi": 12
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "baccalà già ammollato",
+        "amount": 200,
+        "unit": "g",
+        "min": 160,
+        "max": 240,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 82
+      },
+      {
+        "name": "patate",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 77
+      },
+      {
+        "name": "olive nere",
+        "amount": 25,
+        "unit": "g",
+        "min": 20,
+        "max": 35,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 115
+      },
+      {
+        "name": "pomodori pelati",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "aglio, prezzemolo",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Tagliare il baccalà a pezzi, infarinare leggermente e rosolare in olio.",
+      "Aggiungere le patate a cubetti, i pelati e le olive.",
+      "Cuocere coperto a fuoco basso per 30 minuti.",
+      "Cospargere di prezzemolo e servire."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "baccalà",
+      "tradizionale",
+      "invernale",
+      "senza glutine"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Baccala-umido-patate.html",
+    "kcal_min_scaled": 260,
+    "kcal_max_scaled": 510
+  },
+  {
+    "name": "Insalata di lenticchie con melograno e spinaci",
+    "description": "Insalata vegana invernale ricca di ferro e antiossidanti.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 330,
+    "macros": {
+      "proteine": 18,
+      "carboidrati": 44,
+      "grassi": 8
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "lenticchie lessate",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 116
+      },
+      {
+        "name": "spinaci freschi",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 23
+      },
+      {
+        "name": "chicchi di melograno",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "frutta",
+        "kcal_per_100": 83
+      },
+      {
+        "name": "noci",
+        "amount": 15,
+        "unit": "g",
+        "min": 10,
+        "max": 25,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 654
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "aceto balsamico",
+        "amount": 10,
+        "unit": "ml",
+        "min": 10,
+        "max": 10,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 88
+      }
+    ],
+    "instructions": [
+      "Cuocere le lenticchie in acqua salata se non già pronte.",
+      "Comporre l'insalata: spinaci, lenticchie, melograno.",
+      "Condire con olio, aceto balsamico e sale.",
+      "Guarnire con noci spezzettate."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "senza glutine",
+      "insalata",
+      "ferro",
+      "invernale"
+    ],
+    "allergens": [
+      "frutta a guscio"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-lenticchie-melograno.html",
+    "kcal_min_scaled": 250,
+    "kcal_max_scaled": 490
+  },
+  {
+    "name": "Calamari ripieni al forno",
+    "description": "Secondo di pesce festivo e leggero, farcito con pane, erbe e gamberi.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 310,
+    "macros": {
+      "proteine": 34,
+      "carboidrati": 16,
+      "grassi": 11
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "calamari già puliti",
+        "amount": 200,
+        "unit": "g",
+        "min": 160,
+        "max": 240,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 85
+      },
+      {
+        "name": "gamberetti sgusciati",
+        "amount": 60,
+        "unit": "g",
+        "min": 50,
+        "max": 80,
+        "step": 10,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 99
+      },
+      {
+        "name": "pane integrale (mollica)",
+        "amount": 30,
+        "unit": "g",
+        "min": 20,
+        "max": 40,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 230
+      },
+      {
+        "name": "prezzemolo, aglio, limone",
+        "amount": 8,
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Tritare gamberetti, mollica di pane, prezzemolo e aglio.",
+      "Farcire i calamari con il composto, chiudere con stuzzicadenti.",
+      "Disporre in teglia, condire con olio e limone.",
+      "Cuocere in forno a 180°C per 25 minuti."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "molluschi",
+      "forno",
+      "raffinato"
+    ],
+    "allergens": [
+      "pesce",
+      "crostacei",
+      "glutine",
+      "molluschi"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Calamari-ripieni-forno.html",
+    "kcal_min_scaled": 230,
+    "kcal_max_scaled": 460
+  },
+  {
+    "name": "Pasta alla norma",
+    "description": "Primo piatto siciliano con melanzane fritte light, pomodoro e ricotta salata.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 440,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 68,
+      "grassi": 13
+    },
+    "prep_time": 35,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "pasta integrale (spaghetti)",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
+      },
+      {
+        "name": "melanzane",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 30,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 25
+      },
+      {
+        "name": "passata di pomodoro",
+        "amount": 150,
+        "unit": "g",
+        "min": 120,
+        "max": 200,
+        "step": 30,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 35
+      },
+      {
+        "name": "ricotta salata",
+        "amount": 20,
+        "unit": "g",
+        "min": 15,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 270
+      },
+      {
+        "name": "basilico fresco",
+        "amount": 8,
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Tagliare le melanzane a cubetti, saltare in padella con poco olio.",
+      "Preparare il sugo di pomodoro con aglio e basilico.",
+      "Cuocere la pasta, scolare e condire col sugo.",
+      "Aggiungere le melanzane e guarnire con ricotta salata grattugiata."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "siciliano",
+      "primo piatto",
+      "tradizionale"
+    ],
+    "allergens": [
+      "glutine",
+      "latte"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Pasta-alla-norma.html",
+    "kcal_min_scaled": 330,
+    "kcal_max_scaled": 640
+  },
+  {
+    "name": "Insalata di polpo con patate e prezzemolo",
+    "description": "Antipasto/secondo freddo tipico della cucina marinara italiana.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 320,
+    "macros": {
+      "proteine": 28,
+      "carboidrati": 26,
+      "grassi": 10
+    },
+    "prep_time": 60,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "polpo già cotto",
+        "amount": 180,
+        "unit": "g",
+        "min": 150,
+        "max": 220,
+        "step": 20,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 82
+      },
+      {
+        "name": "patate",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 77
+      },
+      {
+        "name": "prezzemolo fresco",
+        "amount": 8,
+        "unit": "g",
+        "min": 8,
+        "max": 8,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olive nere",
+        "amount": 20,
+        "unit": "g",
+        "min": 15,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 115
+      },
+      {
+        "name": "limone (succo)",
+        "amount": 15,
+        "unit": "ml",
+        "min": 10,
+        "max": 20,
+        "step": 5,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 29
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      }
+    ],
+    "instructions": [
+      "Lessare le patate, sbucciare e tagliare a cubetti, raffreddare.",
+      "Tagliare il polpo a pezzi.",
+      "Condire tutto con olio, limone, prezzemolo e olive.",
+      "Servire freddo o a temperatura ambiente."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "molluschi",
+      "polpo",
+      "senza glutine",
+      "freddo",
+      "estivo"
+    ],
+    "allergens": [
+      "molluschi"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1485921325833-c485921325833?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Insalata-polpo-patate.html",
+    "kcal_min_scaled": 240,
+    "kcal_max_scaled": 470
+  },
+  {
+    "name": "Minestra di farro con verdure invernali",
+    "description": "Zuppa densa e corroborante per l'inverno, con carote, sedano e farro.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana",
+      "vegana"
+    ],
+    "calories": 340,
+    "macros": {
+      "proteine": 10,
+      "carboidrati": 56,
+      "grassi": 8
+    },
+    "prep_time": 45,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "farro perlato",
+        "amount": 70,
+        "unit": "g",
+        "min": 50,
+        "max": 100,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 340
+      },
+      {
+        "name": "carote",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
+      },
+      {
+        "name": "sedano",
+        "amount": 60,
+        "unit": "g",
+        "min": 40,
+        "max": 80,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 16
+      },
+      {
+        "name": "patate",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 77
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 8,
+        "unit": "ml",
+        "min": 5,
+        "max": 15,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "brodo vegetale",
+        "amount": 500,
+        "unit": "ml",
+        "min": 400,
+        "max": 600,
+        "step": 50,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 5
+      }
+    ],
+    "instructions": [
+      "Soffriggere cipolla con olio.",
+      "Aggiungere tutte le verdure a cubetti, mescolare 3 minuti.",
+      "Versare il brodo e il farro, portare a bollore.",
+      "Cuocere 30 minuti a fuoco medio. Servire con olio a crudo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegano",
+      "vegetariano",
+      "cereali",
+      "invernale",
+      "minestra"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1547592180-85f173990554?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Minestra-farro-verdure.html",
+    "kcal_min_scaled": 250,
+    "kcal_max_scaled": 510
+  },
+  {
+    "name": "Tagliatelle integrali al ragù di verdure",
+    "description": "Primo vegetariano ricco con un ragù di verdure saporito e soddisfacente.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard",
+      "vegetariana"
+    ],
+    "calories": 420,
+    "macros": {
+      "proteine": 14,
+      "carboidrati": 66,
+      "grassi": 12
+    },
+    "prep_time": 40,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "tagliatelle integrali",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 10,
+        "priority": 1,
+        "category": "carboidrati",
+        "kcal_per_100": 350
+      },
+      {
+        "name": "carote",
+        "amount": 60,
+        "unit": "g",
+        "min": 50,
+        "max": 80,
+        "step": 15,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 41
+      },
+      {
+        "name": "sedano",
+        "amount": 40,
+        "unit": "g",
+        "min": 30,
+        "max": 60,
+        "step": 15,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 16
+      },
+      {
+        "name": "cipolla",
+        "amount": 50,
+        "unit": "g",
+        "min": 40,
+        "max": 60,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 40
+      },
+      {
+        "name": "funghi champignon",
+        "amount": 80,
+        "unit": "g",
+        "min": 60,
+        "max": 110,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 22
+      },
+      {
+        "name": "passata di pomodoro",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 35
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "vino rosso",
+        "amount": 30,
+        "unit": "ml",
+        "min": 30,
+        "max": 30,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 68
+      }
+    ],
+    "instructions": [
+      "Tritare finemente sedano, carota e cipolla per il soffritto.",
+      "Aggiungere i funghi a pezzi, sfumare col vino rosso.",
+      "Aggiungere la passata e cuocere 20 minuti.",
+      "Cuocere le tagliatelle e mantecare nel ragù."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "vegetariano",
+      "primo piatto",
+      "ragù",
+      "funghi"
+    ],
+    "allergens": [
+      "glutine"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Tagliatelle-ragu-verdure.html",
+    "kcal_min_scaled": 310,
+    "kcal_max_scaled": 620
+  },
+  {
+    "name": "Spigola in acqua pazza",
+    "description": "Pesce bianco cotto nel brodo di pomodorini, capperi e olive — semplicità napoletana.",
+    "meal_type": [
+      "pranzo",
+      "cena"
+    ],
+    "diet_type": [
+      "standard"
+    ],
+    "calories": 280,
+    "macros": {
+      "proteine": 36,
+      "carboidrati": 6,
+      "grassi": 12
+    },
+    "prep_time": 30,
+    "servings": 1,
+    "ingredients": [
+      {
+        "name": "spigola (branzino) intera",
+        "amount": 350,
+        "unit": "g",
+        "min": 300,
+        "max": 420,
+        "step": 30,
+        "priority": 3,
+        "category": "proteine",
+        "kcal_per_100": 82
+      },
+      {
+        "name": "pomodorini",
+        "amount": 120,
+        "unit": "g",
+        "min": 100,
+        "max": 160,
+        "step": 20,
+        "priority": 4,
+        "category": "verdure",
+        "kcal_per_100": 18
+      },
+      {
+        "name": "capperi",
+        "amount": 10,
+        "unit": "g",
+        "min": 10,
+        "max": 15,
+        "step": 5,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 23
+      },
+      {
+        "name": "olive verdi",
+        "amount": 20,
+        "unit": "g",
+        "min": 15,
+        "max": 30,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 145
+      },
+      {
+        "name": "aglio e prezzemolo",
+        "amount": 5,
+        "unit": "g",
+        "min": 5,
+        "max": 5,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 0
+      },
+      {
+        "name": "olio extravergine d'oliva",
+        "amount": 10,
+        "unit": "ml",
+        "min": 8,
+        "max": 18,
+        "step": 5,
+        "priority": 2,
+        "category": "grassi",
+        "kcal_per_100": 900
+      },
+      {
+        "name": "vino bianco secco",
+        "amount": 50,
+        "unit": "ml",
+        "min": 50,
+        "max": 50,
+        "step": 0,
+        "priority": 99,
+        "category": "condimento",
+        "kcal_per_100": 66
+      }
+    ],
+    "instructions": [
+      "In teglia larga, soffriggere aglio con olio.",
+      "Aggiungere pomodorini, capperi, olive e sfumare col vino.",
+      "Adagiare la spigola, aggiungere acqua fino a metà pesce.",
+      "Coprire e cuocere 15-18 minuti. Servire con prezzemolo."
+    ],
+    "tags": [
+      "pranzo",
+      "cena",
+      "pesce",
+      "spigola",
+      "senza glutine",
+      "napoletano",
+      "raffinato"
+    ],
+    "allergens": [
+      "pesce"
+    ],
+    "image_url": "https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=600",
+    "source_url": "https://ricette.giallozafferano.it/Spigola-acqua-pazza.html",
+    "kcal_min_scaled": 210,
+    "kcal_max_scaled": 420
   }
 ]

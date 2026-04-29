@@ -987,3 +987,27 @@ textarea { resize: vertical; min-height: 80px; }
     background: var(--green); color: #000; border-color: var(--green);
   }
 }
+
+/* Streak */
+.streak-num { font-size: 1.6rem !important; line-height: 1 !important; }
+
+/* ── Ricerca ricette ── */
+.search-result-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px; border-radius: var(--radius-sm);
+  margin-bottom: 8px; transition: background 0.15s;
+}
+.search-result-item:hover { background: var(--green-pale); }
+.search-thumb {
+  width: 56px; height: 56px; border-radius: 8px; flex-shrink: 0;
+  background-size: cover; background-position: center;
+  background-color: var(--green-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+
+/* ── Swipe animation ── */
+@keyframes slideInRight { from { opacity:0; transform: translateX(40px); } to { opacity:1; transform: translateX(0); } }
+@keyframes slideInLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
+.slide-in-right { animation: slideInRight 0.28s cubic-bezier(.4,0,.2,1); }
+.slide-in-left  { animation: slideInLeft  0.28s cubic-bezier(.4,0,.2,1); }

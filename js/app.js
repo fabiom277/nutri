@@ -146,6 +146,28 @@ async function loadUserData() {
     const savedPlan = profile.current_plan;
     if (savedPlan && savedPlan.days) {
       state.plan = hydratePlan(savedPlan, recipes);
+
+      // Migrazione formato legacy (solo UUID → ora { id, cal, macros })
+      // Se i slot hanno calorie base (non scalate), ri-scala e risalva
+      if (state.plan && profile.target_calories) {
+        const needsMigration = state.plan.days.some(d =>
+          Object.values(d.slots).some(r => r && !r._hydrated)
+        );
+        if (needsMigration) {
+          const calSlots = caloriesBySlot(profile.target_calories, profile.meal_schedule);
+          const slots    = activeSlots(profile.meal_schedule);
+          for (const day of state.plan.days) {
+            for (const slot of slots) {
+              const r = day.slots[slot];
+              if (r && !r._hydrated) {
+                day.slots[slot] = scaleRecipeToTarget(r, calSlots[slot], profile.meal_schedule);
+              }
+            }
+          }
+          // Risalva il piano col nuovo formato
+          savePlanCompact().catch(e => console.warn('[migration] savePlanCompact:', e));
+        }
+      }
     }
 
     if (!state.plan || !state.plan.days?.length) {
@@ -688,6 +710,62 @@ async function saveOnboarding() {
   showApp();
 }
 
+// ── Ricerca ricette nel piano ─────────────────────────
+function renderSearchResults(dayIdx) {
+  const q    = document.getElementById('recipe-search-input')?.value.toLowerCase().trim() || '';
+  const slot = document.getElementById('recipe-slot-select')?.value || 'pranzo';
+  const el   = document.getElementById('recipe-search-results');
+  if (!el) return;
+
+  const candidates = filterRecipes(state.recipes, state.profile, slot, state.excluded);
+  const filtered   = q
+    ? candidates.filter(r =>
+        r.name.toLowerCase().includes(q) ||
+        r.ingredients?.some(i => i.name.toLowerCase().includes(q)) ||
+        r.tags?.some(t => t.toLowerCase().includes(q))
+      )
+    : candidates;
+
+  if (!filtered.length) {
+    el.innerHTML = `<p class="text-soft" style="text-align:center;padding:24px">Nessuna ricetta trovata</p>`;
+    return;
+  }
+
+  const calSlots = caloriesBySlot(state.profile?.target_calories || 2000, state.profile?.meal_schedule || 'standard');
+  const target   = calSlots[slot] || 500;
+
+  el.innerHTML = filtered.slice(0, 20).map(r => `
+    <div class="search-result-item" data-rid="${r.id}" data-slot="${slot}" data-day="${dayIdx}">
+      ${r.image_url ? `<div class="search-thumb" style="background-image:url(${r.image_url})"></div>` : '<div class="search-thumb search-thumb-empty">🍽️</div>'}
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</div>
+        <div style="font-size:0.78rem;color:var(--text-soft);margin-top:2px">${r.calories} kcal base · target ${target} kcal</div>
+        <div class="macro-bar" style="margin-top:4px">
+          <span class="macro-chip p">P ${r.macros?.proteine || 0}g</span>
+          <span class="macro-chip c">C ${r.macros?.carboidrati || 0}g</span>
+          <span class="macro-chip f">G ${r.macros?.grassi || 0}g</span>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-sm" style="flex-shrink:0" onclick="applyRecipeToSlot('${r.id}','${slot}',${dayIdx})">Usa</button>
+    </div>
+  `).join('');
+}
+
+window.applyRecipeToSlot = async function(recipeId, slot, dayIdx) {
+  const recipe = state.recipes.find(r => r.id === recipeId);
+  if (!recipe) return;
+
+  const calSlots = caloriesBySlot(state.profile?.target_calories || 2000, state.profile?.meal_schedule || 'standard');
+  const scaled   = scaleRecipeToTarget(recipe, calSlots[slot], state.profile?.meal_schedule || 'standard');
+
+  state.plan.days[dayIdx].slots[slot] = scaled;
+  await savePlanCompact();
+
+  document.getElementById('search-recipe-overlay')?.classList.remove('open');
+  renderPiano();
+  toast(`"${recipe.name}" aggiunto al ${slot} ✓`);
+};
+
 // ── Smart Rigenera ────────────────────────────────────
 // Rigenera solo i pasti NON confermati, lascia intatti i confermati
 async function smartRegenerate() {
@@ -737,148 +815,174 @@ async function smartRegenerate() {
 
 // ── Dashboard Progressi ───────────────────────────────
 async function renderDashboard() {
-  const el = document.getElementById('page-dashboard');
+  const el  = document.getElementById('page-dashboard');
   const uid = state.session?.user?.id;
+  if (!el) return;
 
-  // Carica confirmed meals delle ultime 4 settimane
-  const now     = new Date();
-  const pad     = n => String(n).padStart(2, '0');
-  const local   = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-  const past30  = new Date(now); past30.setDate(now.getDate() - 30);
-  const todayStr = local(now);
+  const now      = new Date();
+  const pad      = n => String(n).padStart(2, '0');
+  const localStr = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const todayStr = localStr(now);
 
+  // Carica confirmed meals (ultime 5 settimane)
   let confirmed = state.confirmedMeals;
-  // Se non copre abbastanza, ricarica
-  if (!confirmed.some(c => c.plan_date <= local(past30))) {
-    try {
-      confirmed = await getConfirmedMeals(uid,
-        local(past30), local(new Date(now.getTime() + 7 * 86400000))
-      );
-    } catch {}
+  try {
+    const past35 = new Date(now); past35.setDate(now.getDate() - 35);
+    const fut7   = new Date(now); fut7.setDate(now.getDate() + 7);
+    if (!confirmed.some(c => c.plan_date >= localStr(past35))) {
+      confirmed = await getConfirmedMeals(uid, localStr(past35), localStr(fut7));
+    }
+  } catch(e) { console.warn('[dashboard] getConfirmedMeals:', e); }
+
+  const slots = activeSlots(state.profile?.meal_schedule || 'standard');
+  const target = Math.round(state.profile?.target_calories || 0);
+
+  // ── Ultimi 7 giorni ──
+  const last7 = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(now); d.setDate(now.getDate() - (6 - i));
+    return localStr(d);
+  });
+
+  // Streak: giorni consecutivi terminando da ieri con almeno 1 pasto confermato
+  let streak = 0;
+  for (let i = 0; i < 60; i++) {
+    const d = new Date(now); d.setDate(now.getDate() - 1 - i);
+    const ds = localStr(d);
+    if (confirmed.some(c => c.plan_date === ds)) streak++;
+    else break;
   }
+  // Se oggi ha già pasti confermati, conta anche oggi
+  if (confirmed.some(c => c.plan_date === todayStr)) streak++;
 
-  // ── Calcoli ──
-  const thisWeekStart = new Date(now);
-  thisWeekStart.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1));
-  const weekStr = local(thisWeekStart);
+  // Aderenza ultimi 7gg
+  const daysWithMeals = last7.filter(d => confirmed.some(c => c.plan_date === d)).length;
+  const adherencePct  = Math.round((daysWithMeals / 7) * 100);
 
-  const thisWeekMeals  = confirmed.filter(c => c.plan_date >= weekStr && c.plan_date <= todayStr);
-  const totalKcalWeek  = thisWeekMeals.reduce((s, c) => s + (c.scaled_calories || c.recipes?.calories || 0), 0);
-  const daysCounted    = new Set(thisWeekMeals.map(c => c.plan_date)).size || 1;
-  const avgKcalDay     = Math.round(totalKcalWeek / daysCounted);
-  const target         = Math.round(state.profile?.target_calories || 0);
+  // Kcal per giorno (ultimi 7)
+  const kcalPerDay = last7.map(d => {
+    const meals = confirmed.filter(c => c.plan_date === d);
+    return meals.reduce((s, c) => s + (c.scaled_calories || c.recipes?.calories || 0), 0);
+  });
 
-  // Aderenza: giorni con almeno 1 pasto confermato negli ultimi 7gg
-  const last7 = [];
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date(now); d.setDate(now.getDate() - i);
-    last7.push(local(d));
-  }
-  const daysWithMeals  = last7.filter(d => confirmed.some(c => c.plan_date === d)).length;
-  const adherencePct   = Math.round((daysWithMeals / 7) * 100);
+  // Kcal media giornaliera (solo giorni con dati)
+  const daysWithKcal  = kcalPerDay.filter(k => k > 0);
+  const avgKcalDay    = daysWithKcal.length
+    ? Math.round(daysWithKcal.reduce((s, k) => s + k, 0) / daysWithKcal.length)
+    : 0;
 
-  // Macro medi
+  // Macro medi (settimana corrente)
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1));
+  const weekMeals = confirmed.filter(c => c.plan_date >= localStr(weekStart) && c.plan_date <= todayStr);
   let totP = 0, totC = 0, totF = 0, mealCount = 0;
-  for (const c of thisWeekMeals) {
-    const m = c.recipes?.macros;
-    if (!m) continue;
-    const scale = (c.scaled_calories && c.recipes?.calories)
-      ? c.scaled_calories / c.recipes.calories : 1;
-    totP += (m.proteine    || 0) * scale;
-    totC += (m.carboidrati || 0) * scale;
-    totF += (m.grassi      || 0) * scale;
+  for (const c of weekMeals) {
+    const m = c.recipes?.macros; if (!m) continue;
+    const sc = (c.scaled_calories && c.recipes?.calories) ? c.scaled_calories / c.recipes.calories : 1;
+    totP += (m.proteine || 0) * sc; totC += (m.carboidrati || 0) * sc; totF += (m.grassi || 0) * sc;
     mealCount++;
   }
   const avgP = mealCount ? Math.round(totP / mealCount) : 0;
   const avgC = mealCount ? Math.round(totC / mealCount) : 0;
   const avgF = mealCount ? Math.round(totF / mealCount) : 0;
 
-  // Peso trend
-  const logs      = state.weightLogs;
-  const firstW    = logs[0]?.weight;
-  const lastW     = logs[logs.length - 1]?.weight;
-  const deltaW    = (firstW && lastW) ? (lastW - firstW).toFixed(1) : null;
-  const deltaSign = deltaW > 0 ? '+' : '';
+  // Peso
+  const logs   = state.weightLogs;
+  const firstW = logs[0]?.weight;
+  const lastW  = logs[logs.length - 1]?.weight;
+  const deltaW = (firstW && lastW && logs.length > 1) ? (lastW - firstW).toFixed(1) : null;
 
-  // Ricette con rating
-  const liked    = Object.values(state.ratings).filter(v => v === 1).length;
+  // Rating
+  const liked    = Object.values(state.ratings).filter(v => v ===  1).length;
   const disliked = Object.values(state.ratings).filter(v => v === -1).length;
+
+  // ── Empty state ──
+  const hasEnoughData = daysWithMeals >= 2;
+  const emptyBanner   = hasEnoughData ? '' : `
+    <div class="card mt-16" style="text-align:center;padding:28px 20px;border:2px dashed var(--border)">
+      <div style="font-size:2.5rem;margin-bottom:10px">🥗</div>
+      <h3 style="margin-bottom:6px">Inizia a confermare i pasti</h3>
+      <p class="text-soft" style="font-size:0.875rem">Le statistiche si aggiornano man mano che confermi i tuoi pasti nel Piano. Ci vogliono almeno 2 giorni di dati.</p>
+    </div>`;
 
   el.innerHTML = `
     <div id="main-content">
       <h2 style="margin-bottom:20px">Progressi</h2>
+      ${emptyBanner}
 
-      <!-- KPI principali -->
+      <!-- KPI -->
       <div class="progress-grid">
         <div class="progress-card">
           <div class="big-num">${avgKcalDay || '–'}</div>
           <div class="big-label">kcal media/giorno</div>
           <div class="sub-info">Target: ${target} kcal
-            ${avgKcalDay ? `<br><strong style="color:${Math.abs(avgKcalDay-target)<150?'var(--green)':'var(--accent)'}">${avgKcalDay > target ? '+' : ''}${avgKcalDay - target} kcal</strong>` : ''}
+            ${avgKcalDay && target ? `<br><strong style="color:${Math.abs(avgKcalDay-target)<150?'var(--green)':'var(--accent)'}">
+              ${avgKcalDay > target ? '+' : ''}${avgKcalDay - target} kcal</strong>` : ''}
           </div>
+        </div>
+        <div class="progress-card">
+          <div class="big-num${streak > 0 ? ' streak-num' : ''}">${streak > 0 ? '🔥' : '–'} ${streak > 0 ? streak : ''}</div>
+          <div class="big-label">Streak giorni</div>
+          <div class="sub-info">${streak > 0 ? `${streak} giorno/i consecutiv${streak===1?'o':'i'}` : 'Nessuno streak attivo'}</div>
         </div>
         <div class="progress-card">
           <div class="big-num">${adherencePct}%</div>
           <div class="big-label">Aderenza 7 giorni</div>
-          <div class="adherence-bar-wrap"><div class="adherence-bar-fill" style="width:${adherencePct}%"></div></div>
-          <div class="sub-info">${daysWithMeals}/7 giorni con pasti confermati</div>
+          <div class="adherence-bar-wrap" style="margin:8px 0 4px">
+            <div class="adherence-bar-fill" style="width:${adherencePct}%"></div>
+          </div>
+          <div class="sub-info">${daysWithMeals}/7 giorni</div>
         </div>
-        ${deltaW !== null ? `
         <div class="progress-card">
-          <div class="big-num" style="color:${deltaW <= 0 ? 'var(--green-dark)' : 'var(--accent)'}">${deltaSign}${deltaW} kg</div>
+          <div class="big-num" style="${deltaW !== null ? `color:${+deltaW <= 0 ? 'var(--green-dark)' : 'var(--accent)'}` : ''}">
+            ${deltaW !== null ? `${+deltaW > 0 ? '+' : ''}${deltaW} kg` : '–'}
+          </div>
           <div class="big-label">Variazione peso</div>
-          <div class="sub-info">${firstW} kg → ${lastW} kg</div>
-        </div>` : '<div class="progress-card"><div class="big-num" style="font-size:1.2rem">–</div><div class="big-label">Variazione peso</div><div class="sub-info">Registra il peso nel profilo</div></div>'}
-        <div class="progress-card">
-          <div class="big-num">${liked}</div>
-          <div class="big-label">Ricette piaciute 👍</div>
-          <div class="sub-info">${disliked} non piaciute 👎</div>
+          <div class="sub-info">${logs.length > 1 ? `${firstW} → ${lastW} kg` : 'Registra il peso nel profilo'}</div>
+        </div>
+      </div>
+
+      <!-- Grafico kcal a barre -->
+      <div class="card mt-16">
+        <h3 style="margin-bottom:16px">Kcal ultimi 7 giorni</h3>
+        <canvas id="kcal-bar-chart" height="140"></canvas>
+        <div style="display:flex;justify-content:flex-end;margin-top:6px;gap:16px;font-size:0.72rem;color:var(--text-soft)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:3px;background:var(--green);display:inline-block"></span> Kcal consumate</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:16px;height:2px;background:#aaa;display:inline-block;border-top:2px dashed #aaa"></span> Target</span>
         </div>
       </div>
 
       <!-- Macro medi -->
       ${mealCount > 0 ? `
       <div class="card mt-16">
-        <h3 style="margin-bottom:12px">Macro medi a pasto (questa settimana)</h3>
+        <h3 style="margin-bottom:12px">Macro medi a pasto — questa settimana</h3>
         <div class="macro-donut-row">
-          <div class="macro-donut-item p">
-            <div class="val" style="color:#C2410C">${avgP}g</div>
-            <div class="lbl">Proteine</div>
-          </div>
-          <div class="macro-donut-item c">
-            <div class="val" style="color:#15803D">${avgC}g</div>
-            <div class="lbl">Carboidrati</div>
-          </div>
-          <div class="macro-donut-item f">
-            <div class="val" style="color:#1D4ED8">${avgF}g</div>
-            <div class="lbl">Grassi</div>
-          </div>
+          <div class="macro-donut-item p"><div class="val" style="color:#C2410C">${avgP}g</div><div class="lbl">Proteine</div></div>
+          <div class="macro-donut-item c"><div class="val" style="color:#15803D">${avgC}g</div><div class="lbl">Carboidrati</div></div>
+          <div class="macro-donut-item f"><div class="val" style="color:#1D4ED8">${avgF}g</div><div class="lbl">Grassi</div></div>
         </div>
       </div>` : ''}
 
-      <!-- Grafico peso -->
+      <!-- Peso -->
       ${logs.length >= 2 ? `
       <div class="card mt-16">
         <h3 style="margin-bottom:12px">Andamento peso</h3>
         <canvas id="dash-weight-chart" class="weight-chart"></canvas>
       </div>` : ''}
 
-      <!-- Aderenza ultimi 7 giorni -->
+      <!-- Rating ricette -->
       <div class="card mt-16">
-        <h3 style="margin-bottom:12px">Ultimi 7 giorni</h3>
-        <div style="display:flex;gap:6px;justify-content:space-between">
-          ${last7.map(d => {
-            const meals = confirmed.filter(c => c.plan_date === d);
-            const slots = activeSlots(state.profile?.meal_schedule || 'standard');
-            const pct   = Math.round((meals.length / slots.length) * 100);
-            const dayN  = new Date(d + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'narrow' });
-            const dayD  = new Date(d + 'T12:00:00').getDate();
-            return `<div style="flex:1;text-align:center">
-              <div style="width:32px;height:${Math.max(8, Math.round(pct*0.48))}px;background:${pct>=100?'var(--green)':pct>0?'var(--green-light)':'var(--border)'};border-radius:4px;margin:0 auto 4px"></div>
-              <div style="font-size:0.65rem;font-weight:700;color:var(--text-soft)">${dayN}</div>
-              <div style="font-size:0.65rem;color:var(--text-soft)">${dayD}</div>
-            </div>`;
-          }).join('')}
+        <h3 style="margin-bottom:8px">Le tue preferenze</h3>
+        <div style="display:flex;gap:12px">
+          <div style="flex:1;text-align:center;padding:12px;background:var(--green-pale);border-radius:10px">
+            <div style="font-size:1.6rem">👍</div>
+            <div style="font-size:1.4rem;font-weight:700;color:var(--green-dark)">${liked}</div>
+            <div style="font-size:0.75rem;color:var(--text-soft)">piaciute</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:12px;background:#FFF1F2;border-radius:10px">
+            <div style="font-size:1.6rem">👎</div>
+            <div style="font-size:1.4rem;font-weight:700;color:#BE123C">${disliked}</div>
+            <div style="font-size:0.75rem;color:var(--text-soft)">non piaciute</div>
+          </div>
         </div>
       </div>
 
@@ -887,7 +991,7 @@ async function renderDashboard() {
         <div class="flex items-center justify-between">
           <div>
             <h3>Notifiche pasti</h3>
-            <p style="font-size:0.82rem;margin-top:4px">Ricevi un promemoria per confermare i pasti.</p>
+            <p style="font-size:0.82rem;margin-top:4px">Promemoria giornaliero per confermare i pasti.</p>
           </div>
           <button class="btn btn-secondary btn-sm" id="btn-enable-notif">🔔 Attiva</button>
         </div>
@@ -895,6 +999,78 @@ async function renderDashboard() {
       </div>
 
     </div>`;
+
+  // ── Grafico a barre kcal ──
+  setTimeout(() => {
+    const canvas = document.getElementById('kcal-bar-chart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W   = canvas.parentElement.offsetWidth - 32;
+    const H   = 140;
+    canvas.width = W; canvas.height = H;
+    const pad2   = 36;
+    const barW   = Math.floor((W - pad2 * 2) / 7) - 4;
+    const maxVal = Math.max(target * 1.15, ...kcalPerDay, 100);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Griglia orizzontale
+    ctx.strokeStyle = 'rgba(128,128,128,0.12)'; ctx.lineWidth = 1;
+    [0.25, 0.5, 0.75, 1].forEach(f => {
+      const y = H - 24 - (H - 40) * f;
+      ctx.beginPath(); ctx.moveTo(pad2, y); ctx.lineTo(W - 8, y); ctx.stroke();
+    });
+
+    // Linea target tratteggiata
+    if (target > 0) {
+      const ty = H - 24 - (H - 40) * (target / maxVal);
+      ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(128,128,128,0.5)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(pad2, ty); ctx.lineTo(W - 8, ty); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Barre + etichette
+    last7.forEach((dateStr, i) => {
+      const x    = pad2 + i * ((W - pad2 * 2) / 7) + 2;
+      const kcal = kcalPerDay[i];
+      const barH = kcal > 0 ? Math.max(4, Math.round((H - 40) * (kcal / maxVal))) : 0;
+      const y    = H - 24 - barH;
+
+      // Barra
+      if (kcal > 0) {
+        const pct = kcal / target;
+        ctx.fillStyle = pct >= 0.9 && pct <= 1.12 ? '#1D9E75'
+          : pct < 0.9  ? '#5DCAA5'
+          : '#FF7043';
+        ctx.beginPath();
+        ctx.roundRect(x, y, barW, barH, [4, 4, 0, 0]);
+        ctx.fill();
+
+        // Valore sopra la barra
+        if (barH > 14) {
+          ctx.fillStyle = '#666'; ctx.font = '9px Inter,sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText(kcal >= 1000 ? `${(kcal/1000).toFixed(1)}k` : kcal, x + barW/2, y - 3);
+        }
+      }
+
+      // Etichetta giorno
+      const d   = new Date(dateStr + 'T12:00:00');
+      const dow = d.toLocaleDateString('it-IT', { weekday: 'narrow' });
+      const dom = d.getDate();
+      ctx.fillStyle = dateStr === todayStr ? '#1D9E75' : 'rgba(128,128,128,0.7)';
+      ctx.font = `${dateStr === todayStr ? '700' : '400'} 9px Inter,sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(`${dow} ${dom}`, x + barW/2, H - 8);
+    });
+
+    // Asse Y labels
+    ctx.fillStyle = 'rgba(128,128,128,0.6)'; ctx.font = '8px Inter,sans-serif'; ctx.textAlign = 'right';
+    [0.5, 1].forEach(f => {
+      const y   = H - 24 - (H - 40) * f;
+      const val = Math.round(maxVal * f);
+      ctx.fillText(val >= 1000 ? `${(val/1000).toFixed(1)}k` : val, pad2 - 2, y + 3);
+    });
+  }, 80);
 
   // Grafico peso
   if (logs.length >= 2) setTimeout(() => renderWeightChart('dash-weight-chart'), 100);
@@ -1041,6 +1217,7 @@ function renderPiano() {
           <h2>Il tuo Piano</h2>
           <div style="display:flex;gap:8px">
             <button class="btn btn-ghost btn-sm" id="btn-print-plan" title="Stampa">🖨</button>
+            <button class="btn btn-ghost btn-sm" id="btn-search-recipe" title="Cerca ricetta">🔍</button>
             <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera liberi</button>
           </div>
         </div>
@@ -1060,6 +1237,22 @@ function renderPiano() {
         </div>
         <div class="meals-list">${mealsHtml}</div>
       </div>
+    </div>
+
+    <!-- Search recipe modal -->
+    <div id="search-recipe-overlay" class="modal-overlay">
+      <div class="modal-sheet" style="max-width:560px">
+        <button id="search-recipe-close" style="position:absolute;right:16px;top:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#aaa">×</button>
+        <div class="modal-handle"></div>
+        <h3 style="margin-bottom:14px">Cerca una ricetta</h3>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input type="text" id="recipe-search-input" placeholder="Es: pollo, pasta, zucchine..." style="flex:1">
+          <select id="recipe-slot-select" style="width:130px">
+            ${slots.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select>
+        </div>
+        <div id="recipe-search-results" style="max-height:340px;overflow-y:auto"></div>
+      </div>
     </div>`;
 
   // ── Events ──
@@ -1071,23 +1264,34 @@ function renderPiano() {
     });
   });
 
-  // Nav prev/next
+  // Nav prev/next con direzione per animazione
   el.querySelector('#btn-prev-day')?.addEventListener('click', () => {
-    if (state.currentDayIndex > 0) { state.currentDayIndex--; renderPiano(); }
+    if (state.currentDayIndex > 0) { state._swipeDir = 'left'; state.currentDayIndex--; renderPiano(); }
   });
   el.querySelector('#btn-next-day')?.addEventListener('click', () => {
-    if (state.currentDayIndex < maxIdx) { state.currentDayIndex++; renderPiano(); }
+    if (state.currentDayIndex < maxIdx) { state._swipeDir = 'right'; state.currentDayIndex++; renderPiano(); }
   });
 
-  // Swipe touch
+  // Applica classe animazione al contenuto del giorno
+  const dayView = el.querySelector('#piano-day-view');
+  if (dayView && state._swipeDir) {
+    dayView.classList.add(state._swipeDir === 'right' ? 'slide-in-right' : 'slide-in-left');
+    state._swipeDir = null;
+  }
+
+  // Swipe touch con direzione per animazione
   let touchStartX = 0;
   const view = el.querySelector('#piano-day-view');
   view?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
   view?.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) < 50) return;
-    if (dx < 0 && state.currentDayIndex < maxIdx) { state.currentDayIndex++; renderPiano(); }
-    if (dx > 0 && state.currentDayIndex > 0)      { state.currentDayIndex--; renderPiano(); }
+    if (dx < 0 && state.currentDayIndex < maxIdx) {
+      state._swipeDir = 'right'; state.currentDayIndex++; renderPiano();
+    }
+    if (dx > 0 && state.currentDayIndex > 0) {
+      state._swipeDir = 'left'; state.currentDayIndex--; renderPiano();
+    }
   }, { passive: true });
 
   // Rigenera
@@ -1097,6 +1301,21 @@ function renderPiano() {
     renderPiano();
   });
   el.querySelector('#btn-print-plan')?.addEventListener('click', () => window.print());
+
+  // Search recipe
+  el.querySelector('#btn-search-recipe')?.addEventListener('click', () => {
+    document.getElementById('search-recipe-overlay')?.classList.add('open');
+    document.getElementById('recipe-search-input')?.focus();
+  });
+  document.getElementById('search-recipe-close')?.addEventListener('click', () => {
+    document.getElementById('search-recipe-overlay')?.classList.remove('open');
+  });
+  document.getElementById('search-recipe-overlay')?.addEventListener('click', e => {
+    if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+  });
+  const searchInput = document.getElementById('recipe-search-input');
+  searchInput?.addEventListener('input', () => renderSearchResults(dayIdx));
+  document.getElementById('recipe-slot-select')?.addEventListener('change', () => renderSearchResults(dayIdx));
 
   // Click card → apre modal (ma non se clicchi sul menu o dentro il dropdown)
   el.querySelectorAll('.meal-card-inner').forEach(inner => {
