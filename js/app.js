@@ -1265,6 +1265,7 @@ async function doImportSave() {
 }
 
 
+function openBuilder(recipe) {
   builderIngredients = recipe?.ingredients ? JSON.parse(JSON.stringify(recipe.ingredients)) : [];
   builderEditId      = recipe?.id || null;
 
