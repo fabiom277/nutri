@@ -57,15 +57,30 @@ function showPage(name) {
   document.querySelector(`.nav-item[data-page="${name}"]`)?.classList.add('active');
 
   if (name === 'piano')      renderPiano();
-  if (name === 'dashboard')  renderDashboard();
-  if (name === 'calendario') {
-    // Reset al mese corrente quando si entra nel calendario dal menu
-    calendarYear  = null;
-    calendarMonth = null;
-    renderCalendar();
-  }
   if (name === 'spesa')      renderSpesa();
   if (name === 'profilo')    renderProfilo();
+
+  // Pagine async: spinner immediato poi render
+  if (name === 'dashboard') {
+    const el = document.getElementById('page-dashboard');
+    if (el) el.innerHTML = '<div id="main-content"><div class="loading-wrap"><div class="spinner"></div><p>Caricamento progressi...</p></div></div>';
+    renderDashboard().catch(e => {
+      console.error('[renderDashboard]', e);
+      const el = document.getElementById('page-dashboard');
+      if (el) el.innerHTML = `<div id="main-content"><div class="card mt-16" style="text-align:center;padding:32px"><p>⚠️ Errore caricamento: ${e.message}</p></div></div>`;
+    });
+  }
+  if (name === 'calendario') {
+    const el = document.getElementById('page-calendario');
+    if (el) el.innerHTML = '<div id="main-content"><div class="loading-wrap"><div class="spinner"></div><p>Caricamento calendario...</p></div></div>';
+    calendarYear  = null;
+    calendarMonth = null;
+    renderCalendar().catch(e => {
+      console.error('[renderCalendar]', e);
+      const el = document.getElementById('page-calendario');
+      if (el) el.innerHTML = `<div id="main-content"><div class="card mt-16" style="text-align:center;padding:32px"><p>⚠️ Errore caricamento: ${e.message}</p></div></div>`;
+    });
+  }
 }
 
 // ── Init ─────────────────────────────────────────────
