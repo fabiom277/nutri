@@ -271,7 +271,9 @@ async function rollPlanForward() {
 }
 
 /**
- * Salva il piano corrente su Supabase in formato compatto (solo ID ricette)
+ * Salva il piano su Supabase in formato compatto.
+ * Salva ID + calories scalate + macros scalati per ogni slot,
+ * così al ricaricamento le kcal mostrate sono quelle reali (non le base).
  */
 async function savePlanCompact() {
   const planCompact = {
@@ -279,7 +281,14 @@ async function savePlanCompact() {
     days: state.plan.days.map(d => ({
       date: d.date,
       slots: Object.fromEntries(
-        Object.entries(d.slots).map(([slot, recipe]) => [slot, recipe?.id || null])
+        Object.entries(d.slots).map(([slot, recipe]) => [
+          slot,
+          recipe ? {
+            id:       recipe.id,
+            cal:      recipe.calories,          // calorie scalate
+            macros:   recipe.macros || null,    // macros scalati
+          } : null
+        ])
       )
     }))
   };
@@ -290,7 +299,8 @@ async function savePlanCompact() {
 }
 
 /**
- * Ricostruisce il piano completo dagli ID salvati nel DB
+ * Ricostruisce il piano dagli ID salvati nel DB.
+ * Ripristina le calorie scalate salvate nel piano (non quelle base del DB).
  */
 function hydratePlan(compactPlan, recipes) {
   if (!compactPlan?.days?.length) return null;
@@ -303,19 +313,29 @@ function hydratePlan(compactPlan, recipes) {
     slots: Object.fromEntries(
       Object.entries(d.slots || {}).map(([slot, val]) => {
         if (!val) return [slot, null];
-        // Formato nuovo: val è una stringa UUID
+
+        // Formato nuovo: { id, cal, macros }
+        if (typeof val === 'object' && val.id && val.cal) {
+          const base = recipeMap[val.id];
+          if (!base) return [slot, null];
+          return [slot, {
+            ...base,
+            calories: val.cal,                        // usa calorie scalate
+            macros:   val.macros || base.macros,      // usa macros scalati
+            _hydrated: true,
+          }];
+        }
+        // Formato stringa UUID (legacy)
         if (typeof val === 'string') return [slot, recipeMap[val] || null];
-        // Formato vecchio: val è già un oggetto ricetta (retrocompatibilità)
+        // Formato oggetto completo (legacy vecchissimo)
         if (typeof val === 'object' && val.id) return [slot, recipeMap[val.id] || val];
+
         return [slot, null];
       })
     )
   }));
 
-  // Verifica che almeno un giorno abbia almeno una ricetta valida
-  const hasAnyRecipe = days.some(d =>
-    Object.values(d.slots).some(r => r !== null)
-  );
+  const hasAnyRecipe = days.some(d => Object.values(d.slots).some(r => r !== null));
   if (!hasAnyRecipe) return null;
 
   return { days, generatedAt: compactPlan.generatedAt };
@@ -978,11 +998,21 @@ function renderPiano() {
             <div class="meal-card-name">${recipe.name}</div>
             <div class="meal-card-kcal">${recipe.calories} <span>kcal</span></div>
             <div class="macro-bar">
-              <span class="macro-chip p">P ${p}g</span>
-              <span class="macro-chip c">C ${c}g</span>
-              <span class="macro-chip f">G ${f}g</span>
+              <span class="macro-chip p">Proteine ${p}g</span>
+              <span class="macro-chip c">Carboidrati ${c}g</span>
+              <span class="macro-chip f">Grassi ${f}g</span>
             </div>
           </div>
+        </div>
+        <div class="meal-card-actions">
+          <button class="meal-action-pill btn-replace${isConfirmed?' disabled':''}" data-day="${dayIdx}" data-slot="${slot}" ${isConfirmed?'disabled':''}>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+            Sostituisci
+          </button>
+          <button class="meal-action-pill btn-confirm${isConfirmed?' active':''}" data-day="${dayIdx}" data-slot="${slot}">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            ${isConfirmed ? 'Confermato' : 'Conferma'}
+          </button>
         </div>
         <div class="meal-dropdown hidden" data-day="${dayIdx}" data-slot="${slot}">
           <button class="meal-dd-item btn-details" data-day="${dayIdx}" data-slot="${slot}">
@@ -996,14 +1026,6 @@ function renderPiano() {
             👎 Non mi piace
           </button>
           <div class="meal-dd-divider"></div>
-          <button class="meal-dd-item btn-confirm${isConfirmed?' is-confirmed':''}" data-day="${dayIdx}" data-slot="${slot}">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-            ${isConfirmed ? 'Rimuovi conferma' : 'Conferma pasto'}
-          </button>
-          <button class="meal-dd-item btn-replace${isConfirmed?' disabled':''}" data-day="${dayIdx}" data-slot="${slot}" ${isConfirmed?'disabled':''}>
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
-            Sostituisci
-          </button>
           <button class="meal-dd-item btn-exclude danger${isConfirmed?' disabled':''}" data-day="${dayIdx}" data-slot="${slot}" ${isConfirmed?'disabled':''}>
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             Elimina dai suggerimenti
