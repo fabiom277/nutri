@@ -103,19 +103,23 @@ async function loadUserData() {
   _loadInProgress = true;
   try {
     const uid = state.session.user.id;
-    const [profile, recipes, excluded, weightLogs, ratings] = await Promise.all([
+    const [profile, recipes, excluded, weightLogs] = await Promise.all([
       getProfile(uid),
       getAllRecipes(),
       getExcludedIds(uid),
       getWeightLogs(uid),
-      getRatings(uid),
     ]);
 
     state.profile    = profile;
     state.recipes    = recipes;
     state.excluded   = excluded;
     state.weightLogs = weightLogs;
-    state.ratings    = ratings;
+
+    // Ratings: non-bloccante (tabella potrebbe non esistere ancora)
+    try { state.ratings = await getRatings(uid); } catch (e) {
+      console.warn('[loadUserData] getRatings failed (non-critical):', e);
+      state.ratings = {};
+    }
 
     if (!profile || !profile.onboarding_complete) {
       showOnboarding();
