@@ -286,10 +286,13 @@ function hydratePlan(compactPlan, recipes) {
 
 async function loadConfirmedMeals() {
   const uid = state.session.user.id;
-  // Carica 60 giorni: 30 passati + 30 futuri (copre storico calendario + piano corrente)
-  const from = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
-  const to   = new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0];
-  state.confirmedMeals = await getConfirmedMeals(uid, from, to);
+  // Date locali (non UTC) per evitare sfasamento timezone
+  const now  = new Date();
+  const pad  = n => String(n).padStart(2, '0');
+  const localDate = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const past = new Date(now); past.setDate(now.getDate() - 30);
+  const fut  = new Date(now); fut.setDate(now.getDate() + 30);
+  state.confirmedMeals = await getConfirmedMeals(uid, localDate(past), localDate(fut));
 }
 
 // ── Auth UI ───────────────────────────────────────────
@@ -928,9 +931,11 @@ async function renderCalendar(yearOverride, monthOverride) {
   const year  = calendarYear;
   const month = calendarMonth;
 
-  // Carica pasti confermati del mese visualizzato
-  const firstDay = new Date(year, month, 1).toISOString().split('T')[0];
-  const lastDay  = new Date(year, month + 1, 0).toISOString().split('T')[0];
+  // Date mese: usa aritmetica locale (non toISOString che converte in UTC)
+  const pad = n => String(n).padStart(2, '0');
+  const firstDay = `${year}-${pad(month + 1)}-01`;
+  const lastDayNum = new Date(year, month + 1, 0).getDate(); // giorni nel mese
+  const lastDay  = `${year}-${pad(month + 1)}-${pad(lastDayNum)}`;
   let confirmed = [];
   try {
     confirmed = await getConfirmedMeals(state.session?.user?.id || 'x', firstDay, lastDay);
@@ -942,7 +947,8 @@ async function renderCalendar(yearOverride, monthOverride) {
   const firstDow   = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const startOffset = (firstDow + 6) % 7; // Lunedì = 0
-  const todayStr   = now.toISOString().split('T')[0];
+  const todayD  = new Date();
+  const todayStr = `${todayD.getFullYear()}-${pad(todayD.getMonth()+1)}-${pad(todayD.getDate())}`;
 
   // Calcola mese precedente e successivo
   const prevYear  = month === 0  ? year - 1 : year;
