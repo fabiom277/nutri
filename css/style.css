@@ -639,3 +639,106 @@ textarea { resize: vertical; min-height: 80px; }
 
   @page { margin: 1.5cm; size: A4 portrait; }
 }
+
+/* ══════════════════════════════════════════════════
+   DARK MODE — correzioni leggibilità testo
+   ══════════════════════════════════════════════════ */
+
+/* Colore testo base su elementi interattivi che non lo ereditano */
+.day-toggle          { color: var(--text); }
+.btn-secondary       { color: var(--green); }
+.btn-ghost           { color: var(--text-soft); }
+.btn                 { font-family: var(--font); }
+
+@media (prefers-color-scheme: dark) {
+  /* Day toggle spesa */
+  .day-toggle {
+    color: var(--text);
+    background: rgba(255,255,255,0.06);
+    border-color: var(--border);
+  }
+  .day-toggle.selected { background: var(--green); color: #000; }
+
+  /* Bottoni generici */
+  .btn-secondary { color: var(--green-light); background: rgba(46,204,143,0.1); border-color: var(--border); }
+  .btn-ghost     { color: var(--text-soft); }
+  .btn-primary   { color: #fff; }
+
+  /* Auth tabs */
+  .auth-tab     { color: var(--text-soft); }
+  .auth-tab.active { color: #fff; }
+
+  /* Shopping list */
+  .shopping-item   { color: var(--text); }
+  .item-name       { color: var(--text); }
+  .item-amount     { color: var(--text-soft); }
+  .shopping-category h4 { color: var(--text-soft); }
+
+  /* Ingredient list nel modal */
+  .ingredient-item { background: rgba(46,204,143,0.12); color: var(--text); }
+
+  /* Step istruzione */
+  .step-text { color: var(--text-soft); }
+
+  /* Profile stat box */
+  .stat-box .stat-value { color: var(--green-light); }
+  .stat-box .stat-label { color: var(--text-soft); }
+
+  /* Progress cards */
+  .progress-card .big-num   { color: var(--green-light); }
+  .progress-card .big-label { color: var(--text-soft); }
+  .progress-card .sub-info  { color: var(--text-soft); }
+
+  /* Macro chips */
+  .macro-chip.p { color: #f08060; background: rgba(194,65,12,0.18); }
+  .macro-chip.c { color: #60c880; background: rgba(21,128,61,0.18); }
+  .macro-chip.f { color: #6090f0; background: rgba(29,78,216,0.18); }
+
+  /* Badge slot pasti */
+  .slot-colazione { background: rgba(194,65,12,0.18);  color: #f08060; }
+  .slot-pranzo    { background: rgba(21,128,61,0.18);  color: #60c880; }
+  .slot-cena      { background: rgba(29,78,216,0.18);  color: #6090f0; }
+  .slot-spuntino  { background: rgba(126,34,206,0.18); color: #b070e0; }
+
+  /* Day card */
+  .day-label      { color: var(--green-light); }
+  .day-total-kcal { background: rgba(46,204,143,0.12); color: var(--green-light); }
+  .meal-name      { color: var(--text); }
+  .meal-kcal      { color: var(--text); }
+  .meal-kcal span { color: var(--text-soft); }
+
+  /* Onboarding choice cards */
+  .choice-card .label { color: var(--text); }
+  .choice-card .sub   { color: var(--text-soft); }
+  .choice-card .icon  { color: var(--text); }
+
+  /* Input group labels */
+  .input-group label { color: var(--text); }
+
+  /* Tag pills */
+  .tag-pill { background: rgba(46,204,143,0.2); color: var(--green-light); }
+
+  /* BMR card testo */
+  .bmr-card h3 { color: #fff; }
+  .bmr-card p  { color: rgba(255,255,255,0.8); }
+  .bmr-card .kcal { color: #fff; }
+
+  /* Auth box inputs */
+  .auth-box input { color: var(--text); }
+
+  /* Modal recipe */
+  .modal-sheet h2, .modal-sheet h3 { color: var(--text); }
+  .modal-sheet p  { color: var(--text-soft); }
+
+  /* Step numerati */
+  .step-num { background: var(--green); color: #000; }
+
+  /* Admin table */
+  .recipe-table th { background: rgba(46,204,143,0.1); color: var(--text-soft); }
+  .recipe-table td { color: var(--text); }
+  .recipe-table tr:hover td { background: rgba(46,204,143,0.06); }
+
+  /* Calendar headers */
+  .cal-header { color: var(--text-soft); }
+  .cal-day:not(.empty):not(.today) { color: var(--text); }
+}
