@@ -1125,7 +1125,7 @@ async function renderRicette() {
 let _importedRecipe = null; // risultato temporaneo dell'anteprima
 
 async function doImportPreview() {
-  const url   = document.getElementById('import-url-input')?.value.trim();
+  const url    = document.getElementById('import-url-input')?.value.trim();
   const prevEl = document.getElementById('import-preview');
   const errEl  = document.getElementById('import-error');
   const saveBtn = document.getElementById('btn-import-save');
@@ -1148,7 +1148,9 @@ async function doImportPreview() {
   try {
     const SUPA_URL = 'https://ynaaksvbfrlraqdwnvea.supabase.co';
     const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InluYWFrc3ZiZnJscmFxZHdudmVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyMjgxMTQsImV4cCI6MjA5MjgwNDExNH0.-QGrwtUS0O9Wu8vtUuSMiKiZQH2p-aH8gVFoDgoTFQg';
-    const { data: { session } } = await (await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')).createClient(SUPA_URL, ANON_KEY).auth.getSession();
+
+    // Usa il client supabase già importato (non dynamic import)
+    const { data: { session } } = await supabase.auth.getSession();
 
     const res = await fetch(
       `${SUPA_URL}/functions/v1/recipe-import`,
@@ -1177,7 +1179,6 @@ async function doImportPreview() {
         <div class="import-preview-body">
           <h3 style="margin-bottom:6px">${data.name}</h3>
           ${data.description ? `<p class="text-soft" style="font-size:0.82rem;margin-bottom:10px">${data.description.slice(0,150)}${data.description.length > 150 ? '...' : ''}</p>` : ''}
-
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
             <div class="import-stat"><div class="import-stat-val">${data.calories}</div><div class="import-stat-lbl">kcal totali</div></div>
             <div class="import-stat"><div class="import-stat-val" style="color:#C2410C">${data.macros.proteine}g</div><div class="import-stat-lbl">Proteine</div></div>
@@ -1185,12 +1186,10 @@ async function doImportPreview() {
             <div class="import-stat"><div class="import-stat-val" style="color:#1D4ED8">${data.macros.grassi}g</div><div class="import-stat-lbl">Grassi</div></div>
             ${data.prep_time ? `<div class="import-stat"><div class="import-stat-val">${data.prep_time}'</div><div class="import-stat-lbl">Preparazione</div></div>` : ''}
           </div>
-
           <div style="font-size:0.78rem;background:var(--green-pale);border-radius:8px;padding:8px 10px">
             <strong style="color:${matchColor}">${data.matched}/${data.total} ingredienti</strong>
             <span class="text-soft"> abbinati al database INRAN (${matchPct}% di precisione nutrizionale)</span>
           </div>
-
           <details style="margin-top:10px">
             <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--green-dark)">Vedi ingredienti (${data.ingredients.length})</summary>
             <div style="margin-top:8px;font-size:0.8rem">
@@ -1209,7 +1208,7 @@ async function doImportPreview() {
   } catch (e) {
     prevEl.innerHTML = '';
     errEl.textContent = e.message.includes('Failed to fetch') || e.message.includes('NetworkError')
-      ? 'Edge Function non raggiungibile. Assicurati di aver fatto il deploy della funzione su Supabase.'
+      ? 'Edge Function non raggiungibile. Assicurati di aver fatto il deploy su Supabase.'
       : `Errore: ${e.message}`;
     errEl.style.display = 'block';
   } finally {
