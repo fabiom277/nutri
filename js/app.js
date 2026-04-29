@@ -949,20 +949,6 @@ function renderPiano() {
       const c = recipe.macros?.carboidrati || 0;
       const f = recipe.macros?.grassi      || 0;
 
-      html += `
-        <div class="meal-row${isConfirmed ? ' confirmed' : ''}" data-day="${d}" data-slot="${slot}">
-          <div class="meal-row-top">
-            <span class="meal-slot-badge slot-${slot}">${slot}</span>
-            <div class="meal-info">
-              <div class="meal-name">${recipe.name}</div>
-              <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
-              <div class="macro-bar">
-                <span class="macro-chip p">Proteine ${p}g</span>
-                <span class="macro-chip c">Carboidrati ${c}g</span>
-                <span class="macro-chip f">Grassi ${f}g</span>
-              </div>
-            </div>
-          </div>
       const ratingVal = state.ratings[recipe.id] || 0;
 
       html += `
