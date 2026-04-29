@@ -253,7 +253,8 @@ function filterRecipes(recipes, profile, slot, excluded = []) {
 function generateWeeklyPlan(recipes, profile, excludedIds = []) {
   const slots    = activeSlots(profile.meal_schedule);
   const calSlots = caloriesBySlot(profile.target_calories, profile.meal_schedule);
-  const today    = new Date();
+  const todayLocal = new Date();
+  const pad = n => String(n).padStart(2, '0');
 
   // Pool per slot (filtrato per dieta/allergie)
   const pools = {};
@@ -265,9 +266,9 @@ function generateWeeklyPlan(recipes, profile, excludedIds = []) {
   const days = [];
 
   for (let d = 0; d < 7; d++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + d);
-    const dateStr = date.toISOString().split('T')[0];
+    // Data locale: usa new Date(y, m, day+d) per evitare bug UTC+2
+    const date = new Date(todayLocal.getFullYear(), todayLocal.getMonth(), todayLocal.getDate() + d);
+    const dateStr = `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
     const daySlots = {};
     let dayKcal = 0;
 
