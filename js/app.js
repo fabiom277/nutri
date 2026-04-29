@@ -4,7 +4,8 @@ import {
   getProfile, upsertProfile, getAllRecipes,
   getExcludedIds, excludeRecipe,
   getConfirmedMeals, confirmMeal, unconfirmMeal,
-  getWeightLogs, addWeightLog, deleteWeightLog
+  getWeightLogs, addWeightLog, deleteWeightLog,
+  getRatings, setRating, savePushSubscription
 } from './supabase.js';
 
 import {
@@ -21,7 +22,8 @@ const state = {
   recipes: [],
   plan: null,
   excluded: [],
-  rejectedPerSlot: {}, // { 'colazione': [id,...], ... }
+  ratings: {},           // { recipeId: 1 | -1 }
+  rejectedPerSlot: {},
   confirmedMeals: [],
   weightLogs: [],
   shoppingChecked: {},
@@ -55,6 +57,7 @@ function showPage(name) {
   document.querySelector(`.nav-item[data-page="${name}"]`)?.classList.add('active');
 
   if (name === 'piano')      renderPiano();
+  if (name === 'dashboard')  renderDashboard();
   if (name === 'calendario') {
     // Reset al mese corrente quando si entra nel calendario dal menu
     calendarYear  = null;
@@ -84,6 +87,13 @@ async function init() {
   setupNavigation();
   setupAuth();
   setupOnboarding();
+
+  // Registra service worker per PWA e notifiche push
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/nutri/sw.js', { scope: '/nutri/' })
+      .then(reg => { console.log('[SW] registrato', reg.scope); })
+      .catch(e => console.warn('[SW] errore:', e));
+  }
 }
 
 let _loadInProgress = false;
@@ -93,17 +103,19 @@ async function loadUserData() {
   _loadInProgress = true;
   try {
     const uid = state.session.user.id;
-    const [profile, recipes, excluded, weightLogs] = await Promise.all([
+    const [profile, recipes, excluded, weightLogs, ratings] = await Promise.all([
       getProfile(uid),
       getAllRecipes(),
       getExcludedIds(uid),
       getWeightLogs(uid),
+      getRatings(uid),
     ]);
 
     state.profile    = profile;
     state.recipes    = recipes;
     state.excluded   = excluded;
     state.weightLogs = weightLogs;
+    state.ratings    = ratings;
 
     if (!profile || !profile.onboarding_complete) {
       showOnboarding();
@@ -126,6 +138,11 @@ async function loadUserData() {
 
     await loadConfirmedMeals();
     showApp();
+
+    // Se notifiche attive, controlla pasti mancanti oggi
+    if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+      setTimeout(scheduleLocalReminders, 2000);
+    }
 
   } catch (e) {
     console.error('[loadUserData]', e);
@@ -631,7 +648,223 @@ async function saveOnboarding() {
   showApp();
 }
 
-// ── Piano generazione ─────────────────────────────────
+// ── Smart Rigenera ────────────────────────────────────
+// Rigenera solo i pasti NON confermati, lascia intatti i confermati
+async function smartRegenerate() {
+  if (!state.plan?.days?.length) { await generateAndSavePlan(); return; }
+
+  const confirmedSet = new Set(
+    state.confirmedMeals.map(cm => `${cm.plan_date}|${cm.meal_slot}`)
+  );
+  const slots    = activeSlots(state.profile.meal_schedule);
+  const calSlots = caloriesBySlot(state.profile.target_calories, state.profile.meal_schedule);
+  const usedIds  = new Set();
+
+  // Raccogli ID già in uso (confermati) per evitare ripetizioni
+  for (const day of state.plan.days) {
+    for (const slot of slots) {
+      const key = `${day.date}|${slot}`;
+      if (confirmedSet.has(key) && day.slots[slot]?.id) {
+        usedIds.add(day.slots[slot].id);
+      }
+    }
+  }
+
+  for (const day of state.plan.days) {
+    for (const slot of slots) {
+      const key = `${day.date}|${slot}`;
+      if (confirmedSet.has(key)) continue; // confermato: non toccare
+
+      const target     = calSlots[slot];
+      const candidates = filterRecipes(state.recipes, state.profile, slot, state.excluded);
+      const fresh      = candidates.filter(r => !usedIds.has(r.id));
+      const pool       = fresh.length ? fresh : candidates;
+      if (!pool.length) continue;
+
+      const sorted = [...pool].sort((a, b) =>
+        Math.abs(a.calories - target) - Math.abs(b.calories - target)
+      );
+      const chosen = sorted.slice(0, Math.min(4, sorted.length))[
+        Math.floor(Math.random() * Math.min(4, sorted.length))
+      ];
+      day.slots[slot] = scaleRecipeToTarget(chosen, target, state.profile.meal_schedule);
+      usedIds.add(chosen.id);
+    }
+  }
+
+  await savePlanCompact();
+}
+
+// ── Dashboard Progressi ───────────────────────────────
+async function renderDashboard() {
+  const el = document.getElementById('page-dashboard');
+  const uid = state.session?.user?.id;
+
+  // Carica confirmed meals delle ultime 4 settimane
+  const now     = new Date();
+  const pad     = n => String(n).padStart(2, '0');
+  const local   = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const past30  = new Date(now); past30.setDate(now.getDate() - 30);
+  const todayStr = local(now);
+
+  let confirmed = state.confirmedMeals;
+  // Se non copre abbastanza, ricarica
+  if (!confirmed.some(c => c.plan_date <= local(past30))) {
+    try {
+      confirmed = await getConfirmedMeals(uid,
+        local(past30), local(new Date(now.getTime() + 7 * 86400000))
+      );
+    } catch {}
+  }
+
+  // ── Calcoli ──
+  const thisWeekStart = new Date(now);
+  thisWeekStart.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1));
+  const weekStr = local(thisWeekStart);
+
+  const thisWeekMeals  = confirmed.filter(c => c.plan_date >= weekStr && c.plan_date <= todayStr);
+  const totalKcalWeek  = thisWeekMeals.reduce((s, c) => s + (c.scaled_calories || c.recipes?.calories || 0), 0);
+  const daysCounted    = new Set(thisWeekMeals.map(c => c.plan_date)).size || 1;
+  const avgKcalDay     = Math.round(totalKcalWeek / daysCounted);
+  const target         = Math.round(state.profile?.target_calories || 0);
+
+  // Aderenza: giorni con almeno 1 pasto confermato negli ultimi 7gg
+  const last7 = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(now); d.setDate(now.getDate() - i);
+    last7.push(local(d));
+  }
+  const daysWithMeals  = last7.filter(d => confirmed.some(c => c.plan_date === d)).length;
+  const adherencePct   = Math.round((daysWithMeals / 7) * 100);
+
+  // Macro medi
+  let totP = 0, totC = 0, totF = 0, mealCount = 0;
+  for (const c of thisWeekMeals) {
+    const m = c.recipes?.macros;
+    if (!m) continue;
+    const scale = (c.scaled_calories && c.recipes?.calories)
+      ? c.scaled_calories / c.recipes.calories : 1;
+    totP += (m.proteine    || 0) * scale;
+    totC += (m.carboidrati || 0) * scale;
+    totF += (m.grassi      || 0) * scale;
+    mealCount++;
+  }
+  const avgP = mealCount ? Math.round(totP / mealCount) : 0;
+  const avgC = mealCount ? Math.round(totC / mealCount) : 0;
+  const avgF = mealCount ? Math.round(totF / mealCount) : 0;
+
+  // Peso trend
+  const logs      = state.weightLogs;
+  const firstW    = logs[0]?.weight;
+  const lastW     = logs[logs.length - 1]?.weight;
+  const deltaW    = (firstW && lastW) ? (lastW - firstW).toFixed(1) : null;
+  const deltaSign = deltaW > 0 ? '+' : '';
+
+  // Ricette con rating
+  const liked    = Object.values(state.ratings).filter(v => v === 1).length;
+  const disliked = Object.values(state.ratings).filter(v => v === -1).length;
+
+  el.innerHTML = `
+    <div id="main-content">
+      <h2 style="margin-bottom:20px">Progressi</h2>
+
+      <!-- KPI principali -->
+      <div class="progress-grid">
+        <div class="progress-card">
+          <div class="big-num">${avgKcalDay || '–'}</div>
+          <div class="big-label">kcal media/giorno</div>
+          <div class="sub-info">Target: ${target} kcal
+            ${avgKcalDay ? `<br><strong style="color:${Math.abs(avgKcalDay-target)<150?'var(--green)':'var(--accent)'}">${avgKcalDay > target ? '+' : ''}${avgKcalDay - target} kcal</strong>` : ''}
+          </div>
+        </div>
+        <div class="progress-card">
+          <div class="big-num">${adherencePct}%</div>
+          <div class="big-label">Aderenza 7 giorni</div>
+          <div class="adherence-bar-wrap"><div class="adherence-bar-fill" style="width:${adherencePct}%"></div></div>
+          <div class="sub-info">${daysWithMeals}/7 giorni con pasti confermati</div>
+        </div>
+        ${deltaW !== null ? `
+        <div class="progress-card">
+          <div class="big-num" style="color:${deltaW <= 0 ? 'var(--green-dark)' : 'var(--accent)'}">${deltaSign}${deltaW} kg</div>
+          <div class="big-label">Variazione peso</div>
+          <div class="sub-info">${firstW} kg → ${lastW} kg</div>
+        </div>` : '<div class="progress-card"><div class="big-num" style="font-size:1.2rem">–</div><div class="big-label">Variazione peso</div><div class="sub-info">Registra il peso nel profilo</div></div>'}
+        <div class="progress-card">
+          <div class="big-num">${liked}</div>
+          <div class="big-label">Ricette piaciute 👍</div>
+          <div class="sub-info">${disliked} non piaciute 👎</div>
+        </div>
+      </div>
+
+      <!-- Macro medi -->
+      ${mealCount > 0 ? `
+      <div class="card mt-16">
+        <h3 style="margin-bottom:12px">Macro medi a pasto (questa settimana)</h3>
+        <div class="macro-donut-row">
+          <div class="macro-donut-item p">
+            <div class="val" style="color:#C2410C">${avgP}g</div>
+            <div class="lbl">Proteine</div>
+          </div>
+          <div class="macro-donut-item c">
+            <div class="val" style="color:#15803D">${avgC}g</div>
+            <div class="lbl">Carboidrati</div>
+          </div>
+          <div class="macro-donut-item f">
+            <div class="val" style="color:#1D4ED8">${avgF}g</div>
+            <div class="lbl">Grassi</div>
+          </div>
+        </div>
+      </div>` : ''}
+
+      <!-- Grafico peso -->
+      ${logs.length >= 2 ? `
+      <div class="card mt-16">
+        <h3 style="margin-bottom:12px">Andamento peso</h3>
+        <canvas id="dash-weight-chart" class="weight-chart"></canvas>
+      </div>` : ''}
+
+      <!-- Aderenza ultimi 7 giorni -->
+      <div class="card mt-16">
+        <h3 style="margin-bottom:12px">Ultimi 7 giorni</h3>
+        <div style="display:flex;gap:6px;justify-content:space-between">
+          ${last7.map(d => {
+            const meals = confirmed.filter(c => c.plan_date === d);
+            const slots = activeSlots(state.profile?.meal_schedule || 'standard');
+            const pct   = Math.round((meals.length / slots.length) * 100);
+            const dayN  = new Date(d + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'narrow' });
+            const dayD  = new Date(d + 'T12:00:00').getDate();
+            return `<div style="flex:1;text-align:center">
+              <div style="width:32px;height:${Math.max(8, Math.round(pct*0.48))}px;background:${pct>=100?'var(--green)':pct>0?'var(--green-light)':'var(--border)'};border-radius:4px;margin:0 auto 4px"></div>
+              <div style="font-size:0.65rem;font-weight:700;color:var(--text-soft)">${dayN}</div>
+              <div style="font-size:0.65rem;color:var(--text-soft)">${dayD}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Notifiche -->
+      <div class="card mt-16">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3>Notifiche pasti</h3>
+            <p style="font-size:0.82rem;margin-top:4px">Ricevi un promemoria per confermare i pasti.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-enable-notif">🔔 Attiva</button>
+        </div>
+        <p id="notif-status" style="font-size:0.78rem;color:var(--text-soft);margin-top:8px"></p>
+      </div>
+
+    </div>`;
+
+  // Grafico peso
+  if (logs.length >= 2) setTimeout(() => renderWeightChart('dash-weight-chart'), 100);
+
+  // Notifiche
+  const btn = document.getElementById('btn-enable-notif');
+  const statusEl = document.getElementById('notif-status');
+  updateNotifButton(btn, statusEl);
+  btn?.addEventListener('click', () => requestNotificationPermission(btn, statusEl));
+}
 async function generateAndSavePlan() {
   if (!state.recipes.length) {
     try { state.recipes = await getAllRecipes(); } catch {}
@@ -681,7 +914,10 @@ function renderPiano() {
   let html = `<div id="main-content">
     <div class="week-header">
       <h2>Il tuo Piano</h2>
-      <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera settimana</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary btn-sm" id="btn-print-plan">🖨 Stampa</button>
+        <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera liberi</button>
+      </div>
     </div>`;
 
   for (let d = 0; d < state.plan.days.length; d++) {
@@ -723,12 +959,33 @@ function renderPiano() {
               </div>
             </div>
           </div>
+      const ratingVal = state.ratings[recipe.id] || 0;
+
+      html += `
+        <div class="meal-row${isConfirmed ? ' confirmed' : ''}" data-day="${d}" data-slot="${slot}">
+          <div class="meal-row-top">
+            <span class="meal-slot-badge slot-${slot}">${slot}</span>
+            <div class="meal-info">
+              <div class="meal-name">${recipe.name}</div>
+              <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
+              <div class="macro-bar">
+                <span class="macro-chip p">Proteine ${p}g</span>
+                <span class="macro-chip c">Carboidrati ${c}g</span>
+                <span class="macro-chip f">Grassi ${f}g</span>
+              </div>
+            </div>
+          </div>
+          <div class="meal-rating-row">
+            <span>Ti è piaciuto?</span>
+            <button class="rating-btn like${ratingVal === 1 ? ' active' : ''}" data-rid="${recipe.id}" data-val="1">👍 Mi piace</button>
+            <button class="rating-btn dislike${ratingVal === -1 ? ' active' : ''}" data-rid="${recipe.id}" data-val="-1">👎 Non mi piace</button>
+          </div>
           <div class="meal-actions">
             <button class="meal-action-btn details btn-details" data-day="${d}" data-slot="${slot}">
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               Dettagli
             </button>
-            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per poter sostituire"' : ''}>
+            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per sostituire"' : ''}>
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
               Sostituisci
             </button>
@@ -736,7 +993,7 @@ function renderPiano() {
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
               ${isConfirmed ? 'Confermato' : 'Conferma'}
             </button>
-            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per poter eliminare"' : ''}>
+            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per eliminare"' : ''}>
               <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Elimina
             </button>
@@ -752,9 +1009,25 @@ function renderPiano() {
 
   // Events
   el.querySelector('#btn-regen')?.addEventListener('click', async () => {
-    toast('Rigenerazione in corso...', 'info');
-    await generateAndSavePlan();
+    toast('Rigenerazione pasti liberi...', 'info');
+    await smartRegenerate();
     renderPiano();
+  });
+
+  el.querySelector('#btn-print-plan')?.addEventListener('click', () => window.print());
+
+  // Rating buttons
+  el.querySelectorAll('.rating-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const rid = btn.dataset.rid;
+      const val = +btn.dataset.val;
+      const current = state.ratings[rid] || 0;
+      const newVal  = current === val ? 0 : val; // toggle off se già selezionato
+      state.ratings[rid] = newVal;
+      await setRating(state.session.user.id, rid, newVal).catch(console.warn);
+      renderPiano();
+    });
   });
 
   el.querySelectorAll('.btn-details').forEach(btn => {
@@ -1506,8 +1779,73 @@ function promptWeightEntry() {
   });
 }
 
-function renderWeightChart() {
-  const canvas = document.getElementById('weight-chart');
+// ── Notifiche PWA ─────────────────────────────────────
+function updateNotifButton(btn, statusEl) {
+  if (!btn) return;
+  if (!('Notification' in window)) {
+    btn.textContent = '🔕 Non supportate'; btn.disabled = true; return;
+  }
+  if (Notification.permission === 'granted') {
+    btn.textContent = '✓ Attive'; btn.disabled = true;
+    if (statusEl) statusEl.textContent = 'Le notifiche sono attive.';
+  } else if (Notification.permission === 'denied') {
+    btn.textContent = '🚫 Bloccate'; btn.disabled = true;
+    if (statusEl) statusEl.textContent = 'Hai bloccato le notifiche. Abilitale dalle impostazioni del browser.';
+  } else {
+    btn.textContent = '🔔 Attiva notifiche'; btn.disabled = false;
+  }
+}
+
+async function requestNotificationPermission(btn, statusEl) {
+  const perm = await Notification.requestPermission();
+  if (perm === 'granted') {
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      // Mostra subito una notifica di test
+      reg.showNotification('Nutrì 🌿', {
+        body: 'Notifiche attivate! Ti ricorderemo di confermare i pasti.',
+        icon: '/nutri/assets/icon-192.png',
+        tag: 'nutri-test',
+      });
+      // Salva subscription se Push API disponibile
+      if ('PushManager' in window) {
+        // VAPID key pubblica — per ora usa notification semplici (senza server push)
+        // Per push server-side serve una backend function
+      }
+      toast('Notifiche attivate! ✓');
+      // Pianifica reminder locale tramite Notification
+      scheduleLocalReminders();
+    } catch (e) { console.warn('Notif error:', e); }
+  }
+  updateNotifButton(btn, statusEl);
+}
+
+function scheduleLocalReminders() {
+  // Usa un approccio semplice: all'apertura dell'app mostra reminder
+  // se ci sono pasti del giorno non confermati
+  const now    = new Date();
+  const pad    = n => String(n).padStart(2, '0');
+  const today  = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+  const slots  = activeSlots(state.profile?.meal_schedule || 'standard');
+
+  if (!state.plan?.days) return;
+  const todayPlan = state.plan.days.find(d => d.date === today);
+  if (!todayPlan) return;
+
+  const confirmedToday = state.confirmedMeals.filter(c => c.plan_date === today).map(c => c.meal_slot);
+  const missing = slots.filter(s => !confirmedToday.includes(s));
+  if (missing.length > 0 && Notification.permission === 'granted') {
+    new Notification('Nutrì 🌿', {
+      body: `Hai ancora ${missing.length} pasto/i da confermare oggi: ${missing.join(', ')}.`,
+      icon: '/nutri/assets/icon-192.png',
+      tag: 'nutri-daily',
+    });
+  }
+}
+
+// ── Weight chart ──────────────────────────────────────
+function renderWeightChart(canvasId = 'weight-chart') {
+  const canvas = document.getElementById(canvasId);
   if (!canvas || !state.weightLogs.length) return;
 
   const labels = state.weightLogs.map(l => new Date(l.logged_at).toLocaleDateString('it-IT', { day:'numeric', month:'short' }));

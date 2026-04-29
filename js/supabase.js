@@ -169,3 +169,38 @@ export async function deleteWeightLog(id) {
   const { error } = await supabase.from('weight_logs').delete().eq('id', id);
   if (error) throw error;
 }
+
+// ── Recipe ratings ────────────────────────────────────
+
+export async function getRatings(userId) {
+  const { data, error } = await supabase
+    .from('recipe_ratings')
+    .select('recipe_id, rating')
+    .eq('user_id', userId);
+  if (error) throw error;
+  // { recipeId: 1 | -1 }
+  return Object.fromEntries((data || []).map(r => [r.recipe_id, r.rating]));
+}
+
+export async function setRating(userId, recipeId, rating) {
+  if (rating === 0) {
+    await supabase.from('recipe_ratings').delete()
+      .eq('user_id', userId).eq('recipe_id', recipeId);
+    return;
+  }
+  const { error } = await supabase.from('recipe_ratings')
+    .upsert({ user_id: userId, recipe_id: recipeId, rating });
+  if (error) throw error;
+}
+
+// ── Push subscriptions ────────────────────────────────
+
+export async function savePushSubscription(userId, subscription) {
+  const sub = subscription.toJSON();
+  const { error } = await supabase.from('push_subscriptions').upsert({
+    user_id: userId,
+    endpoint: sub.endpoint,
+    keys: sub.keys,
+  });
+  if (error) throw error;
+}

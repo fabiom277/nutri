@@ -177,3 +177,28 @@ ALTER TABLE recipes
 -- MIGRATION v3: kcal scalate nelle conferme
 ALTER TABLE confirmed_meals
   ADD COLUMN IF NOT EXISTS scaled_calories INTEGER;
+
+-- MIGRATION v4: rating ricette + notifiche PWA
+CREATE TABLE IF NOT EXISTS recipe_ratings (
+  id         UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id    UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
+  recipe_id  UUID REFERENCES recipes ON DELETE CASCADE NOT NULL,
+  rating     SMALLINT NOT NULL CHECK (rating IN (1, -1)),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, recipe_id)
+);
+ALTER TABLE recipe_ratings ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "ratings_all" ON recipe_ratings FOR ALL USING (auth.uid() = user_id);
+CREATE INDEX IF NOT EXISTS idx_ratings_user ON recipe_ratings (user_id);
+
+-- Subscription push notifications
+CREATE TABLE IF NOT EXISTS push_subscriptions (
+  id         UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id    UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
+  endpoint   TEXT NOT NULL,
+  keys       JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, endpoint)
+);
+ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "push_all" ON push_subscriptions FOR ALL USING (auth.uid() = user_id);
