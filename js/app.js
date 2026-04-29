@@ -22,12 +22,13 @@ const state = {
   recipes: [],
   plan: null,
   excluded: [],
-  ratings: {},           // { recipeId: 1 | -1 }
+  ratings: {},
   rejectedPerSlot: {},
   confirmedMeals: [],
   weightLogs: [],
   shoppingChecked: {},
   selectedShoppingDays: [],
+  currentDayIndex: 0,      // giorno visualizzato nel piano (0 = oggi)
   currentModal: null,
 };
 
@@ -924,133 +925,220 @@ function renderPiano() {
   }
 
   const slots = activeSlots(state.profile?.meal_schedule || 'standard');
-
   const confirmedMap = {};
   for (const cm of state.confirmedMeals) {
     confirmedMap[`${cm.plan_date}|${cm.meal_slot}`] = cm.recipe_id;
   }
 
-  let html = `<div id="main-content">
-    <div class="week-header">
-      <h2>Il tuo Piano</h2>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-secondary btn-sm" id="btn-print-plan">🖨 Stampa</button>
-        <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera liberi</button>
+  // Clamp index
+  const maxIdx = state.plan.days.length - 1;
+  if (state.currentDayIndex > maxIdx) state.currentDayIndex = 0;
+  const dayIdx = state.currentDayIndex;
+  const day    = state.plan.days[dayIdx];
+
+  // ── Day tabs ──
+  const tabsHtml = state.plan.days.map((d, i) => {
+    const dateObj = new Date(d.date + 'T12:00:00');
+    const dow = dateObj.toLocaleDateString('it-IT', { weekday: 'short' });
+    const dom = dateObj.getDate();
+    const isToday = i === 0;
+    const hasAll  = slots.every(s => !!confirmedMap[`${d.date}|${s}`]);
+    return `<button class="day-tab${i === dayIdx ? ' active' : ''}" data-i="${i}">
+      <span class="day-tab-dow">${dow}</span>
+      <span class="day-tab-dom">${dom}</span>
+      ${hasAll ? '<span class="day-tab-dot confirmed"></span>' : ''}
+    </button>`;
+  }).join('');
+
+  // ── Totale kcal giorno ──
+  const totalKcal = slots.reduce((s, slot) => s + (day.slots[slot]?.calories || 0), 0);
+
+  // ── Meal cards ──
+  let mealsHtml = '';
+  for (const slot of slots) {
+    const recipe = day.slots[slot];
+    if (!recipe) continue;
+    const isConfirmed = !!confirmedMap[`${day.date}|${slot}`];
+    const p = recipe.macros?.proteine    || 0;
+    const c = recipe.macros?.carboidrati || 0;
+    const f = recipe.macros?.grassi      || 0;
+    const ratingVal = state.ratings[recipe.id] || 0;
+    const imgSrc = recipe.image_url || '';
+
+    mealsHtml += `
+      <div class="meal-card${isConfirmed ? ' confirmed' : ''}" data-day="${dayIdx}" data-slot="${slot}">
+        <div class="meal-card-inner">
+          ${imgSrc ? `<div class="meal-thumb" style="background-image:url(${imgSrc})"></div>` : `<div class="meal-thumb meal-thumb-empty"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg></div>`}
+          <div class="meal-card-body">
+            <div class="meal-card-header">
+              <span class="meal-slot-badge slot-${slot}">${slot}</span>
+              ${isConfirmed ? '<span class="confirmed-badge">✓ Confermato</span>' : ''}
+              <button class="meal-menu-btn" data-day="${dayIdx}" data-slot="${slot}" title="Opzioni">⋮</button>
+            </div>
+            <div class="meal-card-name">${recipe.name}</div>
+            <div class="meal-card-kcal">${recipe.calories} <span>kcal</span></div>
+            <div class="macro-bar">
+              <span class="macro-chip p">P ${p}g</span>
+              <span class="macro-chip c">C ${c}g</span>
+              <span class="macro-chip f">G ${f}g</span>
+            </div>
+          </div>
+        </div>
+        <div class="meal-dropdown hidden" data-day="${dayIdx}" data-slot="${slot}">
+          <button class="meal-dd-item btn-details" data-day="${dayIdx}" data-slot="${slot}">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> Dettagli ricetta
+          </button>
+          <div class="meal-dd-divider"></div>
+          <button class="meal-dd-item rating-btn like${ratingVal===1?' active':''}" data-rid="${recipe.id}" data-val="1">
+            👍 Mi piace
+          </button>
+          <button class="meal-dd-item rating-btn dislike${ratingVal===-1?' active':''}" data-rid="${recipe.id}" data-val="-1">
+            👎 Non mi piace
+          </button>
+          <div class="meal-dd-divider"></div>
+          <button class="meal-dd-item btn-confirm${isConfirmed?' is-confirmed':''}" data-day="${dayIdx}" data-slot="${slot}">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            ${isConfirmed ? 'Rimuovi conferma' : 'Conferma pasto'}
+          </button>
+          <button class="meal-dd-item btn-replace${isConfirmed?' disabled':''}" data-day="${dayIdx}" data-slot="${slot}" ${isConfirmed?'disabled':''}>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+            Sostituisci
+          </button>
+          <button class="meal-dd-item btn-exclude danger${isConfirmed?' disabled':''}" data-day="${dayIdx}" data-slot="${slot}" ${isConfirmed?'disabled':''}>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Elimina dai suggerimenti
+          </button>
+        </div>
+      </div>`;
+  }
+
+  el.innerHTML = `
+    <div id="main-content" class="piano-main">
+      <div class="piano-header">
+        <div class="piano-header-row">
+          <h2>Il tuo Piano</h2>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-ghost btn-sm" id="btn-print-plan" title="Stampa">🖨</button>
+            <button class="btn btn-secondary btn-sm" id="btn-regen">↻ Rigenera liberi</button>
+          </div>
+        </div>
+        <div class="day-tabs-wrap">
+          <div class="day-tabs">${tabsHtml}</div>
+        </div>
+      </div>
+
+      <div class="piano-day-view" id="piano-day-view">
+        <div class="piano-day-nav">
+          <button class="day-nav-btn" id="btn-prev-day" ${dayIdx === 0 ? 'disabled' : ''}>‹</button>
+          <div class="piano-day-title">
+            <strong>${new Date(day.date + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' })}</strong>
+            <span class="day-kcal-badge">${totalKcal} kcal</span>
+          </div>
+          <button class="day-nav-btn" id="btn-next-day" ${dayIdx === maxIdx ? 'disabled' : ''}>›</button>
+        </div>
+        <div class="meals-list">${mealsHtml}</div>
       </div>
     </div>`;
 
-  for (let d = 0; d < state.plan.days.length; d++) {
-    const day = state.plan.days[d];
-    const label = formatDate(day.date);
+  // ── Events ──
+  // Tabs giorno
+  el.querySelectorAll('.day-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      state.currentDayIndex = +tab.dataset.i;
+      renderPiano();
+    });
+  });
 
-    // Calcola totale kcal giornaliero
-    const totalKcal = slots.reduce((sum, slot) => {
-      return sum + (day.slots[slot]?.calories || 0);
-    }, 0);
+  // Nav prev/next
+  el.querySelector('#btn-prev-day')?.addEventListener('click', () => {
+    if (state.currentDayIndex > 0) { state.currentDayIndex--; renderPiano(); }
+  });
+  el.querySelector('#btn-next-day')?.addEventListener('click', () => {
+    if (state.currentDayIndex < maxIdx) { state.currentDayIndex++; renderPiano(); }
+  });
 
-    html += `
-      <div class="day-card">
-        <div class="day-card-header">
-          <span class="day-label">${label}</span>
-          <span class="day-total-kcal">${totalKcal} kcal totali</span>
-        </div>
-        <div class="day-meals-list">`;
+  // Swipe touch
+  let touchStartX = 0;
+  const view = el.querySelector('#piano-day-view');
+  view?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  view?.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) < 50) return;
+    if (dx < 0 && state.currentDayIndex < maxIdx) { state.currentDayIndex++; renderPiano(); }
+    if (dx > 0 && state.currentDayIndex > 0)      { state.currentDayIndex--; renderPiano(); }
+  }, { passive: true });
 
-    for (const slot of slots) {
-      const recipe = day.slots[slot];
-      if (!recipe) continue;
-      const isConfirmed = !!confirmedMap[`${day.date}|${slot}`];
-      const p = recipe.macros?.proteine    || 0;
-      const c = recipe.macros?.carboidrati || 0;
-      const f = recipe.macros?.grassi      || 0;
-
-      const ratingVal = state.ratings[recipe.id] || 0;
-
-      html += `
-        <div class="meal-row${isConfirmed ? ' confirmed' : ''}" data-day="${d}" data-slot="${slot}">
-          <div class="meal-row-top">
-            <span class="meal-slot-badge slot-${slot}">${slot}</span>
-            <div class="meal-info">
-              <div class="meal-name">${recipe.name}</div>
-              <div class="meal-kcal">${recipe.calories} <span>kcal</span></div>
-              <div class="macro-bar">
-                <span class="macro-chip p">Proteine ${p}g</span>
-                <span class="macro-chip c">Carboidrati ${c}g</span>
-                <span class="macro-chip f">Grassi ${f}g</span>
-              </div>
-            </div>
-          </div>
-          <div class="meal-rating-row">
-            <span>Ti è piaciuto?</span>
-            <button class="rating-btn like${ratingVal === 1 ? ' active' : ''}" data-rid="${recipe.id}" data-val="1">👍 Mi piace</button>
-            <button class="rating-btn dislike${ratingVal === -1 ? ' active' : ''}" data-rid="${recipe.id}" data-val="-1">👎 Non mi piace</button>
-          </div>
-          <div class="meal-actions">
-            <button class="meal-action-btn details btn-details" data-day="${d}" data-slot="${slot}">
-              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              Dettagli
-            </button>
-            <button class="meal-action-btn replace btn-replace" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per sostituire"' : ''}>
-              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
-              Sostituisci
-            </button>
-            <button class="meal-action-btn confirm${isConfirmed ? ' active' : ''} btn-confirm" data-day="${d}" data-slot="${slot}">
-              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              ${isConfirmed ? 'Confermato' : 'Conferma'}
-            </button>
-            <button class="meal-action-btn exclude btn-exclude" data-day="${d}" data-slot="${slot}" ${isConfirmed ? 'disabled title="Rimuovi la conferma per eliminare"' : ''}>
-              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              Elimina
-            </button>
-          </div>
-        </div>`;
-    }
-
-    html += `</div></div>`;
-  }
-
-  html += `</div>`;
-  el.innerHTML = html;
-
-  // Events
+  // Rigenera
   el.querySelector('#btn-regen')?.addEventListener('click', async () => {
     toast('Rigenerazione pasti liberi...', 'info');
     await smartRegenerate();
     renderPiano();
   });
-
   el.querySelector('#btn-print-plan')?.addEventListener('click', () => window.print());
 
-  // Rating buttons
+  // Click card → apre modal (ma non se clicchi sul menu o dentro il dropdown)
+  el.querySelectorAll('.meal-card-inner').forEach(inner => {
+    inner.addEventListener('click', e => {
+      if (e.target.closest('.meal-menu-btn')) return;
+      const card = inner.closest('.meal-card');
+      openRecipeModal(+card.dataset.day, card.dataset.slot);
+    });
+  });
+
+  // Menu ⋮
+  el.querySelectorAll('.meal-menu-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const slot = btn.dataset.slot;
+      const d    = btn.dataset.day;
+      // Chiudi tutti gli altri dropdown aperti
+      el.querySelectorAll('.meal-dropdown').forEach(dd => {
+        if (dd.dataset.slot !== slot || dd.dataset.day !== d) dd.classList.add('hidden');
+      });
+      const dd = el.querySelector(`.meal-dropdown[data-day="${d}"][data-slot="${slot}"]`);
+      dd?.classList.toggle('hidden');
+    });
+  });
+
+  // Chiudi dropdown cliccando fuori
+  document.addEventListener('click', closeAllDropdowns, { once: false });
+  function closeAllDropdowns(e) {
+    if (!e.target.closest('.meal-menu-btn') && !e.target.closest('.meal-dropdown')) {
+      el.querySelectorAll('.meal-dropdown').forEach(dd => dd.classList.add('hidden'));
+    }
+  }
+
+  // Azioni nel dropdown
+  el.querySelectorAll('.btn-details').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); closeDropdowns(); openRecipeModal(+btn.dataset.day, btn.dataset.slot); });
+  });
+  el.querySelectorAll('.btn-replace').forEach(btn => {
+    btn.addEventListener('click', async e => { e.stopPropagation(); closeDropdowns(); if (!btn.disabled) await handleReplace(+btn.dataset.day, btn.dataset.slot); });
+  });
+  el.querySelectorAll('.btn-confirm').forEach(btn => {
+    btn.addEventListener('click', async e => { e.stopPropagation(); closeDropdowns(); await handleConfirm(+btn.dataset.day, btn.dataset.slot); });
+  });
+  el.querySelectorAll('.btn-exclude').forEach(btn => {
+    btn.addEventListener('click', async e => { e.stopPropagation(); closeDropdowns(); if (!btn.disabled) await handleExclude(+btn.dataset.day, btn.dataset.slot); });
+  });
   el.querySelectorAll('.rating-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', async e => {
       e.stopPropagation();
       const rid = btn.dataset.rid;
       const val = +btn.dataset.val;
-      const current = state.ratings[rid] || 0;
-      const newVal  = current === val ? 0 : val; // toggle off se già selezionato
+      const newVal = (state.ratings[rid] || 0) === val ? 0 : val;
       state.ratings[rid] = newVal;
       await setRating(state.session.user.id, rid, newVal).catch(console.warn);
+      closeDropdowns();
       renderPiano();
     });
   });
 
-  el.querySelectorAll('.btn-details').forEach(btn => {
-    btn.addEventListener('click', (e) => { e.stopPropagation(); openRecipeModal(+btn.dataset.day, btn.dataset.slot); });
-  });
-  el.querySelectorAll('.btn-replace').forEach(btn => {
-    btn.addEventListener('click', async (e) => { e.stopPropagation(); await handleReplace(+btn.dataset.day, btn.dataset.slot); });
-  });
-  el.querySelectorAll('.btn-confirm').forEach(btn => {
-    btn.addEventListener('click', async (e) => { e.stopPropagation(); await handleConfirm(+btn.dataset.day, btn.dataset.slot); });
-  });
-  el.querySelectorAll('.btn-exclude').forEach(btn => {
-    btn.addEventListener('click', async (e) => { e.stopPropagation(); await handleExclude(+btn.dataset.day, btn.dataset.slot); });
-  });
-  el.querySelectorAll('.meal-row').forEach(row => {
-    row.addEventListener('click', () => openRecipeModal(+row.dataset.day, row.dataset.slot));
-  });
+  function closeDropdowns() {
+    el.querySelectorAll('.meal-dropdown').forEach(dd => dd.classList.add('hidden'));
+  }
 }
+
 
 async function handleReplace(dayIdx, slot) {
   const day     = state.plan.days[dayIdx];
