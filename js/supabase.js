@@ -260,3 +260,48 @@ export async function deleteUserRecipe(id) {
     .eq('id', id);
   if (error) throw error;
 }
+
+// ── Shopping list persistente ─────────────────────────
+
+export async function getShoppingList(userId) {
+  const { data, error } = await supabase
+    .from('shopping_list')
+    .select('*')
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+export async function saveShoppingList(userId, days, items) {
+  const { data, error } = await supabase
+    .from('shopping_list')
+    .upsert({
+      user_id:        userId,
+      days,
+      items,
+      completed_days: [],
+      generated_at:   new Date().toISOString(),
+      updated_at:     new Date().toISOString(),
+    })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateShoppingItems(userId, items) {
+  const { error } = await supabase
+    .from('shopping_list')
+    .update({ items, updated_at: new Date().toISOString() })
+    .eq('user_id', userId);
+  if (error) throw error;
+}
+
+export async function markDaysCompleted(userId, completedDays) {
+  const { error } = await supabase
+    .from('shopping_list')
+    .update({ completed_days: completedDays, updated_at: new Date().toISOString() })
+    .eq('user_id', userId);
+  if (error) throw error;
+}

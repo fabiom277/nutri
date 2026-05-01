@@ -1194,3 +1194,23 @@ textarea { resize: vertical; min-height: 80px; }
   .import-preview-card { background: rgba(46,204,143,0.08); }
   .import-stat-val { color: var(--green-light); }
 }
+
+/* ── Spesa persistente ── */
+.active-list-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--green-pale); border: 1.5px solid var(--green-light);
+  border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px;
+  flex-wrap: wrap; gap: 10px;
+}
+.shop-day-badge {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 50px; margin-left: 4px;
+}
+.shop-day-badge.done   { background: var(--green); color: #fff; }
+.shop-day-badge.active { background: #FDE68A; color: #92400E; }
+.shop-day-label { display: block; font-size: 0.78rem; font-weight: 600; }
+.day-toggle.completed { opacity: 0.55; cursor: default; }
+@media (prefers-color-scheme: dark) {
+  .active-list-banner { background: rgba(46,204,143,0.12); border-color: var(--green); }
+  .shop-day-badge.active { background: rgba(253,230,138,0.2); color: #e0b040; }
+}

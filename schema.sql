@@ -255,3 +255,16 @@ ALTER TABLE user_recipes ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "urecipes_own"    ON user_recipes FOR ALL   USING (auth.uid() = user_id);
 CREATE POLICY "urecipes_public" ON user_recipes FOR SELECT USING (is_public = TRUE);
 CREATE INDEX idx_user_recipes_user ON user_recipes (user_id);
+
+-- MIGRATION v6: lista spesa persistente
+CREATE TABLE IF NOT EXISTS shopping_list (
+  id           UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id      UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL UNIQUE,
+  days         TEXT[] NOT NULL,          -- date coperte es. ['2025-05-01','2025-05-02']
+  items        JSONB NOT NULL,           -- { "categoria": [{ name, amount, unit, checked }] }
+  completed_days TEXT[] DEFAULT '{}',   -- giorni confermati con "spesa fatta"
+  generated_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at   TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE shopping_list ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "shopping_own" ON shopping_list FOR ALL USING (auth.uid() = user_id);

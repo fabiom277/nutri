@@ -6,7 +6,8 @@ import {
   getConfirmedMeals, confirmMeal, unconfirmMeal,
   getWeightLogs, addWeightLog, deleteWeightLog,
   getRatings, setRating, savePushSubscription,
-  searchFoodItems, getUserRecipes, saveUserRecipe, deleteUserRecipe
+  searchFoodItems, getUserRecipes, saveUserRecipe, deleteUserRecipe,
+  getShoppingList, saveShoppingList, updateShoppingItems, markDaysCompleted
 } from './supabase.js';
 
 import {
@@ -31,6 +32,7 @@ const state = {
   selectedShoppingDays: [],
   currentDayIndex: 0,      // giorno visualizzato nel piano (0 = oggi)
   userRecipes: [],           // ricette create dall'utente
+  shoppingList: null,        // lista spesa persistente dal DB
   currentModal: null,
 };
 
@@ -61,7 +63,15 @@ function showPage(name) {
 
   if (name === 'piano')      renderPiano();
   if (name === 'ricette')    renderRicette();
-  if (name === 'spesa')      renderSpesa();
+  if (name === 'spesa') {
+    const el = document.getElementById('page-spesa');
+    if (el) el.innerHTML = '<div id="main-content"><div class="loading-wrap"><div class="spinner"></div></div></div>';
+    renderSpesa().catch(e => {
+      console.error('[renderSpesa]', e);
+      const el = document.getElementById('page-spesa');
+      if (el) el.innerHTML = `<div id="main-content"><p class="text-soft">Errore: ${e.message}</p></div>`;
+    });
+  }
   if (name === 'profilo')    renderProfilo();
 
   // Pagine async: spinner immediato poi render
@@ -133,6 +143,11 @@ async function loadUserData() {
     state.recipes    = recipes;
     state.excluded   = excluded;
     state.weightLogs = weightLogs;
+
+    // Shopping list
+    try { state.shoppingList = await getShoppingList(uid); } catch (e) {
+      console.warn('[loadUserData] getShoppingList:', e);
+    }
 
     // User recipes
     try { state.userRecipes = await getUserRecipes(uid); } catch (e) {
@@ -2331,43 +2346,84 @@ function showDayDetail(date, confirmed) {
 }
 
 // ── Render Spesa ──────────────────────────────────────
-function renderSpesa() {
+async function renderSpesa() {
   const el = document.getElementById('page-spesa');
   if (!state.plan || !state.plan.days) {
-    el.innerHTML = `<div id="main-content"><p class="text-soft">Piano non disponibile.</p></div>`;
+    el.innerHTML = `<div id="main-content"><div class="empty-state"><img src="assets/empty-shopping.svg" alt="" style="width:120px"><h3>Piano non disponibile</h3></div></div>`;
     return;
   }
 
+  const uid  = state.session?.user?.id;
   const days = state.plan.days;
+  const pad  = n => String(n).padStart(2, '0');
+  const local = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 
-  // Quanti pasti confermati per ogni giorno (per mostrare badge)
-  const confirmedByDate = {};
-  for (const cm of state.confirmedMeals) {
-    confirmedByDate[cm.plan_date] = (confirmedByDate[cm.plan_date] || 0) + 1;
+  // Carica lista spesa dal DB (prima apertura o dopo refresh)
+  if (!state.shoppingList && uid) {
+    try { state.shoppingList = await getShoppingList(uid); } catch {}
   }
 
+  const sl             = state.shoppingList;
+  const savedDays      = sl?.days || [];
+  const completedDays  = sl?.completed_days || [];
+  const hasActiveList  = savedDays.length > 0;
+
+  // Badge per ogni giorno del piano
   const dayBtns = days.map((d, i) => {
-    const count = confirmedByDate[d.date] || 0;
-    const badge = count > 0 ? `<span style="font-size:0.7rem;background:var(--green);color:#fff;border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;margin-left:4px">${count}</span>` : '';
-    return `<button class="day-toggle${state.selectedShoppingDays.includes(i) ? ' selected' : ''}" data-day="${i}">
-      ${formatDateShort(d.date)}${badge}
+    const isCompleted = completedDays.includes(d.date);
+    const isInList    = savedDays.includes(d.date);
+    const isSelected  = state.selectedShoppingDays.includes(i);
+    const dateObj     = new Date(d.date + 'T12:00:00');
+    const label       = dateObj.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' });
+
+    let badge = '';
+    if (isCompleted)      badge = '<span class="shop-day-badge done">🛒 Fatto</span>';
+    else if (isInList)    badge = '<span class="shop-day-badge active">📋 In lista</span>';
+
+    return `<button class="day-toggle${isSelected ? ' selected' : ''}${isCompleted ? ' completed' : ''}" data-day="${i}" data-date="${d.date}">
+      <span class="shop-day-label">${label}</span>
+      ${badge}
     </button>`;
   }).join('');
+
+  // Sezione lista attiva (se esiste una lista salvata)
+  const activeListSection = hasActiveList ? `
+    <div class="active-list-banner">
+      <div>
+        <strong>Lista attiva</strong>
+        <div style="font-size:0.8rem;color:var(--text-soft);margin-top:2px">
+          ${savedDays.map(d => new Date(d + 'T12:00:00').toLocaleDateString('it-IT', {weekday:'short',day:'numeric',month:'short'})).join(' · ')}
+        </div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary btn-sm" id="btn-view-active-list">📋 Vedi lista</button>
+        <button class="btn btn-secondary btn-sm" id="btn-mark-done">✓ Spesa fatta</button>
+      </div>
+    </div>` : '';
 
   el.innerHTML = `
     <div id="main-content">
       <h2 style="margin-bottom:6px">Lista della Spesa</h2>
-      <p class="text-soft" style="margin-bottom:4px">Seleziona i giorni per cui fare la spesa.</p>
-      <p class="text-soft" style="margin-bottom:16px;font-size:0.82rem">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg>
-        La lista include solo i pasti che hai confermato — il numero verde indica quanti pasti confermati ha ogni giorno.
+      <p class="text-soft" style="margin-bottom:4px">Seleziona i giorni per cui vuoi fare la spesa.</p>
+      <p class="text-soft" style="font-size:0.82rem;margin-bottom:14px">
+        Solo i pasti che hai <strong>confermato</strong> vengono inclusi nella lista.
       </p>
-      <div class="shopping-day-selector">${dayBtns}</div>
-      <button class="btn btn-primary w-full" id="btn-gen-shopping" style="margin-bottom:24px">Genera lista della spesa</button>
+
+      ${activeListSection}
+
+      <div class="shopping-day-selector" style="margin-bottom:12px">${dayBtns}</div>
+
+      <button class="btn btn-primary w-full" id="btn-gen-shopping" style="margin-bottom:24px">
+        Genera lista della spesa
+      </button>
+
       <div id="shopping-list"></div>
     </div>`;
 
-  el.querySelectorAll('.day-toggle').forEach(btn => {
+  // ── Events ──
+
+  // Selezione giorni
+  el.querySelectorAll('.day-toggle:not(.completed)').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = +btn.dataset.day;
       if (state.selectedShoppingDays.includes(idx)) {
@@ -2380,134 +2436,229 @@ function renderSpesa() {
     });
   });
 
-  el.querySelector('#btn-gen-shopping').addEventListener('click', () => {
+  // Genera lista
+  el.querySelector('#btn-gen-shopping')?.addEventListener('click', async () => {
     if (!state.selectedShoppingDays.length) { toast('Seleziona almeno un giorno', 'error'); return; }
 
-    // Calcola le date selezionate
     const selectedDates = state.selectedShoppingDays.map(i => days[i]?.date).filter(Boolean);
 
-    // Filtra i pasti confermati per quelle date
-    const confirmedForDays = state.confirmedMeals.filter(cm => selectedDates.includes(cm.plan_date));
+    // Controlla se sovrascrive giorni con spesa già fatta
+    const alreadyDone = selectedDates.filter(d => completedDays.includes(d));
+    if (alreadyDone.length > 0) {
+      const labels = alreadyDone.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long'})).join(', ');
+      const ok = confirm(`Hai già segnato la spesa come fatta per: ${labels}.\nVuoi generare una nuova lista sovrascrivendo quella precedente?`);
+      if (!ok) return;
+    }
 
+    // Filtra pasti confermati
+    const confirmedForDays = state.confirmedMeals.filter(cm => selectedDates.includes(cm.plan_date));
     if (!confirmedForDays.length) {
-      toast('Nessun pasto confermato nei giorni selezionati', 'info');
       document.getElementById('shopping-list').innerHTML = `
         <div class="empty-state">
-          <img src="assets/empty-shopping.svg" alt="">
+          <img src="assets/empty-shopping.svg" alt="" style="width:90px">
           <h3>Nessun pasto confermato</h3>
-          <p>Vai nel Piano, conferma i pasti che vuoi cucinare, poi torna qui a generare la lista.</p>
+          <p>Vai nel Piano e conferma i pasti dei giorni selezionati, poi torna qui.</p>
         </div>`;
       return;
     }
 
-    // Risolve le ricette dagli ID confermati
+    // Risolvi ricette
     const recipeMap = {};
     for (const r of state.recipes) recipeMap[r.id] = r;
-
-    const confirmedRecipes = confirmedForDays
-      .map(cm => recipeMap[cm.recipe_id])
-      .filter(Boolean);
+    const confirmedRecipes = confirmedForDays.map(cm => recipeMap[cm.recipe_id]).filter(Boolean);
 
     const list = buildShoppingListFromRecipes(confirmedRecipes);
-    const totalConfirmed = confirmedForDays.length;
-    renderShoppingList(list, totalConfirmed);
+
+    // Salva su Supabase
+    if (uid) {
+      try {
+        const saved = await saveShoppingList(uid, selectedDates, list);
+        state.shoppingList = saved;
+      } catch (e) { console.warn('saveShoppingList failed:', e); }
+    }
+
+    renderShoppingListUI(list, confirmedForDays.length, selectedDates);
+    toast('Lista generata e salvata ✓');
+  });
+
+  // Vedi lista attiva (quella già salvata)
+  el.querySelector('#btn-view-active-list')?.addEventListener('click', () => {
+    if (sl?.items) renderShoppingListUI(sl.items, 0, savedDays);
+  });
+
+  // Segna spesa come fatta
+  el.querySelector('#btn-mark-done')?.addEventListener('click', async () => {
+    if (!sl) return;
+    const selected = state.selectedShoppingDays.map(i => days[i]?.date).filter(Boolean);
+    const toMark   = selected.length ? selected : savedDays;
+    const labels   = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long'})).join(', ');
+
+    if (!confirm(`Segnare la spesa come completata per: ${labels}?`)) return;
+
+    const newCompleted = [...new Set([...completedDays, ...toMark])];
+    try {
+      await markDaysCompleted(uid, newCompleted);
+      state.shoppingList = { ...sl, completed_days: newCompleted };
+      toast('Spesa segnata come completata 🛒');
+      renderSpesa();
+    } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });
 }
 
-/**
- * Aggrega ingredienti da un array di ricette già risolte
- */
-function buildShoppingListFromRecipes(recipes) {
-  const raw = {};
-
-  for (const recipe of recipes) {
-    if (!recipe?.ingredients) continue;
-    for (const ing of recipe.ingredients) {
-      const key = `${ing.name.toLowerCase()}||${ing.unit || ''}`;
-      if (raw[key]) {
-        raw[key].amount += ing.amount || 0;
-      } else {
-        raw[key] = { name: ing.name, unit: ing.unit || '', amount: ing.amount || 0 };
-      }
-    }
-  }
-
-  const CATS = {
-    'Carne e Pesce':    ['pollo','manzo','vitello','tacchino','macinato','coniglio','salmone','tonno','orata','branzino','merluzzo','sgombro','alici','acciughe','gamberetti','trancio'],
-    'Verdure e Ortaggi':['zucchine','carote','spinaci','broccoli','pomodori','peperoni','cipolla','aglio','sedano','melanzane','asparagi','lattuga','rucola','cetriolo','patate','zucca','cipollotto','fagiolini'],
-    'Frutta':           ['mela','banana','fragole','mirtilli','limone','lime','avocado','arancia','pera','kiwi','albicocche'],
-    'Latticini e Uova': ['yogurt','ricotta','parmigiano','feta','grana','latte','uova','uovo','albume','formaggio','kefir','mozzarella','burro'],
-    'Pasta e Cereali':  ['pasta','spaghetti','fusilli','penne','riso','farro','orzo','cous','quinoa','avena','gallette','pane','fette biscottate'],
-    'Legumi':           ['ceci','fagioli','lenticchie','piselli','soia','fave','edamame','tofu'],
-    'Dispensa':         ['olio','sale','pepe','curry','curcuma','cannella','zenzero','rosmarino','basilico','timo','origano','prezzemolo','paprika','cumino','miele','confettura','aceto','capperi','olive','tahini'],
-    'Frutta secca':     ['mandorle','noci','nocciole','pistacchi','anacardi','pinoli','semi'],
-  };
-
-  const categorized = {};
-  for (const item of Object.values(raw)) {
-    let cat = 'Altro';
-    const nameLow = item.name.toLowerCase();
-    for (const [c, keywords] of Object.entries(CATS)) {
-      if (keywords.some(k => nameLow.includes(k))) { cat = c; break; }
-    }
-    if (!categorized[cat]) categorized[cat] = [];
-    categorized[cat].push(item);
-  }
-
-  // Ordina gli ingredienti alfabeticamente dentro ogni categoria
-  for (const cat of Object.keys(categorized)) {
-    categorized[cat].sort((a, b) => a.name.localeCompare(b.name, 'it'));
-  }
-
-  return categorized;
-}
-
-function renderShoppingList(list, confirmedCount = 0) {
-  const el = document.getElementById('shopping-list');
+function renderShoppingListUI(list, confirmedCount, selectedDates) {
+  const el       = document.getElementById('shopping-list');
   const catOrder = ['Carne e Pesce','Verdure e Ortaggi','Frutta','Latticini e Uova','Pasta e Cereali','Legumi','Dispensa','Frutta secca','Altro'];
+  const total    = Object.values(list).reduce((s, arr) => s + arr.length, 0);
 
-  const totalItems = Object.values(list).reduce((s, arr) => s + arr.length, 0);
+  // Carica spunte salvate (dalla lista DB se disponibile)
+  const sl = state.shoppingList;
+  // Usa uno stato locale per le spunte durante la sessione
+  if (!state._shopChecked) state._shopChecked = {};
 
   let html = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
-        <h3 style="margin-bottom:2px">Lista generata</h3>
-        <p style="font-size:0.78rem;color:var(--text-soft)">${confirmedCount} pasto/i confermati · ${totalItems} ingredienti</p>
+        <h3 style="margin-bottom:2px">Lista della spesa</h3>
+        <p style="font-size:0.78rem;color:var(--text-soft)">
+          ${confirmedCount ? confirmedCount + ' pasti · ' : ''}${total} ingredienti
+          ${selectedDates?.length ? '· ' + selectedDates.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric'})).join(', ') : ''}
+        </p>
       </div>
-      <button class="btn btn-ghost btn-sm" id="btn-print">🖨 Stampa</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" id="btn-uncheck-all" title="Rimuovi tutte le spunte">↺</button>
+        <button class="btn btn-ghost btn-sm" id="btn-print">🖨</button>
+      </div>
     </div>`;
 
   for (const cat of catOrder) {
     if (!list[cat]?.length) continue;
-    html += `<div class="shopping-category"><h4>${cat}</h4>`;
+    const allChecked = list[cat].every(i => state._shopChecked[`${i.name}||${i.unit}`]);
+    html += `
+      <div class="shopping-category">
+        <h4 style="display:flex;justify-content:space-between;align-items:center">
+          ${cat}
+          <span style="font-size:0.7rem;color:var(--text-soft)">${list[cat].filter(i => state._shopChecked[`${i.name}||${i.unit}`]).length}/${list[cat].length}</span>
+        </h4>`;
     for (const item of list[cat]) {
-      const key = `${item.name}||${item.unit}`;
-      const checked = !!state.shoppingChecked[key];
-      const amtDisplay = item.unit === 'pz' ? `${item.amount} pz` :
-                         item.unit === 'pizzico' ? `q.b.` :
-                         `${item.amount}${item.unit}`;
+      const key     = `${item.name}||${item.unit}`;
+      const checked = !!state._shopChecked[key];
+      const amt     = item.unit === 'pz' ? `${Math.round(item.amount)} pz`
+                    : item.unit === 'pizzico' ? 'q.b.'
+                    : `${Math.round(item.amount)} ${item.unit}`;
       html += `
         <div class="shopping-item${checked ? ' checked' : ''}" data-key="${key}">
           <div class="check-box${checked ? ' checked' : ''}">${checked ? '✓' : ''}</div>
           <span class="item-name">${item.name}</span>
-          <span class="item-amount">${amtDisplay}</span>
+          <span class="item-amount">${amt}</span>
         </div>`;
     }
     html += `</div>`;
   }
 
+  html += `
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+      <button class="btn btn-primary w-full" id="btn-done-shopping">
+        🛒 Spesa completata — segna i giorni
+      </button>
+    </div>`;
+
   el.innerHTML = html;
 
+  // Toggle spunta con salvataggio persistente
   el.querySelectorAll('.shopping-item').forEach(row => {
-    row.addEventListener('click', () => {
+    row.addEventListener('click', async () => {
       const key = row.dataset.key;
-      state.shoppingChecked[key] = !state.shoppingChecked[key];
-      renderShoppingList(list); // re-render with updated state
+      state._shopChecked[key] = !state._shopChecked[key];
+
+      // Aggiorna visivamente senza re-render completo
+      row.classList.toggle('checked', !!state._shopChecked[key]);
+      const box = row.querySelector('.check-box');
+      box.classList.toggle('checked', !!state._shopChecked[key]);
+      box.textContent = state._shopChecked[key] ? '✓' : '';
+
+      // Aggiorna contatore categoria
+      const catSection = row.closest('.shopping-category');
+      if (catSection) {
+        const items   = catSection.querySelectorAll('.shopping-item');
+        const checked = catSection.querySelectorAll('.shopping-item.checked');
+        const counter = catSection.querySelector('h4 span');
+        if (counter) counter.textContent = `${checked.length}/${items.length}`;
+      }
+
+      // Salva le spunte nel DB (throttled)
+      if (state.shoppingList && state.session?.user?.id) {
+        clearTimeout(state._shopSaveTimer);
+        state._shopSaveTimer = setTimeout(async () => {
+          // Merge checked state nelle items
+          const updatedItems = JSON.parse(JSON.stringify(state.shoppingList.items || {}));
+          for (const cat of Object.keys(updatedItems)) {
+            for (const item of updatedItems[cat]) {
+              const k = `${item.name}||${item.unit}`;
+              item.checked = !!state._shopChecked[k];
+            }
+          }
+          await updateShoppingItems(state.session.user.id, updatedItems).catch(console.warn);
+        }, 1500);
+      }
     });
   });
 
-  document.getElementById('btn-print')?.addEventListener('click', () => window.print());
+  el.querySelector('#btn-uncheck-all')?.addEventListener('click', () => {
+    state._shopChecked = {};
+    renderShoppingListUI(list, confirmedCount, selectedDates);
+  });
+  el.querySelector('#btn-print')?.addEventListener('click', () => window.print());
+
+  // Spesa completata dalla lista
+  el.querySelector('#btn-done-shopping')?.addEventListener('click', async () => {
+    if (!state.shoppingList || !state.session?.user?.id) return;
+    const sl           = state.shoppingList;
+    const newCompleted = [...new Set([...(sl.completed_days || []), ...sl.days])];
+    try {
+      await markDaysCompleted(state.session.user.id, newCompleted);
+      state.shoppingList = { ...sl, completed_days: newCompleted };
+      toast('Spesa completata! 🛒 I giorni sono stati segnati.');
+      renderSpesa();
+    } catch (e) { toast('Errore: ' + e.message, 'error'); }
+  });
 }
+
+function buildShoppingListFromRecipes(recipes) {
+  const raw = {};
+  for (const recipe of recipes) {
+    if (!recipe?.ingredients) continue;
+    for (const ing of recipe.ingredients) {
+      const key = `${ing.name.toLowerCase()}||${ing.unit || ''}`;
+      if (raw[key]) raw[key].amount += ing.amount || 0;
+      else raw[key] = { name: ing.name, unit: ing.unit || '', amount: ing.amount || 0 };
+    }
+  }
+  const CATS = {
+    'Carne e Pesce':    ['pollo','manzo','vitello','tacchino','macinato','coniglio','salmone','tonno','orata','branzino','merluzzo','sgombro','gamberetti','trancio','acciughe','baccalà','calamari','polpo','spigola'],
+    'Verdure e Ortaggi':['zucchine','carote','spinaci','broccoli','pomodori','peperoni','cipolla','aglio','sedano','melanzane','asparagi','lattuga','rucola','cetriolo','patate','zucca','fagiolini','funghi','cavolo','finocch'],
+    'Frutta':           ['mela','banana','fragole','mirtilli','limone','lime','avocado','arancia','pera','kiwi','albicocche','melograno'],
+    'Latticini e Uova': ['yogurt','ricotta','parmigiano','feta','grana','latte','uova','uovo','albume','formaggio','kefir','mozzarella','burro'],
+    'Pasta e Cereali':  ['pasta','spaghetti','fusilli','penne','riso','farro','orzo','cous','quinoa','avena','gallette','pane','fette biscottate','tagliatelle','gnocchi'],
+    'Legumi':           ['ceci','fagioli','lenticchie','piselli','soia','fave','edamame','tofu'],
+    'Dispensa':         ['olio','sale','pepe','curry','curcuma','cannella','zenzero','rosmarino','basilico','timo','origano','prezzemolo','paprika','cumino','miele','confettura','aceto','capperi','olive'],
+    'Frutta secca':     ['mandorle','noci','nocciole','pistacchi','anacardi','pinoli','semi'],
+  };
+  const categorized = {};
+  for (const item of Object.values(raw)) {
+    let cat = 'Altro';
+    const nl = item.name.toLowerCase();
+    for (const [c, kws] of Object.entries(CATS)) {
+      if (kws.some(k => nl.includes(k))) { cat = c; break; }
+    }
+    if (!categorized[cat]) categorized[cat] = [];
+    categorized[cat].push(item);
+  }
+  for (const cat of Object.keys(categorized))
+    categorized[cat].sort((a, b) => a.name.localeCompare(b.name, 'it'));
+  return categorized;
+}
+
+
 
 // ── Render Profilo ────────────────────────────────────
 function renderProfilo() {
