@@ -2469,7 +2469,7 @@ async function renderSpesa() {
 
     const list = buildShoppingListFromRecipes(confirmedRecipes);
 
-    // Salva su Supabase
+    // Salva su Supabase (mantiene i completed_days esistenti per altri giorni)
     if (uid) {
       try {
         const saved = await saveShoppingList(uid, selectedDates, list);
@@ -2477,43 +2477,64 @@ async function renderSpesa() {
       } catch (e) { console.warn('saveShoppingList failed:', e); }
     }
 
-    renderShoppingListUI(list, confirmedForDays.length, selectedDates);
+    // resetChecks=true: nuova lista, azzera vecchie spunte
+    state._shopChecked = {};
+    renderShoppingListUI(list, confirmedForDays.length, selectedDates, true);
     toast('Lista generata e salvata ✓');
   });
 
-  // Vedi lista attiva (quella già salvata)
+  // Vedi lista attiva — usa state.shoppingList aggiornato e ripristina spunte
   el.querySelector('#btn-view-active-list')?.addEventListener('click', () => {
-    if (sl?.items) renderShoppingListUI(sl.items, 0, savedDays);
+    const current = state.shoppingList;
+    if (current?.items) {
+      // Non resettare le spunte: le legge da item.checked nel DB
+      renderShoppingListUI(current.items, 0, current.days, false);
+    }
   });
 
-  // Segna spesa come fatta
+  // Segna spesa come fatta — usa sempre state.shoppingList aggiornato (no closure stale)
   el.querySelector('#btn-mark-done')?.addEventListener('click', async () => {
-    if (!sl) return;
-    const selected = state.selectedShoppingDays.map(i => days[i]?.date).filter(Boolean);
-    const toMark   = selected.length ? selected : savedDays;
-    const labels   = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long'})).join(', ');
+    const current = state.shoppingList;
+    if (!current) { toast('Nessuna lista attiva', 'error'); return; }
 
-    if (!confirm(`Segnare la spesa come completata per: ${labels}?`)) return;
+    // Segna TUTTI i giorni della lista attiva come "Fatto"
+    const toMark       = current.days || [];
+    const currCompleted = current.completed_days || [];
+    const labels        = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
 
-    const newCompleted = [...new Set([...completedDays, ...toMark])];
+    if (!confirm(`Segnare la spesa come completata per:\n${labels}?`)) return;
+
+    const newCompleted = [...new Set([...currCompleted, ...toMark])];
     try {
       await markDaysCompleted(uid, newCompleted);
-      state.shoppingList = { ...sl, completed_days: newCompleted };
-      toast('Spesa segnata come completata 🛒');
+      state.shoppingList = { ...current, completed_days: newCompleted };
+      state.selectedShoppingDays = []; // deseleziona tutto
+      toast('Spesa completata! 🛒');
       renderSpesa();
     } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });
 }
 
-function renderShoppingListUI(list, confirmedCount, selectedDates) {
+function renderShoppingListUI(list, confirmedCount, selectedDates, resetChecks = false) {
   const el       = document.getElementById('shopping-list');
   const catOrder = ['Carne e Pesce','Verdure e Ortaggi','Frutta','Latticini e Uova','Pasta e Cereali','Legumi','Dispensa','Frutta secca','Altro'];
   const total    = Object.values(list).reduce((s, arr) => s + arr.length, 0);
 
-  // Carica spunte salvate (dalla lista DB se disponibile)
-  const sl = state.shoppingList;
-  // Usa uno stato locale per le spunte durante la sessione
-  if (!state._shopChecked) state._shopChecked = {};
+  // Ripristina spunte:
+  // - se resetChecks=true (nuova lista): azzera tutto
+  // - altrimenti: leggi item.checked salvati nel DB
+  if (resetChecks || !state._shopChecked) {
+    state._shopChecked = {};
+  }
+  // Popola _shopChecked dagli item.checked salvati (vengono da DB via "Vedi lista")
+  for (const items of Object.values(list)) {
+    for (const item of items) {
+      const key = `${item.name}||${item.unit}`;
+      if (item.checked && !(key in state._shopChecked)) {
+        state._shopChecked[key] = true;
+      }
+    }
+  }
 
   let html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -2611,13 +2632,18 @@ function renderShoppingListUI(list, confirmedCount, selectedDates) {
 
   // Spesa completata dalla lista
   el.querySelector('#btn-done-shopping')?.addEventListener('click', async () => {
-    if (!state.shoppingList || !state.session?.user?.id) return;
-    const sl           = state.shoppingList;
-    const newCompleted = [...new Set([...(sl.completed_days || []), ...sl.days])];
+    const current = state.shoppingList;
+    if (!current || !state.session?.user?.id) return;
+    const toMark       = current.days || [];
+    const currCompleted = current.completed_days || [];
+    const newCompleted = [...new Set([...currCompleted, ...toMark])];
+    const labels = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
+    if (!confirm(`Segnare la spesa come completata per:\n${labels}?`)) return;
     try {
       await markDaysCompleted(state.session.user.id, newCompleted);
-      state.shoppingList = { ...sl, completed_days: newCompleted };
-      toast('Spesa completata! 🛒 I giorni sono stati segnati.');
+      state.shoppingList = { ...current, completed_days: newCompleted };
+      state.selectedShoppingDays = [];
+      toast('Spesa completata! 🛒');
       renderSpesa();
     } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });

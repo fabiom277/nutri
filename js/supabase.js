@@ -274,13 +274,25 @@ export async function getShoppingList(userId) {
 }
 
 export async function saveShoppingList(userId, days, items) {
+  // Leggi i completed_days esistenti per mantenerli (non azzerarli)
+  const { data: existing } = await supabase
+    .from('shopping_list')
+    .select('completed_days')
+    .eq('user_id', userId)
+    .maybeSingle();
+
+  // Mantieni solo i giorni "Fatto" che NON sono nella nuova lista
+  // (i giorni della nuova lista ripartono da zero)
+  const prevCompleted = existing?.completed_days || [];
+  const keptCompleted = prevCompleted.filter(d => !days.includes(d));
+
   const { data, error } = await supabase
     .from('shopping_list')
     .upsert({
       user_id:        userId,
       days,
       items,
-      completed_days: [],
+      completed_days: keptCompleted,
       generated_at:   new Date().toISOString(),
       updated_at:     new Date().toISOString(),
     })
