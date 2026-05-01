@@ -2356,73 +2356,76 @@ async function renderSpesa() {
   const uid  = state.session?.user?.id;
   const days = state.plan.days;
   const pad  = n => String(n).padStart(2, '0');
-  const local = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 
-  // Carica lista spesa dal DB (prima apertura o dopo refresh)
-  if (!state.shoppingList && uid) {
-    try { state.shoppingList = await getShoppingList(uid); } catch {}
+  // Ricarica SEMPRE dal DB per avere dati freschi
+  if (uid) {
+    try { state.shoppingList = await getShoppingList(uid); }
+    catch (e) { console.warn('[renderSpesa] getShoppingList:', e); }
   }
 
-  const sl             = state.shoppingList;
-  const savedDays      = sl?.days || [];
-  const completedDays  = sl?.completed_days || [];
-  const hasActiveList  = savedDays.length > 0;
+  const sl            = state.shoppingList;
+  const savedDays     = sl?.days || [];
+  const completedDays = sl?.completed_days || [];
+  const hasActiveList = savedDays.length > 0;
 
-  // Badge per ogni giorno del piano
+  // Ripristina spunte dalla lista DB ogni volta che si entra nella pagina
+  if (sl?.items && hasActiveList) {
+    state._shopChecked = state._shopChecked || {};
+    for (const items of Object.values(sl.items)) {
+      for (const item of items) {
+        const key = `${item.name}||${item.unit}`;
+        if (item.checked) state._shopChecked[key] = true;
+      }
+    }
+  }
+
+  // Badge giorno
   const dayBtns = days.map((d, i) => {
     const isCompleted = completedDays.includes(d.date);
     const isInList    = savedDays.includes(d.date);
     const isSelected  = state.selectedShoppingDays.includes(i);
     const dateObj     = new Date(d.date + 'T12:00:00');
     const label       = dateObj.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' });
-
     let badge = '';
-    if (isCompleted)      badge = '<span class="shop-day-badge done">🛒 Fatto</span>';
-    else if (isInList)    badge = '<span class="shop-day-badge active">📋 In lista</span>';
-
-    return `<button class="day-toggle${isSelected ? ' selected' : ''}${isCompleted ? ' completed' : ''}" data-day="${i}" data-date="${d.date}">
-      <span class="shop-day-label">${label}</span>
-      ${badge}
+    if (isCompleted)   badge = '<span class="shop-day-badge done">🛒 Fatto</span>';
+    else if (isInList) badge = '<span class="shop-day-badge active">📋 In lista</span>';
+    return `<button class="day-toggle${isSelected?' selected':''}${isCompleted?' completed':''}" data-day="${i}" data-date="${d.date}">
+      <span class="shop-day-label">${label}</span>${badge}
     </button>`;
   }).join('');
-
-  // Sezione lista attiva (se esiste una lista salvata)
-  const activeListSection = hasActiveList ? `
-    <div class="active-list-banner">
-      <div>
-        <strong>Lista attiva</strong>
-        <div style="font-size:0.8rem;color:var(--text-soft);margin-top:2px">
-          ${savedDays.map(d => new Date(d + 'T12:00:00').toLocaleDateString('it-IT', {weekday:'short',day:'numeric',month:'short'})).join(' · ')}
-        </div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-primary btn-sm" id="btn-view-active-list">📋 Vedi lista</button>
-        <button class="btn btn-secondary btn-sm" id="btn-mark-done">✓ Spesa fatta</button>
-      </div>
-    </div>` : '';
 
   el.innerHTML = `
     <div id="main-content">
       <h2 style="margin-bottom:6px">Lista della Spesa</h2>
-      <p class="text-soft" style="margin-bottom:4px">Seleziona i giorni per cui vuoi fare la spesa.</p>
       <p class="text-soft" style="font-size:0.82rem;margin-bottom:14px">
-        Solo i pasti che hai <strong>confermato</strong> vengono inclusi nella lista.
+        Solo i pasti <strong>confermati</strong> vengono inclusi. 🛒 = spesa già fatta.
       </p>
 
-      ${activeListSection}
+      ${hasActiveList ? `
+      <div class="active-list-banner">
+        <div>
+          <strong>Lista attiva</strong>
+          <div style="font-size:0.8rem;color:var(--text-soft);margin-top:2px">
+            ${savedDays.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short'})).join(' · ')}
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-mark-done">🛒 Spesa completata</button>
+      </div>` : ''}
 
       <div class="shopping-day-selector" style="margin-bottom:12px">${dayBtns}</div>
-
       <button class="btn btn-primary w-full" id="btn-gen-shopping" style="margin-bottom:24px">
         Genera lista della spesa
       </button>
-
       <div id="shopping-list"></div>
     </div>`;
 
+  // Mostra automaticamente la lista attiva se esiste (senza cliccare "Vedi lista")
+  if (hasActiveList && sl?.items) {
+    renderShoppingListUI(sl.items, 0, savedDays);
+  }
+
   // ── Events ──
 
-  // Selezione giorni
   el.querySelectorAll('.day-toggle:not(.completed)').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = +btn.dataset.day;
@@ -2436,139 +2439,124 @@ async function renderSpesa() {
     });
   });
 
-  // Genera lista
   el.querySelector('#btn-gen-shopping')?.addEventListener('click', async () => {
     if (!state.selectedShoppingDays.length) { toast('Seleziona almeno un giorno', 'error'); return; }
 
     const selectedDates = state.selectedShoppingDays.map(i => days[i]?.date).filter(Boolean);
 
-    // Controlla se sovrascrive giorni con spesa già fatta
-    const alreadyDone = selectedDates.filter(d => completedDays.includes(d));
+    // Controlla sovrapposizione con giorni già "Fatto"
+    const alreadyDone = selectedDates.filter(d => (state.shoppingList?.completed_days || []).includes(d));
     if (alreadyDone.length > 0) {
       const labels = alreadyDone.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long'})).join(', ');
-      const ok = confirm(`Hai già segnato la spesa come fatta per: ${labels}.\nVuoi generare una nuova lista sovrascrivendo quella precedente?`);
-      if (!ok) return;
+      if (!confirm(`Hai già segnato la spesa come fatta per: ${labels}.
+Vuoi generare una nuova lista per questi giorni?`)) return;
     }
 
-    // Filtra pasti confermati
     const confirmedForDays = state.confirmedMeals.filter(cm => selectedDates.includes(cm.plan_date));
     if (!confirmedForDays.length) {
       document.getElementById('shopping-list').innerHTML = `
         <div class="empty-state">
           <img src="assets/empty-shopping.svg" alt="" style="width:90px">
           <h3>Nessun pasto confermato</h3>
-          <p>Vai nel Piano e conferma i pasti dei giorni selezionati, poi torna qui.</p>
+          <p>Vai nel Piano, conferma i pasti dei giorni selezionati, poi torna qui.</p>
         </div>`;
       return;
     }
 
-    // Risolvi ricette
     const recipeMap = {};
     for (const r of state.recipes) recipeMap[r.id] = r;
     const confirmedRecipes = confirmedForDays.map(cm => recipeMap[cm.recipe_id]).filter(Boolean);
-
     const list = buildShoppingListFromRecipes(confirmedRecipes);
 
-    // Salva su Supabase (mantiene i completed_days esistenti per altri giorni)
+    // Azzera le spunte per i nuovi ingredienti
+    state._shopChecked = {};
+
     if (uid) {
       try {
         const saved = await saveShoppingList(uid, selectedDates, list);
         state.shoppingList = saved;
-      } catch (e) { console.warn('saveShoppingList failed:', e); }
+        toast('Lista salvata ✓');
+      } catch (e) {
+        console.error('saveShoppingList failed:', e);
+        toast('Lista generata (errore salvataggio: ' + e.message + ')', 'info');
+        // Salva in memoria anche se il DB fallisce
+        state.shoppingList = { days: selectedDates, items: list, completed_days: [] };
+      }
     }
 
-    // resetChecks=true: nuova lista, azzera vecchie spunte
-    state._shopChecked = {};
-    renderShoppingListUI(list, confirmedForDays.length, selectedDates, true);
-    toast('Lista generata e salvata ✓');
+    renderShoppingListUI(list, confirmedForDays.length, selectedDates);
   });
 
-  // Vedi lista attiva — usa state.shoppingList aggiornato e ripristina spunte
-  el.querySelector('#btn-view-active-list')?.addEventListener('click', () => {
-    const current = state.shoppingList;
-    if (current?.items) {
-      // Non resettare le spunte: le legge da item.checked nel DB
-      renderShoppingListUI(current.items, 0, current.days, false);
-    }
-  });
-
-  // Segna spesa come fatta — usa sempre state.shoppingList aggiornato (no closure stale)
+  // "Spesa completata" nel banner — segna i giorni della lista attiva
   el.querySelector('#btn-mark-done')?.addEventListener('click', async () => {
+    // Rileggi sempre da state.shoppingList per avere dati freschi
     const current = state.shoppingList;
-    if (!current) { toast('Nessuna lista attiva', 'error'); return; }
+    if (!current?.days?.length) { toast('Nessuna lista attiva', 'error'); return; }
 
-    // Segna TUTTI i giorni della lista attiva come "Fatto"
-    const toMark       = current.days || [];
-    const currCompleted = current.completed_days || [];
-    const labels        = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
+    const toMark    = current.days;
+    const labels    = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
+    if (!confirm(`Segnare come completata la spesa per:\n${labels}?`)) return;
 
-    if (!confirm(`Segnare la spesa come completata per:\n${labels}?`)) return;
-
-    const newCompleted = [...new Set([...currCompleted, ...toMark])];
+    const newCompleted = [...new Set([...(current.completed_days||[]), ...toMark])];
     try {
       await markDaysCompleted(uid, newCompleted);
       state.shoppingList = { ...current, completed_days: newCompleted };
-      state.selectedShoppingDays = []; // deseleziona tutto
-      toast('Spesa completata! 🛒');
-      renderSpesa();
+      state.selectedShoppingDays = [];
+      toast('Spesa completata 🛒');
+      renderSpesa(); // ricarica la pagina con i badge aggiornati
     } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });
 }
 
-function renderShoppingListUI(list, confirmedCount, selectedDates, resetChecks = false) {
+function renderShoppingListUI(list, confirmedCount, selectedDates) {
   const el       = document.getElementById('shopping-list');
+  if (!el) return;
   const catOrder = ['Carne e Pesce','Verdure e Ortaggi','Frutta','Latticini e Uova','Pasta e Cereali','Legumi','Dispensa','Frutta secca','Altro'];
   const total    = Object.values(list).reduce((s, arr) => s + arr.length, 0);
 
-  // Ripristina spunte:
-  // - se resetChecks=true (nuova lista): azzera tutto
-  // - altrimenti: leggi item.checked salvati nel DB
-  if (resetChecks || !state._shopChecked) {
-    state._shopChecked = {};
-  }
-  // Popola _shopChecked dagli item.checked salvati (vengono da DB via "Vedi lista")
+  if (!state._shopChecked) state._shopChecked = {};
+  // Popola da item.checked (dati DB)
   for (const items of Object.values(list)) {
     for (const item of items) {
       const key = `${item.name}||${item.unit}`;
-      if (item.checked && !(key in state._shopChecked)) {
-        state._shopChecked[key] = true;
-      }
+      if (item.checked && !(key in state._shopChecked)) state._shopChecked[key] = true;
     }
   }
+
+  const dateLabel = (selectedDates || []).map(d =>
+    new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric'})
+  ).join(', ');
 
   let html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
-        <h3 style="margin-bottom:2px">Lista della spesa</h3>
-        <p style="font-size:0.78rem;color:var(--text-soft)">
-          ${confirmedCount ? confirmedCount + ' pasti · ' : ''}${total} ingredienti
-          ${selectedDates?.length ? '· ' + selectedDates.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric'})).join(', ') : ''}
-        </p>
+        <h3 style="margin-bottom:2px">Ingredienti</h3>
+        <p style="font-size:0.75rem;color:var(--text-soft)">${total} voci · ${dateLabel}</p>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-ghost btn-sm" id="btn-uncheck-all" title="Rimuovi tutte le spunte">↺</button>
+        <button class="btn btn-ghost btn-sm" id="btn-uncheck-all" title="Rimuovi spunte">↺</button>
         <button class="btn btn-ghost btn-sm" id="btn-print">🖨</button>
       </div>
     </div>`;
 
   for (const cat of catOrder) {
     if (!list[cat]?.length) continue;
-    const allChecked = list[cat].every(i => state._shopChecked[`${i.name}||${i.unit}`]);
-    html += `
-      <div class="shopping-category">
-        <h4 style="display:flex;justify-content:space-between;align-items:center">
-          ${cat}
-          <span style="font-size:0.7rem;color:var(--text-soft)">${list[cat].filter(i => state._shopChecked[`${i.name}||${i.unit}`]).length}/${list[cat].length}</span>
-        </h4>`;
+    const done  = list[cat].filter(i => state._shopChecked[`${i.name}||${i.unit}`]).length;
+    const total = list[cat].length;
+    html += `<div class="shopping-category">
+      <h4 style="display:flex;justify-content:space-between">
+        ${cat}
+        <span style="font-size:0.7rem;color:${done===total?'var(--green)':'var(--text-soft)'}">${done}/${total}</span>
+      </h4>`;
     for (const item of list[cat]) {
       const key     = `${item.name}||${item.unit}`;
       const checked = !!state._shopChecked[key];
-      const amt     = item.unit === 'pz' ? `${Math.round(item.amount)} pz`
-                    : item.unit === 'pizzico' ? 'q.b.'
+      const amt     = item.unit==='pz' ? `${Math.round(item.amount)} pz`
+                    : item.unit==='pizzico' ? 'q.b.'
                     : `${Math.round(item.amount)} ${item.unit}`;
       html += `
-        <div class="shopping-item${checked ? ' checked' : ''}" data-key="${key}">
-          <div class="check-box${checked ? ' checked' : ''}">${checked ? '✓' : ''}</div>
+        <div class="shopping-item${checked?' checked':''}" data-key="${key}">
+          <div class="check-box${checked?' checked':''}">${checked?'✓':''}</div>
           <span class="item-name">${item.name}</span>
           <span class="item-amount">${amt}</span>
         </div>`;
@@ -2576,50 +2564,47 @@ function renderShoppingListUI(list, confirmedCount, selectedDates, resetChecks =
     html += `</div>`;
   }
 
-  html += `
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
-      <button class="btn btn-primary w-full" id="btn-done-shopping">
-        🛒 Spesa completata — segna i giorni
-      </button>
-    </div>`;
+  html += `<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+    <button class="btn btn-primary w-full" id="btn-done-shopping">🛒 Spesa completata</button>
+  </div>`;
 
   el.innerHTML = html;
 
-  // Toggle spunta con salvataggio persistente
+  // Toggle spunta con salvataggio immediato (no debounce)
   el.querySelectorAll('.shopping-item').forEach(row => {
     row.addEventListener('click', async () => {
       const key = row.dataset.key;
       state._shopChecked[key] = !state._shopChecked[key];
 
-      // Aggiorna visivamente senza re-render completo
+      // Aggiorna DOM inline senza re-render
       row.classList.toggle('checked', !!state._shopChecked[key]);
       const box = row.querySelector('.check-box');
       box.classList.toggle('checked', !!state._shopChecked[key]);
       box.textContent = state._shopChecked[key] ? '✓' : '';
 
-      // Aggiorna contatore categoria
-      const catSection = row.closest('.shopping-category');
-      if (catSection) {
-        const items   = catSection.querySelectorAll('.shopping-item');
-        const checked = catSection.querySelectorAll('.shopping-item.checked');
-        const counter = catSection.querySelector('h4 span');
-        if (counter) counter.textContent = `${checked.length}/${items.length}`;
+      // Aggiorna counter categoria
+      const cat = row.closest('.shopping-category');
+      if (cat) {
+        const counter  = cat.querySelector('h4 span');
+        const allItems = cat.querySelectorAll('.shopping-item');
+        const checked  = cat.querySelectorAll('.shopping-item.checked');
+        const done = checked.length, tot = allItems.length;
+        if (counter) {
+          counter.textContent = `${done}/${tot}`;
+          counter.style.color = done===tot ? 'var(--green)' : 'var(--text-soft)';
+        }
       }
 
-      // Salva le spunte nel DB (throttled)
+      // Salva immediatamente su DB (niente debounce)
       if (state.shoppingList && state.session?.user?.id) {
-        clearTimeout(state._shopSaveTimer);
-        state._shopSaveTimer = setTimeout(async () => {
-          // Merge checked state nelle items
-          const updatedItems = JSON.parse(JSON.stringify(state.shoppingList.items || {}));
-          for (const cat of Object.keys(updatedItems)) {
-            for (const item of updatedItems[cat]) {
-              const k = `${item.name}||${item.unit}`;
-              item.checked = !!state._shopChecked[k];
-            }
+        const updatedItems = JSON.parse(JSON.stringify(state.shoppingList.items || {}));
+        for (const catItems of Object.values(updatedItems)) {
+          for (const item of catItems) {
+            item.checked = !!state._shopChecked[`${item.name}||${item.unit}`];
           }
-          await updateShoppingItems(state.session.user.id, updatedItems).catch(console.warn);
-        }, 1500);
+        }
+        state.shoppingList.items = updatedItems;
+        updateShoppingItems(state.session.user.id, updatedItems).catch(console.warn);
       }
     });
   });
@@ -2628,22 +2613,21 @@ function renderShoppingListUI(list, confirmedCount, selectedDates, resetChecks =
     state._shopChecked = {};
     renderShoppingListUI(list, confirmedCount, selectedDates);
   });
+
   el.querySelector('#btn-print')?.addEventListener('click', () => window.print());
 
-  // Spesa completata dalla lista
   el.querySelector('#btn-done-shopping')?.addEventListener('click', async () => {
     const current = state.shoppingList;
-    if (!current || !state.session?.user?.id) return;
-    const toMark       = current.days || [];
-    const currCompleted = current.completed_days || [];
-    const newCompleted = [...new Set([...currCompleted, ...toMark])];
-    const labels = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
-    if (!confirm(`Segnare la spesa come completata per:\n${labels}?`)) return;
+    if (!current?.days?.length) return;
+    const toMark  = current.days;
+    const labels  = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
+    if (!confirm(`Segnare come completata la spesa per:\n${labels}?`)) return;
+    const newCompleted = [...new Set([...(current.completed_days||[]), ...toMark])];
     try {
       await markDaysCompleted(state.session.user.id, newCompleted);
       state.shoppingList = { ...current, completed_days: newCompleted };
       state.selectedShoppingDays = [];
-      toast('Spesa completata! 🛒');
+      toast('Spesa completata 🛒');
       renderSpesa();
     } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });
