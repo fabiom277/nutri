@@ -7,7 +7,7 @@ import {
   getWeightLogs, addWeightLog, deleteWeightLog,
   getRatings, setRating, savePushSubscription,
   searchFoodItems, getUserRecipes, saveUserRecipe, deleteUserRecipe,
-  getShoppingList, saveShoppingList, updateShoppingItems, markDaysCompleted
+  getShoppingList, saveShoppingList, updateShoppingItems, markDaysCompleted, updateShoppingCompletedDays
 } from './supabase.js';
 
 import {
@@ -2366,7 +2366,10 @@ async function renderSpesa() {
   const sl            = state.shoppingList;
   const savedDays     = sl?.days || [];
   const completedDays = sl?.completed_days || [];
-  const hasActiveList = savedDays.length > 0;
+  // Mostra banner solo se la lista ha giorni ancora nel piano corrente
+  const planDates     = days.map(d => d.date);
+  const relevantDays  = savedDays.filter(d => planDates.includes(d));
+  const hasActiveList = relevantDays.length > 0;
 
   // Ripristina spunte dalla lista DB ogni volta che si entra nella pagina
   if (sl?.items && hasActiveList) {
@@ -2406,7 +2409,7 @@ async function renderSpesa() {
         <div>
           <strong>Lista attiva</strong>
           <div style="font-size:0.8rem;color:var(--text-soft);margin-top:2px">
-            ${savedDays.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short'})).join(' · ')}
+            ${relevantDays.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short'})).join(' · ')}
           </div>
         </div>
         <button class="btn btn-secondary btn-sm" id="btn-mark-done">🛒 Spesa completata</button>
@@ -2497,13 +2500,13 @@ Vuoi generare una nuova lista per questi giorni?`)) return;
     const labels    = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
     if (!confirm(`Segnare come completata la spesa per:\n${labels}?`)) return;
 
-    const newCompleted = [...new Set([...(current.completed_days||[]), ...toMark])];
     try {
-      await markDaysCompleted(uid, newCompleted);
-      state.shoppingList = { ...current, completed_days: newCompleted };
+      // atomic: legge dal DB i completed_days freschi e aggiunge senza perdere nulla
+      const merged = await updateShoppingCompletedDays(uid, current.days, toMark);
+      state.shoppingList = { ...current, completed_days: merged };
       state.selectedShoppingDays = [];
       toast('Spesa completata 🛒');
-      renderSpesa(); // ricarica la pagina con i badge aggiornati
+      renderSpesa();
     } catch (e) { toast('Errore: ' + e.message, 'error'); }
   });
 }
@@ -2622,10 +2625,9 @@ function renderShoppingListUI(list, confirmedCount, selectedDates) {
     const toMark  = current.days;
     const labels  = toMark.map(d => new Date(d+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})).join(', ');
     if (!confirm(`Segnare come completata la spesa per:\n${labels}?`)) return;
-    const newCompleted = [...new Set([...(current.completed_days||[]), ...toMark])];
     try {
-      await markDaysCompleted(state.session.user.id, newCompleted);
-      state.shoppingList = { ...current, completed_days: newCompleted };
+      const merged = await updateShoppingCompletedDays(state.session.user.id, current.days, toMark);
+      state.shoppingList = { ...current, completed_days: merged };
       state.selectedShoppingDays = [];
       toast('Spesa completata 🛒');
       renderSpesa();

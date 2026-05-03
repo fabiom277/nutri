@@ -274,18 +274,18 @@ export async function getShoppingList(userId) {
 }
 
 export async function saveShoppingList(userId, days, items) {
-  // Leggi i completed_days esistenti per mantenerli (non azzerarli)
+  // Leggi lo stato corrente prima di sovrascrivere
   const { data: existing } = await supabase
     .from('shopping_list')
     .select('completed_days')
     .eq('user_id', userId)
     .maybeSingle();
 
-  // Mantieni solo i giorni "Fatto" che NON sono nella nuova lista
-  // (i giorni della nuova lista ripartono da zero)
+  // Mantieni "Fatto" solo per i giorni NON inclusi nella nuova lista
   const prevCompleted = existing?.completed_days || [];
   const keptCompleted = prevCompleted.filter(d => !days.includes(d));
 
+  // onConflict: 'user_id' → UPDATE se esiste, INSERT se non esiste
   const { data, error } = await supabase
     .from('shopping_list')
     .upsert({
@@ -295,7 +295,7 @@ export async function saveShoppingList(userId, days, items) {
       completed_days: keptCompleted,
       generated_at:   new Date().toISOString(),
       updated_at:     new Date().toISOString(),
-    })
+    }, { onConflict: 'user_id' })
     .select()
     .single();
   if (error) throw error;
@@ -311,9 +311,26 @@ export async function updateShoppingItems(userId, items) {
 }
 
 export async function markDaysCompleted(userId, completedDays) {
+  // Usa upsert con onConflict per sicurezza
   const { error } = await supabase
     .from('shopping_list')
     .update({ completed_days: completedDays, updated_at: new Date().toISOString() })
     .eq('user_id', userId);
   if (error) throw error;
+}
+
+export async function updateShoppingCompletedDays(userId, newDays, additionalCompleted) {
+  // Atomic: legge completed_days correnti e aggiunge senza perdere nulla
+  const { data: existing } = await supabase
+    .from('shopping_list')
+    .select('completed_days')
+    .eq('user_id', userId)
+    .maybeSingle();
+  const merged = [...new Set([...(existing?.completed_days || []), ...additionalCompleted])];
+  const { error } = await supabase
+    .from('shopping_list')
+    .update({ completed_days: merged, updated_at: new Date().toISOString() })
+    .eq('user_id', userId);
+  if (error) throw error;
+  return merged;
 }
